@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/*커스텀오버레이*/
+.arrow_box {
+	position: relative;
+	color: #fff;
+	background: #70A5FA;
+	padding: 2px 8px;
+	border: 1px solid #70A5FA;
+	border-radius: 25px;
+}
+.arrow_box:after, .arrow_box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(112, 165, 250, 0);
+	border-top-color: #70A5FA;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow_box:before {
+	border-color: rgba(112, 165, 250, 0);
+	border-top-color: #70A5FA;
+	border-width: 11px;
+	margin-left: -11px;
+}
+/*인포윈도우*/
+.iwContent{
+	boarder: 1px solid black;
+}

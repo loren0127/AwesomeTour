@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 자동 스캔 -->
+	<context:component-scan base-package="kr.spring.accom.controller" />
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model : 어노테이션 사용 명시(삭제 금지!!!) -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- view resolver
+	- View Resolver는 Spring의 DispatcherServlet이 Controller의 응답 결과를 가져올 때, 어떤 방식으로 view 객체를 가져올지 정하고 해당 객체를 생성한다.
+	- View Resolver를 구현한 클래스는 InternalResourceViewResolver, BeanNameViewResolver, XmlViewResolver, UrlBasedViewResolver 등이 있다.
+	- DispatcherServlet은 여러 개의 ViewResolver를 가질 수 있는데, 'order' property에 따라 어떤 ViewResolver를 결정할지 우선순위를 정할 수 있다.
+	  우선순위를 명시하지 않으면 가장 낮은 우선순위를 가진다.
+	- 우선순위가 높은 ViewResolver에게 View 객체를 요청하는데, 만약 null을 리턴한다면 그 다음 우선순위의 ViewResolver에게 객체를 요청하게 된다.
+	- InternalResourceViewResolver는 항상 mapping되는 view 객체를 리턴하고, 없다고 null을 반환하지 않으므로 항상 가장 낮은 우선순위로 두어야한다.
+	-->
+
+	<!-- 파일 다운로드 설정 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/><!-- viewResolver order -->
+
+	<!-- Tiles 설정 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<!-- 프로퍼티 설정 방식 
+		name : 의존 객체를 주입할 때 사용할 setter 메소드의 프로퍼티 이름
+		-->
+		<beans:property name="definitions">
+			<!-- List 타입 프로퍼티 설정 방식 
+			Tiles 설정 파일(top-left-right-bottom-center의 화면 구성 제어 역할)
+			-->
+			<beans:list>
+				<beans:value>/WEB-INF/tiles-def/main.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/awesomeMenu.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/accomDetail.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- Tiles viewResolver -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<!-- 컨트롤러의 리턴값과 Tiles 설정 파일의 식별자가 일치하면 tiles-definition 설정을 실행 -->
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<beans:property name="order" value="1"/><!-- viewResolver order -->
+	</beans:bean>
+	
+	<!-- 팝업창 또는 Ajax 통신 등 Tiles를 이용하지 않고 JSP를 호출해야 하는 경우 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/><!-- viewResolver order -->
+	</beans:bean>
+	
+	<!-- 파일 업로드 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"/><!-- 50 MB -->
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+	</beans:bean>
+	
+	<!-- 유효성 체크시 필요한 메시지 처리 설정 -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>messages.validation</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- 데이터 작업 없이 뷰 호출 : 메인 페이지 -->
+	<view-controller path="/main/main.do" view-name="main"/><!-- 요청 : view-name 속성을 통해 Tiles 설정을 호출 -->
+	
+	<!-- 인터셉터로 로그인 여부 체크(aop보다는 좁은 범위) -->
+	<!-- <interceptors>
+		<interceptor>
+		아래에서 로그인 여부 체크가 필요한 메소드 맵핑
+			<mapping path="/member/detail.do"/>
+			<mapping path="/member/update.do"/>
+			<mapping path="/member/delete.do"/>
+			<mapping path="/board/write.do"/>
+			<mapping path="/board/update.do"/>
+			<mapping path="/board/delete.do"/>
+			인터셉터 객체 생성
+			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/update.do"/>
+			<mapping path="/board/delete.do"/>
+			<beans:bean class="kr.spring.interceptor.WriterCheckInterceptor"/>
+		</interceptor>
+	</interceptors> -->
+	
+</beans:beans>

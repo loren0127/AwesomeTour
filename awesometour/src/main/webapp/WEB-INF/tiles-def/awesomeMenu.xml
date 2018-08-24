@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- 설정 파일을 중심으로 상단, 하단 같이 반복되는 페이지를 include -->
+<tiles-definitions>
+	<!-- name : 컨트롤러 리턴값
+	대문페이지는 데이터 작업 없이 뷰 호출을 하기 때문에 servlet-context.xml에서 <view-controller>태그의 view-name값 -->
+										<!-- 실제 실행될 페이지 : layout 페이지에 의해 하단 속성 태그를 통해 header와 footer, menu가 조합된다. -->
+	<definition name="map" extends="main">
+		<put-attribute name="title" value="지도"/>
+		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/map.jsp"/>
+	</definition>
+	<definition name="group" extends="main">
+		<put-attribute name="title" value="모임"/>
+		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/group.jsp"/>
+	</definition>
+	<definition name="recommend" extends="main">
+		<put-attribute name="title" value="추천"/>
+		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/recommend.jsp"/>
+	</definition>
+	
+</tiles-definitions>

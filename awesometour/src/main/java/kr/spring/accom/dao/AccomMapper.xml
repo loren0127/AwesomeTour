@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 식별자라서 여러 개의 mapper를 만들었을 때 구별하기 위해 유니크 해야 함 -->
+<mapper namespace="kr.spring.accom.dao.AccomMapper">
+	
+	
+</mapper>

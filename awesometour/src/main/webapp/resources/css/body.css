@@ -1,0 +1,48 @@
+@charset "UTF-8";
+.align-center {
+    text-align: center;
+}
+.underline {
+    padding-bottom: 1rem;
+}
+.underline .line {
+    width: 5rem;
+    height: 3px;
+    background: #d900ed;
+    display: inline-block;
+}
+.card {
+	background-color: transparent;
+    border: none;
+    padding-bottom: 2rem;
+}
+.card-us {
+	background-color: transparent;
+    border: none;
+    padding-bottom: 2rem;
+}
+.card-us p {
+    margin: initial;
+    padding-bottom: 1rem;
+    text-align: left;
+}
+.card-us i {
+    font-size: 3rem;
+    color: #46004c;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    transition: color 0.4s;
+}
+.card-us:hover i {
+    color: #d900ed;
+}
+.section-sepa1 {
+	padding-top: 75px;
+    padding-bottom: 75px;
+}
+.section-sepa2 {
+	padding-top: 75px;
+    padding-bottom: 75px;
+    background-color: #222222;
+    color: #fff;
+}

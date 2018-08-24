@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.list-inline-item + .list-inline-item::before {
+	padding-right: .5rem;
+	padding-left: .5rem;
+	content: "|";
+}
+p::before {
+content: "";
+display: block;
+clear: both;
+}
