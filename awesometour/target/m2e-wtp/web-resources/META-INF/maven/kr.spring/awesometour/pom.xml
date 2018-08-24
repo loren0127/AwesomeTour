@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>kr.spring</groupId>
 	<artifactId>awesometour</artifactId>
-	<name>awesometour_new</name>
+	<name>awesometour</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
