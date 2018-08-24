@@ -1,3 +1,3 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div>모임12345</div>
+<div>모임123</div>
