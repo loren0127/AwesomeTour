@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class GroupController {
-	@RequestMapping("/awesomeMenu/group.do")
+	@RequestMapping("/group.do")
 	public String form() {
 		return "group";
 	}
