@@ -81,14 +81,29 @@
 		<property name="dataSource" ref="dataSource"/>
 		<!-- value값으로 명시된 패키지 아래의 모든 클래스를 스캔해서 빈 객체를 생성하고 자동 알리아스를 준다. 첫 글자가 소문자 -->
 																		<!-- 쉼표로 나열해서 추가 -->
-		<property name="typeAliasesPackage" value="kr.spring.accom.domain"/>
+		<property name="typeAliasesPackage" value="kr.spring.accom.domain,kr.spring.member.domain"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 									<!-- value값으로 명시된 패키지 안에서 mapper를 찾는다. 
 									(대박)myBatis는 내부에서 인터페이스를 인식해서 자동으로 클래스를 만들고 추상메소드를 구현한다.
 									-->
 															<!-- 쉼표로 나열해서 추가 -->
-		<property name="basePackage" value="kr.spring.accom.dao"/>
+		<property name="basePackage" value="kr.spring.accom.dao,kr.spring.member.dao"/>
+		
 	</bean>
-
+	 <!-- 메일보내기 -->
+	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.gmail.com" />
+      <property name="port" value="587" />
+      <property name="username" value="ghcks3916@gmail.com" />
+      <property name="password" value="cks0108662" />
+      <property name="javaMailProperties">
+         <props>
+               <prop key="mail.transport.protocol">smtp</prop>
+               <prop key="mail.smtp.auth">true</prop>
+               <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.debug">true</prop>
+         </props>
+      </property>
+   </bean>
 </beans>
