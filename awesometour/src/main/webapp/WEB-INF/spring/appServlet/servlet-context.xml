@@ -11,6 +11,7 @@
 	<!-- 자동 스캔 -->
 	<context:component-scan base-package="kr.spring.accom.controller" />
 	<context:component-scan base-package="kr.spring.member.controller" />
+	<context:component-scan base-package="kr.spring.group.controller" />
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model : 어노테이션 사용 명시(삭제 금지!!!) -->
@@ -46,6 +47,8 @@
 				<beans:value>/WEB-INF/tiles-def/accomDetail.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/mail.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/group.xml</beans:value>
+				
 			</beans:list>
 		</beans:property>
 	</beans:bean>

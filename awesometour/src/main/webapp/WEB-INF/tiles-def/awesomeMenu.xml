@@ -11,10 +11,7 @@
 		<put-attribute name="title" value="지도"/>
 		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/map.jsp"/>
 	</definition>
-	<definition name="group" extends="main">
-		<put-attribute name="title" value="모임"/>
-		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/group.jsp"/>
-	</definition>
+
 	<definition name="recommend" extends="main">
 		<put-attribute name="title" value="추천"/>
 		<put-attribute name="body" value="/WEB-INF/views/awesomeMenu/recommend.jsp"/>
