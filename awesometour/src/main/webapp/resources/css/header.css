@@ -1,0 +1,17 @@
+ @charset "UTF-8";
+Modal Content (Map)
+.modal-content {
+    margin: 20px;
+    width: 100%;
+}
+The Close Button
+.close {
+    padding: 10px 10px;
+    font-size: 40px;
+    color: #46004c;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #d900ed;
+} 
