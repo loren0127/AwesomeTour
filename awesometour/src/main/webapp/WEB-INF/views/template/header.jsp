@@ -11,21 +11,21 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener" style="cursor:pointer;">지도</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;">지도</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					href="${pageContext.request.contextPath}/awesomeMenu/group.do">지도보기</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/awesomeMenu/recommend.do">추천</a></li>
-					|
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/member/login.do">로그인</a></li><!-- 로그아웃 -->
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/mail/mailForm.do">회원가입</a></li><!-- 마이페이지 -->
-					|
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#contact">호스팅</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#contact">고객센터</a></li>
+					href="#contact">QnA</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#contact">관리자</a></li><!-- 로그인 전 숨김 -->
 			</ul>
@@ -33,9 +33,9 @@
 	</div>
 </nav>
 
-<!-- Map 
+<!-- Map -->
 <div class="container">
-	<div id="map_dialog">
+	<div id="mapSearch_dialog">
 		<div>
 			<form class="form-inline" style="float:left;">
 				<div class="form-group mb-2"><i class="fa fa-search" style="font-size:20px"></i></div>
@@ -47,7 +47,6 @@
 			</form>
 			<span class="closer">&times;</span>
 		</div>
-		<div id="map" style="width: 100%; height: 700px;"></div>
+		<div id="mapSearch" style="width: 100%; height: 700px;"></div>
 	</div>
-</div> 
--->
+</div>

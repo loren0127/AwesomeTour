@@ -2,7 +2,6 @@
 
 .list-inline-item + .list-inline-item::before {
 	padding-right: .5rem;
-	padding-left: .5rem;
 	content: "|";
 }
 p::before {
