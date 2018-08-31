@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light" id="mainNav">
 	<div class="container">
@@ -18,10 +18,16 @@
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/awesomeMenu/recommend.do">추천</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="${pageContext.request.contextPath}/member/login.do">로그인</a></li><!-- 로그아웃 -->
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="${pageContext.request.contextPath}/mail/mailForm.do">회원가입</a></li><!-- 마이페이지 -->
+				<c:if test="${empty user_email}">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="${pageContext.request.contextPath}/member/login.do">로그인</a></li><!-- 로그아웃 -->
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="${pageContext.request.contextPath}/mail/mailForm.do">회원가입</a></li><!-- 마이페이지 -->
+				</c:if>
+				<c:if test="${!empty user_email}">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="${pageContext.request.contextPath}/member/detailCheck.do">회원정보 수정</a></li><!-- 테스트 -->
+				</c:if>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#contact">호스팅</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
