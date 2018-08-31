@@ -8,18 +8,51 @@
 			<div class="col-xl-9 mx-auto">
 				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
 			</div>
-			<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-				<form>
-					<div class="form-row">
-						<div class="col-12 col-md-9 mb-2 mb-md-0">
-							<input type="search" class="form-control form-control-lg"
-								placeholder="서울">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<form id="search_form" action="../accomList/accomList.do">
+					<div class="form-row" style="width: 1200px; margin-left: 100px;">
+						<!-- 변경한 내용임 -->
+						<div>
+							<select name="searchtype" style="height: 50px;" id="type">
+								<option value="h" id="h">호텔</option>
+								<option value="p" id="p">프라이빗하우스</option>
+							</select>
 						</div>
-						<div class="col-12 col-md-3">
+						<div>
+							<input type="text" id="date_in" name="check_in" value=""
+								style="height: 50px; width: 150px;">
+								
+						</div>
+						<div>
+
+							<input type="text" id="date_out" name="check_out" value=""
+								style="height: 50px; width: 150px;">
+						</div>
+						<div class="people_pop">
+						<input type="hidden" name="people_count" id="people_count" value="1">
+						
+							<button id="people" name="people"
+								style="height: 50px; width: 150px;">
+								인원 <span id="peo_sum_btn">1</span>명
+							</button>
+
+							<div class="check" id="pe_pop" >
+								<span>인원<input type="button" name="people_plus"
+									id="people_plus" value="+"> <span id="people_sum">1</span>
+									<input type="button" name="minus" id="people_minus" value="-"></span>
+
+							</div>
+						</div>
+						<div>
+							<input type="text" style="width: 300px; height: 50px;"
+								name="search" placeholder="서울">
+						</div>
+						<div>
 							<button type="submit" class="btn btn-block btn-lg btn-primary">검색</button>
 						</div>
 					</div>
 				</form>
+				<!-- 변경한 내용끝-->
 			</div>
 		</div>
 	</div>
