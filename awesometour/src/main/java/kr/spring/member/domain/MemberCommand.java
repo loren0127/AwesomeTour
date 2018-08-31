@@ -167,14 +167,6 @@ public class MemberCommand {
 
 
 
-	@Override
-	public String toString() {
-		return "MemberCommand [member_auth=" + member_auth + ", member_passwd=" + member_passwd + ", member_email="
-				+ member_email + ", member_nickname=" + member_nickname + ", member_reg_date=" + member_reg_date
-				+ ", member_content=" + member_content + ", member_hobby=" + member_hobby + ", member_tendency="
-				+ member_tendency + ", upload=" + upload + ", member_uploadfile=" + Arrays.toString(member_uploadfile)
-				+ ", member_filename=" + member_filename + ", log=" + log + "]";
-	}
 }
 
 
