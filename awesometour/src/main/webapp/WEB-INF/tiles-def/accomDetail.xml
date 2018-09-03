@@ -15,5 +15,9 @@
 		<put-attribute name="title" value="숙소 상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/accomDetail/accomDetail_hotel.jsp"/>
 	</definition>
+	<definition name="accomDetailPrivate" extends="main">
+		<put-attribute name="title" value="숙소 상세"/>
+		<put-attribute name="body" value="/WEB-INF/views/accomDetail/accomDetail_private.jsp"/>
+	</definition>
 	
 </tiles-definitions>

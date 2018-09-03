@@ -26,7 +26,7 @@
                 left outer join reservation c
                 on b.acc_num = c.rv_acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_acc_num                
+                on b.acc_num = i.im_ac_num                
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
@@ -71,7 +71,7 @@
                 left outer join reservation c
                 on b.acc_num = c.rv_acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_acc_num                  
+                on b.acc_num = i.im_ac_num                  
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
