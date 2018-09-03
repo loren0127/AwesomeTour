@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/confirmEmail.js"></script>
 <script type="text/javascript">
 </script>
 	<div class="container section-sepa1">
 	<br>
 	<br>
-		<h4 style="margin-left:50px;">이메일 인증</h4><br><br>
+		<h4>이메일 인증</h4><br><br>
 		<form action="${pageContext.request.contextPath}/mail/mailSending.do" method="post" name="regiform" id="regiform">
 			<div align="center">
 				<textarea rows="20" cols="135">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
@@ -43,7 +44,11 @@
 				</div>
 				<br>
 				<!-- 받는 사람 이메일 -->
-				<input type="email" name="email" id="email" size="120" style="width: 30%" placeholder="이메일" class="form-control">
+				<input type="email" name="email" id="email" size="120" style="width: 30%" placeholder="이메일" >
+				<input type="button" id="check_email" name="check_email" value="이메일 중복 확인" class="btn btn-warning"><br>
+				<span id="message_email"></span>
+				<span id="message_email2"></span>
+				<br>
 				<br>
 			</div>
 			<div align="center">

@@ -2,13 +2,42 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-<title>비밀번호 체크</title>
+<div class="container section-sepa1" style="height: 800px;">
+	<section class="about_history_area section_gap"
+		style="margin-top: 150px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 d_flex align-items-center">
+					<div class="about_content " style="margin-top: 85px;">
+						<form
+							action="${pageContext.request.contextPath}/member/detailChecking.do"
+							method="post" id="view_Check" name="view_Check">
+							<div align="center">
+								<input type="text" name="member_email" size="120" style="width: 50%" value="${user_email }" readonly="true" class="form-control"> <br>
+								<input type="password" name="member_passwd" id="member_passwd" style="width: 50%" size="120" placeholder="비밀번호" class="form-control">
+							</div>
+							<br>
+							<div align="center">
+								<input type="submit" value="확인" class="btn btn-warning">
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<img class="img-fluid"
+						src="${pageContext.request.contextPath}/resources/img/rome.jpg"
+						alt="img">
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<%-- <title>비밀번호 체크</title>
 </head>
 <body>
 	<div class="container" align="center">
@@ -25,4 +54,4 @@
 		</form>
 	</div>
 </body>
-</html>
+</html> --%>

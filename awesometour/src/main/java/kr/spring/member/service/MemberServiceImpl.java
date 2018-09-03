@@ -104,6 +104,33 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.deleteDetail(member_email);
 	}
 
+	@Override
+	public MemberCommand selctNickname(String member_nickname) {
+		
+		return memberMapper.selctNickname(member_nickname);
+	}
+
+	@Override
+	public MemberCommand seleccheckEmail(String member_email) {
+		return memberMapper.seleccheckEmail(member_email);
+	}
+
+	@Override
+	public MemberCommand  selectPasswd2(String member_email) {
+		return memberMapper.selectPasswd2(member_email);
+	}
+
+	@Override
+	public MemberCommand selectCheckPw(MemberCommand memberCommand) {
+		return memberMapper.selectCheckPw(memberCommand);
+	}
+
+
+
+
+
+
+
 	
 
 

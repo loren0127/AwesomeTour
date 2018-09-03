@@ -13,6 +13,7 @@ public interface MemberService {
 	public void insertCode2(CodeCommand code);
 	public int selectCode(CodeCommand codeCommand);
 	public int selectCode2(CodeCommand codeCommand);
+	public MemberCommand selctNickname(String member_nickname);
 	public void deleteCode(String code);
 	public void deleteCode2(CodeCommand codeCommand);
 	public int checkEmail(String email);
@@ -20,4 +21,7 @@ public interface MemberService {
 	public MemberCommand selectMemb(String member_email);
 	public int selectPasswd(MemberCommand memberCommand);
 	public void deleteDetail(String member_email);
+	public MemberCommand selectPasswd2(String member_email);
+	MemberCommand seleccheckEmail(String member_email);
+	public MemberCommand selectCheckPw(MemberCommand memberCommand);
 }

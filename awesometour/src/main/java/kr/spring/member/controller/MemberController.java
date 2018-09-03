@@ -140,7 +140,6 @@ public class MemberController {
 			}
 		}catch(Exception e) {
 			result.reject("invalidIdOrPassword");
-			
 			if(log.isDebugEnabled()) {
 				log.debug("<<���� ����>>");
 			}
@@ -248,13 +247,12 @@ public class MemberController {
 			
 			session.setAttribute("command", memberCommand);
 			
-			return "member/memberModify2";
+			return "memberModify2";
 			//return "redirect:/member/detail.do";
 		}
 		//==========회원수정 2=======
 		@RequestMapping(value="/member/update2.do", method=RequestMethod.POST)
 		public String submitUpdate2(String ch[],String ra[],HttpSession session,String member_email) {
-			
 			String ten = "";
 			for (int i=0 ; i<ch.length ; i++) {
 				ten +=ch[i];
@@ -267,14 +265,13 @@ public class MemberController {
 			for (int i=0 ; i<ra.length ; i++) {
 				ho +=ra[i];
 			}
-			
 			//전에있던 데이터
 			MemberCommand memberCommand = (MemberCommand) session.getAttribute("command");
 			//텐에서 선택한
 			memberCommand.setMember_tendency(ten);
 			memberCommand.setMember_hobby(ho);
+			System.out.println("!$%@%#$%#$%#$#%"+memberCommand);
 			memberService.update(memberCommand);
-			
 			
 			return "redirect:/member/detail.do";
 		}
@@ -282,7 +279,7 @@ public class MemberController {
 		@RequestMapping("member/memberdeleteCheck.do")
 		public String deleteCheck() {
 			
-			return "member/memberdeleteCheck";
+			return "memberdeleteCheck";
 		}
 		//================탈퇴 인증 페이지=======
 		@RequestMapping("member/delete.do")
@@ -335,7 +332,7 @@ public class MemberController {
 		      System.out.println(e);
 		    }
 			
-			return "member/memberDelete";
+			return "memberDelete";
 		}
 		//=============탈퇴 ing ==============
 		@RequestMapping("/member/deleteCheck.do")
@@ -353,11 +350,8 @@ public class MemberController {
 				  return "member/delete.do";
 			  }
 			  memberService.deleteCode(code_email);
-			  System.out.println("1");
 			  memberService.updateAuth(code_email);
-			  System.out.println("2");
 			  memberService.deleteDetail(code_email);
-			  System.out.println("3");
 			  session.invalidate();
 			
 			return "redirect:/main/main.do";

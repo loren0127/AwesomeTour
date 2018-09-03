@@ -10,22 +10,22 @@
                     <div class="col-md-6 d_flex align-items-center">
                         <div class="about_content ">
 							<form action="${pageContext.request.contextPath}/mail/mailChecking.do" method="post" id="mailCheck" name="mailCheck">
-								<div align="center" style="margin-top:85px;">
+								<div align="center" style="margin-top:45px;">
 									<h4>이메일 코드 확인</h4>
 									<c:if test="${email != null }">
 										<input type="email" name="code_email" class="form-control"
-											size="120" style="width: 50%" value="${email }"
+											size="180" value="${email }"
 											readonly="true">
 										<br>
 										<input type="text" name="code_code" id="code_code" class="form-control"
-											size="120" style="width: 50%" placeholder="코드">
+											size="180" placeholder="코드">
 									</c:if>
 									<c:if test="${email == null }">
 										<input type="email" name="code_email" class="form-control"
-											size="120" style="width: 50%" placeholder="이메일">
+											size="180" placeholder="이메일">
 										<br>
 										<input type="text" name="code_code"  id="code_code"  class="form-control"
-											size="120" style="width: 50%" placeholder="코드">
+											size="180" placeholder="코드">
 									</c:if>
 								</div>
 								<br> <br>

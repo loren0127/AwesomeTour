@@ -7,11 +7,13 @@
  	<update id="update">
  		<if test="member_filename ==''">
  			UPDATE member_detail SET member_email=#{member_email},member_passwd=#{member_passwd},
- 			member_nickname=#{member_nickname},member_content=#{member_content},member_tendency=#{member_tendency},member_hobby=#{member_hobby} WHERE member_email=#{member_email}
+ 			member_nickname=#{member_nickname},member_content=#{member_content},member_tendency=#{member_tendency}
+ 			,member_hobby=#{member_hobby} WHERE member_email=#{member_email}
  		</if>
  		<if test="member_filename != ''">
  			UPDATE member_detail SET member_email=#{member_email},member_passwd=#{member_passwd},
- 			member_nickname=#{member_nickname},member_content=#{member_content},member_uploadfile=#{member_uploadfile},member_filename=#{member_filename},member_tendency=#{member_tendency},member_hobby=#{member_hobby} WHERE member_email=#{member_email}
+ 			member_nickname=#{member_nickname},member_content=#{member_content},member_uploadfile=#{member_uploadfile}
+ 			,member_filename=#{member_filename},member_tendency=#{member_tendency},member_hobby=#{member_hobby} WHERE member_email=#{member_email}
  		</if>
  	</update>
  	

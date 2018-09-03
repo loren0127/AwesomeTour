@@ -29,6 +29,12 @@ public interface MemberMapper {
 	@Select("SELECT * FROM member_detail WHERE member_email=#{member_email}")
 	public MemberCommand selectMemb(String member_email);
 	
+	@Select("SELECT member_nickname FROM member_detail WHERE member_nickname=#{member_nickname}")
+	public MemberCommand selctNickname(String member_nickname);
+	
+	@Select("SELECT member_passwd FROM member_detail WHERE member_email=#{member_email}")
+	public MemberCommand selectPasswd2(String member_email);
+	
 	@Insert("INSERT INTO member_code (code_num,code_code,code_email) "
 			+ "VALUES (fmember_code_seq.nextval,#{code_code},#{code_email})")
 	public void insertCode(CodeCommand code);
@@ -45,6 +51,7 @@ public interface MemberMapper {
 	@Select("SELECT COUNT(*) FROM member_code WHERE code_email=#{code_email} AND code_status=#{code_status}")
 	public int selectCode2(CodeCommand codeCommand);
 	
+	
 	//비밀번호 찾기
 	@Select("SELECT COUNT(*) FROM member_detail WHERE member_email=#{member_email} AND member_passwd=#{member_passwd}")
 	public int selectPasswd(MemberCommand memberCommand);
@@ -52,6 +59,10 @@ public interface MemberMapper {
 	//이메일 코드찾기 
 	@Select("SELECT COUNT(*) FROM member_auth WHERE member_email=#{member_email}")
 	public int checkEmail(String email);
+	
+	//이메일 중복체크
+	@Select("SELECT member_email FROM member_auth WHERE member_email=#{member_email}")
+	public MemberCommand seleccheckEmail(String member_email);
 	
 	//이메일인증 전 해당 이메일 존재여부 확인
 	@Select("SELECT COUNT(*) FROM member_code WHERE code_email=#{code_email}")
@@ -71,6 +82,11 @@ public interface MemberMapper {
 	//탈퇴 후 detail 삭제
 	@Delete("DELETE FROM member_detail WHERE member_email=#{member_email}")
 	public void deleteDetail(String member_email);
+	
+	
+	//비밀번호 존재 체크
+	@Select("SELECT member_passwd FROM member_detail WHERE member_email=#{member_email} AND member_passwd=#{member_passwd}")
+	public MemberCommand selectCheckPw(MemberCommand memberCommand);
 }
 
 

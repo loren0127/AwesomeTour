@@ -27,6 +27,8 @@
 				<c:if test="${!empty user_email}">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/detailCheck.do">회원정보 수정</a></li><!-- 테스트 -->
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li><!-- 테스트 -->
 				</c:if>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#contact">호스팅</a></li>

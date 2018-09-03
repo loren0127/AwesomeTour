@@ -52,11 +52,11 @@ public class MailController {
 		return mailCheck();
 	}
 	
-	int checkcount = memberService.checkEmail(email);
+	/*int checkcount = memberService.checkEmail(email);
 	if(checkcount != 0) {
 		session.invalidate();
 		return mailForm();
-	}
+	}*/
 	
 	
 	String code_code1 = String.valueOf((char) ((int) (random.nextInt(26)) + 97));
