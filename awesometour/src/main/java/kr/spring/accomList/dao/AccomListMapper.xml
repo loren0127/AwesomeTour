@@ -22,11 +22,11 @@
                 i.im_cover_name
       from accom b
                 left outer join accom_room r
-                on b.acc_num = r.ro_num
+                on b.acc_num = r.ro_acc_num
                 left outer join reservation c
-                on b.acc_num = c.rv_num
+                on b.acc_num = c.rv_acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_num                
+                on b.acc_num = i.im_acc_num                
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
@@ -67,11 +67,11 @@
                 i.im_cover_name                
       from accom b
                 left outer join accom_room r
-                on b.acc_num = r.ro_num
+                on b.acc_num = r.ro_acc_num
                 left outer join reservation c
-                on b.acc_num = c.rv_num
+                on b.acc_num = c.rv_acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_num                  
+                on b.acc_num = i.im_acc_num                  
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
