@@ -11,7 +11,7 @@ public class AccomCommand {
 	private String acc_theme;
 	private String acc_phone;
 	private String acc_zipcode;
-	private String acc_address;
+	private String acc_address1;
 	private String acc_address2;
 	private String acc_lati;
 	private String acc_longi;
@@ -76,11 +76,11 @@ public class AccomCommand {
 	public void setAcc_zipcode(String acc_zipcode) {
 		this.acc_zipcode = acc_zipcode;
 	}
-	public String getAcc_address() {
-		return acc_address;
+	public String getAcc_address1() {
+		return acc_address1;
 	}
-	public void setAcc_address(String acc_address) {
-		this.acc_address = acc_address;
+	public void setAcc_address1(String acc_address1) {
+		this.acc_address1 = acc_address1;
 	}
 	public String getAcc_address2() {
 		return acc_address2;
@@ -106,7 +106,7 @@ public class AccomCommand {
 		return "AccomCommand [acc_num=" + acc_num + ", acc_se_num=" + acc_se_num + ", acc_host=" + acc_host
 				+ ", acc_name=" + acc_name + ", acc_grade=" + acc_grade + ", acc_in=" + acc_in + ", acc_out=" + acc_out
 				+ ", acc_theme=" + acc_theme + ", acc_phone=" + acc_phone + ", acc_zipcode=" + acc_zipcode
-				+ ", acc_address=" + acc_address + ", acc_address2=" + acc_address2 + ", acc_lati=" + acc_lati
+				+ ", acc_address1=" + acc_address1 + ", acc_address2=" + acc_address2 + ", acc_lati=" + acc_lati
 				+ ", acc_longi=" + acc_longi + "]";
 	}
 }
