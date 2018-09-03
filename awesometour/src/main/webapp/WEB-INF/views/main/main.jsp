@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>	
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 <!-- Masthead -->
 <header class="masthead text-white text-center">
 	<div class="container">
@@ -20,13 +22,13 @@
 						</div>
 						<div>
 							<input type="text" id="date_in" name="check_in" value=""
-								style="height: 50px; width: 150px;">
+								style="height: 50px; width: 150px;" autocomplete="off">
 								
 						</div>
 						<div>
 
 							<input type="text" id="date_out" name="check_out" value=""
-								style="height: 50px; width: 150px;">
+								style="height: 50px; width: 150px;" autocomplete="off">
 						</div>
 						<div class="people_pop">
 						<input type="hidden" name="people_count" id="people_count" value="1">
@@ -45,11 +47,11 @@
 						</div>
 						<div>
 							<input type="text" style="width: 300px; height: 50px;"
-								name="search" placeholder="서울">
+								name="search" id="address" placeholder="서울" value="">
 						</div>
 						<div>
-							<button type="submit" class="btn btn-block btn-lg btn-primary">검색</button>
-						</div>
+							<button type="submit" id="search" class="btn btn-block btn-lg btn-primary">검색</button>
+						</div>				
 					</div>
 				</form>
 				<!-- 변경한 내용끝-->

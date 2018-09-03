@@ -12,6 +12,8 @@
 	<context:component-scan base-package="kr.spring.accom.controller" />
 	<context:component-scan base-package="kr.spring.member.controller" />
 	<context:component-scan base-package="kr.spring.group.controller" />
+	<context:component-scan base-package="kr.spring.accomList.controller" />
+	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model : 어노테이션 사용 명시(삭제 금지!!!) -->

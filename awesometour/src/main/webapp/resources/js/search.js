@@ -2,6 +2,8 @@ $(document).ready(function() {
 	$('#pe_pop').hide();
 	var today = $.datepicker.formatDate('yy/mm/dd', new Date()); //오늘 날짜 구하기
 	$('#date_in').val(today);
+	$('#search_1').hide(); //검색 활성화 버튼 숨기기
+	var seoul = $('#search').val('서울'); // 검색 입력이 안되어있을 때는 서울로 설정하기.
 
 	//인원수 클릭시 div 활성화
 	$('.people_pop').click(function(event){
@@ -20,14 +22,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	//호텔,프라이빗 하우스 클릭시 프라이빗하우스클릭하였을 때 객실 버튼 비활성화
-	$('#type').click(function(event){
-		var check = $("#type option:selected").val(); //셀렉트에서 선택한 데이터의 값
-		if(check == $('#p').val()){
-			$('#room_plus').attr('disabled',true); //버튼 비활성화
-			$('#room_minus').attr('disabled',true);	//버튼 비활성화
-		}
-	});
+
 
 	
 //	--------------------------인원수 클릭시 숫자변경----------------------------------------------
@@ -39,7 +34,11 @@ $(document).ready(function() {
 		$('#people_sum').text(new_peo_num);
 		$('#peo_sum_btn').text(new_peo_num);
 		$('#people_count').val(new_peo_num);
+		if(new_peo_num>7){
+			alert('8명이상 검색할수 없습니다.');
+			$('#people_plus').attr('disabled',true); //버튼 비활성화
 		
+		}
 	});
 
 	$('#people_minus').on("click",function(){ //인원수 설정시 
@@ -47,15 +46,41 @@ $(document).ready(function() {
 		$('#people_sum').text(new_peo_minus);
 		$('#peo_sum_btn').text(new_peo_minus);
 		$('#people_count').val(new_peo_minus);
+		
+		if(new_peo_minus<0){
+			alert('최소인원은 1명입니다.');
+			$('#people_minus').attr('disabled',true); //버튼 비활성화
+		
+		}
 	});
 	// ------------------------------------------------------------------------	
-
+	
+	$('#search').on("click change",function(event){
+		var date = $('#date_out').val();
+		
+		if(date == ''){
+			alert('시작날짜와 끝날짜를 설정하세요');
+			return false;
+		}
+		if(date != ''){
+			$('#address').val('서울');
+			return true;
+		}
+		event.preventDefault();
+	});
+	
+	//검색시 끝날짜 설정하지않으면 비활성화
+/*	$('#search').click(function(){
+		var search = $('#date_out').val();
+		if(search == ''){
+			alert('시작날짜와 끝날짜를 설정하세요');
+			$('#search').attr('disabled',true); //버튼 비활성화
+		}else{
+			$('#search').attr('disabled',false); //버튼 활성화
+		}
+	});*/
 });
 
-function peopleChange(){
-
-
-}
 //----------------------------날짜 설정시 선택한 날짜로부터 한달동안만 보여지게 활성화 -----------------------//
 $(function(selectedDate) {
 	var minDate = new Date();
@@ -86,4 +111,7 @@ $(function(selectedDate) {
 	});
 
 });
+
+
+
 

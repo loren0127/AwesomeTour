@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 식별자라서 여러 개의 mapper를 만들었을 때 구별하기 위해 유니크 해야 함 -->
+<mapper namespace="kr.spring.accomList.dao.AccomListMapper">
+	<select id="selectAccomlist" parameterType="map"
+		resultType="AccomListCommand">									
+      	SELECT
+      			b.acc_num,
+                b.acc_name,
+				b.acc_grade,
+				b.acc_theme,
+				b.acc_address1,
+				r.ro_num,
+				r.ro_price,
+				r.ro_pe_count,
+				r.ro_sub,
+				r.ro_type,
+                c.rv_start_date,
+                c.rv_end_date,
+                i.im_cover,
+                i.im_cover_name
+      from accom b
+                left outer join accom_room r
+                on b.acc_num = r.ro_num
+                left outer join reservation c
+                on b.acc_num = c.rv_num
+                left outer join accom_image i
+                on b.acc_num = i.im_num                
+         WHERE
+           		r.ro_sub = #{searchtype}
+		 <if test="search !=''">
+           		AND b.acc_address1 LIKE '%' || #{search} || '%'
+        </if>
+         <if test="search !=''">
+           		AND r.ro_pe_count >= #{people_count}
+        </if>
+         <if test="search !=''">
+         
+       		   AND b.acc_num NOT IN(SELECT rv_acc_num 
+          				FROM reservation 
+				 				
+				 <![CDATA[
+				 		where TO_DATE(c.rv_end_date,'yy/mm/dd') >= #{check_in} 
+						AND TO_DATE(c.rv_start_date,'yy/mm/dd') <= #{check_out}
+					]]> 
+				 		)
+        </if>
+	</select>
+	
+	<select id="selectAccomListCount" parameterType="map"
+		resultType="integer">		
+		SELECT COUNT(*) FROM (							
+      	SELECT
+      			b.acc_num,
+                b.acc_name,
+				b.acc_grade,
+				b.acc_theme,
+				b.acc_address1,
+				r.ro_num,
+				r.ro_price,
+				r.ro_pe_count,
+				r.ro_sub,
+                c.rv_start_date,
+                c.rv_end_date,
+                i.im_cover,
+                i.im_cover_name                
+      from accom b
+                left outer join accom_room r
+                on b.acc_num = r.ro_num
+                left outer join reservation c
+                on b.acc_num = c.rv_num
+                left outer join accom_image i
+                on b.acc_num = i.im_num                  
+         WHERE
+           		r.ro_sub = #{searchtype}
+		 <if test="search !=''">
+           		AND b.acc_address1 LIKE '%' || #{search} || '%'
+        </if>
+         <if test="search !=''">
+           		AND r.ro_pe_count >= #{people_count}
+        </if>
+         <if test="search !=''">
+         
+       		   AND b.acc_num NOT IN(SELECT rv_acc_num 
+          				FROM reservation 
+				 				
+				 <![CDATA[
+				 		where TO_DATE(c.rv_end_date,'yy/mm/dd') >= #{check_in}  AND 
+				 		TO_DATE(c.rv_start_date,'yy/mm/dd') <= #{check_out}
+					]]> 
+				 		))a
+        </if>
+	</select>	
+</mapper>
