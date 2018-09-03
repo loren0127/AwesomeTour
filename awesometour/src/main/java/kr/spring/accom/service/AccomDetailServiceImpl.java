@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import kr.spring.accom.dao.AccomMapper;
+import kr.spring.accom.dao.AccomDetailMapper;
 import kr.spring.accom.domain.HotelDetailCommand;
 import kr.spring.accom.domain.ImageCommand;
 import kr.spring.accom.domain.PrivateDetailCommand;
@@ -17,7 +17,7 @@ import kr.spring.accom.domain.ReviewCommand;
 public class AccomDetailServiceImpl implements AccomDetailService{
 	
 	@Resource
-	private AccomMapper accomMapper;
+	private AccomDetailMapper accomMapper;
 	
 	//이미지 등록(나중에 제거)
 	public void insertImage(ImageCommand image) {

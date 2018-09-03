@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 식별자라서 여러 개의 mapper를 만들었을 때 구별하기 위해 유니크 해야 함 -->
+<mapper namespace="kr.spring.accom.dao.AccomMapper">
+	<select id="selectHotelTotalImage" parameterType="hotelDetailCommand" resultType="hotelDetailCommand">
+		SELECT 
+		  i.im_cover,
+		  i.im_cover_name,
+		  i.im_image2,
+		  i.im_image2_name,
+		  i.im_image3,
+		  i.im_image3_name,
+		  i.im_ro_num,
+		  b.ro_room_num
+	    FROM accom_image i 
+	    JOIN 
+	       (SELECT ro_num,ro_room_num 
+	       FROM accom_room 
+	       WHERE ro_acc_num=#{im_ac_num})b 
+	    ON i.im_ro_num=b.ro_num
+	</select>
+	<select id="selectHotelImage" parameterType="map" resultType="hotelDetailCommand">
+		SELECT 
+		  i.im_cover,
+		  i.im_cover_name,
+		  i.im_image2,
+		  i.im_image2_name,
+		  i.im_image3,
+		  i.im_image3_name,
+		  i.im_ro_num,
+		  b.ro_room_num
+	   FROM accom_image i 
+	   JOIN 
+	      (SELECT ro_num,ro_room_num 
+	         FROM accom_room 
+	         WHERE ro_acc_num=#{im_ac_num})b ON i.im_ro_num=b.ro_num WHERE b.ro_room_num=#{ro_room_num}
+	</select>
+	<select id="selectHotelDetail" parameterType="Integer" resultType="hotelDetailCommand">
+		SELECT a.acc_num,a.acc_name,a.acc_address1,a.acc_grade,a.acc_in,a.acc_out,a.acc_theme,ROUND(b.ag_grade,1) ag_grade
+		    FROM accom a LEFT OUTER JOIN 
+		        (SELECT ag_acc_num,AVG(ag_grade) ag_grade 
+		            FROM accom_grade 
+		            GROUP BY ag_acc_num 
+		            HAVING ag_acc_num=#{im_ac_num})b 
+		    ON a.acc_num=b.ag_acc_num 
+		    WHERE a.acc_grade is not null AND a.acc_num=#{im_ac_num}
+	</select> 
+	<select id="selectStandardRoomCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM (SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='스탠다드')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+				FROM reservation 
+				<![CDATA[
+				WHERE rv_end_date > to_date(#{check_in,jdbcType=VARCHAR},'YYYY/MM/DD')
+				AND rv_start_date < to_date(#{check_out,jdbcType=VARCHAR},'YYYY/MM/DD')
+				]]>
+				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
+
+	</select>
+	<select id="selectStandardRoom" parameterType="map" resultType="hotelDetailCommand">
+		SELECT * FROM(SELECT f.*,rownum rnum FROM (SELECT * FROM(SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='스탠다드')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+		FROM reservation 
+		<![CDATA[
+		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+		]]>
+		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectDeluxRoomCount" parameterType="map" resultType="Integer">
+	SELECT COUNT(*) FROM (SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='디럭스')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+				FROM reservation 
+				<![CDATA[
+				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+				]]>
+				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
+	</select>
+	<select id="selectDeluxRoom" parameterType="map" resultType="hotelDetailCommand">
+			SELECT * FROM(SELECT f.*,rownum rnum FROM (SELECT * FROM(SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='디럭스')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+		FROM reservation 
+		<![CDATA[
+		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+		]]>
+		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end} 
+		]]>
+	</select>
+	<select id="selectSuiteRoomCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM (SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='스위트')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+				FROM reservation 
+				<![CDATA[
+				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+				]]>
+				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
+	</select>
+	<select id="selectSuiteRoom" parameterType="map" resultType="hotelDetailCommand">
+			SELECT * FROM(SELECT f.*,rownum rnum FROM (SELECT * FROM(SELECT * FROM 
+		       (SELECT d.* FROM
+		              (SELECT c.*,im.im_cover,im.im_cover_name FROM 
+		                    (SELECT b.*,r.ro_num,r.ro_room_num,r.ro_bed_type,r.ro_bed_count,r.ro_price FROM 
+		                           (SELECT s.se_name,a.acc_num 
+		                               FROM accom_service s 
+		                      		   JOIN accom a 
+		                      		   ON s.se_acc_num=a.acc_num 
+		                      		   WHERE a.acc_grade is not null 
+		                      		   AND a.acc_num=#{im_ac_num})b 
+		                     JOIN accom_room r ON b.acc_num=r.ro_acc_num 
+		                     WHERE r.ro_type='스위트')c 
+		         JOIN accom_image im 
+		         ON c.ro_num=im.im_ro_num)d))br LEFT OUTER JOIN (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+		FROM reservation 
+		<![CDATA[
+		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+		]]>
+		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<!-- 후기 리스트 -->
+	<select id="selectListReview" parameterType="map" resultType="reviewCommand"><!-- Map과 BoardReplyCommand에 알리아스가 지정되어 있음(자동인식) -->
+	SELECT e.*,f.member_nickname FROM (SELECT * FROM
+		(SELECT b.*,NVL(d.al_count,0) al_count,rownum rnum FROM (SELECT a.*,g.ag_grade FROM(SELECT 
+		          re_num,
+		          re_acc_num,
+		          re_email,
+		          TO_CHAR(re_reg_date,'YYYY-MM-DD HH24:MI:SS') re_reg_date,
+		          re_content 
+		        FROM accom_review WHERE re_acc_num=#{im_ac_num})a LEFT OUTER JOIN (SELECT ag_grade,ag_email FROM accom_grade WHERE ag_acc_num=#{im_ac_num})g ON a.re_email=g.ag_email)b
+		    LEFT OUTER JOIN 
+		        (SELECT COUNT(*) al_count,al_re_num 
+		        FROM accom_like WHERE al_acc_num=#{im_ac_num}
+		           GROUP BY al_re_num)d 
+		        ON b.re_num=d.al_re_num)
+		     <![CDATA[
+			  WHERE rnum >= #{start} AND rnum <= #{end}
+			  ]]>
+			  ORDER BY al_count DESC)e 
+			  LEFT OUTER JOIN (SELECT member_email,member_nickname FROM member_detail)f 
+	 ON e.re_email=f.member_email
+
+              
+                        
+	</select>
+	<select id="selectReviewCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM(SELECT e.*,f.member_nickname FROM (SELECT * FROM
+		(SELECT b.*,NVL(d.al_count,0) al_count FROM (SELECT a.*,g.ag_grade FROM(SELECT 
+		          re_num,
+		          re_acc_num,
+		          re_email,
+		          TO_CHAR(re_reg_date,'YYYY-MM-DD HH24:MI:SS') re_reg_date,
+		          re_content 
+		        FROM accom_review WHERE re_acc_num=#{im_ac_num})a LEFT OUTER JOIN (SELECT ag_grade,ag_email FROM accom_grade WHERE ag_acc_num=#{im_ac_num})g ON a.re_email=g.ag_email)b
+		    LEFT OUTER JOIN 
+		        (SELECT COUNT(*) al_count,al_re_num 
+		        FROM accom_like WHERE al_acc_num=#{im_ac_num}
+		           GROUP BY al_re_num)d 
+		        ON b.re_num=d.al_re_num)
+			   ORDER BY al_count DESC)e LEFT OUTER JOIN (SELECT member_email,member_nickname FROM member_detail)f 
+	 ON e.re_email=f.member_email)
+
+	</select>
+	<select id="selectPrivateDetail" parameterType="Integer" resultType="privateDetailCommand">
+		SELECT * FROM (SELECT c.*,s.se_name 
+		   FROM 
+		     (SELECT a.acc_num,a.acc_name,a.acc_address1,a.acc_theme,a.acc_in,a.acc_out,NVL(b.ag_grade,0) ag_grade,a.acc_host
+		         FROM accom a LEFT OUTER JOIN (
+		             SELECT AVG(ag_grade) ag_grade,ag_acc_num 
+		                  FROM accom_grade 
+		                  GROUP BY ag_acc_num)b 
+		             ON a.acc_num=b.ag_acc_num 
+		             WHERE acc_num=#{im_ac_num})c JOIN accom_service s ON c.acc_num=s.se_acc_num)g JOIN (SELECT member_content,member_email FROM member_detail)f ON g.acc_host=f.member_email
+	</select>
+	<select id="selectHotelRecommendationList" parameterType="map" resultType="hotelDetailCommand">
+	
+	SELECT * FROM(SELECT rw.*,rownum rnum FROM (SELECT * FROM
+	    (SELECT c.acc_num,c.ag_grade,c.acc_name,c.ro_price,c.acc_address1,i.im_cover,i.im_cover_name,c.ro_room_num
+	         FROM
+	      (SELECT b.acc_num,NVL(b.ag_grade,0) ag_grade,b.acc_name,r.ro_price,b.acc_address1,r.ro_room_num
+	           FROM
+	         (SELECT a.acc_num,ROUND(ag.ag_grade,1) ag_grade,a.acc_name,a.acc_address1
+	         FROM accom a 
+	         LEFT OUTER JOIN
+	       (SELECT ag_acc_num,AVG(ag_grade) ag_grade
+			  FROM accom_grade
+	          GROUP BY ag_acc_num)ag
+	          ON a.acc_num=ag.ag_acc_num)b
+	          RIGHT OUTER JOIN
+	             (SELECT DISTINCT ro_acc_num,MIN(ro_price) OVER(partition by ro_acc_num) ro_price,MIN(ro_room_num) OVER(partition by ro_acc_num) ro_room_num
+	   				 FROM accom_room WHERE ro_sub='h')r ON b.acc_num=r.ro_acc_num)c
+			  		JOIN
+					  (SELECT im_cover,im_cover_name,im_ac_num,im_ro_num FROM accom_image WHERE
+						 im_ro_num IN (SELECT MAX(ro_num) ro_num FROM accom_room WHERE
+								ro_sub='h' GROUP BY ro_acc_num))i
+					   ON c.acc_num=i.im_ac_num WHERE c.acc_address1 like '%' || #{search} || '%')br LEFT OUTER JOIN
+			(SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num,
+			     COUNT(*) OVER(partition by rv_acc_num) rv_room_count FROM reservation
+	        <![CDATA[
+			WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+	        AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+	         ]]>
+	        )a JOIN (SELECT ro_num,ro_room_num,COUNT(*) OVER(partition by ro_acc_num)
+				ro_room_count FROM accom_room WHERE ro_sub='h')b ON
+					a.rv_ro_num=b.ro_num
+		    <![CDATA[
+			WHERE ro_room_count >= rv_room_count
+			 ]]>
+			)cr ON br.acc_num=cr.rv_acc_num WHERE br.ag_grade >= 4.0)rw) 
+			 <![CDATA[
+		  	WHERE rnum >= 1 AND rnum <=4
+		  	 ]]>
+	</select>
+	<select id="selectPrivateRecommendationList" parameterType="map" resultType="privateDetailCommand">
+	SELECT * FROM (SELECT rw.*,rownum rnum FROM (SELECT * FROM 
+	 (SELECT
+	   c.acc_num,c.ag_grade,c.acc_name,c.ro_price,c.acc_address1,i.im_cover,i.im_cover_name
+	  FROM
+	   (SELECT b.acc_num,NVL(b.ag_grade,0) ag_grade,b.acc_name,r.ro_price,b.acc_address1
+	     FROM(SELECT a.acc_num,ROUND(ag.ag_grade,1) ag_grade,a.acc_name,a.acc_address1
+	           FROM accom a LEFT OUTER JOIN
+	            (SELECT ag_acc_num,AVG(ag_grade) ag_grade
+				  FROM accom_grade
+				  GROUP BY ag_acc_num)ag
+				  ON a.acc_num=ag.ag_acc_num)b
+				RIGHT OUTER JOIN
+		 (SELECT ro_acc_num,ro_price FROM accom_room WHERE ro_sub='p')r
+				ON b.acc_num=r.ro_acc_num)c
+		  JOIN
+		(SELECT im_cover,im_cover_name,im_ac_num FROM accom_image)i
+		  ON c.acc_num=i.im_ac_num WHERE c.acc_address1 like '%' || #{search} || '%')br LEFT OUTER JOIN
+	    (SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num
+          FROM reservation
+          <![CDATA[
+			WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+			AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+		  ]]>
+			)a JOIN (SELECT ro_acc_num FROM accom_room WHERE ro_sub='p')b ON
+			a.rv_acc_num=b.ro_acc_num)cr 
+			ON br.acc_num=cr.rv_acc_num WHERE cr.rv_start_date is null AND br.ag_grade >= 4.0)rw)
+		  <![CDATA[
+		  	WHERE rnum >= 1 AND rnum <=4
+		  ]]>
+	</select>
+	<select id="selectHotelRvChecked" parameterType="map" resultType="hotelDetailCommand">
+		SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
+		FROM reservation 
+		<![CDATA[
+		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
+		]]>
+		)a JOIN (SELECT ro_num,ro_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num} AND ro_room_num=#{ro_room_num})b ON a.rv_ro_num=b.ro_num
+	
+	</select>
+
+</mapper>
