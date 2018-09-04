@@ -24,7 +24,7 @@
                 left outer join accom_room r
                 on b.acc_num = r.ro_acc_num
                 left outer join reservation c
-                on b.acc_num = c.rv_acc_num
+                on b.acc_num = c.acc_num
                 left outer join accom_image i
                 on b.acc_num = i.im_ac_num                
          WHERE
@@ -37,7 +37,7 @@
         </if>
          <if test="search !=''">
          
-       		   AND b.acc_num NOT IN(SELECT rv_acc_num 
+       		   AND b.acc_num NOT IN(SELECT acc_num 
           				FROM reservation 
 				 				
 				 <![CDATA[
@@ -69,7 +69,7 @@
                 left outer join accom_room r
                 on b.acc_num = r.ro_acc_num
                 left outer join reservation c
-                on b.acc_num = c.rv_acc_num
+                on b.acc_num = c.acc_num
                 left outer join accom_image i
                 on b.acc_num = i.im_ac_num                  
          WHERE
@@ -82,7 +82,7 @@
         </if>
          <if test="search !=''">
          
-       		   AND b.acc_num NOT IN(SELECT rv_acc_num 
+       		   AND b.acc_num NOT IN(SELECT acc_num 
           				FROM reservation 
 				 				
 				 <![CDATA[
