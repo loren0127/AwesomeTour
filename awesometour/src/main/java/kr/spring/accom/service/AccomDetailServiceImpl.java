@@ -151,13 +151,13 @@ public class AccomDetailServiceImpl implements AccomDetailService{
 	}
 
 	@Override
-	public List<String> selectRvDateStart() {
-		return accomMapper.selectRvDateStart();
+	public List<String> selectRvDateStart(Integer im_ac_num) {
+		return accomMapper.selectRvDateStart(im_ac_num);
 	}
 
 	@Override
-	public List<String> selectRvDateEnd() {
-		return accomMapper.selectRvDateEnd();
+	public List<String> selectRvDateEnd(Integer im_ac_num) {
+		return accomMapper.selectRvDateEnd(im_ac_num);
 	}
 
 	@Override

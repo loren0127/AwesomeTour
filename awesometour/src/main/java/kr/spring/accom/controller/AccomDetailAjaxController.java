@@ -1,6 +1,7 @@
 package kr.spring.accom.controller;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -376,5 +377,24 @@ public class AccomDetailAjaxController {
 			}
 			
 			return map;
+		}
+		
+		@RequestMapping("/accomDetail/datePicker.do")
+		@ResponseBody
+		public Object datePicker(@RequestParam("im_ac_num") int im_ac_num){
+			List<String> startList = accomDetailService.selectRvDateStart(im_ac_num);
+			List<String> endList = accomDetailService.selectRvDateEnd(im_ac_num);
+			
+			if(log.isDebugEnabled()) {
+				log.debug("<<im_ac_num>> : "+im_ac_num);
+				log.debug("<<startList>> : "+startList);
+				log.debug("<<endList>> : " + endList);
+			}
+			
+			Map<String,Object> result = new HashMap<String,Object>();
+			result.put("startList", startList);
+			result.put("endList",endList);
+			
+			return result;
 		}
 }

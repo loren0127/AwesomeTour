@@ -41,7 +41,7 @@ public interface AccomDetailMapper {
 	//리스트 카운트
 	public int selectReviewCount(Map<String, Object> map);
 	//후기 작성시 해당 숙소를 현재 날짜보다 이전에 예약한 사람만 작성가능
-	@Select("SELECT rv_start_date,rv_end_date FROM reservation WHERE SYSDATE > rv_end_date AND member_email=#{re_email} AND rv_acc_num=#{re_acc_num} AND rv_status=2")
+	@Select("SELECT rv_start_date,rv_end_date FROM reservation WHERE SYSDATE > rv_end_date AND member_email=#{re_email} AND acc_num=#{re_acc_num} AND rv_status=2")
 	public HotelDetailCommand selectRvReivew(Map<String,Object> map);
 	//후기 등록
 	@Insert("INSERT INTO accom_review (re_num,re_acc_num,re_email,re_reg_date,re_content,re_ip) VALUES (review_seq.nextval,#{re_acc_num},#{re_email},sysdate,#{re_content},#{re_ip})")
@@ -86,12 +86,12 @@ public interface AccomDetailMapper {
 	
 	//datepicker
 	//시작일과 종료일
-	@Select("SELECT TO_CHAR(SYSDATE,'YYYY/MM/DD') start_date, TO_CHAR((ADD_MONTHS(SYSDATE,5)),'YYYY/MM/DD') end_date FROM dual")
+	@Select("SELECT TO_CHAR(SYSDATE,'YYYY/MM/DD') start_date, TO_CHAR((ADD_MONTHS(SYSDATE,3)),'YYYY/MM/DD') end_date FROM dual")
 	public PrivateDetailCommand selectStartEndDate();
 	//제거일1
-	@Select("SELECT rv_start_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,5)")
-	public List<String> selectRvDateStart();
-	@Select("SELECT rv_end_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,5)")
-	public List<String> selectRvDateEnd();
+	@Select("SELECT rv_start_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,3) AND acc_num=#{im_ac_num}")
+	public List<String> selectRvDateStart(Integer im_ac_num);
+	@Select("SELECT rv_end_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,3) AND acc_num=#{im_ac_num}")
+	public List<String> selectRvDateEnd(Integer im_ac_num);
 
 }

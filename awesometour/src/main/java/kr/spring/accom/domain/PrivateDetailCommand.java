@@ -1,6 +1,7 @@
 package kr.spring.accom.domain;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,8 +44,22 @@ public class PrivateDetailCommand {
 	//회원테이블
 	private String member_content;
 	private String member_email;
+	private String member_nickname;
+	private Date member_reg_date;
 	
 	
+	public String getMember_nickname() {
+		return member_nickname;
+	}
+	public void setMember_nickname(String member_nickname) {
+		this.member_nickname = member_nickname;
+	}
+	public Date getMember_reg_date() {
+		return member_reg_date;
+	}
+	public void setMember_reg_date(Date member_reg_date) {
+		this.member_reg_date = member_reg_date;
+	}
 	public String getMember_content() {
 		return member_content;
 	}

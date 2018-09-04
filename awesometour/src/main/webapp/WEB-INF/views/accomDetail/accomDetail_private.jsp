@@ -91,8 +91,25 @@
 		<br> <br> <br>
 		<div style="min-height:300px;">
 			<h3>호스트 소개</h3>
-			<div>${privateDetail.member_content}</div>
-		</div>
+				<div class="comments-area" style="background-color:#f8f9fa;">
+						<div class="row">
+							<div class="col-md-3">
+								<img src="${pageContext.request.contextPath}/member/imageView.do?member_email=${privateDetail.member_email}" alt="" style="width:100px;">
+							</div>
+							<br><br>
+								
+							<div class="col-md-9 mt-sm-20 left-align-p">
+								<p style="font-weight:bold;"><b>${privateDetail.member_nickname}</b>님의 프라이빗 하우스입니다!</p>
+								<p>${privateDetail.member_content}</p>
+								<p>가입일 : ${privateDetail.member_reg_date}</p>
+							</div>
+							<div style="padding-left:275px;">
+							<a href="#" class="btn-reply button_hover">연락하기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br><br>
 			<div class="container" style="background-color: white;">
 				<br> <br>
 				<h4>
@@ -188,7 +205,7 @@
 			</div>
 		</div>
 		<!-- 평점이 높은 다른 숙소 -->
-		<div style="min-height:300px;clear:left;">
+		<div style="min-height:300px;clear:left;padding-top:50px;">
 			<h3>평점이 높은 프라이빗 하우스</h3>
 			<br>
             <div class="container">

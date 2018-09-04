@@ -38,7 +38,7 @@ $('document').ready(function(){
 						var output = '<div class="single-comment justify-content-between d-flex " style="float:left;width:50%;">';
 						output += '<div class="user justify-content-between d-flex item" style="width:500px;">';
 						output += ' <div class="thumb">';
-						output += '<img src="../resources/images/NoImage.gif" style="width:80px;" alt="이미지가 없습니다.">';
+						output += '<img src="../member/imageView.do?member_email='+item.re_email+'" style="width:80px;">';
 						output += '</div>';
 						output += ' <div class="desc" style="width:500px;">';
 						output += ' <h5>' + item.member_nickname +'&nbsp;<span class="like" data-num="'+item.re_num+'" data-email="'+item.re_email+'"><i class="fa fa-thumbs-o-up"></i></span><span class="like_count">'+item.al_count+'</span></h5>';
@@ -425,23 +425,44 @@ $('document').ready(function(){
 	//초기 데이터(목록) 호출
 	selectData(1,$('#im_ac_num').val());
 	
-	//평점이 높은 다른 숙소 보기
+	var disabledate;
 	
-	
-	//datepicker
-		$('#datepicker').datepicker({
-			showMonthAfterYear:true,
-			prevText: '<',
-	        nextText: '>',
-			dateFormat:'yy-mm-dd',
-			dayNamesMin:['일','월','화','수','목','금','토'],
-			changeYear:true,
-			changeMonth:true,
-			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
-			yearSuffix: '년',
-			minDate:new Date($('#start_date').val()),
-			maxDate:new Date($('#end_date').val())
+	$.ajax({
+		type:'post',
+		url:'datePicker.do',
+		data:{im_ac_num:$('#im_ac_num').val()},
+		dataType:'json',
+		cache:false,
+		timeout:30000,
+		success:function(data){
+			disabledate = '\'' + data.startList.join(','); 
+			disabledate += ',' + data.endList.join(',') + '\'';
+			//console.log(disabledate);
 			
-		});
+			$('#datepicker').datepicker({
+				showMonthAfterYear:true,
+				prevText: '<',
+		        nextText: '>',
+				dateFormat:'yy/mm/dd',
+				dayNamesMin:['일','월','화','수','목','금','토'],
+				changeYear:true,
+				changeMonth:true,
+				monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+				yearSuffix: '년',
+				minDate:new Date($('#start_date').val()),
+				maxDate:new Date($('#end_date').val()),
+				beforeShowDay: function(day) {
+		            if(disabledate.indexOf($.datepicker.formatDate('yy/mm/dd', day)) != -1) return [false, "disabledate", "beforeShowDay로 블록"];
+		            else return [true, "", ""];
+				}
+			});
+            
+           //alert('전송 성공');
+		},
+		error:function(){
+			alert('네트워크 오류 발생!');
+		}
+	});
+	
 		
 });

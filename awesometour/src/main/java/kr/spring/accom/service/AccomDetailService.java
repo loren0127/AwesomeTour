@@ -74,6 +74,6 @@ public interface AccomDetailService {
 	//시작일과 종료일
 	public PrivateDetailCommand selectStartEndDate();
 	//제거일1
-	public List<String> selectRvDateStart();
-	public List<String> selectRvDateEnd();
+	public List<String> selectRvDateStart(Integer im_ac_num);
+	public List<String> selectRvDateEnd(Integer im_ac_num);
 }

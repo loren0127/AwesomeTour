@@ -224,6 +224,7 @@ public class AccomDetailController {
 		
 		//평점이 높은 다른 숙소
 		Map<String,Object> mapHotelGrade = new HashMap<String,Object>();
+		mapHotelGrade.put("im_ac_num", im_ac_num);
 		mapHotelGrade.put("check_in", check_in);
 		mapHotelGrade.put("check_out", check_out);
 		mapHotelGrade.put("search", search);
@@ -297,6 +298,7 @@ public class AccomDetailController {
 			
 			//평점이 높은 다른 숙소
 			Map<String,Object> mapPrivateGrade = new HashMap<String,Object>();
+			mapPrivateGrade.put("im_ac_num", im_ac_num);
 			mapPrivateGrade.put("check_in", check_in);
 			mapPrivateGrade.put("check_out", check_out);
 			mapPrivateGrade.put("search", search);
@@ -318,8 +320,8 @@ public class AccomDetailController {
 			PrivateDetailCommand privateDetail2 = accomDetailService.selectStartEndDate();
 			model.addAttribute("privateDetail2", privateDetail2);
 			
-			/*//제거일
-			List<String> dateStartList = accomDetailService.selectRvDateStart();
+			//제거일
+			/*List<String> dateStartList = accomDetailService.selectRvDateStart();
 			List<String> dateEndList = accomDetailService.selectRvDateEnd();
 			
 			model.addAttribute("dateStartList",dateStartList);

@@ -240,7 +240,7 @@
 		                  FROM accom_grade 
 		                  GROUP BY ag_acc_num)b 
 		             ON a.acc_num=b.ag_acc_num 
-		             WHERE acc_num=#{im_ac_num})c JOIN accom_service s ON c.acc_num=s.se_acc_num)g JOIN (SELECT member_content,member_email FROM member_detail)f ON g.acc_host=f.member_email
+		             WHERE acc_num=#{im_ac_num})c JOIN accom_service s ON c.acc_num=s.se_acc_num)g JOIN (SELECT member_content,member_email,member_nickname,member_reg_date FROM member_detail)f ON g.acc_host=f.member_email
 	</select>
 	<select id="selectHotelRecommendationList" parameterType="map" resultType="hotelDetailCommand">
 	
@@ -280,6 +280,7 @@
 			 <![CDATA[
 		  	WHERE rnum >= 1 AND rnum <=4
 		  	 ]]>
+		  	 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) 
 	</select>
 	<select id="selectPrivateRecommendationList" parameterType="map" resultType="privateDetailCommand">
 	SELECT * FROM (SELECT rw.*,rownum rnum FROM (SELECT * FROM 
@@ -311,6 +312,7 @@
 		  <![CDATA[
 		  	WHERE rnum >= 1 AND rnum <=4
 		  ]]>
+		  AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num})
 	</select>
 	<select id="selectHotelRvChecked" parameterType="map" resultType="hotelDetailCommand">
 		SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num

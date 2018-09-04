@@ -52,7 +52,7 @@ public class ReviewCommand {
 		return re_reg_date;
 	}
 	public void setRe_reg_date(String re_reg_date) {
-		this.re_reg_date = re_reg_date;
+		this.re_reg_date = DurationFromNow.getTimeDiffLabel(re_reg_date);
 	}
 	public String getRe_content() {
 		return re_content;
