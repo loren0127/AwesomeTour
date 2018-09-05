@@ -34,7 +34,10 @@ public interface AccomDetailService {
 	public List<HotelDetailCommand> selectSuiteRoom(Map<String,Object> map);
 	//=====호텔 후기=====
 	//리스트
+	//좋아요순
 	public List<ReviewCommand> selectListReview(Map<String, Object> map);
+	//최신순
+	public List<ReviewCommand> selectListReview2(Map<String,Object> map);
 	//리스트 카운트
 	public int selectReviewCount(Map<String, Object> map);
 	//후기 작성시 해당 숙소를 현재 날짜보다 이전에 예약한 사람만 작성가능

@@ -269,11 +269,26 @@
 				</div>
 				<br> <br>
 				<div class="comment-list">
+				<div class="block_cate" id="blockcate">
+				<div class="con_align" style="text-align:center;">
+					<hr size="1" noshade>
+					<span style="padding-left:10px;"><input type="radio" class="confirm-radio" name="reviewList" id="review_like"
+						value="first" checked> <label for="review_like" >좋아요순</label></span>
+					<span style="padding-left:10px;"><input type="radio" class="confirm-radio" name="reviewList" id="review_recency"
+						value="second"> <label for="review_recency">최신순</label></span>
+					<hr size="1" noshade>
+				</div>
+				</div>
 					<div id="output"></div>
 					<div class="paging-link4"
 						style="text-align:center;<c:if test="${more4 == 0}">display:none;</c:if>">
 						<a href="#" style="color: #222; font-weight: bold;"><span
 							id="remainCount" style="color: #d900ed;"></span>개 더보기&nbsp;<b>∨</b></a>
+					</div>
+					<div class="paging-link5"
+						style="text-align:center;<c:if test="${more5 == 0}">display:none;</c:if>">
+						<a href="#" style="color: #222; font-weight: bold;"><span
+							id="remainCount2" style="color: #d900ed;"></span>개 더보기&nbsp;<b>∨</b></a>
 					</div>
 					<div id="loading" style="display: none;">
 						<img

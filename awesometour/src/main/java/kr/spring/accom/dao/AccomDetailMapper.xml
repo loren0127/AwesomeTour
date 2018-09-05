@@ -190,8 +190,8 @@
 	</select>
 	<!-- 후기 리스트 -->
 	<select id="selectListReview" parameterType="map" resultType="reviewCommand"><!-- Map과 BoardReplyCommand에 알리아스가 지정되어 있음(자동인식) -->
-	SELECT e.*,f.member_nickname FROM (SELECT * FROM
-		(SELECT b.*,NVL(d.al_count,0) al_count,rownum rnum FROM (SELECT a.*,g.ag_grade FROM(SELECT 
+	SELECT * FROM (SELECT er.*,f.member_nickname FROM (SELECT e.*,rownum rnum FROM
+		(SELECT b.*,NVL(d.al_count,0) al_count FROM (SELECT a.*,g.ag_grade FROM(SELECT 
 		          re_num,
 		          re_acc_num,
 		          re_email,
@@ -202,16 +202,33 @@
 		        (SELECT COUNT(*) al_count,al_re_num 
 		        FROM accom_like WHERE al_acc_num=#{im_ac_num}
 		           GROUP BY al_re_num)d 
-		        ON b.re_num=d.al_re_num)
-		     <![CDATA[
-			  WHERE rnum >= #{start} AND rnum <= #{end}
-			  ]]>
-			  ORDER BY al_count DESC)e 
+		        ON b.re_num=d.al_re_num ORDER BY al_count DESC)e)er 
 			  LEFT OUTER JOIN (SELECT member_email,member_nickname FROM member_detail)f 
-	 ON e.re_email=f.member_email
-
-              
-                        
+	 ON er.re_email=f.member_email 
+	 <![CDATA[
+	 WHERE rnum >= #{start} AND rnum <= #{end})
+     ]]>
+	</select>
+	<select id="selectListReview2" parameterType="map" resultType="reviewCommand"><!-- Map과 BoardReplyCommand에 알리아스가 지정되어 있음(자동인식) -->
+	SELECT * FROM (SELECT er.*,f.member_nickname FROM (SELECT e.*,rownum rnum FROM
+		(SELECT b.*,NVL(d.al_count,0) al_count FROM (SELECT a.*,g.ag_grade FROM(SELECT 
+		          re_num,
+		          re_acc_num,
+		          re_email,
+		          TO_CHAR(re_reg_date,'YYYY-MM-DD HH24:MI:SS') re_reg_date,
+		          re_content 
+		        FROM accom_review WHERE re_acc_num=#{im_ac_num})a LEFT OUTER JOIN (SELECT ag_grade,ag_email FROM accom_grade WHERE ag_acc_num=#{im_ac_num})g ON a.re_email=g.ag_email)b
+		    LEFT OUTER JOIN 
+		        (SELECT COUNT(*) al_count,al_re_num 
+		        FROM accom_like WHERE al_acc_num=#{im_ac_num}
+		           GROUP BY al_re_num)d 
+		        ON b.re_num=d.al_re_num)e)er 
+			  LEFT OUTER JOIN (SELECT member_email,member_nickname FROM member_detail)f 
+	 ON er.re_email=f.member_email 
+	 <![CDATA[
+	 WHERE rnum >= #{start} AND rnum <= #{end}
+     ]]>
+        )ORDER BY re_reg_date DESC
 	</select>
 	<select id="selectReviewCount" parameterType="map" resultType="Integer">
 		SELECT COUNT(*) FROM(SELECT e.*,f.member_nickname FROM (SELECT * FROM

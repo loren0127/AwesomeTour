@@ -237,14 +237,17 @@ $('document').ready(function(){
 				var list = data.list;
 				
 				if(count <= 0 || list == null){
+					var output = '<div style="text-align:center">등록된 후기가 없습니다</div>';
+					
 					$('#reviewCount').text(count);
+					$('#output').append(output);
 				}else{
 					$(list).each(function(index,item){
 						
 						var output = '<div class="single-comment justify-content-between d-flex " style="float:left;width:50%;">';
 						output += '<div class="user justify-content-between d-flex item" style="width:500px;">';
 						output += ' <div class="thumb">';
-						output += '<img src="../resources/images/NoImage.gif" style="width:80px;" alt="이미지가 없습니다.">';
+						output += ' <img src="../member/imageView.do?member_email='+item.re_email+'" style="width:80px;">';
 						output += '</div>';
 						output += ' <div class="desc" style="width:500px;">';
 						output += ' <h5>' + item.member_nickname +'&nbsp;<span class="like" data-num="'+item.re_num+'" data-email="'+item.re_email+'"><i class="fa fa-thumbs-o-up"></i></span><span class="like_count">'+item.al_count+'</span></h5>';
@@ -340,6 +343,140 @@ $('document').ready(function(){
 			}
 		});
 	}
+	//최신순
+	function selectData2(pageNum,im_ac_num){
+		currentPage = pageNum;
+		
+		if(pageNum == 1){
+			//처음 호출 시에는 해당 ID의 div의 내부 내용을 제거
+			$('#output').empty();
+		}
+		
+		//로딩 이미지 노출
+		$('#loading').show();
+		
+		$.ajax({
+			type:'post',
+			data:{pageNum:pageNum,im_ac_num:im_ac_num},
+			url:'listReview2.do',
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){
+				//로딩이미지 감추기
+				$('#loading').hide();
+				count = data.count;
+				rowCount = data.rowCount;
+				var list = data.list;
+				
+				if(count <= 0 || list == null){
+					var output = '<div style="text-align:center">등록된 후기가 없습니다</div>';
+					
+					$('#reviewCount').text(count);
+					$('#output').append(output);
+				}else{
+					$(list).each(function(index,item){
+						
+						var output = '<div class="single-comment justify-content-between d-flex " style="float:left;width:50%;">';
+						output += '<div class="user justify-content-between d-flex item" style="width:500px;">';
+						output += ' <div class="thumb">';
+						output += '<img src="../member/imageView.do?member_email='+item.re_email+'" style="width:80px;">';
+						output += '</div>';
+						output += ' <div class="desc" style="width:500px;">';
+						output += ' <h5>' + item.member_nickname +'&nbsp;<span class="like" data-num="'+item.re_num+'" data-email="'+item.re_email+'"><i class="fa fa-thumbs-o-up"></i></span><span class="like_count">'+item.al_count+'</span></h5>';
+						if(item.ag_grade == "0.5"){
+							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "1"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "1.5"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "2"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "2.5"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "3"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "3.5"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "4"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "4.5"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}else if(item.ag_grade == "5"){
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>';
+							output += '<i class="fa fa-star" style="color:#424d97;"></i>&nbsp;';
+							output += item.ag_grade+'점';
+						}
+						output += ' <div class="date">'+item.re_reg_date+'</div>';
+						output += ' <div class="sub-item" style="width:200px;">';
+						output += '  <p class="comment">' + item.re_content + '</p>';
+						if($('#user_email').val() == item.re_email){
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:30%;">';
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:30%;">';
+							
+							$('#re_content').attr('disabled',true);
+							$('#re_content').text('후기는 한번만 작성가능합니다.');
+						}
+						output += '</div>';
+						output += '<br><br>';
+						output += '</div>';
+						output += '</div>';
+						output += '</div>';
+						
+						var remainCount = count - 4;
+						$('#remainCount2').text(remainCount);
+						$('#reviewCount').text(count);
+						
+						//문서 객체에 추가
+						$('#output').append(output);
+					});
+					
+					//paging button 처리
+					if(currentPage>=Math.ceil(count/rowCount)){//전체 페이지보다 현재 페이지가 크거나 같으면 다음 페이지 없음
+						//다음 페이지가 없음
+						$('.paging-link5').hide();
+					}else{//전체 페이지보다 현재 페이지가 작으면 다음 페이지 존재
+						//다음 페이지가 존재
+						$('.paging-link5').show();
+					}
+				}
+			},
+			error:function(){
+				//로딩이미지 감추기
+				$('#loading').hide();
+				alert('네트워크 오류');
+			}
+		});
+	}
+	
 	
 	//다음 댓글 보기 버튼 클릭시 데이터 추가
 	$('.paging-link4 a').click(function(event){
@@ -348,6 +485,37 @@ $('document').ready(function(){
 		
 		event.preventDefault();
 	});
+	$('.paging-link5 a').click(function(event){
+		var pageNum = currentPage + 1;
+		selectData2(pageNum, $('#im_ac_num').val());
+		
+		event.preventDefault();
+	});
+	
+	//초기데이터(목록) 호출
+	$('#review_like').change(function(){
+		 if($('#review_like').is(':checked')){
+			 $('.paging-link5').hide();
+			 
+			 selectData(1,$('#im_ac_num').val());
+			 
+	        }else{
+	        	$('#output').empty();
+	        }
+	});
+	
+	$('#review_recency').change(function(){
+		 if($('#review_recency').is(':checked')){
+			 $('.paging-link4').hide();
+			 
+			 selectData2(1,$('#im_ac_num').val());
+			 
+		 }else{
+	        $('#output').empty();
+	  }
+		
+	});
+	
 	//댓글 등록
 	$('#re_form').submit(function(event){//기본 이벤트를 막기위해 event 받는다.(기본이벤트 완전히 제거)
 		if($('#re_content').val()==''){
@@ -490,6 +658,8 @@ $('document').ready(function(){
 						alert('별점을 등록해주셔서 감사합니다!');
 					}else if(data.result == 'failed'){
 						alert('별점이 등록되지 않았습니다.');
+					}else if(data.result == 'not'){
+						alert('숙소를 이용하신 후에 별점을 등록하실 수 있습니다!');
 					}else{
 						alert('별점이 등록되지 않았습니다.');
 					}
@@ -628,7 +798,7 @@ $('document').ready(function(){
 	});
 	
 	//초기 데이터(목록) 호출
+	$('.paging-link5').hide();
 	selectData(1,$('#im_ac_num').val());
 	
-	//예약되어있는 호텔 방 체크
 });

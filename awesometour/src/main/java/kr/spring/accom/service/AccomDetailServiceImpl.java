@@ -174,4 +174,9 @@ public class AccomDetailServiceImpl implements AccomDetailService{
 	public HotelDetailCommand selectHotelRvChecked(Map<String, Object> map) {
 		return accomMapper.selectHotelRvChecked(map);
 	}
+
+	@Override
+	public List<ReviewCommand> selectListReview2(Map<String, Object> map) {
+		return accomMapper.selectListReview2(map);
+	}
 }

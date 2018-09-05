@@ -320,13 +320,6 @@ public class AccomDetailController {
 			PrivateDetailCommand privateDetail2 = accomDetailService.selectStartEndDate();
 			model.addAttribute("privateDetail2", privateDetail2);
 			
-			//제거일
-			/*List<String> dateStartList = accomDetailService.selectRvDateStart();
-			List<String> dateEndList = accomDetailService.selectRvDateEnd();
-			
-			model.addAttribute("dateStartList",dateStartList);
-			model.addAttribute("dateEndList",dateEndList);*/
-			
 			return "accomDetailPrivate";
 		}
 		

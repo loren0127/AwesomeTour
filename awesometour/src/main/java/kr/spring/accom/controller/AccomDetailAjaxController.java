@@ -196,7 +196,7 @@ public class AccomDetailAjaxController {
 			return map;
 		}
 		
-		//후기 목록
+		//후기 목록(좋아요순)
 		@RequestMapping("/accomDetail/listReview.do")
 		@ResponseBody
 		public Map<String,Object> getList(@RequestParam(value="pageNum",defaultValue="1")int currentPage,@RequestParam("im_ac_num") int im_ac_num){
@@ -221,6 +221,43 @@ public class AccomDetailAjaxController {
 			List<ReviewCommand> list = null;
 			if(count > 0) {
 				list = accomDetailService.selectListReview(map);//map 데이터를 넘김(num,start,end 필요)
+			}else {
+				//null이 전달되지 않도록 list를 비워서 보내기
+				list = Collections.emptyList();
+			}
+			
+			Map<String,Object> mapJson = new HashMap<String,Object>();
+			mapJson.put("count", count);
+			mapJson.put("rowCount", rowCount2);
+			mapJson.put("list", list);
+			
+			return mapJson;
+		}
+		//후기목록(최신순)
+		@RequestMapping("/accomDetail/listReview2.do")
+		@ResponseBody
+		public Map<String,Object> getList2(@RequestParam(value="pageNum",defaultValue="1")int currentPage,@RequestParam("im_ac_num") int im_ac_num){
+			
+			if(log.isDebugEnabled()) {
+				log.debug("<<currentPage>> : "+currentPage);
+				log.debug("<<im_ac_num>> : " + im_ac_num);
+			}
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("im_ac_num", im_ac_num);
+			
+			//총 글의 갯수
+			int count = accomDetailService.selectReviewCount(map);//map 데이터를 넘김(num의 정보 필요)
+			
+			//startRowNum,endRowNum을 구하기 위해 사용
+			PagingUtil page = new PagingUtil(currentPage,count,rowCount2,pageCount,null);//호출 url은 ajax 방식이므로 필요없음 
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			
+			List<ReviewCommand> list = null;
+			if(count > 0) {
+				list = accomDetailService.selectListReview2(map);//map 데이터를 넘김(num,start,end 필요)
 			}else {
 				//null이 전달되지 않도록 list를 비워서 보내기
 				list = Collections.emptyList();
@@ -295,12 +332,12 @@ public class AccomDetailAjaxController {
 		//별점 등록
 		@RequestMapping("/accomDetail/starReview.do")
 		@ResponseBody
-		public Map<String,String> starReview(@RequestParam("ag_grade") String ag_grade,@RequestParam("ag_acc_num") int ag_acc_num,@RequestParam("ag_email") String ag_email,HttpSession session){
+		public Map<String,String> starReview(@RequestParam("ag_grade") String ag_grade,@RequestParam("ag_acc_num") int re_acc_num,@RequestParam("ag_email") String re_email,HttpSession session){
 			
 			if(log.isDebugEnabled()) {
 				log.debug("<<ag_grade>> : "+ag_grade);
-				log.debug("<<ag_acc_num>> : " + ag_acc_num);
-				log.debug("<<ag_email>> : " + ag_email);
+				log.debug("<<re_acc_num>> : " + re_acc_num);
+				log.debug("<<re_email>> : " + re_email);
 			}
 			
 			Map<String,String> map = new HashMap<String,String>();
@@ -312,20 +349,26 @@ public class AccomDetailAjaxController {
 			}else if(user_email != null && ag_grade != null) {
 				
 				Map<String,Object> mapGrade = new HashMap<String,Object>();
-				mapGrade.put("ag_acc_num", ag_acc_num);
-				mapGrade.put("ag_email", ag_email);
+				mapGrade.put("re_acc_num", re_acc_num);
+				mapGrade.put("re_email", re_email);
 				
 				ReviewCommand reviewCommand = accomDetailService.selectStarGrade(mapGrade);
+				HotelDetailCommand rvReview = accomDetailService.selectRvReivew(mapGrade);
 				
 				mapGrade.put("ag_grade", ag_grade);
 				
-				if(reviewCommand != null) {
+				if(reviewCommand != null && rvReview != null) {
 					accomDetailService.updateStarGrade(mapGrade);
-				}else {
+					map.put("result", "success");
+				}
+				if(reviewCommand == null && rvReview != null){
 					accomDetailService.insertStarGrade(mapGrade);
+					map.put("result", "success");
+				}
+				if(rvReview == null){
+					map.put("result", "not");
 				}
 				
-				map.put("result", "success");
 			}else { 
 				map.put("result", "failed");
 			}

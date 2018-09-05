@@ -143,13 +143,23 @@
 			</div>
 		<br><br>
 		<div style="min-height:300px;">
+			<input type="hidden" name="check_in" value="${check_in}" id="check_in">
+			<input type="hidden" name="check_out" value="${check_out}" id="check_out">
 			<input type="hidden" name="start_date" value="${privateDetail2.start_date}" id="start_date">
 			<input type="hidden" name="end_date" value="${privateDetail2.end_date}" id="end_date">
 			<h3>예약 가능 여부</h3>
-			<input type="text" value="" id="datepicker">
+			<br>
+			<!--  <input type="text" value="" id="datepicker">-->
+			<div id="datepicker" style="float:left;width:30%;"></div>
+			<div id="datepicker2" style="float:left;width:30%;"></div>
 		</div>
+		<br>
+		<div style="padding-top:50px;">
+		<a href="#" class="btn-reply button_hover" style="width:100px;clear:both;">예약하기</a>
+		</div>
+		<br>
 		<!-- 후기 -->
-		<div id="reply_div">
+		<div id="reply_div" style="clear:both;">
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
@@ -191,11 +201,26 @@
 				</div>
 				<br> <br>
 				<div class="comment-list">
+				<div class="block_cate" id="blockcate">
+				<div class="con_align" style="text-align:center;">
+					<hr size="1" noshade>
+					<span style="padding-left:10px;"><input type="radio" class="confirm-radio" name="reviewList" id="review_like"
+						value="first" checked> <label for="review_like" >좋아요순</label></span>
+					<span style="padding-left:10px;"><input type="radio" class="confirm-radio" name="reviewList" id="review_recency"
+						value="second"> <label for="review_recency">최신순</label></span>
+					<hr size="1" noshade>
+				</div>
+				</div>
 					<div id="output"></div>
 					<div class="paging-link4"
 						style="text-align:center;<c:if test="${more5 == 0}">display:none;</c:if>">
 						<a href="#" style="color: #222; font-weight: bold;"><span
 							id="remainCount" style="color: #d900ed;"></span>개 더보기&nbsp;<b>∨</b></a>
+					</div>
+					<div class="paging-link5"
+						style="text-align:center;<c:if test="${more5 == 0}">display:none;</c:if>">
+						<a href="#" style="color: #222; font-weight: bold;"><span
+							id="remainCount2" style="color: #d900ed;"></span>개 더보기&nbsp;<b>∨</b></a>
 					</div>
 					<div id="loading" style="display: none;">
 						<img

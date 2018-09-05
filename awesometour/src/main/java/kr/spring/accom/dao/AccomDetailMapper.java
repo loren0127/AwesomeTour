@@ -37,7 +37,10 @@ public interface AccomDetailMapper {
 	public List<HotelDetailCommand> selectSuiteRoom(Map<String,Object> map);
 	//=====호텔 후기=====
 	//리스트
+	//좋아요순
 	public List<ReviewCommand> selectListReview(Map<String, Object> map);
+	//최신순
+	public List<ReviewCommand> selectListReview2(Map<String,Object> map);
 	//리스트 카운트
 	public int selectReviewCount(Map<String, Object> map);
 	//후기 작성시 해당 숙소를 현재 날짜보다 이전에 예약한 사람만 작성가능
@@ -53,11 +56,11 @@ public interface AccomDetailMapper {
 	@Delete("DELETE FROM accom_review WHERE re_num=#{re_num}")
 	public void deleteReview(Integer re_num);
 	//별점
-	@Insert("INSERT INTO accom_grade (ag_num,ag_email,ag_grade,ag_acc_num) VALUES (accom_grade_seq.nextval,#{ag_email},#{ag_grade},#{ag_acc_num})")
+	@Insert("INSERT INTO accom_grade (ag_num,ag_email,ag_grade,ag_acc_num) VALUES (accom_grade_seq.nextval,#{re_email},#{ag_grade},#{re_acc_num})")
 	public void insertStarGrade(Map<String,Object> map);
-	@Select("SELECT * FROM accom_grade WHERE ag_email=#{ag_email} AND ag_acc_num=#{ag_acc_num}")
+	@Select("SELECT * FROM accom_grade WHERE ag_email=#{re_email} AND ag_acc_num=#{re_acc_num}")
 	public ReviewCommand selectStarGrade(Map<String,Object> map);
-	@Update("UPDATE accom_grade SET ag_grade=#{ag_grade} WHERE ag_acc_num=#{ag_acc_num} AND ag_email=#{ag_email}")
+	@Update("UPDATE accom_grade SET ag_grade=#{ag_grade} WHERE ag_acc_num=#{re_acc_num} AND ag_email=#{re_email}")
 	public void updateStarGrade(Map<String, Object> map);
 	//좋아요
 	@Insert("INSERT INTO accom_like (al_num,al_email,al_re_num,al_acc_num) VALUES (accom_like_seq.nextval,#{al_email},#{al_re_num},#{al_acc_num})")
