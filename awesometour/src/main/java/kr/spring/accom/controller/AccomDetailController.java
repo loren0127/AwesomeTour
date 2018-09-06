@@ -168,6 +168,7 @@ public class AccomDetailController {
 		mapStandard.put("im_ac_num", im_ac_num);
 		mapStandard.put("check_in", check_in);
 		mapStandard.put("check_out", check_out);
+		mapStandard.put("people_count", people_count);
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<mapStandard>> : "+ mapStandard);
@@ -187,6 +188,7 @@ public class AccomDetailController {
 		mapDelux.put("im_ac_num", im_ac_num);
 		mapDelux.put("check_in", check_in);
 		mapDelux.put("check_out", check_out);
+		mapDelux.put("people_count", people_count);
 		int countDelux = accomDetailService.selectDeluxRoomCount(mapDelux);
 		
 		int more2 = 1;//다음페이지있음
@@ -201,6 +203,7 @@ public class AccomDetailController {
 		mapSuite.put("im_ac_num", im_ac_num);
 		mapSuite.put("check_in", check_in);
 		mapSuite.put("check_out", check_out);
+		mapSuite.put("people_count", people_count);
 		int countSuite = accomDetailService.selectSuiteRoomCount(mapSuite);
 		
 		int more3 = 1;//다음페이지있음
@@ -302,6 +305,7 @@ public class AccomDetailController {
 			mapPrivateGrade.put("check_in", check_in);
 			mapPrivateGrade.put("check_out", check_out);
 			mapPrivateGrade.put("search", search);
+			mapPrivateGrade.put("people_count", people_count);
 			List<PrivateDetailCommand> privateGrade = accomDetailService.selectPrivateRecommendationList(mapPrivateGrade);
 			
 			//check_in

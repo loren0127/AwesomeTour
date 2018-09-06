@@ -31,6 +31,7 @@
 	font-size:20px;
 	color:#d900ed;
 }
+
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/accomDetail/accomDetail_hotel.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
@@ -130,6 +131,7 @@
 		<br> <br> <br>
 		<input type="hidden" id="check_in" value="${check_in}">
 		<input type="hidden" id="check_out" value="${check_out}">
+		<input type="hidden" id="people_count" value="${people_count}">
 		<!-- 룸디테일 -->
 		<input id="breakfast" type="hidden" value="${breakfast}"> <input
 			id="WIFI" type="hidden" value="${WIFI}">
@@ -260,7 +262,7 @@
 								<span class="letter-count">300/300</span>
 							</div>
 							<br>
-							<div id="re_second" style="float: left; padding-left: 475px;">
+							<div id="re_second" style="position:relative;right:-475px;">
 								<input type="submit" class="btn-reply text-uppercase"
 									value="click">
 							</div>

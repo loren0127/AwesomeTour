@@ -71,7 +71,8 @@
 			</a>
 		</div>
 		<br> <br>
-		<h3 style="float: left; width: 90%;">${privateDetail.acc_name}</h3>
+		<div class="container">
+		<h3 style="float: left;width:90%;">${privateDetail.acc_name}</h3>
 		<div style="float: right; width: 10%;font-size:20px;"><span style="padding-right:20px;"><b><i class="fa fa-heart"></i></b>&nbsp;${privateDetail.ag_grade}점</span></div>
 		<div style="float: left; width: 90%;">${privateDetail.acc_address1}<a href="#detailMap" style="font-size:12px;"><b>자세한 주소</b></a></div>
 		<div style="float: right; width: 10%;">
@@ -88,8 +89,9 @@
 			</span>
 		</div> 
 		<hr size="1" noshade>
+		</div>
 		<br> <br> <br>
-		<div style="min-height:300px;">
+		<div class="container" style="min-height:300px;">
 			<h3>호스트 소개</h3>
 				<div class="comments-area" style="background-color:#f8f9fa;">
 						<div class="row">
@@ -110,7 +112,7 @@
 					</div>
 				</div>
 				<br><br>
-			<div class="container" style="background-color: white;">
+			<div class="container col-sm-12 col-md-12" style="background-color: white;">
 				<br> <br>
 				<h4>
 					한 눈에 보기&nbsp;<b>∨</b>
@@ -142,7 +144,7 @@
 				</div>
 			</div>
 		<br><br>
-		<div style="min-height:300px;">
+		<div class="container col-sm-12" style="min-height:300px;">
 			<input type="hidden" name="check_in" value="${check_in}" id="check_in">
 			<input type="hidden" name="check_out" value="${check_out}" id="check_out">
 			<input type="hidden" name="start_date" value="${privateDetail2.start_date}" id="start_date">
@@ -150,8 +152,8 @@
 			<h3>예약 가능 여부</h3>
 			<br>
 			<!--  <input type="text" value="" id="datepicker">-->
-			<div id="datepicker" style="float:left;width:30%;"></div>
-			<div id="datepicker2" style="float:left;width:30%;"></div>
+			<div class="col-sm-6 col-md-12" id="datepicker" style="float:left;width:30%;"></div>
+			<div class="col-sm-6 col-md-12" id="datepicker2" style="float:left;width:30%;"></div>
 		</div>
 		<br>
 		<div style="padding-top:50px;">
@@ -159,7 +161,7 @@
 		</div>
 		<br>
 		<!-- 후기 -->
-		<div id="reply_div" style="clear:both;">
+		<div class="container" id="reply_div" style="clear:both;">
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
@@ -230,7 +232,7 @@
 			</div>
 		</div>
 		<!-- 평점이 높은 다른 숙소 -->
-		<div style="min-height:300px;clear:left;padding-top:50px;">
+		<div class="container" style="min-height:300px;clear:left;padding-top:50px;">
 			<h3>평점이 높은 프라이빗 하우스</h3>
 			<br>
             <div class="container">
@@ -256,7 +258,7 @@
             </div>
 		</div>
 		<br>
-		<div style="min-height:300px;" id="detailMap">
+		<div class="container" style="min-height:300px;" id="detailMap">
 			<h3>지도</h3>
 		</div>
 </div>

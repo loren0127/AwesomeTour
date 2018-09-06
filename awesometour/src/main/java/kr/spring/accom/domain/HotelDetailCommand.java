@@ -40,6 +40,7 @@ public class HotelDetailCommand {
 	private int ro_bed_count;
 	private int ro_price;
 	private int ro_room_count;
+	private int ro_pe_count;
 	//예약 테이블
 	private int rv_acc_num;
 	private int rv_ro_num;
@@ -47,7 +48,13 @@ public class HotelDetailCommand {
 	private String rv_end_date;
 	private int rv_room_num;
 	private int rv_room_count;
-	
+		
+	public int getRo_pe_count() {
+		return ro_pe_count;
+	}
+	public void setRo_pe_count(int ro_pe_count) {
+		this.ro_pe_count = ro_pe_count;
+	}
 	public int getRo_num2() {
 		return ro_num2;
 	}

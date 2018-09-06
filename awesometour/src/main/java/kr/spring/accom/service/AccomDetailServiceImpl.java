@@ -88,6 +88,7 @@ public class AccomDetailServiceImpl implements AccomDetailService{
 	@Override
 	public void insertReview(Map<String,Object> map) {
 		accomMapper.insertReview(map);
+		accomMapper.updateSuperHost(map);
 	}
 
 	@Override

@@ -38,19 +38,21 @@ public class AccomDetailAjaxController {
 	
 	@RequestMapping("/accomDetail/hotelRoomDetail_standard.do")
 	@ResponseBody
-	public Map<String,Object> viewRoomDetailStandard(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out){
+	public Map<String,Object> viewRoomDetailStandard(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count){
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<currentPage>> : "+currentPage);
 			log.debug("<<im_ac_num>> : " + im_ac_num);
 			log.debug("<<check_in>> : " + check_in);
 			log.debug("<<check_out>> : " + check_out);
+			log.debug("<<people_count>> : " + people_count);
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("im_ac_num", im_ac_num);
 		map.put("check_in", check_in);
 		map.put("check_out", check_out);
+		map.put("people_count", people_count);
 		
 		//총 스탠다드룸의 개수
 		int count = accomDetailService.selectStandardRoomCount(map);
@@ -77,19 +79,21 @@ public class AccomDetailAjaxController {
 	}
 	@RequestMapping("/accomDetail/hotelRoomDetail_delux.do")
 	@ResponseBody
-	public Map<String,Object> viewRoomDetailDelux(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out){
+	public Map<String,Object> viewRoomDetailDelux(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count){
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<currentPage>> : "+currentPage);
 			log.debug("<<im_ac_num>> : " + im_ac_num);
 			log.debug("<<check_in>> : " + check_in);
 			log.debug("<<check_out>> : " + check_out);
+			log.debug("<<people _count>> : " + people_count);
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("im_ac_num", im_ac_num);
 		map.put("check_in", check_in);
 		map.put("check_out", check_out);
+		map.put("people_count", people_count);
 		
 		//총 스탠다드룸의 개수
 		int count = accomDetailService.selectDeluxRoomCount(map);
@@ -116,19 +120,21 @@ public class AccomDetailAjaxController {
 	}
 	@RequestMapping("/accomDetail/hotelRoomDetail_suite.do")
 	@ResponseBody
-	public Map<String,Object> viewRoomDetailSuite(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out){
+	public Map<String,Object> viewRoomDetailSuite(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count){
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<currentPage>> : "+currentPage);
 			log.debug("<<im_ac_num>> : " + im_ac_num);
 			log.debug("<<check_in>> : " + check_in);
 			log.debug("<<check_out>> : " + check_out);
+			log.debug("<<people_count>> : " + people_count);
 		}
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("im_ac_num", im_ac_num);
 		map.put("check_in", check_in);
 		map.put("check_out", check_out);
+		map.put("people_count", people_count);
 		
 		//총 스탠다드룸의 개수
 		int count = accomDetailService.selectSuiteRoomCount(map);

@@ -103,8 +103,8 @@ $('document').ready(function(){
 							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:30%;">';
 							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:30%;">';
 							
-							$('#re_content').attr('disabled',true);
-							$('#re_content').text('후기는 한번만 작성가능합니다.');
+							//$('#re_content').attr('disabled',true);
+							//$('#re_content').text('후기는 한번만 작성가능합니다.');
 						}
 						output += '</div>';
 						output += '<br><br>';
@@ -457,6 +457,7 @@ $('document').ready(function(){
 					}else{
 						alert('별점이 등록되지 않았습니다.');
 					}
+					selectData(1, $('#im_ac_num').val());
 				},
 				error:function(){
 					alert('네트워크 오류 발생!');
@@ -641,7 +642,7 @@ $('document').ready(function(){
 				changeMonth:true,
 				monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
 				yearSuffix: '년',
-				minDate:new Date($('#start_date').val()),
+				minDate:new Date($('#check_in').val()),
 				maxDate:new Date($('#end_date').val()),
 				onSelect: function(selected) {
 					console.log(selected);

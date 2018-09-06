@@ -79,4 +79,7 @@ public interface AccomDetailService {
 	//제거일1
 	public List<String> selectRvDateStart(Integer im_ac_num);
 	public List<String> selectRvDateEnd(Integer im_ac_num);
+	
+	//리뷰 작성 후 리뷰 5개, 예약 내역 5개 이상이면 슈퍼호스트 업데이트
+	//public void updateSuperHost(Map<String,Object> map);
 }

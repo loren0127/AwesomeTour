@@ -10,7 +10,7 @@ $('document').ready(function(){
 	}
 	
 	//스탠다드룸 리스트
-	function StandardRoomListData(pageNum,im_ac_num,check_in,check_out){
+	function StandardRoomListData(pageNum,im_ac_num,check_in,check_out,people_count){
 		currentPage = pageNum;
 		if(pageNum == 1){
 			//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
@@ -18,7 +18,7 @@ $('document').ready(function(){
 		}
 		$.ajax({
 			type:'post',
-			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out},
+			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out,people_count:people_count},
 			url:'hotelRoomDetail_standard.do',//데이터 전송->json데이터를 ajax가 반환받아 객체로 만들어줌->success의 function의 인자로 들어감(data)
 			dataType:'json',
 			cache:false,
@@ -66,7 +66,7 @@ $('document').ready(function(){
 	}
 	
 	//디럭스룸 리스트
-	function DeluxRoomListData(pageNum,im_ac_num,check_in,check_out){
+	function DeluxRoomListData(pageNum,im_ac_num,check_in,check_out,people_count){
 		currentPage = pageNum;
 		if(pageNum == 1){
 			//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
@@ -74,7 +74,7 @@ $('document').ready(function(){
 		}
 		$.ajax({
 			type:'post',
-			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out},
+			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out,people_count:people_count},
 			url:'hotelRoomDetail_delux.do',//데이터 전송->json데이터를 ajax가 반환받아 객체로 만들어줌->success의 function의 인자로 들어감(data)
 			dataType:'json',
 			cache:false,
@@ -122,7 +122,7 @@ $('document').ready(function(){
 	}
 	
 	//스위트룸 리스트
-	function SuiteRoomListData(pageNum,im_ac_num,check_in,check_out){
+	function SuiteRoomListData(pageNum,im_ac_num,check_in,check_out,people_count){
 		currentPage = pageNum;
 		if(pageNum == 1){
 			//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
@@ -130,7 +130,7 @@ $('document').ready(function(){
 		}
 		$.ajax({
 			type:'post',
-			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out},
+			data:{pageNum:pageNum,im_ac_num:im_ac_num,check_in:check_in,check_out:check_out,people_count:people_count},
 			url:'hotelRoomDetail_suite.do',//데이터 전송->json데이터를 ajax가 반환받아 객체로 만들어줌->success의 function의 인자로 들어감(data)
 			dataType:'json',
 			cache:false,
@@ -181,7 +181,7 @@ $('document').ready(function(){
 	//스탠다드룸 페이징 처리
 	$('.paging-link a').click(function(event){
 			var pageNum = currentPage + 1;
-			StandardRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+			StandardRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 			
 			event.preventDefault();
 	});
@@ -189,7 +189,7 @@ $('document').ready(function(){
 	//디럭스룸 페이징 처리
 	$('.paging-link2 a').click(function(event){
 		var pageNum = currentPage + 1;
-		DeluxRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+		DeluxRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 		
 		event.preventDefault();
 	});
@@ -197,17 +197,17 @@ $('document').ready(function(){
 	//스위트룸 페이징 처리
 	$('.paging-link3 a').click(function(event){
 		var pageNum = currentPage + 1;
-		SuiteRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+		SuiteRoomListData(pageNum,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 		
 		event.preventDefault();
 	});
 	
 	//스탠다드룸 리스트
-	StandardRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+	StandardRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 	//디럭스룸 리스트
-	DeluxRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+	DeluxRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 	//스위트룸 리스트
-	SuiteRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val());
+	SuiteRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 	
 	
 	//후기 목록
@@ -659,10 +659,11 @@ $('document').ready(function(){
 					}else if(data.result == 'failed'){
 						alert('별점이 등록되지 않았습니다.');
 					}else if(data.result == 'not'){
-						alert('숙소를 이용하신 후에 별점을 등록하실 수 있습니다!');
+						alert('호텔을 이용하신 후에 별점을 등록하실 수 있습니다!');
 					}else{
 						alert('별점이 등록되지 않았습니다.');
 					}
+					selectData(1, $('#im_ac_num').val());
 				},
 				error:function(){
 					alert('네트워크 오류 발생!');
