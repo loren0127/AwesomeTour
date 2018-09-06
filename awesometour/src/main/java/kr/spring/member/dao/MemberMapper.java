@@ -11,7 +11,7 @@ import kr.spring.member.domain.MemberCommand;
 
 
 public interface MemberMapper {
-	@Insert("INSERT INTO member_auth (member_email) VALUES (#{member_email})")
+	@Insert("INSERT INTO member_auth (member_email,member_num) VALUES (#{member_email},member_auth_seq.nextval)")
 	public void insert(MemberCommand member);
 	@Insert("INSERT INTO member_detail (member_passwd,member_email,member_nickname,member_reg_date,member_content,member_uploadfile,member_filename,member_tendency,member_hobby) "
 			+ "VALUES (#{member_passwd},#{member_email},#{member_nickname},sysdate,#{member_content},#{member_uploadfile},#{member_filename},#{member_tendency},#{member_hobby})")

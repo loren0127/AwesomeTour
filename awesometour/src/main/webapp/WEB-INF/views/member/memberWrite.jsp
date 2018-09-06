@@ -10,6 +10,34 @@
 	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/confirmNickname.js"></script>
+	
+	<style>
+	.filebox label { 
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: #000000; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #f7c820; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+	}
+	.filebox input[type="file"] { 
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; 
+	}
+
+</style>
 <div class="container section-sepa1" style="margin-top:180px;">
 	<section class="about_history_area section_gap">
 		<div class="row">
@@ -50,8 +78,10 @@
 							</div>
 							<br>	
 							<div class="mt-10" >
-								<label for="upload">프로필</label><br>
-								 <input type="file" name="upload" id="upload" style="margin-left:100px;"/>
+								<div class="filebox">
+									<label for="upload">프로필</label><br>
+								 	<input type="file" name="upload" id="upload" style="margin-left:100px;"/>	
+								</div>
 							</div>
 							<br>
 							<div class="mt-10">

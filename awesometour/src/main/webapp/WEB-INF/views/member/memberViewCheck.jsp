@@ -4,8 +4,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/member.js"></script>
-
-
+<style>
+	  @media screen and (max-width: 767px){
+	  	#image{
+	  		display:none;
+	  	}
+	  
+	  }
+</style>
 <div class="container section-sepa1" style="height: 800px;">
 	<section class="about_history_area section_gap"
 		style="margin-top: 150px;">
@@ -29,8 +35,8 @@
 				</div>
 				<div class="col-md-6">
 					<img class="img-fluid"
-						src="${pageContext.request.contextPath}/resources/img/rome.jpg"
-						alt="img">
+						src="${pageContext.request.contextPath}/resources/images/rome.jpg"
+						alt="img" id="image">
 				</div>
 			</div>
 		</div>

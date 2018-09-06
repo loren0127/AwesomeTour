@@ -26,10 +26,10 @@ $(document).ready(function() {
 		
 		var nick = $('#member_nickname').val();
 		var exptext =  /^[a-z0-9]{2,10}$/;
+		var exptext2 = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|0-9]{2,10}/;
 		
-		
-		if(!exptext.test(nick)){
-			alert('닉네임에 특수문자를 입력할 수 없고 2~10자 사이로 입력해주세요');
+		if(!exptext2.test(nick)){
+			alert('닉네임에 한글과 영어로 2~10자 사이로 입력해주세요');
 			return false;
 		}
 	});

@@ -11,7 +11,7 @@
 		<h4>이메일 인증</h4><br><br>
 		<form action="${pageContext.request.contextPath}/mail/mailSending.do" method="post" name="regiform" id="regiform">
 			<div align="center">
-				<textarea rows="20" cols="135">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
+				<textarea rows="20" cols="135" class="form-control">가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
 - 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보
 만14세 미만 아동 회원가입 
@@ -44,7 +44,7 @@
 				</div>
 				<br>
 				<!-- 받는 사람 이메일 -->
-				<input type="email" name="email" id="email" size="120" style="width: 30%" placeholder="이메일" >
+				<input type="email" name="email" id="email" size="120" style="display:inline;max-width:500px;" placeholder="이메일" class="form-control" >
 				<input type="button" id="check_email" name="check_email" value="이메일 중복 확인" class="btn btn-warning"><br>
 				<span id="message_email"></span>
 				<span id="message_email2"></span>

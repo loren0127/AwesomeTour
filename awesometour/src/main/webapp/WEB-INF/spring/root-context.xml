@@ -5,10 +5,22 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+	
+	
+	<!-- 스케쥴러파일이 존재하는 패키지 설정 --> 
+	<context:component-scan base-package="com.crontab" /> 
+	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+	 <task:scheduler id="jobScheduler" pool-size="10" />
+	  <task:annotation-driven scheduler="jobScheduler" />
+
 	
 	<!-- 빈 자동 스캔 
 	: servlet-context.xml에서 Controller 자동 스캔을 설정했기 때문에 아래 설정에서는 Controller는 자동 스캔 대상에서 제외시킨다. 
@@ -81,14 +93,14 @@
 		<property name="dataSource" ref="dataSource"/>
 		<!-- value값으로 명시된 패키지 아래의 모든 클래스를 스캔해서 빈 객체를 생성하고 자동 알리아스를 준다. 첫 글자가 소문자 -->
 																		<!-- 쉼표로 나열해서 추가 -->
-		<property name="typeAliasesPackage" value="kr.spring.accom.domain,kr.spring.member.domain,kr.spring.group.domain,kr.spring.accomList.domain"/>
+		<property name="typeAliasesPackage" value="kr.spring.accom.domain,kr.spring.member.domain,kr.spring.group.domain,kr.spring.accomList.domain,kr.spring.admin.domain"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 									<!-- value값으로 명시된 패키지 안에서 mapper를 찾는다. 
 									(대박)myBatis는 내부에서 인터페이스를 인식해서 자동으로 클래스를 만들고 추상메소드를 구현한다.
 									-->
 															<!-- 쉼표로 나열해서 추가 -->
-		<property name="basePackage" value="kr.spring.accom.dao,kr.spring.member.dao,kr.spring.group.dao,kr.spring.accomList.dao"/>
+		<property name="basePackage" value="kr.spring.accom.dao,kr.spring.member.dao,kr.spring.group.dao,kr.spring.accomList.dao,kr.spring.admin.dao"/>
 		
 	</bean>
 	 <!-- 메일보내기 -->

@@ -13,6 +13,7 @@
 	<context:component-scan base-package="kr.spring.member.controller" />
 	<context:component-scan base-package="kr.spring.group.controller" />
 	<context:component-scan base-package="kr.spring.accomList.controller" />
+	<context:component-scan base-package="kr.spring.admin.controller" />
 	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -50,7 +51,8 @@
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/mail.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/group.xml</beans:value>
-				
+				<beans:value>/WEB-INF/tiles-def/admin.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/adminDetail.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -86,7 +88,6 @@
 	
 	<!-- 데이터 작업 없이 뷰 호출 : 메인 페이지 -->
 	<view-controller path="/main/main.do" view-name="main"/><!-- 요청 : view-name 속성을 통해 Tiles 설정을 호출 -->
-	
 	<!-- 인터셉터로 로그인 여부 체크(aop보다는 좁은 범위) -->
 	<!-- <interceptors>
 		<interceptor>

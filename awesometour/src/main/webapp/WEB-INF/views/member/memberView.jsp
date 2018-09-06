@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<style>
+	  @media screen and (max-width: 767px){
+	  	#div1{
+	  		display:none;
+	  	}
+	  
+	  }
+</style>
 <div class="container section-sepa1" style="margin-top:100px;">
 	<%-- <h2>회원상세정보</h2>
 	<ul>
@@ -26,36 +34,56 @@
           <h1>회원 정보</h1>
        <br>
        <br>
+       <div style="float:right;padding:200px 50px;border-width:10px;border-color:#ffc004;border-style:solid;" id="div1">
+        		회원정보 페이지입니다.<br>
+        		회원정보 수정을 원하시면 수정버튼을<br>
+        		탈퇴를 원하시면 탈퇴버튼을<br>
+        		클릭 후 진행해주시면 됩니다.
+        </div>
         <div class="col-md-6 col-md-offset-3">
+        	
           <form role="form">
             <div class="form-group">
-              <label for="member_email">이메일 주소</label>
-              <input type="email" class="form-control" id="member_email" value="${member.member_email}" readonly="true">
+              <label for="member_email">이메일 주소</label><br>
+              <input type="hidden" class="form-control" id="member_email" value="${member.member_email}" readonly="true">
+              <span>${member.member_email}</span>
             </div>
+            <hr>
             <div class="form-group">
-              <label for="member_nickname">닉네임</label>
-              <input type="text" class="form-control" id="member_nickname" value="${member.member_nickname}" readonly="true">
+              <label for="member_nickname">닉네임</label><br>
+              <input type="hidden" class="form-control" id="member_nickname" value="${member.member_nickname}" readonly="true">
+              <span>${member.member_nickname}</span>
             </div>
+            <hr>
             <div class="form-group">
-              <label for="member_nickname">성향</label>
-              <input type="text" class="form-control" id="member_tendency" value="${member.member_tendency}" readonly="true">
+              <label for="member_nickname">성향</label><br>
+              <input type="hidden" class="form-control" id="member_tendency" value="${member.member_tendency}" readonly="true">
+               <span>${member.member_tendency}</span>
             </div>
+            <hr>
             <div class="form-group">
-              <label for="member_hobby">취미</label>
-              <input type="text" class="form-control" id="member_hobby" value="${member.member_hobby}" readonly="true">
+              <label for="member_hobby">취미</label><br>
+              <input type="hidden" class="form-control" id="member_hobby" value="${member.member_hobby}" readonly="true">
+              <span>${member.member_hobby}</span>
             </div>
+            <hr>
             <div class="form-group">
-              <label for="member_filename">프로필</label>
+              <label for="member_filename">프로필</label><br>
               <c:if test="${!empty member.member_filename}">
-              	<input type="text" class="form-control" id="member_filename" value="${member.member_filename}" readonly="true">
+              	<input type="hidden" class="form-control" id="member_filename" value="${member.member_filename}" readonly="true">
+              	 <span>${member.member_filename}</span>
+              	 <hr>
               </c:if>
               <c:if test="${empty member.member_filename}">
-              	<input type="text" class="form-control" id="member_filename" readonly="true">
+              	<input type="hidden" class="form-control" id="member_filename" readonly="true">
+              	 <span>${member.member_filename}</span>
+              	 <hr>
               </c:if>
             </div>
             <div class="form-group">
-              <label for="member_content">자기소개</label>
-              <textarea type="text" class="form-control" id="member_content" value="" readonly="true">${member.member_content}</textarea>
+              <label for="member_content">자기소개</label><br>
+              <input type="hidden" class="form-control" id="member_content" value="${member.member_content}" readonly="true">
+              <span>${member.member_content}</span>
             </div>
             <div class="form-group text-center">
               <input type="button" value="수정 " class="btn btn-default"  onclick="location.href='update.do'">

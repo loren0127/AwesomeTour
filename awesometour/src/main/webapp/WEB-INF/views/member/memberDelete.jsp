@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-md-6">
 					<img class="img-fluid"
-						src="${pageContext.request.contextPath}/resources/img/rome.jpg"
+						src="${pageContext.request.contextPath}/resources/images/rome.jpg"
 						alt="img">
 				</div>
 			</div>
