@@ -6,27 +6,14 @@
 	<select id="selectAccomlist" parameterType="map"
 		resultType="AccomListCommand">									
       	SELECT
-      			b.acc_num,
-                b.acc_name,
-				b.acc_grade,
-				b.acc_theme,
-				b.acc_address1,
-				r.ro_num,
-				r.ro_price,
-				r.ro_pe_count,
-				r.ro_sub,
-				r.ro_type,
-                c.rv_start_date,
-                c.rv_end_date,
-                i.im_cover,
-                i.im_cover_name
+      			*
       from accom b
                 left outer join accom_room r
                 on b.acc_num = r.ro_acc_num
                 left outer join reservation c
                 on b.acc_num = c.acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_ac_num                
+                on b.acc_num = i.im_ac_num               
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
@@ -41,8 +28,8 @@
           				FROM reservation 
 				 				
 				 <![CDATA[
-				 		where TO_DATE(c.rv_end_date,'yy/mm/dd') >= #{check_in} 
-						AND TO_DATE(c.rv_start_date,'yy/mm/dd') <= #{check_out}
+				 		where TO_DATE(rv_end_date,'yy/mm/dd') >= #{check_in} 
+						AND TO_DATE(rv_start_date,'yy/mm/dd') <= #{check_out}
 					]]> 
 				 		)
         </if>
@@ -52,19 +39,7 @@
 		resultType="integer">		
 		SELECT COUNT(*) FROM (							
       	SELECT
-      			b.acc_num,
-                b.acc_name,
-				b.acc_grade,
-				b.acc_theme,
-				b.acc_address1,
-				r.ro_num,
-				r.ro_price,
-				r.ro_pe_count,
-				r.ro_sub,
-                c.rv_start_date,
-                c.rv_end_date,
-                i.im_cover,
-                i.im_cover_name                
+      			*  
       from accom b
                 left outer join accom_room r
                 on b.acc_num = r.ro_acc_num
@@ -86,10 +61,78 @@
           				FROM reservation 
 				 				
 				 <![CDATA[
-				 		where TO_DATE(c.rv_end_date,'yy/mm/dd') >= #{check_in}  AND 
-				 		TO_DATE(c.rv_start_date,'yy/mm/dd') <= #{check_out}
+				 		where TO_DATE(rv_end_date,'yy/mm/dd') >= #{check_in}  AND 
+				 		TO_DATE(rv_start_date,'yy/mm/dd') <= #{check_out}
 					]]> 
 				 		))a
         </if>
-	</select>	
+	</select>
+	
+		<select id="selectAccomTotallist" parameterType="map"
+		resultType="AccomListCommand">									
+      	SELECT
+      			*
+      from accom b
+                left outer join accom_room r
+                on b.acc_num = r.ro_acc_num
+                left outer join reservation c
+                on b.acc_num = c.acc_num
+                left outer join accom_image i
+                on b.acc_num = i.im_ac_num  
+                left outer join member_auth m
+                on b.acc_num = m.member_num
+                left outer join accom_grade g
+                on b.acc_num = g.ag_acc_num
+ 				left outer join accom_service s
+                on b.acc_num = s.se_acc_num                
+                                              
+         WHERE
+           		r.ro_sub = #{searchtype}
+		 <if test="search !=''">
+           		AND b.acc_address1 LIKE '%' || #{search} || '%'
+        </if>
+         <if test="search !=''">
+           		AND r.ro_pe_count >= #{people_count}
+        </if>
+         <if test="search !=''">
+         
+       		   AND b.acc_num NOT IN(SELECT acc_num 
+          				FROM reservation 
+				 				
+				 <![CDATA[
+				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
+						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
+					]]> 
+				 		)
+        </if>
+        
+ 		<!--  <if test="편의시설 및 서비스 !=''">-->
+ 		<!-- 	<foreach>
+         	AND 편의시설 이름 LIKE '%' || #{search} || '%'
+ 			</foreach> -->
+         		
+        <!--  </if>-->     
+        <!-- <if test="호텔성급 !=''">
+         
+			AND accom_grade = #{호텔성급}		
+        </if>  -->        
+        ORDER BY
+         <if test="price == 'DESC' ">
+		  	 r.ro_price DESC,		
+        </if>    
+        <if test="price == 'ASC' ">
+		  	 r.ro_price ASC,
+        </if> 
+       
+        <if test="avg == 'DESC'">
+      		g.ag_grade  DESC,
+        </if> 
+        <if test="test == 'DESC'">
+      		m.member_auth DESC,
+        </if>               
+  
+       		m.member_auth DESC
+      
+	</select>
+		
 </mapper>

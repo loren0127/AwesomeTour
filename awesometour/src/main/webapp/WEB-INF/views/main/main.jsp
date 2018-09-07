@@ -10,44 +10,45 @@
 			<div class="col-xl-9 mx-auto">
 				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
 			</div>
-			<div class="col-md-10 col-lg-8 col-xl-7">
+			<div style="margin:0 auto;">
 				<form id="search_form" action="../accomList/accomList.do">
-					<div class="form-row" style="width: 1200px; margin-left: 100px;">
+					<div class="form-row" ><!-- style="width: 1200px; margin-left: 100px;" -->
 						<!-- 변경한 내용임 -->
 						<div>
-							<select name="searchtype" style="height: 50px;" id="type">
+							<select name="searchtype" style="height: 50px;" id="type" class="form-control">
 								<option value="h" id="h">호텔</option>
 								<option value="p" id="p">프라이빗하우스</option>
 							</select>
 						</div>
 						<div>
-							<input type="text" id="date_in" name="check_in" value=""
+							<input type="text" id="date_in" name="check_in" value="" class="form-control"
 								style="height: 50px; width: 150px;" autocomplete="off">
 								
 						</div>
 						<div>
 
-							<input type="text" id="date_out" name="check_out" value=""
+							<input type="text" id="date_out" name="check_out" value="" class="form-control"
 								style="height: 50px; width: 150px;" autocomplete="off">
 						</div>
 						<div class="people_pop">
-						<input type="hidden" name="people_count" id="people_count" value="1">
+						<input type="hidden" name="people_count" id="people_count" value="1" class="form-control">
 						
-							<button id="people" name="people"
+							<button id="people" name="people" class="btn"
 								style="height: 50px; width: 150px;">
 								인원 <span id="peo_sum_btn">1</span>명
 							</button>
 
-							<div class="check" id="pe_pop" >
-								<span>인원<input type="button" name="people_plus"
-									id="people_plus" value="+"> <span id="people_sum">1</span>
+							<div class="check" id="pe_pop"  class="form-control">
+								<span>인원
 									<input type="button" name="minus" id="people_minus" value="-"></span>
+									<span id="people_sum">1</span>
+								<input type="button" name="people_plus" id="people_plus" value="+"> 
 
 							</div>
 						</div>
 						<div>
-							<input type="text" style="width: 300px; height: 50px;"
-								name="search" id="address" placeholder="서울" value="">
+							<input type="text" style=" height: 50px;"
+								name="search" id="address" placeholder="서울" value="" class="form-control">
 						</div>
 						<div>
 							<button type="submit" id="search" class="btn btn-block btn-lg btn-primary">검색</button>

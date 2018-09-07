@@ -1,5 +1,6 @@
 package kr.spring.accomList.domain;
 
+import java.util.Arrays;
 
 public class AccomListCommand {
 	private int acc_num; //숙소번호
@@ -13,8 +14,31 @@ public class AccomListCommand {
 	private String ro_sub; //호텔/프라이빗 구분
 	private String rv_start_date;//예약 시작날짜
 	private String rv_end_date;//예약끝날짜
+	private int se_num;
+	private byte[] im_cover;
+	private String im_cover_name;
+	private String se_name;
 	
 	
+	
+	public String getSe_name() {
+		return se_name;
+	}
+	public void setSe_name(String se_name) {
+		this.se_name = se_name;
+	}
+	public byte[] getIm_cover() {
+		return im_cover;
+	}
+	public void setIm_cover(byte[] im_cover) {
+		this.im_cover = im_cover;
+	}
+	public String getIm_cover_name() {
+		return im_cover_name;
+	}
+	public void setIm_cover_name(String im_cover_name) {
+		this.im_cover_name = im_cover_name;
+	}
 	public String getAcc_address1() {
 		return acc_address1;
 	}
@@ -70,8 +94,6 @@ public class AccomListCommand {
 	public void setRo_sub(String ro_sub) {
 		this.ro_sub = ro_sub;
 	}
-	
-	
 	public String getRv_start_date() {
 		return rv_start_date;
 	}
@@ -84,13 +106,25 @@ public class AccomListCommand {
 	public void setRv_end_date(String rv_end_date) {
 		this.rv_end_date = rv_end_date;
 	}
+	public int getSe_num() {
+		return se_num;
+	}
+	public void setSe_num(int se_num) {
+		this.se_num = se_num;
+	}
 	@Override
 	public String toString() {
 		return "AccomListCommand [acc_num=" + acc_num + ", acc_name=" + acc_name + ", acc_grade=" + acc_grade
 				+ ", acc_theme=" + acc_theme + ", acc_address1=" + acc_address1 + ", ro_num=" + ro_num + ", ro_price="
 				+ ro_price + ", ro_pe_count=" + ro_pe_count + ", ro_sub=" + ro_sub + ", rv_start_date=" + rv_start_date
-				+ ", rv_end_date=" + rv_end_date + "]";
+				+ ", rv_end_date=" + rv_end_date + ", se_num=" + se_num + ", im_cover_name=" + im_cover_name
+				+ ", se_name=" + se_name + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	
