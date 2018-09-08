@@ -42,6 +42,12 @@ public class AccomListServiceImpl implements AccomListService{
 		return accomListMapper.selectAccomTotallist(map);
 	}
 
+	@Override
+	public int selectAccomTotallistCount(Map<String, Object> map) {
+		
+		return accomListMapper.selectAccomTotallistCount(map);
+	}
+
 
 
 }

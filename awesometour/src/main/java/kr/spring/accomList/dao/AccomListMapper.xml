@@ -100,6 +100,11 @@
          <if test="search !=''">
            		AND r.ro_pe_count >= #{people_count}
         </if>
+		 <if test="se_name !=''">
+ 			<foreach collection="checklist"  item="type">
+         	AND s.se_name LIKE '%' ||  #{type,jdbcType=VARCHAR} || '%'
+			</foreach>
+        </if>          
          <if test="search !=''">
          
        		   AND b.acc_num NOT IN(SELECT acc_num 
@@ -111,13 +116,7 @@
 					]]> 
 				 		)
         </if>
- 	<!-- 	 <if test="se_name !=''">
- 			<foreach collection="arr" item="arr"  open="(" close=")" separator=",">
-          		
-         	AND s.se_name LIKE '%' || #{arr} || '%'
-			</foreach>
-         		
-        </if> -->
+        
         <!-- <if test="호텔성급 !=''">
          
 			AND accom_grade = #{호텔성급}		
@@ -139,5 +138,70 @@
        		m.member_auth DESC
       
 	</select>
+
+<select id="selectAccomTotallistCount" parameterType="map"
+		resultType="integer">
+		SELECT COUNT(*) FROM (							
+      SELECT
+      			*
+      from accom b
+                left outer join accom_room r
+                on b.acc_num = r.ro_acc_num
+                left outer join reservation c
+                on b.acc_num = c.acc_num
+                left outer join accom_image i
+                on b.acc_num = i.im_ac_num  
+                left outer join member_auth m
+                on b.acc_num = m.member_num
+                left outer join accom_grade g
+                on b.acc_num = g.ag_acc_num
+ 				left outer join accom_service s
+                on b.acc_num = s.se_acc_num                
+                                              
+         WHERE
+           		r.ro_sub = #{searchtype}
+		 <if test="search !=''">
+           		AND b.acc_address1 LIKE '%' || #{search} || '%'
+        </if>
+         <if test="search !=''">
+           		AND r.ro_pe_count >= #{people_count}
+        </if>
+		 <if test="se_name !=''">
+ 			<foreach collection="checklist"  item="type">
+         	AND s.se_name LIKE '%' ||  #{type,jdbcType=VARCHAR} || '%'
+			</foreach>
+        </if>          
+         <if test="search !=''">
+         
+       		   AND b.acc_num NOT IN(SELECT acc_num 
+          				FROM reservation 
+				 				
+				 <![CDATA[
+				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
+						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
+					]]> 
+				 		))
+        </if>
+        
+        <!-- <if test="호텔성급 !=''">
+         
+			AND accom_grade = #{호텔성급}		
+        </if>  -->        
+        ORDER BY
+         <if test="price == 'DESC' ">
+		  	 ro_price DESC,		
+        </if>    
+        <if test="price == 'ASC' ">
+		  	 ro_price ASC,
+        </if> 
+       
+        <if test="avg == 'DESC'">
+      		ag_grade  DESC,
+        </if> 
+        <if test="test == 'DESC'">
+      		member_auth DESC,
+        </if>    
+       		member_auth DESC
+	</select>	
 		
 </mapper>

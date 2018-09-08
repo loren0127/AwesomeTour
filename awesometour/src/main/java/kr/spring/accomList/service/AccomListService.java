@@ -11,4 +11,5 @@ public interface AccomListService {
 	public int selectAccomListCount(Map<String,Object> map);
 	public String selectAcoomSerivce(int se_num);
 	public List<AccomListCommand> selectAccomTotallist(Map<String, Object> map);
+	public int selectAccomTotallistCount(Map<String,Object> map);
 }

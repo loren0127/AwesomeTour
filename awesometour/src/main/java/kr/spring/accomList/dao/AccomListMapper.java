@@ -14,7 +14,7 @@ public interface AccomListMapper {
 	@Select("SELECT se_name FROM accom_service WHERE se_acc_num=#{se_num}")
 	public String selectAcoomSerivce(int se_num);
 	public List<AccomListCommand> selectAccomTotallist(Map<String, Object> map);
-
+	public int selectAccomTotallistCount(Map<String,Object> map);
 	
 }
 
