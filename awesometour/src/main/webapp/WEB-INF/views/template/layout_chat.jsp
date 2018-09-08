@@ -26,8 +26,10 @@
 				</div>
 			</div>
 			<div class="inbox_chat">
-
+			
 				<c:if test="${!empty user_email}">
+				
+					<!-- 채팅 목록이 없을 경우 -->
 					<c:if test="${listCount <= 0}">
 						<ul class="nav nav-tabs" role="tablist">
 							<%-- <li class="nav-item"><a class="nav-link <c:if test="${selected eq 'mainChat'}">active</c:if>" data-toggle="tab" href="#main_chat">메인</a></li> --%>
@@ -97,9 +99,9 @@
 								</div>
 							</div>
 						</div>
-						
 					</c:if>
 					
+					<!-- 채팅 목록이 있을 경우 -->
 					<c:if test="${listCount > 0}">
 						<ul class="nav nav-tabs" role="tablist">
 							<%-- <li class="nav-item"><a class="nav-link <c:if test="${selected eq 'mainChat'}">active</c:if>" data-toggle="tab" href="#main_chat">메인</a></li> --%>
@@ -126,26 +128,52 @@
 								</div>
 							</div> --%>
 							
+							<!-- 채팅이 있을 경우의 친구 채팅 -->
 							<div id="friend_chat" class="container tab-pane fade <c:if test="${selected eq 'friendChatList' || selected eq 'mainChat'}">active show</c:if>">
 								<c:forEach var="chatMemberCommand" items="${selectChatMemberList}">
-									<div class="chat_list">
-										<div class="chat_people">
-											<div class="chat_img">
-												<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-											</div>
-											<div class="chat_ib">
-												<h5>
-													<a href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}">${chatMemberCommand.chat_all_title}</a>
-													<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
-												</h5>
-												<p></p>
+									<c:if test="${chatMemberCommand.group_num eq -1}">
+										<div class="chat_list">
+											<div class="chat_people">
+												<div class="chat_img">
+													<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+												</div>
+												<div class="chat_ib">
+													<h5>
+														<a href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}">${chatMemberCommand.chat_all_title}</a>
+														<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
+													</h5>
+													<p></p>
+												</div>
 											</div>
 										</div>
-									</div>
+									</c:if>
 								</c:forEach>
 							</div>
 							
+							<!-- 채팅이 있을 경우의 그룹 채팅 -->
 							<div id="group_chat" class="container tab-pane fade <c:if test="${selected eq 'groupChatList'}">active show</c:if>">
+								<c:forEach var="chatMemberCommand" items="${selectChatMemberList}">
+									<c:if test="${!(chatMemberCommand.group_num eq -1)}">
+										<div class="chat_list">
+											<div class="chat_people">
+												<div class="chat_img">
+													<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+												</div>
+												<div class="chat_ib">
+													<h5>
+														<a href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}">${chatMemberCommand.chat_all_title}</a>
+														<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
+													</h5>
+													<p></p>
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+							
+							<!-- 채팅이 있을 경우의 쪽지 -->
+							<div id="message_chat" class="container tab-pane fade <c:if test="${selected eq 'messageList'}">active show</c:if>">
 								<div class="chat_list">
 									<div class="chat_people">
 										<div class="chat_img">
@@ -153,14 +181,15 @@
 										</div>
 										<div class="chat_ib">
 											<h5>
-												<a href="#">그룹 채팅 제목</a> <span class="chat_date">2018-00-00</span>
+												<a href="#">쪽지 보기</a>
 											</h5>
-											<p>최신글 출력란</p>
+											<p>쪽지 입니다!</p>
 										</div>
 									</div>
 								</div>
 							</div>
 							
+							<!-- 채팅이 있을 경우의 설정 -->
 							<div id="setting_chat" class="container tab-pane fade <c:if test="${selected eq 'settingList'}">active show</c:if>">
 								<div class="chat_list">
 									<div class="chat_people">
@@ -198,22 +227,6 @@
 												<a href="#">그룹 채팅 초대</a>
 											</h5>
 											<p>그룹과 함께하는 채팅!</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div id="message_chat" class="container tab-pane fade <c:if test="${selected eq 'messageList' || selected eq 'mainChat'}">active show</c:if>">
-								<div class="chat_list">
-									<div class="chat_people">
-										<div class="chat_img">
-											<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-										</div>
-										<div class="chat_ib">
-											<h5>
-												<a href="#">쪽지 보기</a>
-											</h5>
-											<p>쪽지 입니다!</p>
 										</div>
 									</div>
 								</div>
