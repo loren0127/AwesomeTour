@@ -29,6 +29,8 @@
 						href="${pageContext.request.contextPath}/member/detailCheck.do">회원정보 수정</a></li><!-- 테스트 -->
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li><!-- 테스트 -->
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="${pageContext.request.contextPath}/chat/selectChatMemberList.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1000, height=620'); return false;">채팅</a></li><!-- Test -->
 				</c:if>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/admin/adminMainForm.do">관리자 페이지</a></li><!-- 테스트 -->
