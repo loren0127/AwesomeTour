@@ -66,6 +66,7 @@
 				WHERE rv_end_date > to_date(#{check_in,jdbcType=VARCHAR},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out,jdbcType=VARCHAR},'YYYY/MM/DD')
 				]]>
+				AND acc_num = ${im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 
 	</select>
@@ -89,6 +90,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
+		AND acc_num = ${im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -114,6 +116,7 @@
 				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 				]]>
+				AND acc_num = ${im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 	</select>
 	<select id="selectDeluxRoom" parameterType="map" resultType="hotelDetailCommand">
@@ -136,6 +139,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
+		AND acc_num = ${im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end} 
@@ -161,6 +165,7 @@
 				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 				]]>
+				AND acc_num = ${im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 	</select>
 	<select id="selectSuiteRoom" parameterType="map" resultType="hotelDetailCommand">
@@ -183,6 +188,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
+		AND acc_num = ${im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -206,7 +212,7 @@
 			  LEFT OUTER JOIN (SELECT member_email,member_nickname FROM member_detail)f 
 	 ON er.re_email=f.member_email 
 	 <![CDATA[
-	 WHERE rnum >= #{start} AND rnum <= #{end})
+	 WHERE rnum >= #{start} AND rnum <= #{end} ORDER BY al_count DESC)
      ]]>
 	</select>
 	<select id="selectListReview2" parameterType="map" resultType="reviewCommand"><!-- Map과 BoardReplyCommand에 알리아스가 지정되어 있음(자동인식) -->
@@ -352,4 +358,16 @@
 		  (SELECT COUNT(*) FROM reservation WHERE acc_num=#{re_acc_num} AND rv_status=2)>=5 
 		  AND member_email=(SELECT DISTINCT host_email FROM reservation WHERE acc_num=#{re_acc_num})
 	</update>
+	<select id="selectPrivateDisableCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*) FROM(
+		(SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num})a 
+		LEFT OUTER JOIN 
+		(select acc_num from reservation 
+		<![CDATA[
+		where rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
+ 		and rv_start_date < to_date(#{check_out},'YYYY/MM/DD') 
+ 		]]>
+ 		AND acc_num=#{im_ac_num})b ON a.acc_num=b.acc_num) 
+ 		WHERE b.acc_num is null
+	</select>
 </mapper>

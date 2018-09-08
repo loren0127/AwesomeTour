@@ -38,12 +38,12 @@ $('document').ready(function(){
 				}else{
 					$(list).each(function(index,item){
 						
-						var output = '<div class="single-comment justify-content-between d-flex " style="float:left;width:50%;">';
-						output += '<div class="user justify-content-between d-flex item" style="width:500px;">';
+						var output = '<div class="container single-comment justify-content-between d-flex ">';
+						output += '<div class="user justify-content-between d-flex item" style="width:100%;">';
 						output += ' <div class="thumb">';
 						output += '<img src="../member/imageView.do?member_email='+item.re_email+'" style="width:80px;">';
 						output += '</div>';
-						output += ' <div class="desc" style="width:500px;">';
+						output += ' <div class="desc" style="width:100%;">';
 						output += ' <h5>' + item.member_nickname +'&nbsp;<span class="like" data-num="'+item.re_num+'" data-email="'+item.re_email+'"><i class="fa fa-thumbs-o-up"></i></span><span class="like_count">'+item.al_count+'</span></h5>';
 						if(item.ag_grade == "0.5"){
 							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
@@ -97,20 +97,21 @@ $('document').ready(function(){
 							output += item.ag_grade+'점';
 						}
 						output += ' <div class="date">'+item.re_reg_date+'</div>';
-						output += ' <div class="sub-item" style="width:200px;">';
-						output += '  <p class="comment">' + item.re_content + '</p>';
+						output += ' <div class="sub-item">';
+						output += '  <p class="comment" style="width:100%;height:20%;">' + item.re_content + '</p>';
 						if($('#user_email').val() == item.re_email){
-							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:30%;">';
-							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:30%;">';
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:70px;">';
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:70px;">';
 							
-							//$('#re_content').attr('disabled',true);
-							//$('#re_content').text('후기는 한번만 작성가능합니다.');
+							$('#re_content').attr('disabled',true);
+							$('#re_content').text('후기는 한번만 작성가능합니다.');
 						}
 						output += '</div>';
 						output += '<br><br>';
 						output += '</div>';
 						output += '</div>';
 						output += '</div>';
+						output += '<br>';
 						
 						var remainCount = count - 4;
 						$('#remainCount').text(remainCount);
@@ -172,12 +173,12 @@ $('document').ready(function(){
 				}else{
 					$(list).each(function(index,item){
 						
-						var output = '<div class="single-comment justify-content-between d-flex " style="float:left;width:50%;">';
-						output += '<div class="user justify-content-between d-flex item" style="width:500px;">';
+						var output = '<div class="single-comment justify-content-between d-flex "';
+						output += '<div class="user justify-content-between d-flex item" style="width:100%;">';
 						output += ' <div class="thumb">';
 						output += '<img src="../member/imageView.do?member_email='+item.re_email+'" style="width:80px;">';
 						output += '</div>';
-						output += ' <div class="desc" style="width:500px;">';
+						output += ' <div class="desc" style="width:100%;">';
 						output += ' <h5>' + item.member_nickname +'&nbsp;<span class="like" data-num="'+item.re_num+'" data-email="'+item.re_email+'"><i class="fa fa-thumbs-o-up"></i></span><span class="like_count">'+item.al_count+'</span></h5>';
 						if(item.ag_grade == "0.5"){
 							output += '<i class="fa fa-star-half-full" style="color:#424d97;"></i>&nbsp;';
@@ -231,11 +232,11 @@ $('document').ready(function(){
 							output += item.ag_grade+'점';
 						}
 						output += ' <div class="date">'+item.re_reg_date+'</div>';
-						output += ' <div class="sub-item" style="width:200px;">';
+						output += ' <div class="sub-item" style="width:100%;height:20%;">';
 						output += '  <p class="comment">' + item.re_content + '</p>';
 						if($('#user_email').val() == item.re_email){
-							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:30%;">';
-							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:30%;">';
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="수정" class="btn-reply text-uppercase modify-btn" style="float:left;width:70px;">';
+							output += '   <input type="button" data-num="'+item.re_num+'" data-email="'+item.re_email+'" value="삭제" class="btn-reply text-uppercase delete-btn" style="float:left;width:70px;">';
 							
 							$('#re_content').attr('disabled',true);
 							$('#re_content').text('후기는 한번만 작성가능합니다.');
@@ -244,7 +245,7 @@ $('document').ready(function(){
 						output += '<br><br>';
 						output += '</div>';
 						output += '</div>';
-						output += '</div>';
+						output += '</div><br>';
 						
 						var remainCount = count - 4;
 						$('#remainCount2').text(remainCount);
@@ -653,12 +654,11 @@ $('document').ready(function(){
 		            else return [true, "", ""];
 				}
 			}).datepicker("setDate", $('#check_out').val()).datepicker("option","onSelect")($('#check_out').val());
+			
            //alert('전송 성공');
 		},
 		error:function(){
 			alert('네트워크 오류 발생!');
 		}
 	});
-	
-		
 });

@@ -17,167 +17,172 @@ import kr.spring.accom.domain.ReviewCommand;
 public class AccomDetailServiceImpl implements AccomDetailService{
 	
 	@Resource
-	private AccomDetailMapper accomMapper;
+	private AccomDetailMapper accomDetailMapper;
 	
 	//이미지 등록(나중에 제거)
 	public void insertImage(ImageCommand image) {
-		accomMapper.insertImage(image);
+		accomDetailMapper.insertImage(image);
 	}
 
 	@Override
 	public List<HotelDetailCommand> selectHotelTotalImage(Integer im_ac_num) {
-		return accomMapper.selectHotelTotalImage(im_ac_num);
+		return accomDetailMapper.selectHotelTotalImage(im_ac_num);
 	}
 
 	@Override
 	public HotelDetailCommand selectHotelDetail(Integer im_ac_num) {
-		return accomMapper.selectHotelDetail(im_ac_num);
+		return accomDetailMapper.selectHotelDetail(im_ac_num);
 	}
 
 	@Override
 	public HotelDetailCommand selectHotelImage(Map<String,Object> map) {
-		return accomMapper.selectHotelImage(map);
+		return accomDetailMapper.selectHotelImage(map);
 	}
 
 	@Override
 	public String selectService(Integer im_ac_num) {
-		return accomMapper.selectService(im_ac_num);
+		return accomDetailMapper.selectService(im_ac_num);
 	}
 
 	@Override
 	public Integer selectStandardRoomCount(Map<String, Object> map) {
-		return accomMapper.selectStandardRoomCount(map);
+		return accomDetailMapper.selectStandardRoomCount(map);
 	}
 
 	@Override
 	public List<HotelDetailCommand> selectStandardRoom(Map<String, Object> map) {
-		return accomMapper.selectStandardRoom(map);
+		return accomDetailMapper.selectStandardRoom(map);
 	}
 
 	@Override
 	public Integer selectDeluxRoomCount(Map<String, Object> map) {
-		return accomMapper.selectDeluxRoomCount(map);
+		return accomDetailMapper.selectDeluxRoomCount(map);
 	}
 
 	@Override
 	public List<HotelDetailCommand> selectDeluxRoom(Map<String, Object> map) {
-		return accomMapper.selectDeluxRoom(map);
+		return accomDetailMapper.selectDeluxRoom(map);
 	}
 
 	@Override
 	public Integer selectSuiteRoomCount(Map<String, Object> map) {
-		return accomMapper.selectSuiteRoomCount(map);
+		return accomDetailMapper.selectSuiteRoomCount(map);
 	}
 
 	@Override
 	public List<HotelDetailCommand> selectSuiteRoom(Map<String, Object> map) {
-		return accomMapper.selectSuiteRoom(map);
+		return accomDetailMapper.selectSuiteRoom(map);
 	}
 	
 	//후기
 	@Override
 	public List<ReviewCommand> selectListReview(Map<String, Object> map) {
-		return accomMapper.selectListReview(map);
+		return accomDetailMapper.selectListReview(map);
 	}
 
 	@Override
 	public int selectReviewCount(Map<String, Object> map) {
-		return accomMapper.selectReviewCount(map);
+		return accomDetailMapper.selectReviewCount(map);
 	}
 
 	@Override
 	public void insertReview(Map<String,Object> map) {
-		accomMapper.insertReview(map);
-		accomMapper.updateSuperHost(map);
+		accomDetailMapper.insertReview(map);
+		accomDetailMapper.updateSuperHost(map);
 	}
 
 	@Override
 	public void updateReview(ReviewCommand reviewCommand) {
-		accomMapper.updateReview(reviewCommand);
+		accomDetailMapper.updateReview(reviewCommand);
 	}
 
 	@Override
 	public void deleteReview(Integer re_num) {
-		accomMapper.deleteReview(re_num);
+		accomDetailMapper.deleteReview(re_num);
 	}
 
 	@Override
 	public void updateStarGrade(Map<String, Object> map) {
-		accomMapper.updateStarGrade(map);
+		accomDetailMapper.updateStarGrade(map);
 	}
 
 	@Override
 	public void insertStarGrade(Map<String, Object> map) {
-		accomMapper.insertStarGrade(map);
+		accomDetailMapper.insertStarGrade(map);
 	}
 
 	@Override
 	public ReviewCommand selectStarGrade(Map<String, Object> map) {
-		return accomMapper.selectStarGrade(map);
+		return accomDetailMapper.selectStarGrade(map);
 	}
 
 	@Override
 	public void insertLike(Map<String, Object> map) {
-		accomMapper.insertLike(map);
+		accomDetailMapper.insertLike(map);
 	}
 
 	@Override
 	public ReviewCommand selectLikeList(Map<String, Object> map) {
-		return accomMapper.selectLikeList(map);
+		return accomDetailMapper.selectLikeList(map);
 	}
 
 	@Override
 	public void deleteLike(Map<String, Object> map) {
-		accomMapper.deleteLike(map);
+		accomDetailMapper.deleteLike(map);
 	}
 
 	@Override
 	public PrivateDetailCommand selectPrivateImage(Integer im_ac_num) {
-		return accomMapper.selectPrivateImage(im_ac_num);
+		return accomDetailMapper.selectPrivateImage(im_ac_num);
 	}
 
 	@Override
 	public PrivateDetailCommand selectPrivateDetail(Integer im_ac_num) {
-		return accomMapper.selectPrivateDetail(im_ac_num);
+		return accomDetailMapper.selectPrivateDetail(im_ac_num);
 	}
 
 	@Override
 	public HotelDetailCommand selectRvReivew(Map<String, Object> map) {
-		return accomMapper.selectRvReivew(map);
+		return accomDetailMapper.selectRvReivew(map);
 	}
 
 	@Override
 	public PrivateDetailCommand selectStartEndDate() {
-		return accomMapper.selectStartEndDate();
+		return accomDetailMapper.selectStartEndDate();
 	}
 
 	@Override
 	public List<String> selectRvDateStart(Integer im_ac_num) {
-		return accomMapper.selectRvDateStart(im_ac_num);
+		return accomDetailMapper.selectRvDateStart(im_ac_num);
 	}
 
 	@Override
 	public List<String> selectRvDateEnd(Integer im_ac_num) {
-		return accomMapper.selectRvDateEnd(im_ac_num);
+		return accomDetailMapper.selectRvDateEnd(im_ac_num);
 	}
 
 	@Override
 	public List<HotelDetailCommand> selectHotelRecommendationList(Map<String,Object> map) {
-		return accomMapper.selectHotelRecommendationList(map);
+		return accomDetailMapper.selectHotelRecommendationList(map);
 	}
 
 	@Override
 	public List<PrivateDetailCommand> selectPrivateRecommendationList(Map<String,Object> map) {
-		return accomMapper.selectPrivateRecommendationList(map);
+		return accomDetailMapper.selectPrivateRecommendationList(map);
 	}
 
 	@Override
 	public HotelDetailCommand selectHotelRvChecked(Map<String, Object> map) {
-		return accomMapper.selectHotelRvChecked(map);
+		return accomDetailMapper.selectHotelRvChecked(map);
 	}
 
 	@Override
 	public List<ReviewCommand> selectListReview2(Map<String, Object> map) {
-		return accomMapper.selectListReview2(map);
+		return accomDetailMapper.selectListReview2(map);
+	}
+
+	@Override
+	public Integer selectPrivateDisableCount(Map<String, Object> map) {
+		return accomDetailMapper.selectPrivateDisableCount(map);
 	}
 }

@@ -324,6 +324,19 @@ public class AccomDetailController {
 			PrivateDetailCommand privateDetail2 = accomDetailService.selectStartEndDate();
 			model.addAttribute("privateDetail2", privateDetail2);
 			
+			//검색한 날짜에 예약되어 있으면 예약버튼 disable
+			Map<String,Object> disableMap = new HashMap<String,Object>();
+			disableMap.put("im_ac_num", im_ac_num);
+			disableMap.put("check_in", check_in);
+			disableMap.put("check_out", check_out);
+			int disableCount = accomDetailService.selectPrivateDisableCount(disableMap);
+			
+			if(log.isDebugEnabled()) {
+				log.debug("<<disableCount>> : "+ disableCount);
+			}
+			
+			model.addAttribute("disableCount",disableCount);
+			
 			return "accomDetailPrivate";
 		}
 		

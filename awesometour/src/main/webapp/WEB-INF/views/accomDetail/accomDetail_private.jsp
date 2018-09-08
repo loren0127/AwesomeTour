@@ -73,7 +73,7 @@
 		<br> <br>
 		<div class="container">
 		<h3 style="float: left;width:90%;">${privateDetail.acc_name}</h3>
-		<div style="float: right; width: 10%;font-size:20px;"><span style="padding-right:20px;"><b><i class="fa fa-heart"></i></b>&nbsp;${privateDetail.ag_grade}점</span></div>
+		<div style="float: right; width: 10%;font-size:20px;"><span style="padding-right:10%;"><b><i class="fa fa-heart"></i></b>&nbsp;${privateDetail.ag_grade}점</span></div>
 		<div style="float: left; width: 90%;">${privateDetail.acc_address1}<a href="#detailMap" style="font-size:12px;"><b>자세한 주소</b></a></div>
 		<div style="float: right; width: 10%;">
 			<b style="color: #d900ed;">${privateDetail.acc_theme}</b>테마
@@ -81,8 +81,8 @@
 		<br> <br><br><br>
 		<div>${privateDetail.acc_name}에문의하기</div>
 		<hr size="1" noshade>
-	 	<div style="padding-left: 200px;">
-			<span>【 숙소 100배 즐기기 】</span> <span style="padding-left: 100px;">
+	 	<div style="padding-left: 30%;">
+			<span>【 숙소 100배 즐기기 】</span> <span style="padding-left:10%;">
 		<c:forEach var="service" items="${serviceSet2}">
 			${service}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</c:forEach>
@@ -105,8 +105,8 @@
 								<p>${privateDetail.member_content}</p>
 								<p>가입일 : ${privateDetail.member_reg_date}</p>
 							</div>
-							<div style="padding-left:275px;">
-							<a href="#" class="btn-reply button_hover">연락하기</a>
+							<div style="padding-left:26%;">
+							<a href="#" class="btn-reply button_hover" style="width:100px;">연락하기</a>
 							</div>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 				</h4>
 				<div class="row">
 					<div class="col-md-6 d_flex align-items-center" style="text-align:left;">
-						<div class="about_content" style="padding-left: 100px;">
+						<div class="about_content" style="padding-left: 10%;">
 							<h5 class="title title_color">편의시설 및 서비스</h5>
 							<c:forEach var="service" items="${serviceNameArray2}">
 								<ul>
@@ -150,29 +150,30 @@
 			<input type="hidden" name="start_date" value="${privateDetail2.start_date}" id="start_date">
 			<input type="hidden" name="end_date" value="${privateDetail2.end_date}" id="end_date">
 			<h3>예약 가능 여부</h3>
+			<p>*예약 가능 날짜만 참고하세요!</p>
 			<br>
 			<!--  <input type="text" value="" id="datepicker">-->
 			<div class="col-sm-6 col-md-12" id="datepicker" style="float:left;width:30%;"></div>
 			<div class="col-sm-6 col-md-12" id="datepicker2" style="float:left;width:30%;"></div>
 		</div>
-		<br>
+		<br><br><br>
 		<div style="padding-top:50px;">
-		<a href="#" class="btn-reply button_hover" style="width:100px;clear:both;">예약하기</a>
+		<input type="button" class="btn-reply button_hover reservation_button" style="width:100px;clear:both;<c:if test="${disableCount == 0}">display:none;</c:if>" value="예약하기">
 		</div>
 		<br>
 		<!-- 후기 -->
-		<div class="container" id="reply_div" style="clear:both;">
+		<div class="container" id="reply_div">
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
-					<div class="starRev" style="float: right; width: 56%;">
+					<div class="starRev" style="float:left; padding-left:43%;">
 						<span class="starR1 on">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>
 						<span class="starR1">별4_왼쪽</span> <span class="starR2">별4_오른쪽</span>
 						<span class="starR1">별5_왼쪽</span> <span class="starR2">별5_오른쪽</span>
 					</div>
-					<span class="starCount" style="float: right; width: 6%;"></span> <br>
+					<span class="starCount" style="float: right; padding-right: 38%;"></span> <br>
 					<br> <br>
 					<form id="re_form">
 						<input type="hidden" name="im_ac_num" value="${privateDetail.acc_num}" id="im_ac_num">
@@ -194,7 +195,7 @@
 								<span class="letter-count">300/300</span>
 							</div>
 							<br>
-							<div id="re_second" style="float: left; padding-left: 475px;">
+							<div id="re_second" style="float: left; padding-left:47%;">
 								<input type="submit" class="btn-reply text-uppercase"
 									value="click">
 							</div>
@@ -248,7 +249,7 @@
                             </div>
                             <h5 style="color:#d900ed;">${list.acc_name}</h5>
                             <div><fmt:formatNumber>${list.ro_price}</fmt:formatNumber>원<small>/1박</small></div><span><b><i class="fa fa-heart"></i></b>${list.ag_grade}점</span>
-                            <div style="width:200px;padding-left:75px;">
+                            <div style="width:200px;padding-left:30%;">
                             <a href="${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${list.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count=${people_count}&search=${search}" class="btn-reply button_hover" style="width:90px;">예약하기</a>
                             </div>
                         </div>

@@ -76,6 +76,8 @@ public interface AccomDetailMapper {
 	public PrivateDetailCommand selectPrivateImage(Integer im_ac_num);
 	//프라이빗 하우스 상세
 	public PrivateDetailCommand selectPrivateDetail(Integer im_ac_num);
+	//예약되어있는지 체크하고 예약버튼 disable
+	public Integer selectPrivateDisableCount(Map<String,Object> map);
 	
 	//평점이 높은 다른 숙소
 	//검색한 날짜에 예약이 되어 있는지 조건 체크->상세 보여주지 않는 조건
