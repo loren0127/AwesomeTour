@@ -18,6 +18,12 @@ public class Scheduler {
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	
+	//@Scheduled(cron = "0 38 16  * * *")
+	//컴플레인 해제
+	@Scheduled(cron = "0 36 10  * * *")
+	public void complain_delete() {
+		adminService.updateHd_date2();
+	}
 	
 	//오후 에 호출되는 스케쥴러
 	//deposit 1로 변경
@@ -74,7 +80,7 @@ public class Scheduler {
 	
 	
 	}
-	
+	//컴플레인
 	@Scheduled(cron = "0 43 10 * * *")
 	public void account_Change2() {
 		List<HoldingCommand> list2 = adminService.selectComplain();
@@ -84,8 +90,12 @@ public class Scheduler {
 			for(HoldingCommand rv_num5 : list3) {
 				adminService.updateComplain_auth(rv_num5);
 			}
+			adminService.updateHd_date(rv_num4);
+			adminService.deleteComplain(rv_num4);
 		}
 	}
+	
+
 	
 		
 }

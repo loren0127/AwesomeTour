@@ -75,6 +75,21 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.updateComplain_auth(holdingCommand);
 	}
 
+	@Override
+	public void updateHd_date(HoldingCommand holdingCommand) {
+		adminMapper.updateHd_date(holdingCommand);
+	}
+
+	@Override
+	public void deleteComplain(HoldingCommand holdingCommand) {
+		adminMapper.deleteComplain(holdingCommand);
+	}
+
+	@Override
+	public void updateHd_date2() {
+		adminMapper.updateHd_date2();
+	}
+
 
 
 
