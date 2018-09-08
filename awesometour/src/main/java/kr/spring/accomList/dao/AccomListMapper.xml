@@ -8,12 +8,18 @@
       	SELECT
       			*
       from accom b
-                left outer join accom_room r
+               left outer join accom_room r
                 on b.acc_num = r.ro_acc_num
                 left outer join reservation c
                 on b.acc_num = c.acc_num
                 left outer join accom_image i
-                on b.acc_num = i.im_ac_num               
+                on b.acc_num = i.im_ac_num  
+                left outer join member_auth m
+                on b.acc_num = m.member_num
+                left outer join accom_grade g
+                on b.acc_num = g.ag_acc_num
+ 				left outer join accom_service s
+                on b.acc_num = s.se_acc_num                 
          WHERE
            		r.ro_sub = #{searchtype}
 		 <if test="search !=''">
@@ -105,13 +111,13 @@
 					]]> 
 				 		)
         </if>
-        
- 		<!--  <if test="편의시설 및 서비스 !=''">-->
- 		<!-- 	<foreach>
-         	AND 편의시설 이름 LIKE '%' || #{search} || '%'
- 			</foreach> -->
+ 	<!-- 	 <if test="se_name !=''">
+ 			<foreach collection="arr" item="arr"  open="(" close=")" separator=",">
+          		
+         	AND s.se_name LIKE '%' || #{arr} || '%'
+			</foreach>
          		
-        <!--  </if>-->     
+        </if> -->
         <!-- <if test="호텔성급 !=''">
          
 			AND accom_grade = #{호텔성급}		
@@ -129,8 +135,7 @@
         </if> 
         <if test="test == 'DESC'">
       		m.member_auth DESC,
-        </if>               
-  
+        </if>    
        		m.member_auth DESC
       
 	</select>

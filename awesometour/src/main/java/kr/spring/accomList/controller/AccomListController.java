@@ -58,6 +58,8 @@ public class AccomListController {
 			if(log.isDebugEnabled()) {
 				log.debug("<<count>> : " + count);
 			}
+			
+			
 
 			PagingUtil page = new PagingUtil(currentPage, count, rowCount,pageCount,"accomList.do");
 
@@ -73,12 +75,6 @@ public class AccomListController {
 				}
 					
 			}
-			
-			int se_num = 32;
-			
-			//편의시설 명
-			String se_name = accomListService.selectAcoomSerivce(se_num);
-			String se_array[] = se_name.split(",");
 			
 			//가격정렬 부분
 	
@@ -99,7 +95,6 @@ public class AccomListController {
 			mav.addObject("map",map);
 			mav.addObject("count",count);
 			mav.addObject("list",list);
-			mav.addObject("se_array",se_array);
 			
 
 			mav.addObject("pagingHtml",page.getPagingHtml());
