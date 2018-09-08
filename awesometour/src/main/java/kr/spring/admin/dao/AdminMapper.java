@@ -28,7 +28,7 @@ public interface AdminMapper {
 	//예약번호로 호스트의 계좌와 입금될 입금액 조회
 	//SELECT rv_money,host_email FROM reservation r join holding h on r.rv_num=h.rv_num WHERE h.hd_deposit=1
 	//SELECT rv_money,host_email FROM reservation r join holding h on r.rv_num=h.rv_num WHERE h.hd_deposit=1 AND TO_DATE(rv_end_date,'YYYY/MM/DD') < sysdate+1
-	@Select("SELECT rv_money,host_email FROM reservation r join holding h on r.rv_num=h.rv_num WHERE h.hd_deposit=1 AND TO_DATE(rv_end_date,'YYYY/MM/DD') < sysdate+1")
+	@Select("SELECT rv_money,host_email FROM reservation r join holding h on r.rv_num=h.rv_num WHERE h.hd_deposit=1 AND h.hd_date is null AND TO_DATE(rv_end_date,'YYYY/MM/DD') < sysdate+1")
 	public List<HoldingCommand> selecthost();
 	//호스트에게 입금
 	@Update("UPDATE member_detail SET member_money=(NVL(member_money,0)+#{rv_money}*0.9) WHERE member_email=#{host_email}")
@@ -64,6 +64,25 @@ public interface AdminMapper {
 	//슈퍼호스트에서 호스트로 내림
 	@Update("UPDATE member_auth SET member_auth=3 WHERE member_email=#{acc_host}")
 	public void updateComplain_auth(HoldingCommand holdingCommand);
+	
+	//컴플레인 검색되면 오늘 날짜 체크
+	@Update("UPDATE holding SET hd_date = sysdate WHERE rv_num=#{member_complain_accom_num}")
+	public void updateHd_date(HoldingCommand holdingCommand);
+	
+	//해당 컴프레인 삭제
+	@Delete("DELETE FROM member_complain WHERE member_complain_accom_num=#{member_complain_accom_num}")
+	public void deleteComplain(HoldingCommand holdingCommand);
+	
+	//20일 지나면 데이트 null로 업뎃
+	@Update("UPDATE holding SET hd_date = null WHERE hd_date+20 < sysdate AND hd_deposit=1")
+	public void updateHd_date2();
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -17,4 +17,7 @@ public interface AdminService {
 	public List<HoldingCommand> selectComplain();
 	public List<HoldingCommand> selectComplain_email(HoldingCommand holdingCommand);
 	public void updateComplain_auth(HoldingCommand holdingCommand);
+	public void updateHd_date(HoldingCommand holdingCommand);
+	public void deleteComplain(HoldingCommand holdingCommand);
+	public void updateHd_date2();
 }
