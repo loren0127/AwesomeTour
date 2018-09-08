@@ -27,7 +27,6 @@ public class Scheduler {
 		List<HoldingCommand> list2 = adminService.selectRvnum();
 		for(HoldingCommand rv_num: list2){
 			adminService.updateDeposit(rv_num);
-			System.out.println("----------------------------------1번 작동");
 		}
 		
 		

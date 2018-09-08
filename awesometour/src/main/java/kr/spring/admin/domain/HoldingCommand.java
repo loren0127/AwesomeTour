@@ -23,6 +23,72 @@ public class HoldingCommand {
 	private String rv_request;
 	private String host_email;
 	
+	private String acc_host;
+	
+	public String getAcc_host() {
+		return acc_host;
+	}
+	public void setAcc_host(String acc_host) {
+		this.acc_host = acc_host;
+	}
+	private int member_complain_num;
+	private int member_complain_accom_num;
+	private String member_complain_title;
+	private String member_complain_content;
+	private Date member_complain_reg_date;
+	private String member_email;
+	private int member_rv_num;
+	private String member_rv_end_date;
+	
+	
+	public int getMember_complain_num() {
+		return member_complain_num;
+	}
+	public void setMember_complain_num(int member_complain_num) {
+		this.member_complain_num = member_complain_num;
+	}
+	public int getMember_complain_accom_num() {
+		return member_complain_accom_num;
+	}
+	public void setMember_complain_accom_num(int member_complain_accom_num) {
+		this.member_complain_accom_num = member_complain_accom_num;
+	}
+	public String getMember_complain_title() {
+		return member_complain_title;
+	}
+	public void setMember_complain_title(String member_complain_title) {
+		this.member_complain_title = member_complain_title;
+	}
+	public String getMember_complain_content() {
+		return member_complain_content;
+	}
+	public void setMember_complain_content(String member_complain_content) {
+		this.member_complain_content = member_complain_content;
+	}
+	public Date getMember_complain_reg_date() {
+		return member_complain_reg_date;
+	}
+	public void setMember_complain_reg_date(Date member_complain_reg_date) {
+		this.member_complain_reg_date = member_complain_reg_date;
+	}
+	public String getMember_email() {
+		return member_email;
+	}
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
+	public int getMember_rv_num() {
+		return member_rv_num;
+	}
+	public void setMember_rv_num(int member_rv_num) {
+		this.member_rv_num = member_rv_num;
+	}
+	public String getMember_rv_end_date() {
+		return member_rv_end_date;
+	}
+	public void setMember_rv_end_date(String member_rv_end_date) {
+		this.member_rv_end_date = member_rv_end_date;
+	}
 	public int getAcc_num() {
 		return acc_num;
 	}

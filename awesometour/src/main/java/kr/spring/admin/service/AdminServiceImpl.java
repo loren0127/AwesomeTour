@@ -50,6 +50,33 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.updateAccount(rv_num);
 	}
 
+	@Override
+	public List<HoldingCommand> selecthrv_num() {
+		return adminMapper.selecthrv_num();
+	}
+
+	@Override
+	public void deleteDeposit(HoldingCommand holdingCommand) {
+		adminMapper.deleteDeposit(holdingCommand);
+	}
+
+	@Override
+	public List<HoldingCommand> selectComplain() {
+		return adminMapper.selectComplain();
+	}
+
+	@Override
+	public List<HoldingCommand> selectComplain_email(HoldingCommand holdingCommand) {
+		return adminMapper.selectComplain_email(holdingCommand);
+	}
+
+	@Override
+	public void updateComplain_auth(HoldingCommand holdingCommand) {
+		adminMapper.updateComplain_auth(holdingCommand);
+	}
+
+
+
 
 
 

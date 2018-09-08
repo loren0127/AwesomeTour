@@ -34,46 +34,11 @@ public class AdminController {
 		
 		List<HoldingCommand> list = adminService.selectHolding();
 		
-		List<HoldingCommand> list2 = adminService.selecthost();
-		
-		List<HoldingCommand> list3 = adminService.selectAccount();
 		if(log.isDebugEnabled()) {
-			log.debug("<<holdingCommand>> : " + list);
+			log.debug("<<selectHolding>> : " + list);
 		}
 		model.addAttribute("list",list);
-		
-		
-		for(HoldingCommand rv_num : list2) {
-			adminService.updateHostAccount(rv_num);
-		}
-		if(log.isDebugEnabled()) {
-			log.debug("<<updateHostAccount>> : " + list2);
-		}
-		
-		
-		
-		/*for(HoldingCommand rv_num3 : list3) {
-			adminService.updateAccount(rv_num3);
-		}*/
-		if(log.isDebugEnabled()) {
-			log.debug("<<updateHostAccount>> : " + list3);
-		}
-		model.addAttribute("list3",list3);
-		
-		
-		
 		return "adminHolding";
 	}
-	
-	/*//deposit 변경하는 메서드
-	@Scheduled(cron = "0/10 * * * * *")
-	public void cronTest1() {
-		List<HoldingCommand> list2 = adminService.selectRvnum();
-		for(HoldingCommand rv_num: list2){
-			adminService.updateDeposit(rv_num);
-		}
-		System.out.println("!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-	}*/
-	
 	
 }

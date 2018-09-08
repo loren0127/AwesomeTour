@@ -12,4 +12,9 @@ public interface AdminService {
 	public void updateHostAccount(HoldingCommand rv_num);
 	public List<HoldingCommand> selectAccount();
 	public void updateAccount(HoldingCommand rv_num);
+	public List<HoldingCommand> selecthrv_num();
+	public void deleteDeposit(HoldingCommand rv_num4);
+	public List<HoldingCommand> selectComplain();
+	public List<HoldingCommand> selectComplain_email(HoldingCommand holdingCommand);
+	public void updateComplain_auth(HoldingCommand holdingCommand);
 }
