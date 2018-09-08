@@ -44,26 +44,21 @@ $('#se_form').on("submit",function(event){
 					var count = data.count;
 					var pagingAppend = '';
 					
-					var service_1 = [];
-					
 					var serviceArr =[];
-					var sear = [
-						WIFI,개인금고,주차장,장애인용 시설, 스파(호텔전용),피트니스 센터,
-						프로젝트 룸,주방,픽업,24시간 프론트(호텔전용),룸 서비스(식사),세탁 서비스,
-						어메니티(샴푸, 칫솔 등),조식,반려동물 허용,파티 행사 허용
-					];
-					
-					
+					var sear = ["WIFI","개인금고","주차장","장애인용 시설","스파(호텔전용)","피트니스 센터",
+						"프로젝트 룸","주방","픽업","24시간 프론트(호텔전용)","룸 서비스(식사)","세탁 서비스",
+						"어메니티(샴푸,칫솔 등)","조식","반려동물 허용","파티 행사 허용"];
+
+					var se_list = $('#se_num').val();
 					$(list).each(function(index,item){
 
-						
 						pagingAppend +='	<div class="row">';
 						pagingAppend +='<div class="col-6" style="height: 150px; border: 1px solid;">';
 						
 						$('input:checkbox[name="se_name"]:checked').each(function(index,item) {
 							serviceArr.push($(this).val());//체크된 값 저장 
 							
-							
+							var se = sear.indexOf();
 					    }); 
 						
 						if(item.ro_sub == 'h'){
@@ -76,11 +71,11 @@ $('#se_form').on("submit",function(event){
 								pagingAppend +='<span>'+item.acc_theme+'</span><br>';
 						
 						if(item.ro_sub == 'h'){
-						pagingAppend +='<a href="../accomDetail/accomDetail_hotel.do">자세히보기</a>';
+						pagingAppend +='<a href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>';
 						
 						}
 						if(item.ro_sub == 'p'){
-							pagingAppend +='<a href="../accomDetail/accomDetail_private.do">자세히보기</a>';
+							pagingAppend +='<a href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>';
 						}
 						
 						pagingAppend +='</div>';
@@ -131,7 +126,8 @@ $('#se_form').on("submit",function(event){
 					<div>
 						 <input
 							type="hidden" name="searchtype" value="${map.searchtype}">
-						<input type="text" id="date_in" name="check_in"
+							
+						<input type="text" id="date_in1" name="check_in"
 							value="${map.check_in}" style="height: 50px; width: 150px;"
 							autocomplete="off">
 
@@ -189,29 +185,28 @@ $('#se_form').on("submit",function(event){
 				
 		<div class="row">
 			<div id="map" class="col-3">
-			
+			<input type="hidden" name="cnt" value="5"/>
 				<span style="text-align:center;"><b>편의시설</b></span>
 			<ul style="list-style:none;">
-				<li><input type="checkbox" value="${se_array[0]}" name="se_name">${se_array[0]}</li>
-				<li><input type="checkbox" value="${se_array[1]}" name="se_name">${se_array[1]}</li>
-				<li><input type="checkbox" value="${se_array[2]}" name="se_name">${se_array[2]}</li>
-				<li><input type="checkbox" value="${se_array[3]}" name="se_name">${se_array[3]}</li>
-				<li><input type="checkbox" value="${se_array[4]}" name="se_name">${se_array[4]}</li>
-				<li><input type="checkbox" value="${se_array[5]}" name="se_name">${se_array[5]}</li>
-				<li><input type="checkbox" value="${se_array[6]}" name="se_name">${se_array[6]}</li>
-				<li><input type="checkbox" value="${se_array[7]}" name="se_name">${se_array[7]}</li>
+				<li><input type="checkbox" value="WIFI" name="se_name">WIFI,</li>
+				<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
+				<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
+				<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용 시설</li>
+				<li><input type="checkbox" value="스파(호텔전용)" name="se_name">스파(호텔전용)</li>
+				<li><input type="checkbox" value="피트니스 센터" name="se_name">피트니스 센터</li>
+				<li><input type="checkbox" value="프로젝트 룸" name="se_name">프로젝트 룸</li>
+				<li><input type="checkbox" value="주방" name="se_name">주방</li>
 			</ul>
 				<span style="text-align:center;"><b>서비스 및 이용규칙</b></span>
 			<ul style="list-style:none;">
-				<li><input type="checkbox" value="${se_array[8]}" name="se_name">${se_array[8]}</li>
-				<li><input type="checkbox" value="${se_array[9]}" name="se_name">${se_array[9]}</li>
-				<li><input type="checkbox" value="${se_array[10]}" name="se_name">${se_array[10]}</li>
-				<li><input type="checkbox" value="${se_array[11]}" name="se_name">${se_array[11]}</li>
-				<li><input type="checkbox" value="${se_array[12]}" name="se_name">${se_array[12]}</li>
-				<li><input type="checkbox" value="${se_array[13]}" name="se_name">${se_array[13]}</li>
-				<li><input type="checkbox" value="${se_array[14]}" name="se_name">${se_array[14]}</li>
-				<li><input type="checkbox" value="${se_array[15]}" name="se_name">${se_array[15]}</li>
-				<li><input type="checkbox" value="${se_array[16]}" name="se_name">${se_array[16]}</li>
+				<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
+				<li><input type="checkbox" value="24시간 프론트(호텔전용)" name="se_name">24시간 프론트(호텔전용)</li>
+				<li><input type="checkbox" value="룸 서비스" name="se_name">룸 서비스</li>
+				<li><input type="checkbox" value="세탁" name="se_name">세탁</li>
+				<li><input type="checkbox" value="어메니티" name="se_name">어메니티</li>
+				<li><input type="checkbox" value="조식" name="se_name">조식</li>
+				<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물 허용</li>
+				<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티 행사 허용</li>
 			</ul>
 				<span style="text-align:center;"><b>호텔성급</b></span>
 			<ul style="list-style:none;">
@@ -240,15 +235,16 @@ $('#se_form').on("submit",function(event){
 								<br>
 							</c:if>
 							<span>
-							<img src="">
+							<input type="hidden" name="se_num" value="${accom.se_num}" id="se_num">
+							${accom.se_num}r
 							번호 : ${accom.acc_num}</span><br> <span>이름 :
 								${accom.acc_name}</span><br> <span>주소 :
 								${accom.acc_address1}</span><br>
 							<c:if test="${accom.ro_sub=='h'}">
-								<a href="../accomDetail/accomDetail_hotel.do">자세히보기</a>
+								<a href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
 							</c:if>
 							<c:if test="${accom.ro_sub=='p'}">
-								<a href="../accomDetail/accomDetail_private.do">자세히보기</a>
+								<a href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
 							</c:if>
 
 						</div>

@@ -20,10 +20,11 @@
 								<option value="p" id="p">프라이빗하우스</option>
 							</select>
 						</div>
+						<input type="hidden" value="" name="se_num">
 						<div>
 							<input type="text" id="date_in" name="check_in" value="" class="form-control"
 								style="height: 50px; width: 150px;" autocomplete="off">
-								
+							
 						</div>
 						<div>
 
