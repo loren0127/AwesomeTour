@@ -19,14 +19,74 @@ public class Scheduler {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	
-	//오후 5:50:00에 호출되는 스케쥴러
-	@Scheduled(cron = "00 30 * * * *")
-	public void cronTest1() {
+	//오후 에 호출되는 스케쥴러
+	//deposit 1로 변경
+	//@Scheduled(cron = "0 38 16  * * *")
+	@Scheduled(cron = "0 36 10  * * *")
+	public void hd_Deposit() {
 		List<HoldingCommand> list2 = adminService.selectRvnum();
 		for(HoldingCommand rv_num: list2){
 			adminService.updateDeposit(rv_num);
+			System.out.println("----------------------------------1번 작동");
 		}
+		
+		
 	}
 	
 	
+	//오후 에 호출되는 스케쥴러
+	//돈 입금해주는 스케쥴러
+	@Scheduled(cron = "0 43 10 * * *")
+	public void account_Change() {
+		
+		List<HoldingCommand> list2 = adminService.selecthost();
+		
+		for(HoldingCommand rv_num2 : list2) {
+			adminService.updateHostAccount(rv_num2);
+			System.out.println("----------------------------------2번 작동");
+		}
+		if(log.isDebugEnabled()) {
+			log.debug("<<updateHostAccount>> : " + list2);
+		}
+		
+		//-------------------------------------------------------------
+		
+		List<HoldingCommand> list3 = adminService.selectAccount();
+		
+		for(HoldingCommand rv_num3 : list3) {
+			adminService.updateAccount(rv_num3);
+			System.out.println("----------------------------------3번 작동");
+		}
+		if(log.isDebugEnabled()) {
+			log.debug("<<updateHostAccount>> : " + list3);
+		}
+		
+		//-----------------------------------------------------------
+		
+		List<HoldingCommand> list4 = adminService.selecthrv_num();
+		
+		for(HoldingCommand rv_num4 : list4) {
+			adminService.deleteDeposit(rv_num4);
+			System.out.println("----------------------------------4번 작동");
+		}
+		if(log.isDebugEnabled()) {
+			log.debug("<<deleteDeposit>> : " + list4);
+		}
+	
+	
+	}
+	
+	@Scheduled(cron = "0 43 10 * * *")
+	public void account_Change2() {
+		List<HoldingCommand> list2 = adminService.selectComplain();
+		
+		for(HoldingCommand rv_num4 : list2) {
+			List<HoldingCommand> list3 = adminService.selectComplain_email(rv_num4);
+			for(HoldingCommand rv_num5 : list3) {
+				adminService.updateComplain_auth(rv_num5);
+			}
+		}
+	}
+	
+		
 }
