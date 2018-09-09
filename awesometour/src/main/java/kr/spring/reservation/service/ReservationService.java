@@ -5,8 +5,13 @@ import java.util.Map;
 import kr.spring.reservation.domain.ReservationCommand;
 
 public interface ReservationService {	
-	public void insertReservation(Map<String,Object> map);
-	public Map<String,Integer> selectReservationGroup(String g_name);
-	public ReservationCommand selectRerservationAcc(int acc_num);
+	public void insertReservationSet(Map<String,Object> map);
+	public int selectReservationGroup(Map<String,Object> map);
+	public ReservationCommand selectRerservationAcc(Map<String,Integer> map);
+	public int selectReservationCount(Integer acc_num);
+	public String selectHostNick(Integer acc_num);
+	public int selectGroupMemberCount(Map<String,Object> map);
+
+
 
 }

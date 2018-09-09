@@ -22,21 +22,38 @@ public class ReservationServiceImpl implements ReservationService{
 	 private ReservationMapper reservationMapper;
 	
 	@Override
-	public void insertReservation(Map<String,Object> map) {
+	public void insertReservationSet(Map<String,Object> map) {
 		reservationMapper.insertReservation((ReservationCommand) map.get("reservationCommand"));
-		reservationMapper.insertPayment((PaymentCommand) map.get("paymentCommand"));
+		reservationMapper.insertPayment((PaymentCommand) map.get("payCommand"));
 	}
 
 	@Override
-	public Map<String,Integer> selectReservationGroup(String g_name) {
-		Map<String,Integer> g_num = reservationMapper.selectReservationGroup(g_name);
-		return g_num;
+	public int selectReservationGroup(Map<String,Object> map) {
+		return reservationMapper.selectReservationGroup(map);
 	}
 
 	@Override
-	public ReservationCommand selectRerservationAcc(int acc_num) {
-		ReservationCommand rc = reservationMapper.selectRerservationAcc(acc_num);
+	public ReservationCommand selectRerservationAcc(Map<String,Integer> map) {
+		ReservationCommand rc = reservationMapper.selectRerservationAcc(map);
 		return rc;
+	}
+
+	@Override
+	public int selectReservationCount(Integer acc_num) {
+		// TODO Auto-generated method stub
+		return reservationMapper.selectReservationCount(acc_num);
+	}
+
+	@Override
+	public String selectHostNick(Integer acc_num) {
+		// TODO Auto-generated method stub
+		return reservationMapper.selectHostNick(acc_num);
+	}
+
+	@Override
+	public int selectGroupMemberCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return reservationMapper.selectGroupMemberCount(map);
 	}
 
 

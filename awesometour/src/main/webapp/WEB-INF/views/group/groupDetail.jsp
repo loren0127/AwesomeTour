@@ -75,12 +75,14 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	    var email = sessionStorage.getItem('email');
 	}
 	
-	if(!email){
+	if(${chat}==0){
 	
-		$("#group_in").html("그룹 참가");
+		$("#group_in").show();
+		$("#chat_in").hide();
+
 	}else{
-		$("#group_in").html("채팅 참가");
-	
+		$("#group_in").hide();
+		$("#chat_in").show();
 	}
 	var group_name = $('#g_name').val();
 
@@ -90,8 +92,30 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	//그룹 참가 ajax
 	$('#group_in').click(function(){
 	 if($('#private').val() == '0'){
-		 //ajax 처리
-		alert('\"'+group_name+'\"에 참가였습니다!');
+
+		 $.ajax({
+	 	  	type:'post',
+				data:{g_num:${group.g_num}},
+				url:'groupMemberInsert.do',
+				dataType:'json',
+				cache:false,
+				timeout:30000,
+				success:function(data){  
+					if(data.result == 'success'){
+						alert("모임에 가입되었습니다!")
+					}else{
+						alert(data.result);
+					}
+				},
+				error:function(request,status,error){
+					alert('등록시 네트워크 오류 발생!');
+			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+	 	  
+	   })
+		 
+		 
+		 
 	 }else{
 		 alert("비공개 그룹은 그룹 생성자의 허가가 있어여 가능합니다. 요청 메세지를 보내시겠습니까? ");
 		 //넘어오는 값에 따라 메세지 보내기 처리
@@ -219,7 +243,9 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 			</div>
  		
 	 		<div class="col-2"> 		
-				<button class="btn" id="group_in" style="margin:30px"></button>
+				<button class="btn" id="group_in" style="margin:30px">그룹 참가</button>
+				<button class="btn" id="chat_in" style="margin:30px" onclick="window.open.()">채팅 참가</button>
+				
 			</div>
 		</div>
 	</div>

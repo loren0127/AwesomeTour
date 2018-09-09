@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.spring.reservation.dao.ReservationMapper">
+	<insert id="insertPayment" parameterType="paymentCommand">
+		INSERT INTO payment (rv_num,pm_name,pm_email, pm_type, 
+		<if test="pm_type == 0">
+		pm_cardNum, pm_cvc,pm_validity) 
+		</if>
+		<if test="pm_type == 1">
+		pm_account,pm_ac_name,pm_deposit_ac)
+		</if>
+		VALUES (rv_seq.currval,#{pm_name},#{pm_email},#{pm_type},
+		<if test="pm_type == 0">
+		#{pm_cardNum}, #{pm_cvc},#{pm_validity}) 
+		</if>
+		<if test="pm_type == 1">
+		#{pm_account},#{pm_ac_name},#{pm_deposit_ac})
+		</if>
+	</insert>
+	
+	<select id="selectReservationGroup" parameterType="map" resultType="integer">
+		SELECT 
+		<if test="status == 0">
+		COUNT(*) cnt  
+		</if>
+		<if test="status == 1">
+		g_num 
+		</if>
+		FROM group_table WHERE g_name = #{g_name}
+	</select>
+
+</mapper>

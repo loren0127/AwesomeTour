@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.chat.domain.ChatAllCommand;
+import kr.spring.chat.domain.ChatMemberCommand;
+import kr.spring.chat.service.ChatService;
 import kr.spring.group.domain.GroupCommand;
 import kr.spring.group.service.GroupService;
 import kr.spring.member.domain.MemberCommand;
+import kr.spring.reservation.service.ReservationService;
 import kr.spring.util.PagingUtil;
 import kr.spring.util.PagingUtilCircle;
 
@@ -28,9 +32,12 @@ public class GroupAjaxController {
 	private Logger log = Logger.getLogger(this.getClass());
 	private int rowCount = 6;
 	private int pageCount = 10;
-	
+	@Resource
+	private ReservationService reservationService;
 	@Resource
 	private GroupService groupService;
+	@Resource
+	private ChatService chatService;
 	
 	//리스트 출력(필터)
 	@RequestMapping("group/groupListFilter.do")
@@ -113,8 +120,34 @@ public class GroupAjaxController {
 		if(user_email==null) {
 			map.put("result","logout");
 		}else {
+			//그룹생성
 			groupCommand.setMember_email(user_email);
 			groupService.insertGroup(groupCommand);
+			
+			Map<String,Object> gMap = new HashMap<String, Object>();
+			gMap.put("status", 1);
+			gMap.put("g_name", groupCommand.getG_name());
+			
+			//그룹 채팅 생성
+			ChatAllCommand command = new ChatAllCommand();
+			command.setChat_all_title(groupCommand.getG_name());
+			command.setChat_all_member_list(user_email);
+			int g_num = reservationService.selectReservationGroup(gMap);
+			command.setGroup_num(g_num);
+			command.setChat_all_member_max(100);
+			chatService.insertChatAllGroup(command);
+			
+			//멤버 삽입
+			ChatMemberCommand memberCommand = new ChatMemberCommand();
+			memberCommand.setMember_email(user_email);
+			memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+			Map<String,Object> m_map = new HashMap<String, Object>();
+			m_map.put("member_email", user_email);
+			m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
+			
+			if(reservationService.selectGroupMemberCount(m_map)==0)		
+			chatService.insertChatMember(memberCommand);
+
 			map.put("result", "success");
 		}
 		
@@ -206,6 +239,34 @@ public class GroupAjaxController {
 			
 		}
 	
+		//멤버 추가
+		@RequestMapping("group/groupMemberInsert.do")
+		@ResponseBody
+		public Map<String,String> memberInsertGroup(int g_num, HttpSession session) {
+			
+			String user_email = (String)session.getAttribute("user_email");
+
+			Map<String,String > map = new HashMap<String, String>();
+
+			if(user_email==null) {
+				map.put("result","logout");
+			}else {
+				//멤버 삽입
+				ChatMemberCommand memberCommand = new ChatMemberCommand();
+				memberCommand.setMember_email(user_email);
+				memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(g_num));
+				Map<String,Object> m_map = new HashMap<String, Object>();
+				m_map.put("member_email", user_email);
+				m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
+				
+				if(reservationService.selectGroupMemberCount(m_map)==0)		
+					chatService.insertChatMember(memberCommand);
+				
+				map.put("result", "success");
+			}
+			return map;
+			
+		}
 	
 	
 	

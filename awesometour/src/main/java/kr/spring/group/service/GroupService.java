@@ -26,6 +26,8 @@ public interface GroupService {
 	public void updateGroup(GroupCommand groupCommand);
 	public void deleteGroup(Integer g_num);
 	public List<Map<String,Object>> selecRecommendAccom(String loc);
+	public int selectGroupChatnum(Integer group_num);
+
 
 
 

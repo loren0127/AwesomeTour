@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.group.domain.GroupCommand;
 import kr.spring.group.service.GroupService;
 import kr.spring.member.domain.MemberCommand;
+import kr.spring.reservation.service.ReservationService;
 import kr.spring.util.PagingUtilCircle;
 
 @Controller
@@ -27,6 +28,8 @@ public class GroupController {
 	private int rowCount = 6;
 	private int pageCount = 10;
 	
+	@Resource
+	private ReservationService reservationService;
 	@Resource
 	private GroupService groupService;
 	//리스트 출력(기본)
@@ -118,8 +121,8 @@ public class GroupController {
 	}
 	//그룹 상세페이지 출력
 	@RequestMapping("/group/groupDetail.do")
-	public String detail(int g_num, Model model  ) {
-		
+	public String detail(int g_num, Model model, HttpSession session  ) {
+		int chat_count = 0;
 		if(log.isDebugEnabled()) {
 			log.debug("<<g_num>> : "+g_num);
 		}
@@ -131,7 +134,21 @@ public class GroupController {
 		if(log.isDebugEnabled()) {
 			log.debug("<list>> : "+memberList);
 		}
+		
+		String user_email = (String)session.getAttribute("user_email");
+		
+		if(user_email != null) {
+		Map<String,Object> m_map = new HashMap<String, Object>();
+		m_map.put("member_email", user_email);
+		m_map.put("chat_all_num", groupService.selectGroupChatnum(g_num));
+		chat_count = reservationService.selectGroupMemberCount(m_map);
+		}
+		if(log.isDebugEnabled()) {
+			log.debug("<chat>> : "+chat_count);
+		}
 		model.addAttribute("group",group);
+		model.addAttribute("chat",chat_count);
+
 		model.addAttribute("memberList",memberList);
 
 		

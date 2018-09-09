@@ -87,6 +87,12 @@ public class GroupServiceImpl implements GroupService{
 		return groupMapper.selecRecommendAccom(loc);
 	}
 
+	@Override
+	public int selectGroupChatnum(Integer group_num) {
+		// TODO Auto-generated method stub
+		return groupMapper.selectGroupChatnum(group_num);
+	}
+
 	
 
 }
