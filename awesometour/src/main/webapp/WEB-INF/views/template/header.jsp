@@ -13,8 +13,6 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;">지도</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="${pageContext.request.contextPath}/awesomeMenu/group.do">지도보기</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/awesomeMenu/recommend.do">추천</a></li>
@@ -46,13 +44,13 @@
 <div class="container">
 	<div id="mapSearch_dialog">
 		<div>
-			<form class="form-inline" style="float:left;">
+			<form class="form-inline" style="float:left;" action="" method="get">
 				<div class="form-group mb-2"><i class="fa fa-search" style="font-size:20px"></i></div>
 				<div class="form-group mx-sm-3 mb-2">
 					<label for="searchyouwant" class="sr-only">search</label>
 					<input type="search" class="form-control" name="searchyouwant" id="searchyouwant" placeholder="모임 이름 혹은 주소로 검색하기">
 				</div>
-				<input type="submit" value="검색" class="btn btn-warning mb-2" style="color:white;">
+				<input type="submit" value="검색" id="map_search" class="btn btn-warning mb-2">
 			</form>
 			<span class="closer">&times;</span>
 		</div>
