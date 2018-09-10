@@ -21,6 +21,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/map.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/map2.js"></script>
 <!-- services 라이브러리 불러오기 -->
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=463df352b2234b5bac553021b6d8bd14&libraries=services"></script>

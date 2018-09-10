@@ -2,7 +2,6 @@ package kr.spring.accom.domain;
 
 public class AccomCommand {
 	private int acc_num;
-	private int acc_se_num;
 	private String acc_host;
 	private String acc_name;
 	private int acc_grade;
@@ -15,18 +14,17 @@ public class AccomCommand {
 	private String acc_address2;
 	private String acc_lati;
 	private String acc_longi;
+	private int ro_price;
+	private String ro_sub;
+	private String ag_grade;
+	private String member_auth;
+	private int review_count;
 	
 	public int getAcc_num() {
 		return acc_num;
 	}
 	public void setAcc_num(int acc_num) {
 		this.acc_num = acc_num;
-	}
-	public int getAcc_se_num() {
-		return acc_se_num;
-	}
-	public void setAcc_se_num(int acc_se_num) {
-		this.acc_se_num = acc_se_num;
 	}
 	public String getAcc_host() {
 		return acc_host;
@@ -100,13 +98,43 @@ public class AccomCommand {
 	public void setAcc_longi(String acc_longi) {
 		this.acc_longi = acc_longi;
 	}
-	
+	public int getRo_price() {
+		return ro_price;
+	}
+	public void setRo_price(int ro_price) {
+		this.ro_price = ro_price;
+	}
+	public String getRo_sub() {
+		return ro_sub;
+	}
+	public void setRo_sub(String ro_sub) {
+		this.ro_sub = ro_sub;
+	}
+	public String getAg_grade() {
+		return ag_grade;
+	}
+	public void setAg_grade(String ag_grade) {
+		this.ag_grade = ag_grade;
+	}
+	public String getMember_auth() {
+		return member_auth;
+	}
+	public void setMember_auth(String member_auth) {
+		this.member_auth = member_auth;
+	}
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 	@Override
 	public String toString() {
-		return "AccomCommand [acc_num=" + acc_num + ", acc_se_num=" + acc_se_num + ", acc_host=" + acc_host
-				+ ", acc_name=" + acc_name + ", acc_grade=" + acc_grade + ", acc_in=" + acc_in + ", acc_out=" + acc_out
-				+ ", acc_theme=" + acc_theme + ", acc_phone=" + acc_phone + ", acc_zipcode=" + acc_zipcode
-				+ ", acc_address1=" + acc_address1 + ", acc_address2=" + acc_address2 + ", acc_lati=" + acc_lati
-				+ ", acc_longi=" + acc_longi + "]";
+		return "AccomCommand [acc_num=" + acc_num + ", acc_host=" + acc_host + ", acc_name=" + acc_name + ", acc_grade="
+				+ acc_grade + ", acc_in=" + acc_in + ", acc_out=" + acc_out + ", acc_theme=" + acc_theme
+				+ ", acc_phone=" + acc_phone + ", acc_zipcode=" + acc_zipcode + ", acc_address1=" + acc_address1
+				+ ", acc_address2=" + acc_address2 + ", acc_lati=" + acc_lati + ", acc_longi=" + acc_longi
+				+ ", ro_price=" + ro_price + ", ro_sub=" + ro_sub + ", ag_grade=" + ag_grade + ", member_auth="
+				+ member_auth + ", review_count=" + review_count + "]";
 	}
 }

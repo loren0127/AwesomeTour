@@ -6,8 +6,9 @@
 	font-size: 12px;
 	background: #70A5FA;
 	padding: 2px 10px;
-	border: 1px solid #70A5FA;
+	border: 2px solid #fff;
 	border-radius: 25px;
+	text-align:center;
 }
 .arrow_box:after, .arrow_box:before {
 	top: 100%;
@@ -27,8 +28,240 @@
 	margin-left: -10px;
 }
 .arrow_box:before {
+	border-color: rgba(255, 255, 255, 0);
+	border-top-color: #fff;
+	border-width: 13px;
+	margin-left: -13px;
+}
+
+.arrow_box:hover {
+	color: #212529;
+	background: #fff;
+	border: 2px solid #70A5FA;
+}
+
+.arrow_box:hover:after, .arrow_box:hover:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:hover:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-top-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow_box:hover:before {
 	border-color: rgba(112, 165, 250, 0);
 	border-top-color: #70A5FA;
-	border-width: 11px;
-	margin-left: -11px;
+	border-width: 13px;
+	margin-left: -13px;
+}
+
+/*컨테이너에 마우스 진입 시작*/
+.changed {
+	color: #212529;
+	background: #fff;
+	border: 2px solid #70A5FA;
+}
+
+.changed:after, .changed:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.changed:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-top-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.changed:before {
+	border-color: rgba(112, 165, 250, 0);
+	border-top-color: #70A5FA;
+	border-width: 13px;
+	margin-left: -13px;
+}
+/*컨테이너에 마우스 진입 끝*/
+
+/*지도 다이얼로그 상단*/
+.map-header{
+	box-shadow: 0 3px 5px 0 rgba(136, 136, 136, .15);
+	width: 100%;
+	height: 85px;
+	padding:0 20px 0 20px;
+}
+
+/*priceFilter*/
+.priceFilter input[type="text"]{
+	display: inline-block;
+	width: 90px;
+	font-weight: bold;
+	margin-top: 5px;
+    padding: 2px 10px;
+    border: 1px solid lightgray;
+}
+
+/* .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #D900ED;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    border: 1px solid #D900ED;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 10px;
+    height: 20px;
+    border: 1px solid #D900ED;
+    background: #ffffff;
+    cursor: pointer;
+} */
+
+/*dateFilter*/
+#perNight1, #perNight2{
+	text-align:center;
+}
+
+/*headcountFilter*/
+.headcountFilter{
+	padding: 5px 10px;
+    border: 1px solid lemonchiffon;
+    background: lemonchiffon;
+}
+
+/*map-sidePanel*/
+.mapsCard-container {
+	margin-right: 10px;
+    border: 1px solid hsla(0,0%,59%,.42);
+    margin-bottom: 0;
+    margin-top: 0;
+    border: 1px solid hsla(0,0%,59%,.42);
+    position: relative;
+    transition: box-shadow .3s ease-in-out;
+    list-style: none;
+    background-color: #fff;
+}
+
+.mapsCard-container.active, .mapsCard-container:hover {
+    border: 2px solid #70A5FA;
+    box-shadow: 2px 4px 6px 1px rgba(0,0,0,.2);
+}
+
+/*말풍선에 마우스 진입 시작*/
+.on {
+    border: 2px solid #70A5FA;
+    box-shadow: 2px 4px 6px 1px rgba(0,0,0,.2);
+}
+/*말풍선에 마우스 진입 끝*/
+
+.mapsCard-photo {
+    width: 150px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.mapsCard-content {
+    margin: 0 0 0 150px;
+    min-height: 150px;
+    padding: 10px;
+    position: relative;
+}
+
+@media screen and (max-width: 1280px)
+.mapsCard-content .2ndRow .2ndRowLeftCol {
+    width: 50%;
+}
+
+@media screen and (max-width: 1280px)
+.mapsCard-content .2ndRow .2ndRowRightCol {
+    width: 50%;
+}
+
+.2ndRowLeftCol {
+    display: table-cell;
+    padding-bottom: 15px;
+}
+
+.2ndRowRightCol {
+    display: table-cell;
+    text-align: right;
+    vertical-align: bottom;
+    padding-top: 15px;
+}
+
+#map_search, #research, .hotelLink, .houseLink{
+	color: #fff;
+}
+
+#map_search:hover{
+	color: #212529;
+	background-color: #fff;
+    border-color: #ffc107;
+}
+
+#research:hover{
+	color: #212529;
+	background-color: #fff;
+    border-color: #ffc107;
+}
+
+.hotelLink:hover{
+	color: #212529;
+	background-color: #fff;
+    border-color: #ffc107;
+}
+
+.houseLink:hover{
+	color: #212529;
+	background-color: #fff;
+    border-color: #ffc107;
+}
+
+/*선택조건 표시박스*/
+/* #selectedInMap{
+	padding: 5px 10px;
+    margin-right: 27px;
+    border: 1px solid lightgray;
+} */
+
+/*정렬기준 선택박스*/
+#detailInMap-button{
+	width: 345px;
+}
+
+.overflow {
+	height: 220px;
 }
