@@ -43,4 +43,8 @@ public interface ChatService {
 	public List<ChatAllTalkCommand> selectChatAallTalkMessageLog(int chat_all_num);
 	
 	public void updateChatAllJoinChange(Map<String, Object> map);
+	
+	public void insertChatAllGroup(ChatAllCommand command);
+	
+
 }

@@ -73,7 +73,7 @@ public class ChatServiceImpl implements ChatService {
 		
 	}
 	
-	//Chat overlap 諛⑹�
+	//Chat overlap 獄쎻뫗占�
 	@Override
 	public ChatAllCommand selectChatAllJoin(Map<String, Object> map) {
 		return chatMapper.SelectChatAllJoin(map);
@@ -106,4 +106,12 @@ public class ChatServiceImpl implements ChatService {
 	public void updateChatAllJoinChange(Map<String, Object> map) {
 		chatMapper.updateChatAllJoinChange(map);
 	}
+
+	@Override
+	public void insertChatAllGroup(ChatAllCommand command) {
+		// TODO Auto-generated method stub
+		chatMapper.insertChatAllGroup(command);
+	}
+
+
 }

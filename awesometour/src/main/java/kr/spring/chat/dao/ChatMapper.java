@@ -25,6 +25,8 @@ public interface ChatMapper {
 	//ChatMapper.xml
 	public void insertChatAll(ChatAllCommand command);
 	
+	public void insertChatAllGroup(ChatAllCommand command);
+		
 	@Update("UPDATE chat_all SET chat_all_content=#{chat_all_content} WHERE chat_all_num=#{chat_all_num}")
 	public void updateChatAllNotice(Map<String, Object> map);
 	
