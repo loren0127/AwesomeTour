@@ -62,11 +62,11 @@ $('#se_form').on("submit",function(event){
 					    }); 
 						
 						if(item.ro_sub == 'h'){
-						pagingAppend +='<span>'+item.acc_grade+'</span>';
+						pagingAppend +='<span>호텔성급:'+item.acc_grade+'</span>';
 						pagingAppend +='<br>';
 							}
 								pagingAppend +='<span>'+item.acc_name+'</span> <br>';
-								pagingAppend +='<span>'+item.acc_grade+'</span><br>';
+								pagingAppend +='<span>호텔성급 : '+item.acc_grade+'</span><br>';
 								pagingAppend +='<span>'+item.acc_address1+'</span><br>';
 								pagingAppend +='<span>'+item.acc_theme+'</span><br>';
 						
@@ -185,10 +185,9 @@ $('#se_form').on("submit",function(event){
 				
 		<div class="row">
 			<div id="map" class="col-3">
-			<input type="hidden" name="cnt" value="5"/>
 				<span style="text-align:center;"><b>편의시설</b></span>
 			<ul style="list-style:none;">
-				<li><input type="checkbox" value="WIFI" name="se_name">WIFI,</li>
+				<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
 				<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
 				<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
 				<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용 시설</li>
@@ -210,11 +209,11 @@ $('#se_form').on("submit",function(event){
 			</ul>
 				<span style="text-align:center;"><b>호텔성급</b></span>
 			<ul style="list-style:none;">
-				<li><input type="checkbox" value="1">1</li>
-				<li><input type="checkbox" value="2">2</li>
-				<li><input type="checkbox" value="3">3</li>
-				<li><input type="checkbox" value="4">4</li>
-				<li><input type="checkbox" value="5">5</li>
+				<li><input type="radio" value="1" name="hotel_grade">1</li>
+				<li><input type="radio" value="2" name="hotel_grade">2</li>
+				<li><input type="radio" value="3" name="hotel_grade">3</li>
+				<li><input type="radio" value="4" name="hotel_grade">4</li>
+				<li><input type="radio" value="5" name="hotel_grade">5</li>
 			</ul>	
 					
 			</div>

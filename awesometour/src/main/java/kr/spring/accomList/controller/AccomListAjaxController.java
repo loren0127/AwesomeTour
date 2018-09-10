@@ -2,7 +2,6 @@ package kr.spring.accomList.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,14 +37,25 @@ public class AccomListAjaxController {
 										@RequestParam(value="check_in",defaultValue="") String check_in, //검색시작날짜
 										@RequestParam(value="check_out",defaultValue="") String check_out, //검색 끝날짜 
 										@RequestParam(value="people_count",defaultValue="") int people_count,//인원수
-										//@RequestParam(value="ro_price",defaultValue="") int ro_price,//가격
-										//@RequestParam(value="avg",defaultValue="") int avg, //평점 
-										@RequestParam(value="price",defaultValue="") String price,
-										@RequestParam(value="se_name",defaultValue="") String se_name) { 
+										@RequestParam(value="price",defaultValue="") String price, //가격정렬
+										@RequestParam(value="se_name",defaultValue="") String se_name,
+										@RequestParam(value="hotel_grade",defaultValue="") String hotel_grade) {  
 		
-		
+
 		List<AccomListCommand> list = null;
 		String check[] = se_name.split(",");
+ 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("searchtype", searchtype);
+		map.put("check_in", check_in);
+		map.put("check_out", check_out);
+		map.put("people_count", people_count);
+		map.put("price", price);
+		map.put("se_name", se_name);
+		List<String> checklist = Arrays.asList(check);
+		map.put("checklist", checklist);
+		map.put("hotel_grade", hotel_grade);
+
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<list>> : " + list);
@@ -58,19 +67,9 @@ public class AccomListAjaxController {
 			log.debug("<<people_count>> : " + people_count);
 			log.debug("<<price>> : " + price);
 			log.debug("<<se_name>> : " + se_name);
-			log.debug("<<check>> : " + check);
+			log.debug("<<checklist>> : " + checklist);
+			log.debug("<<hotel_grade>> : " + hotel_grade);
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("searchtype", searchtype);
-		map.put("check_in", check_in);
-		map.put("check_out", check_out);
-		map.put("people_count", people_count);
-		//map.put("avg", avg);
-		map.put("price", price);
-		map.put("se_name", se_name);
-		List<String> checklist = Arrays.asList(check);
-		map.put("checklist", checklist);
 		
 		System.out.println(checklist);
 		list = accomListService.selectAccomTotallist(map);

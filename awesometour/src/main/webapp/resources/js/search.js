@@ -1,6 +1,6 @@
 $(document).ready(function() {	
 	$('#pe_pop').hide();
-	var today = $.datepicker.formatDate('yy/mm/dd', new Date()); //오늘 날짜 구하기
+	var today = $.datepicker.formatDate('yyyy/mm/dd', new Date()); //오늘 날짜 구하기
 	$('#date_in').val(today);
 
 	//인원수 클릭시 div 활성화
@@ -111,7 +111,7 @@ $(function(selectedDate) {
 	});
 	$('#date_in1').datepicker({
 		showMonthAfterYear:true, //default 월 년
-		dateFormat:'yy/mm/dd',
+		dateFormat:'yyyy/mm/dd',
 		monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 	    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 		dayNamesMin:['일','월','화','수','목','금','토'],//default 영문
@@ -127,7 +127,7 @@ $(function(selectedDate) {
 	});
 	$('#date_out').datepicker({
 		showMonthAfterYear:true, //default 월 년
-		dateFormat:'yy/mm/dd',
+		dateFormat:'yyyy/mm/dd',
 		monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 	    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 		dayNamesMin:['일','월','화','수','목','금','토'],//default 영문

@@ -34,8 +34,8 @@
           				FROM reservation 
 				 				
 				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yy/mm/dd') >= #{check_in} 
-						AND TO_DATE(rv_start_date,'yy/mm/dd') <= #{check_out}
+				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
+						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
 					]]> 
 				 		)
         </if>
@@ -67,8 +67,8 @@
           				FROM reservation 
 				 				
 				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yy/mm/dd') >= #{check_in}  AND 
-				 		TO_DATE(rv_start_date,'yy/mm/dd') <= #{check_out}
+				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in}  AND 
+				 		TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
 					]]> 
 				 		))a
         </if>
@@ -104,7 +104,10 @@
  			<foreach collection="checklist"  item="type">
          	AND s.se_name LIKE '%' ||  #{type,jdbcType=VARCHAR} || '%'
 			</foreach>
-        </if>          
+        </if>    
+		<if test="hotel_grade !=''">
+         	AND b.acc_grade LIKE '%' ||  #{hotel_grade} || '%'
+        </if>  
          <if test="search !=''">
          
        		   AND b.acc_num NOT IN(SELECT acc_num 
@@ -170,7 +173,10 @@
  			<foreach collection="checklist"  item="type">
          	AND s.se_name LIKE '%' ||  #{type,jdbcType=VARCHAR} || '%'
 			</foreach>
-        </if>          
+        </if>  
+		<if test="hotel_grade !=''">
+         	AND b.acc_grade LIKE '%' ||  #{hotel_grade} || '%'
+        </if>                
          <if test="search !=''">
          
        		   AND b.acc_num NOT IN(SELECT acc_num 
