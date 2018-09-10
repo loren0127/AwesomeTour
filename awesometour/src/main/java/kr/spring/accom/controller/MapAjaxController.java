@@ -62,10 +62,25 @@ public class MapAjaxController {
 	//지도 주소->좌표 목록
 	@RequestMapping(value="/accomList/accomList.do", method=RequestMethod.POST)
 	@ResponseBody						//JSON 문자열 저장
-	public Map<String, Object> getList(@RequestParam(value="orderby", defaultValue="") String orderby){
+	public Map<String, Object> getList(@RequestParam(value="orderby", defaultValue="") String orderby, 
+									   @RequestParam("check_in") String check_in, 
+									   @RequestParam("check_out") String check_out, 
+									   @RequestParam("people_count") int people_count, 
+									   @RequestParam("search") String search){
+		
+		if(log.isDebugEnabled()) {
+			log.debug("<<check_in>> : "+ check_in);
+			log.debug("<<check_out>> : "+ check_out);
+			log.debug("<<people_count>> : "+ people_count);
+			log.debug("<<search>> : "+ search);
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("orderby", orderby);//메소드 파라미터의 이름과 key는 동일해야 한다!!!
+		map.put("check_in", check_in);
+		map.put("check_out", check_out);
+		map.put("people_count", people_count);
+		map.put("search", search);
 
 		List<AccomCommand> list = null;
 		list = accomService.selectList(map);

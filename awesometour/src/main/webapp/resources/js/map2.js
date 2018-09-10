@@ -9,6 +9,11 @@ $(document).ready(function(){
 	//select태그(id=detailInMap)에서 선택되는 옵션값을 받기 위한 변수 선언
 	var orderby;
 	var im_ac_num;
+	var check_in = $('#date_in1').val();
+	var check_out = $('#date_out').val();
+	var people_count = $('#people_count').val();
+	var search = $('#je_search').val();
+	console.log(check_in);
 	
 	//지도가 뜨는 걸 한 발 늦도록 하기 위해 함수화
 	function callMap2(orderby){
@@ -32,7 +37,7 @@ $(document).ready(function(){
 			type:'post',
 			url:'accomList.do',
 			dataType:'json',
-			data:{orderby:orderby, im_ac_num:im_ac_num},//정렬 조건 선택시 HTTP 요청과 함께 서버로 보낼 데이터(옵션값)
+			data:{orderby:orderby, im_ac_num:im_ac_num, check_in:check_in, check_out:check_out, people_count:people_count, search:search},//정렬 조건 선택시 HTTP 요청과 함께 서버로 보낼 데이터(옵션값)
 			async:false,//코드가 일시 중지(완료 되기를 기다리는 다른 코드)
 			cache:false,
 			timeout:30000,
@@ -70,9 +75,9 @@ $(document).ready(function(){
 					output += '			<div class="accomPrice" data-price="'+item.ro_price+'" style="font-weight:bold;">'+numberWithCommas(item.ro_price)+'원</div>';
 				if(item.acc_grade == null || item.acc_grade == ''){
 					//커스텀 데이터 속성 사용 : JQuery에서 HTML 태그의 click 기능을 구현할 때 HTML에 있는 특정 값을 가져와서 사용해야 할 경우
-					output += '			<input type="button" data-num="'+item.acc_num+'" class="btn btn-warning hotelLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
+					output += '			<input type="button" data-linknum="'+item.acc_num+'" class="btn btn-warning hotelLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
 				}else{
-					output += '			<input type="button" data-num="'+item.acc_num+'" class="btn btn-warning houseLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
+					output += '			<input type="button" data-linknum="'+item.acc_num+'" class="btn btn-warning houseLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
 				}
 					output += '		</div>';
 					output += '	</div>';
@@ -83,8 +88,9 @@ $(document).ready(function(){
 				$('#output').append(output);
 				});
 			},
-			error:function(){
+			error:function(request,status,error){
 				alert('네트워크 오류');
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 				
@@ -288,14 +294,18 @@ $(document).ready(function(){
 	$(document).on('click', '.hotelLink', function(e){
 		e.preventDefault();
 		//숙소 번호
-		var acc_num = $(this).attr('data-num');
-		location.href = '../accomDetail/accomDetail_hotel.do?acc_num="'+acc_num+'"';
+		var acc_num = $(this).attr('data-linknum');
+		var acc_in = $(this).attr('data-in');
+		var acc_out = $(this).attr('data-out');
+		location.href = '../accomDetail/accomDetail_hotel.do?im_ac_num='+acc_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&search='+search+'';
 	});
 	$(document).on('click', '.houseLink', function(e){
 		e.preventDefault();
 		//숙소 번호
-		var acc_num = $(this).attr('data-num');
-		location.href = '../accomDetail/accomDetail_private.do?acc_num="'+acc_num+'"';
+		var acc_num = $(this).attr('data-linknum');
+		var acc_in = $(this).attr('data-in');
+		var acc_out = $(this).attr('data-out');
+		location.href = '../accomDetail/accomDetail_private.do?im_ac_num='+acc_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&search='+search+'';
 	});
 	
 	//컨테이너에 마우스 올리면 반응
@@ -329,9 +339,16 @@ $(document).ready(function(){
 		$('.arrow_box').removeClass('changed');
 	});
 	
+	//말풍선에 마우스 오버시 해당 컨테이너 자동스크롤 위한 변수 선언
+	var step = 150;
+	var scrolling = false;
+	
 	//말풍선에 마우스 올리면 반응
 	$(document).on('mouseenter', '.arrow_box', function(){
 		var target = $(this).attr('data-address');
+		
+		scrolling = true;
+	    scrollContent('up');//함수 호출
 		$('.mapsCard-container').each(function(index,item){
 			var check = $(this).attr('data-address1');
 			//console.log(target + ',' + check);
@@ -346,45 +363,11 @@ $(document).ready(function(){
 	
 	$(document).on('mouseleave', '.arrow_box', function(){
 		$('.mapsCard-container').removeClass('on');
+		// Cancel scrolling continuously:
+	    scrolling = false;
 	});
 	
-	//말풍선 클릭시 해당 컨테이너를 탑스크롤
-	var step = 150;
-	var scrolling = false;
-
-	// Wire up events for the 'scrollUp' link:
-	$(document).on('mouseenter', '.arrow_box', function(event) {
-		//event.preventDefault();
-		var target = $(this).attr('data-address1');
-		var check = $(this).attr('data-address');
-		if(target == check){
-			// Animates the scrollTop property by the specified step.
-			$('.mapsCard-container').animate({
-				scrollTop: '-=' + step + 'px'
-			});			
-		}
-	}).bind('mouseover', function(event) {
-	    scrolling = true;
-	    scrollContent('up');
-	}).bind('mouseout', function(event) {
-	    // Cancel scrolling continuously:
-	    scrolling = false;
-	});
-
-
-	$("#scrollDown").bind("click", function(event) {
-	    event.preventDefault();
-	    $("#content").animate({
-	        scrollTop: "+=" + step + "px"
-	    });
-	}).bind("mouseover", function(event) {
-	    scrolling = true;
-	    scrollContent("down");
-	}).bind("mouseout", function(event) {
-	    scrolling = false;
-	});
-
-	//스크롤 위치 함수
+	//스크롤 위치 감지 함수
 	function scrollContent(direction) {
 	    var amount = (direction === 'up' ? '-=1px' : '+=1px');
 	    $('.mapsCard-container').animate({

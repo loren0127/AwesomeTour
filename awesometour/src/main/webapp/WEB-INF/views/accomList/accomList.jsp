@@ -115,18 +115,18 @@ $('#se_form').on("submit",function(event){
 
 });
 </script>
-		<form id="se_form">
-<div>
-	
-	<nav class="navbar sticky-top navbar-light bg-light">
-		<div class="col-md-10 col-lg-8 col-xl-7">
-			<!-- 검색 시작 -->
+<!-- ====================정은이 폼 시작==================== -->
+<form id="se_form">
+	<div>
+
+		<nav class="navbar sticky-top navbar-light bg-light">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<!-- 검색 시작 -->
 				<div class="form-row"
 					style="width: 1200px; margin-left: 200px; margin-top: 75px;">
 					<div>
-						 <input
-							type="hidden" name="searchtype" value="${map.searchtype}">
-							
+						<input type="hidden" name="searchtype" value="${map.searchtype}">
+
 						<input type="text" id="date_in1" name="check_in"
 							value="${map.check_in}" style="height: 50px; width: 150px;"
 							autocomplete="off">
@@ -136,7 +136,7 @@ $('#se_form').on("submit",function(event){
 
 						<input type="text" id="date_out" name="check_out"
 							value="${map.check_out}" style="height: 50px; width: 150px;"
-							autocomplete="off"> 
+							autocomplete="off">
 					</div>
 					<div class="people_pop">
 						<input type="hidden" name="people_count" id="people_count"
@@ -156,115 +156,128 @@ $('#se_form').on("submit",function(event){
 					</div>
 					<div>
 						<input type="text" style="width: 300px; height: 50px;"
-							name="search" value="${map.search}">
+							id="je_search" name="search" value="${map.search}">
 					</div>
-					
+
 					<div>
 						<button type="submit" class="btn btn-block btn-lg btn-primary">검색</button>
 					</div>
 				</div>
 				<div></div>
 
-		</div>
-</nav>	
-	<!-- 검색창 끝-->
-
-
-	<!-- 숙소 리스트 시작-->
-	<div class="container">
-	<h2>숙소 목록</h2>
-				<!-- Map Dialog -->
-				<button id="opener2" style="margin-top:100px;">지도보기</button>
-				
-				<button value="DESC" name="best">추천숙소</button>
-						<span>가격</span>
-						  <select  name="price">
-							<option value="ASC">낮은순</option>
-							<option value="DESC">높은순</option>
-						</select>
-						
-				<button value="DESC" name="avg">평점</button>
-				
-		<div class="row">
-			<div id="map" class="col-3">
-				<span style="text-align:center;"><b>편의시설</b></span>
-			<ul style="list-style:none;">
-				<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
-				<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
-				<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
-				<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용 시설</li>
-				<li><input type="checkbox" value="스파(호텔전용)" name="se_name">스파(호텔전용)</li>
-				<li><input type="checkbox" value="피트니스 센터" name="se_name">피트니스 센터</li>
-				<li><input type="checkbox" value="프로젝트 룸" name="se_name">프로젝트 룸</li>
-				<li><input type="checkbox" value="주방" name="se_name">주방</li>
-			</ul>
-				<span style="text-align:center;"><b>서비스 및 이용규칙</b></span>
-			<ul style="list-style:none;">
-				<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
-				<li><input type="checkbox" value="24시간 프론트(호텔전용)" name="se_name">24시간 프론트(호텔전용)</li>
-				<li><input type="checkbox" value="룸 서비스" name="se_name">룸 서비스</li>
-				<li><input type="checkbox" value="세탁" name="se_name">세탁</li>
-				<li><input type="checkbox" value="어메니티" name="se_name">어메니티</li>
-				<li><input type="checkbox" value="조식" name="se_name">조식</li>
-				<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물 허용</li>
-				<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티 행사 허용</li>
-			</ul>
-				<span style="text-align:center;"><b>호텔성급</b></span>
-			<ul style="list-style:none;">
-				<li><input type="radio" value="1" name="hotel_grade">1</li>
-				<li><input type="radio" value="2" name="hotel_grade">2</li>
-				<li><input type="radio" value="3" name="hotel_grade">3</li>
-				<li><input type="radio" value="4" name="hotel_grade">4</li>
-				<li><input type="radio" value="5" name="hotel_grade">5</li>
-			</ul>	
-					
 			</div>
+		</nav>
+		<!-- 검색창 끝-->
+
+
+
+		<!-- ====================숙소 리스트 시작==================== -->
+		<div class="container">
+			<h2>숙소 목록</h2>
+			<!-- Map Dialog Button Start -->
+			<button id="opener2" style="margin-top: 100px;">지도보기</button>
+			<!-- Map Dialog Button End -->
+
+			<button value="DESC" name="best">추천숙소</button>
+			<span>가격</span> <select name="price">
+				<option value="ASC">낮은순</option>
+				<option value="DESC">높은순</option>
+			</select>
+
+			<button value="DESC" name="avg">평점</button>
+
+			<div class="row">
+				<div id="map" class="col-3">
+					<span style="text-align: center;"><b>편의시설</b></span>
+					<ul style="list-style: none;">
+						<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
+						<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
+						<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
+						<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용
+							시설</li>
+						<li><input type="checkbox" value="스파(호텔전용)" name="se_name">스파(호텔전용)</li>
+						<li><input type="checkbox" value="피트니스 센터" name="se_name">피트니스
+							센터</li>
+						<li><input type="checkbox" value="프로젝트 룸" name="se_name">프로젝트
+							룸</li>
+						<li><input type="checkbox" value="주방" name="se_name">주방</li>
+					</ul>
+					<span style="text-align: center;"><b>서비스 및 이용규칙</b></span>
+					<ul style="list-style: none;">
+						<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
+						<li><input type="checkbox" value="24시간 프론트(호텔전용)"
+							name="se_name">24시간 프론트(호텔전용)</li>
+						<li><input type="checkbox" value="룸 서비스" name="se_name">룸
+							서비스</li>
+						<li><input type="checkbox" value="세탁" name="se_name">세탁</li>
+						<li><input type="checkbox" value="어메니티" name="se_name">어메니티</li>
+						<li><input type="checkbox" value="조식" name="se_name">조식</li>
+						<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물
+							허용</li>
+						<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티
+							행사 허용</li>
+					</ul>
+					<span style="text-align: center;"><b>호텔성급</b></span>
+					<ul style="list-style: none;">
+						<li><input type="radio" value="1" name="hotel_grade">1</li>
+						<li><input type="radio" value="2" name="hotel_grade">2</li>
+						<li><input type="radio" value="3" name="hotel_grade">3</li>
+						<li><input type="radio" value="4" name="hotel_grade">4</li>
+						<li><input type="radio" value="5" name="hotel_grade">5</li>
+					</ul>
+
+				</div>
 
 
 
 				<div id="col-6" class="col-9">
-				
-				
-				<c:if test="${count == 0}">
-				<div class="align-center">등록된 게시물이 없습니다.</div>
-				</c:if>
-				<c:forEach var="accom" items="${list}">
-					<div class="row">
-						<div class="col-8" style="height: 150px; border: 1px solid;" >
-							<c:if test="${accom.ro_sub=='h'}">
-								<span>호텔성급 : ${accom.acc_grade}</span>
-								<br>
-							</c:if>
-							<span>
-							<input type="hidden" name="se_num" value="${accom.se_num}" id="se_num">
-							${accom.se_num}r
-							번호 : ${accom.acc_num}</span><br> <span>이름 :
-								${accom.acc_name}</span><br> <span>주소 :
-								${accom.acc_address1}</span><br>
-							<c:if test="${accom.ro_sub=='h'}">
-								<a href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
-							</c:if>
-							<c:if test="${accom.ro_sub=='p'}">
-								<a href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
-							</c:if>
 
-						</div>
-						<div class="col-4" style="height: 150px; border: 1px solid;" id="col-3">
 
-							<span>1박요금</span><br> <span>${accom.ro_price}</span><br>
-							<div></div>
+					<c:if test="${count == 0}">
+						<div class="align-center">등록된 게시물이 없습니다.</div>
+					</c:if>
+					<c:forEach var="accom" items="${list}">
+						<div class="row">
+							<div class="col-8" style="height: 150px; border: 1px solid;">
+								<c:if test="${accom.ro_sub=='h'}">
+									<span>호텔성급 : ${accom.acc_grade}</span>
+									<br>
+								</c:if>
+								<span> <input type="hidden" name="se_num"
+									value="${accom.se_num}" id="se_num"> ${accom.se_num}r
+									번호 : ${accom.acc_num}
+								</span><br> <span>이름 : ${accom.acc_name}</span><br> <span>주소
+									: ${accom.acc_address1}</span><br>
+								<c:if test="${accom.ro_sub=='h'}">
+									<a
+										href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
+								</c:if>
+								<c:if test="${accom.ro_sub=='p'}">
+									<a
+										href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
+								</c:if>
+
+							</div>
+							<div class="col-4" style="height: 150px; border: 1px solid;"
+								id="col-3">
+
+								<span>1박요금</span><br> <span>${accom.ro_price}</span><br>
+								<div></div>
+							</div>
 						</div>
-					</div>
-				</c:forEach>
-</div>
-				<!-- 숙소 리스트 끝-->
-			</div>				
+					</c:forEach>
+				</div>
+				<!-- ====================숙소 리스트 끝==================== -->
 			</div>
-
 		</div>
-		</form>
-<!-- Map Dialog -->
-<div id="mapList_dialog">
+
+	</div>
+</form>
+<!-- ====================정은이 폼 끝==================== -->
+
+
+		<!-- Map Dialog 시작 -->
+		<div id="mapList_dialog">
 			<div>
 				<span class="closer">&times;</span>
 			</div>
@@ -337,3 +350,4 @@ $('#se_form').on("submit",function(event){
 				</div>
 			</div>
 		</div>
+		<!-- Map Dialog 끝 -->
