@@ -27,8 +27,10 @@
 	<insert id="insertChatMember" parameterType="kr.spring.chat.domain.ChatMemberCommand">
 		INSERT INTO 
 		chat_member(chat_member_num, chat_all_num, member_email) 
-		VALUES(chat_member_seq.NEXTVAL, #{chat_all_num_member_fk}, #{member_email})
+		VALUES(chat_member_seq.NEXTVAL, #{chat_all_num_member}, #{member_email})
 	</insert>
+	
 	<update id="updateChatAll" parameterType="kr.spring.chat.domain.ChatAllCommand">
+		UPDATE 
 	</update>
 </mapper>

@@ -19,6 +19,7 @@
 	<context:component-scan base-package="kr.spring.admin.controller" />
 	<context:component-scan base-package="kr.spring.reservation.controller"/>
 	<context:component-scan base-package="kr.spring.chat.controller"/>
+	<context:component-scan base-package="kr.spring.mypage.controller"/>
 	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -60,6 +61,7 @@
 				<beans:value>/WEB-INF/tiles-def/adminDetail.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/reservation.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/chat.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/mypage.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ChatMemberCommand {
 	private int chat_member_num; //Primary key, Not null
-	private int chat_all_num_member_fk; //Foreign key, Not null
+	private int chat_all_num_member; //Foreign key, Not null
 	private String member_email; //Foreign key, Not null
 	
 	//String type date
@@ -19,11 +19,11 @@ public class ChatMemberCommand {
 	public void setChat_member_num(int chat_member_num) {
 		this.chat_member_num = chat_member_num;
 	}
-	public int getChat_all_num_member_fk() {
-		return chat_all_num_member_fk;
+	public int getChat_all_num_member() {
+		return chat_all_num_member;
 	}
-	public void setChat_all_num_member_fk(int chat_all_num_member_fk) {
-		this.chat_all_num_member_fk = chat_all_num_member_fk;
+	public void setChat_all_num_member(int chat_all_num_member) {
+		this.chat_all_num_member = chat_all_num_member;
 	}
 	public String getMember_email() {
 		return member_email;
@@ -46,8 +46,8 @@ public class ChatMemberCommand {
 	
 	@Override
 	public String toString() {
-		return "ChatMemberCommand [chat_member_num=" + chat_member_num + ", chat_all_num_member_fk="
-				+ chat_all_num_member_fk + ", member_email=" + member_email + ", chat_member_mod_date="
-				+ chat_member_mod_date + ", chat_member_mod_date_type=" + chat_member_mod_date_type + "]";
+		return "ChatMemberCommand [chat_member_num=" + chat_member_num + ", chat_all_num_member=" + chat_all_num_member
+				+ ", member_email=" + member_email + ", chat_member_mod_date=" + chat_member_mod_date
+				+ ", chat_member_mod_date_type=" + chat_member_mod_date_type + "]";
 	}
 }

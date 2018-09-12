@@ -7,9 +7,9 @@
 	<!-- name : 컨트롤러 리턴값
 	대문페이지는 데이터 작업 없이 뷰 호출을 하기 때문에 servlet-context.xml에서 <view-controller>태그의 view-name값 -->
 										<!-- 실제 실행될 페이지 : layout 페이지에 의해 하단 속성 태그를 통해 header와 footer, menu가 조합된다. -->
-	<definition name="selectChatMemberList" template="/WEB-INF/views/template/layout_chat.jsp">
+	<definition name="selectChatMain" template="/WEB-INF/views/template/layout_chat.jsp">
 		<put-attribute name="title" value="어썸투어 채팅방 서비스"/>
-		<put-attribute name="body" value="/WEB-INF/views/chat/selectChatMemberList.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/chat/selectChatMain.jsp"/>
 	</definition>
 	
 	<definition name="selectChatAllJoin" template="/WEB-INF/views/template/layout_chat.jsp">
@@ -20,5 +20,10 @@
 	<definition name="insertChatFriendAdd" template="/WEB-INF/views/template/layout_chat.jsp">
 		<put-attribute name="title" value="어썸투어 채팅방 서비스(친구 채팅 생성)"/>
 		<put-attribute name="body" value="/WEB-INF/views/chat/insertChatFriendAdd.jsp"/>
+	</definition>
+	
+	<definition name="insertMessageSend" template="/WEB-INF/views/template/layout_chat.jsp">
+		<put-attribute name="title" value="어썸투어 채팅방 서비스(친구 채팅 생성)"/>
+		<put-attribute name="body" value="/WEB-INF/views/chat/insertMessageSend.jsp"/>
 	</definition>
 </tiles-definitions>

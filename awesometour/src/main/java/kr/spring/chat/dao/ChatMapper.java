@@ -16,7 +16,7 @@ public interface ChatMapper {
 	@Select("SELECT * FROM chat_all WHERE chat_all_num=#{chat_all_num}")
 	public List<ChatAllCommand> chatAllSelectList(Map<String, Object> map);
 	
-	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, a.chat_all_num chat_all_num_member_fk, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
+	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, a.chat_all_num chat_all_num_member_fk, b.chat_all_member_list, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
 	public List<ChatAllAndMemberCommand> selectChatMemberList(Map<String, Object> map);
 	
 	@Select("SELECT COUNT(*) FROM chat_member WHERE member_email=#{user_email}")
@@ -43,7 +43,7 @@ public interface ChatMapper {
 	
 	
 	//Chat join
-	@Select("SELECT * FROM  chat_member INNER JOIN chat_all ON chat_all.chat_all_num=chat_member.chat_all_num WHERE member_email=#{user_email} AND chat_member.chat_all_num=#{chat_all_num}")
+	@Select("SELECT * FROM  chat_member INNER JOIN chat_all ON chat_all.chat_all_num=chat_member.chat_all_num WHERE member_email=#{user_email} AND chat_member.chat_all_num=#{chat_all_num} ORDER BY chat_member_num DESC")
 	public ChatAllCommand SelectChatAllJoin(Map<String, Object> map);
 	
 	//Chat overlap
@@ -60,7 +60,7 @@ public interface ChatMapper {
 	@Insert("INSERT INTO chat_all_talk(chat_all_talk_num, chat_all_num, member_email, chat_all_talk_content, chat_all_talk_reg_date) VALUES(chat_all_talk_seq.NEXTVAL, #{chat_all_num}, #{member_email}, #{chat_all_talk_content}, TO_DATE(#{chat_all_talk_reg_date}, 'YYYY-MM-DD HH24:MI:SS'))")
 	public void insertChatAllTalkMessageLog(ChatAllTalkCommand command);
 	
-	@Select("SELECT * FROM chat_all_talk WHERE chat_all_num=#{chat_all_num} ORDER BY chat_all_talk_reg_date ASC")
+	@Select("SELECT * FROM chat_all_talk WHERE chat_all_num=#{chat_all_num} ORDER BY chat_all_talk_num ASC")
 	public List<ChatAllTalkCommand> selectChatAallTalkMessageLog(int chat_all_num);
 	
 	@Update("UPDATE chat_member SET chat_member_mod_date=SYSDATE WHERE chat_all_num=#{chat_all_num} AND member_email=#{user_email}")
