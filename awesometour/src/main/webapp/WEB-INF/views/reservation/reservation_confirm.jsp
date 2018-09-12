@@ -119,7 +119,7 @@ ${rv.ag_grade }점<br>
 		<input type="checkbox" name="rv_request" value="애완동물 데려감">&nbsp;데려간다.<br>
 		<b>침대 사이즈 변경(이용 가능 여부는 여건에 따라 달라질 수 있음)</b><br> 
 		<input type="radio" name="rv_request" value="대형침대">&nbsp;대형 &nbsp;
-		<input type="radio" value="트윈침대" name="rv_request">
+		<input type="radio" value="트윈침대" name="rv_request">&nbsp;트윈 &nbsp;
 	</p>
 </div>
 </div>

@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.spring.admin.domain.AccountCommand;
+import kr.spring.admin.domain.HoldingCommand;
+import kr.spring.admin.service.AdminService;
 import kr.spring.chat.domain.ChatAllCommand;
 import kr.spring.chat.domain.ChatMemberCommand;
 import kr.spring.chat.service.ChatService;
@@ -47,10 +50,12 @@ public class ReservationController {
 	private GroupService groupService;
 	@Resource
 	private ChatService chatService;
+	@Resource
+	private AdminService adminService;
 	@RequestMapping("/reservation/confirm.do")
 	public String confirm(@RequestParam("im_ac_num") int acc_num,@RequestParam("check_in") String check_in,
 						  @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
-						  @RequestParam("ro_room_num") int ro_num,HttpSession session  ) {
+						  @RequestParam("ro_room_num") int ro_num,HttpSession session) {
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("acc_num", acc_num);
 		map.put("ro_num",ro_num);
@@ -76,18 +81,32 @@ public class ReservationController {
 		return "reservationConfirm";
 	}
 	
+	@RequestMapping("/reservation/test.do")
+
+	public String confirm() {
+			
+		return "reservationResult";
+					}
 
 	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.GET)
-	public String payment(@RequestParam("acc_num") int acc_num,@RequestParam("rv_money") int rv_money,Model model,HttpSession session) {
+	public String payment(@RequestParam("acc_num") int acc_num,@RequestParam("rv_money") int rv_money,
+						@RequestParam(value="rv_request", defaultValue="") String rv_request, Model model,HttpSession session) {
 
 		String host_nick = reservationService.selectHostNick(acc_num);
 		PaymentCommand pmCommand = new PaymentCommand();
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<host_nick>> : "+host_nick);
+			log.debug("<<rv_request>> : "+rv_request);
 		}
+		
 		ReservationCommand reservationCommand = (ReservationCommand) session.getAttribute("rv");
 		reservationCommand.setRv_money(rv_money);
+		reservationCommand.setRv_request(rv_request);
+
+		if(log.isDebugEnabled()) {
+			log.debug("<<rv>> : "+(ReservationCommand) session.getAttribute("rv"));
+		}
 		
 		model.addAttribute("pmCommand", pmCommand);
 		model.addAttribute("host_nick", host_nick);
@@ -97,7 +116,7 @@ public class ReservationController {
 	
 	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.POST)
 	public String result(@ModelAttribute("pmCommand") PaymentCommand paymentCommand,
-						HttpSession session) {
+						HttpSession session,Model model) {
 	
 		String email = (String) session.getAttribute("user_email");
 		ReservationCommand reservationCommand = (ReservationCommand) session.getAttribute("rv");
@@ -113,6 +132,10 @@ public class ReservationController {
 
 		}
 		
+		if(paymentCommand.getPm_type()=='c') {
+			reservationCommand.setRv_status(1);
+		}
+
 		//예약 처리
 		reservationService.insertReservationSet(map);
 		
@@ -179,10 +202,10 @@ public class ReservationController {
 		//멤버 삽입
 		ChatMemberCommand memberCommand = new ChatMemberCommand();
 		memberCommand.setMember_email(email);
-		memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+		memberCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
 		Map<String,Object> m_map = new HashMap<String, Object>();
 		m_map.put("member_email", email);
-		m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
+		m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
 		
 		if(reservationService.selectGroupMemberCount(m_map)==0)		
 		chatService.insertChatMember(memberCommand);
@@ -202,7 +225,26 @@ public class ReservationController {
 	      messageHelper.setFrom(setfrom); 
 	      messageHelper.setTo(paymentCommand.getPm_email());
 	      messageHelper.setSubject("Awesome Tour 예약완료 되었습니다."); 
-	      messageHelper.setText("예약 번호 및 기타 정보");  
+	      String appandEmail ="<h1>AWESOME TOUR</h1>"; 
+	      appandEmail +="<h2>예약 정보</h2>";
+	      appandEmail +="-------------------------------------------------<br>";
+
+	      appandEmail +="예약 숙소 : "+reservationCommand.getAcc_name()+"<br>";
+	      appandEmail +="예약 일시 : "+reservationCommand.getRv_startdate()+"~"+reservationCommand.getRv_enddate()+"<br>";
+	      appandEmail +="예약 이메일 : "+email+"<br>";
+	      appandEmail +="<h2>결제 정보</h2>";
+	      appandEmail +="결제 수단 : ";
+	      if(paymentCommand.getPm_type()==0){
+	    	  appandEmail +="신용카드<br>";
+	      }else {
+	    	  appandEmail +="무통장 입금<br>";
+
+	      }
+	      appandEmail +="결제 금액 : "+reservationCommand.getRv_money()+"<br>";
+	      appandEmail +="-------------------------------------------------<br>";
+	      appandEmail +="이상 예약이 완료되었음을 알려드립니다.";
+	      messageHelper.setText(appandEmail,true);  
+	     
 	      
 	      mailSender.send(message);
 		} catch (MessagingException e) {
@@ -211,24 +253,39 @@ public class ReservationController {
 
 		}
 		//----------------------------------------------
+		if(paymentCommand.getPm_type()=='b') {
+		HoldingCommand hold = new HoldingCommand();
+		hold.setAcc_num(reservationCommand.getAcc_num());
+		hold.setAt_money(reservationCommand.getRv_money());
+		hold.setHd_account(paymentCommand.getPm_deposit_ac());
+		hold.setHd_deposit(0);
+		adminService.insertHolding(hold);
+		AccountCommand act = new AccountCommand();
+		act.setAt_pin(paymentCommand.getPm_deposit_ac());
+		act.setAt_name("입금자 입금");
+		act.setAt_money(reservationCommand.getRv_money());
+		act.setAt_depositor(paymentCommand.getPm_depositor());
+		adminService.insertAccount(act);
+
+
+		}else {
+			HoldingCommand hold = new HoldingCommand();
+			hold.setAcc_num(reservationCommand.getAcc_num());
+			hold.setAt_money(reservationCommand.getRv_money());
+			hold.setHd_account(paymentCommand.getPm_deposit_ac());
+			hold.setHd_deposit(1);
+			adminService.insertHolding(hold);
+
+		}
+		
+		
+		
+		model.addAttribute("rv",session.getAttribute("rv"));
+		session.removeAttribute("rv");
+		session.removeAttribute("count");
 
 		
 		return "reservationResult";
 	}
-	
-	/*//이미지 출력
-	@RequestMapping("/reservation/imageView.do")
-	public ModelAndView download(@RequestParam("g_num") int g_num) {
-		
-		GroupCommand group = reservationService.selectGroupDetail(g_num);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("imageView");
-		mav.addObject("imageFile",group.getG_image());
-		mav.addObject("filename",group.getG_imageName());
 
-		return mav;
-	}*/
-	
 }

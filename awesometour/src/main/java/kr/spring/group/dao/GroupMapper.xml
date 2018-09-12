@@ -59,9 +59,12 @@
 	
 	
 		<select id="selecRecommendAccom" parameterType="String" resultType="java.util.HashMap">
+		
 		SELECT * FROM 
 		(SELECT a.*, rownum rnum FROM
-		(select count(rv_num) count, a.acc_num, a.acc_name,a.acc_address1,a.acc_address2 from  accom a LEFT JOIN (select v.* from reservation v , accom m WHERE v.acc_num = m.acc_num AND m.acc_address1 LIKE '%' || #{loc} || '%') r  on r.acc_num = a.acc_num GROUP BY a.acc_num ,  a.acc_name,a.acc_address1,a.acc_address2  ORDER BY count(rv_num) DESC)a)
+		(select count(rv_num) count, a.acc_num,a.acc_grade, a.acc_name,a.acc_address1,a.acc_address2 ,o.ro_num
+from  accom a LEFT JOIN (select v.* from reservation v , accom m WHERE v.acc_num = m.acc_num AND m.acc_address1 LIKE '%' || #{loc} || '%') r  on r.acc_num = a.acc_num join (SELECT min(ro_room_num) ro_num , ro_acc_num FROM accom_room GROUP by ro_acc_num) o on o.ro_acc_num = a.acc_num
+GROUP BY a.acc_num ,a.acc_grade, a.acc_name,a.acc_address1,a.acc_address2,o.ro_num  ORDER BY count(rv_num) DESC)a)
 	    		<![CDATA[ WHERE rnum >=1 AND rnum <= 5	]]>
 		</select>
 

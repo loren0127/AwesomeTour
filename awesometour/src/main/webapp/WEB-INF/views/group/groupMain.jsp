@@ -115,10 +115,25 @@ $( "#groupAdd" ).button().on( "click", function() {
 	map: map
 	});
 
+	$('#upload').change(function(){
+		if(this.files && this.files[0]) {
+	         var reader = new FileReader();
+	         reader.onload = function (e) {
+	              $('#LoadImg').attr('src', e.target.result);
+	         }
+	         reader.readAsDataURL(this.files[0]);
+	    }
+	});
   });
+  
+
 
 
 })
+
+
+
+
 </script>
 <div class="container section-sepa1" style="padding-Top:100px;padding-bottom: 25px;">
 
@@ -240,24 +255,31 @@ $( "#groupAdd" ).button().on( "click", function() {
       <!-------------------------- 탭 2-------------------- -->
   
   <div id="tabs-2">
-      <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-      <label for="g_address1">모임 위치</label>
+      <label for="g_address1">모임 위치</label>  
+  	<div  style="height:400px;">
+      
+      <div id="map" style="width:500px;height:200px;margin-top:10px;display:none">지도 표시</div><br>
       <form:input  path ="g_address1" id="g_address1" class="text ui-widget-content ui-corner-all" style="width:80%; display:inline" />
 	  <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="display:inline"><br>
       <form:input  path ="g_address2" id="g_address2" class="text ui-widget-content ui-corner-all" placeholder="나머지 주소 입력"/><br>
      	
-     <a href="#" class="btn" id="move-3">다음</a>
+     <a href="#" class="button button-primary" id="move-3">다음</a>
+      </div>
    
   </div> 
   
       <!-------------------------- 탭 3-------------------- -->
   <div id="tabs-3">
+    	<div  style="height:400px;">
+  
   	  <label for="g_close_date">마감일시</label>
-       <form:input type="date"  path="g_close_date" id="g_close_date" class="text ui-widget-content ui-corner-all"/>
-      미입력시 기본 1달로 생성 됩니다<br><br>
-      
+       <form:input placeholder="종료일"  type="text" onfocus="(this.type='date')"  path="g_close_date" id="g_close_date" class="text ui-widget-content ui-corner-all"/>
+       
+      <br>
        <label for="upload">사진 등록</label>
-        <form:input type="file" name="upload" path="upload"/><br>
+		<img id="LoadImg">  
+
+        <form:input type="file" name="upload" path="upload" id="upload"/><br>
        <label for="g_close_date">취미(최대 3개까지 가능)
        </label>
 
@@ -269,17 +291,22 @@ $( "#groupAdd" ).button().on( "click", function() {
      	 <form:checkbox path="g_hobby" value="취미 4"  onClick="count_ck(this);" style="display:inline"/>취미 1
 		<form:checkbox path="g_hobby" value="취미 5"  onClick="count_ck(this);" style="display:inline"/>취미 2
 		<form:checkbox path="g_hobby" value="취미 6"  onClick="count_ck(this);" style="display:inline"/>취미 3 
+   <br>
+       <form:checkbox path="g_hobby" value="취미 4"  onClick="count_ck(this);" style="display:inline"/>취미 1
+		<form:checkbox path="g_hobby" value="취미 5"  onClick="count_ck(this);" style="display:inline"/>취미 2
+		<form:checkbox path="g_hobby" value="취미 6"  onClick="count_ck(this);" style="display:inline"/>취미 3 
+      </div>  
+      
+           <a href="#" class="button button-primary" id="move-4">다음</a>
       
   </div>
   <!-------------------------- 탭 3-------------------- -->
   <div id="tabs-4">
-  	 <label for="g_close_date">초대 하기</label>
-  	  <a href="#">+</a> 
-	
-  </div>
-
-
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+    	<div  style="height:400px;">
+    	 <label for="g_close_date">초대 하기</label>
+  	  	<a href="#">+</a> 
+	</div>
+  </div>      <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
  
   </form:form> 

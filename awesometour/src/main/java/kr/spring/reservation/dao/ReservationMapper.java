@@ -27,6 +27,4 @@ public interface ReservationMapper {
 	public ReservationCommand selectRerservationAcc(Map<String,Integer> map);
 	@Select("SELECT count(*) FROM  chat_member WHERE chat_all_num = #{chat_all_num} and member_email = #{member_email} ")
 	public int selectGroupMemberCount(Map<String,Object> map);
-
-
 }

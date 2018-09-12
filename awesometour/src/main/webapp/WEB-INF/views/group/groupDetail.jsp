@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <style>
 	a:link { color: black; text-decoration: none;}
  	a:visited { color: black; text-decoration: none;}
@@ -52,21 +54,23 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 
         var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
 
-       
         // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$('#g_name').val()+'</div>'
-        });
-        infowindow.open(map, marker);
+        var infowindow = new daum.maps.InfoWindow();
+        infowindow.open(map);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
+
+		var customOverlay = new daum.maps.CustomOverlay({
+			map: map,
+			position: coords,
+		    content: '<div class="arrow_box">'+$('#g_name').val()+'</div>',
+		});
+		
+		// 커스텀 오버레이를 지도에 표시합니다
+		customOverlay.setMap(map);
+        
     } 
 });    
 	
@@ -74,16 +78,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	
 	    var email = sessionStorage.getItem('email');
 	}
-	
-	if(${chat}==0){
-	
-		$("#group_in").show();
-		$("#chat_in").hide();
 
-	}else{
-		$("#group_in").hide();
-		$("#chat_in").show();
-	}
 	var group_name = $('#g_name').val();
 
 
@@ -154,29 +149,32 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 					$(list).each(function(index,item){
 						appendText+='<div class="rounded"  style=" margin:20px; background-color:#e1e1e1; width:300px; padding: 10px;  text-align:center">';
 						appendText+='<h5><a href="../accomDetail/accomDetail_';
-						if(item.acc_grade == null){
+						if(item.acc_grade =="undefined"){
 							appendText+='private';
 						}else{
 							appendText+='hotel';
-						}//@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,
- 					//   @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
-					 //  @RequestParam("search") String search,Model model
+						}
 						appendText+='.do?im_ac_num='+item.ACC_NUM+'&&searchtype=';
-						if(item.ACC_GRADE != 0){
+						if(typeof  item.ACC_GRADE != "undefined"){
 						appendText+='h';							
 						}else{
 						appendText+='p';		
 						}
 						appendText+='&check_in='+today+'&check_out='+today+'&people_count=1&search='+item.ACC_ADDRESS1+'">'+item.ACC_NAME+'</a></h5>';
 						appendText+='<div class="row">';
-						appendText+='<div class="col-5"><img src="../resources/img/mbr-1.jpg" align="center" style="width:100%;" ></div><div class="col-7">';
-
+						appendText+='<div class="col-5"><img src="../accomDetail/imageView';
+						if(typeof  item.ACC_GRADE == "undefined"){
+							appendText+='Private.do?im_ac_num='+item.ACC_NUM+'&kind=im_cover"';							
+						}else{								
+						appendText+='.do?im_ac_num='+item.ACC_NUM+'&ro_room_num='+item.RO_NUM+'&kind=im_cover"';
+						}
+						appendText+='align="center" style="width:100%;" ></div><div class="col-7">';
 						appendText+='<font size="3em ">'+item.ACC_ADDRESS1+item.ACC_ADDRESS2+'</font> <br>';
 						
 						if(item.COUNT>0){
-						appendText+='<font size="2em " color="red">현재<b> '+item.COUNT+'명</b>이 예약중.</font><br></div>';
+						appendText+='<font size="2em " color="red">현재<b> '+item.COUNT+'명</b>이 예약중.</font><br>';
 						}
-						appendText+='</div>';
+						appendText+='</div></div>';
 						appendText+='</div>';
 					 });
 		 				$('#recAcc').append(appendText);
@@ -207,7 +205,8 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	<div class="container" >
 		<div class="row">
 			<div class="col-10">
-			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
+			<font color="gray">
+			<fmt:formatDate pattern="yyyy/MM/dd" value="${group.g_reg_date}" />~${group.g_close_date}</font> 
 	 		<h1 >${group.g_name}</h1>
 	 		<c:forEach var="list" items="${memberList}">
 	 		
@@ -243,8 +242,13 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 			</div>
  		
 	 		<div class="col-2"> 		
+	 		<c:if test="${chat==0 }">
 				<button class="btn" id="group_in" style="margin:30px">그룹 참가</button>
-				<button class="btn" id="chat_in" style="margin:30px" onclick="window.open.()">채팅 참가</button>
+			</c:if>
+			<c:if test="${chat==1 }">
+			
+				<button class="btn" id="chat_in" style="margin:30px" onclick="window.open('${pageContext.request.contextPath}/chat/selectChatMemberList.do?selected=GropChatList', 'chat_page_popup', 'width=1000, height=620');">채팅 참가</button>
+			</c:if>
 				
 			</div>
 		</div>

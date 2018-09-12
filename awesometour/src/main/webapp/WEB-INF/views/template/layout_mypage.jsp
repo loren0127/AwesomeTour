@@ -6,6 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/landing-page.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/body.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/map.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet">
+<!-- JavaScript -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/map.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/map2.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 
 <!-- Font Awesome JS -->
@@ -16,7 +32,10 @@
 		integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
 		crossorigin="anonymous"></script>
 </head>
-
+		<div style="position:fixed;z-index:20000;bottom: 10px;right: 5px;">
+			<a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chat/selectChatMain.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1100, height=620'); return false;"><img alt="icon" src="${pageContext.request.contextPath}/resources/img/chat_icon.png" style="width:70px;"></a>
+		</div>
+		<tiles:insertAttribute name="header"/>
 <div style="padding-top: 100px;"></div>
 <div class="wrapper">
 	<!-- Sidebar  -->
@@ -92,7 +111,7 @@
 		</nav>
 
 		<div class="container">
-			<tiles:insertAttribute name="body" />
+			<%-- <tiles:insertAttribute name="body" /> --%>
 		</div>
 	</div>
 
@@ -108,4 +127,8 @@
 		});
 	</script>
 </div>
+
+<div id="main_footer">
+		<tiles:insertAttribute name="footer"/>
+	</div>
 </html>

@@ -26,7 +26,7 @@
 		 makeHobby();
 	  //다이얼 로그 설정
 	  var dialog = $( "#addDialog" ).dialog({
-		  height:500,
+		  height:700,
 		  position: {my: "center center", at: "center 10000", of: $("#list")},
 	      autoOpen: false,
 	      width: "auto",
@@ -104,7 +104,9 @@
 	     $("#move-3").click(function(){
 			$( "#tabs" ).tabs({ active: 2 });
 	     })
-
+	     $("#move-4").click(function(){
+			$( "#tabs" ).tabs({ active: 3 });
+	     })
 	     
 	     //날짜
    /*      $('#g_close_date').datepicker({
