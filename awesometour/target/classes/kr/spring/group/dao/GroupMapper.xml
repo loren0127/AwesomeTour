@@ -3,68 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.group.dao.GroupMapper">
-	<select id="selectGroupMemberList" parameterType="Integer" resultType="memberCommand">
-		SELECT d.* FROM chat_member m , chat_all a , member_detail d WHERE m.chat_all_num = a.chat_all_num AND m.member_email = d.member_email AND a.group_num = #{g_num}
-	</select>
 	
-	<select id="selectGroupListFilter" parameterType="map" resultType="groupCommand">
-		SELECT * FROM
-		(SELECT a.*, rownum rnum FROM
-		(SELECT * 
-		FROM group_table
-		<where>
-		<if test='myGroup == "" || myGroup==0 '>
-		g_isSearch = 0
-		</if>
-		<if test="myGroup == 1  ">
-		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})
-		</if>
-		<if test="hobby != '' ">
-		and g_hobby like '%' || #{hobby} || '%'
-		</if>
-		<if test="address != '' ">
-		and g_address1 like '%' || #{address} || '%'
-		</if>
-		<if test="date != '' ">
-		and to_date(g_close_date,'yy/mm/dd') >=  to_date(#{date},'yy/mm/dd')
-		</if>)a)
-				<![CDATA[	 WHERE rnum >= #{start} AND rnum <= #{end} ]]>
-		
-		</where>
-	</select>
-	
-	
-	<select id="selectRowCountFilter" parameterType="map" resultType="Integer">
-		SELECT count(*) 
-		FROM group_table
-		<where>
-		<if test='myGroup == "" || myGroup==0 '>
-		g_isSearch = 0
-		</if>
-		<if test="myGroup == 1  ">
-		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})
-		</if>
-		<if test="hobby != '' ">
-		and g_hobby like '%' || #{hobby} || '%'
-		</if>
-		<if test="address != '' ">
-		and g_address1 like '%' || #{address} || '%'
-		</if>
-		<if test="date != '' ">
-		<![CDATA[and to_date(g_close_date,'yy/mm/dd') >=  to_date(#{date},'yy/mm/dd') ]]>
-		</if>
-		
-		</where>
-	</select>
-	
-	
-		<select id="selecRecommendAccom" parameterType="String" resultType="java.util.HashMap">
-		SELECT * FROM 
-		(SELECT a.*, rownum rnum FROM
-		(select count(rv_num) count, a.acc_num, a.acc_name,a.acc_address1,a.acc_address2 from  accom a LEFT JOIN (select v.* from reservation v , accom m WHERE v.acc_num = m.acc_num AND m.acc_address1 LIKE '%' || #{loc} || '%') r  on r.acc_num = a.acc_num GROUP BY a.acc_num ,  a.acc_name,a.acc_address1,a.acc_address2  ORDER BY count(rv_num) DESC)a)
-	    		<![CDATA[ WHERE rnum >=1 AND rnum <= 5	]]>
-		</select>
-
-
 </mapper>
+	
+
+
+
+
+
 

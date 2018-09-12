@@ -140,10 +140,10 @@ public class GroupAjaxController {
 			//¸â¹ö »ðÀÔ
 			ChatMemberCommand memberCommand = new ChatMemberCommand();
 			memberCommand.setMember_email(user_email);
-			memberCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+			memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
 			Map<String,Object> m_map = new HashMap<String, Object>();
 			m_map.put("member_email", user_email);
-			m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
+			m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
 			
 			if(reservationService.selectGroupMemberCount(m_map)==0)		
 			chatService.insertChatMember(memberCommand);
@@ -254,10 +254,10 @@ public class GroupAjaxController {
 				//¸â¹ö »ðÀÔ
 				ChatMemberCommand memberCommand = new ChatMemberCommand();
 				memberCommand.setMember_email(user_email);
-				memberCommand.setChat_all_num_member(groupService.selectGroupChatnum(g_num));
+				memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(g_num));
 				Map<String,Object> m_map = new HashMap<String, Object>();
 				m_map.put("member_email", user_email);
-				m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
+				m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
 				
 				if(reservationService.selectGroupMemberCount(m_map)==0)		
 					chatService.insertChatMember(memberCommand);
