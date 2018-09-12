@@ -66,10 +66,6 @@ public class MapAjaxController {
 	}
 	
 	//==========상세가 넘어오는 페이지==========//
-	@RequestMapping(value="/accomList/accomList.do", method=RequestMethod.GET)
-	public String callMap() {
-		return "accomList";
-	}
 	
 	//지도 주소->좌표 목록
 	@RequestMapping(value="/accomList/accomList.do", method=RequestMethod.POST)
