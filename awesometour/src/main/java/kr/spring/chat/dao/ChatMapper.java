@@ -16,7 +16,7 @@ public interface ChatMapper {
 	@Select("SELECT * FROM chat_all WHERE chat_all_num=#{chat_all_num}")
 	public List<ChatAllCommand> chatAllSelectList(Map<String, Object> map);
 	
-	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, a.chat_all_num chat_all_num_member_fk, b.chat_all_member_list, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
+	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, b.chat_all_member_list, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
 	public List<ChatAllAndMemberCommand> selectChatMemberList(Map<String, Object> map);
 	
 	@Select("SELECT COUNT(*) FROM chat_member WHERE member_email=#{user_email}")
