@@ -8,15 +8,14 @@ $(document).ready(function(){
 	var locations=[],contents=[],prices=[],styles=[],grades=[];
 	//select태그(id=detailInMap)에서 선택되는 옵션값을 받기 위한 변수 선언
 	var orderby;
-	var im_ac_num;
-	var check_in = $('#date_in1').val();
-	var check_out = $('#date_out').val();
-	var people_count = $('#people_count').val();
-	var search = $('#je_search').val();
-	console.log(check_in);
+	var check_in;//-->정은이 검색 리스트 받을 때는 $(selector).val()값 선언
+	var check_out;
+	var people_count;
+	var search;
 	
 	//지도가 뜨는 걸 한 발 늦도록 하기 위해 함수화
-	function callMap2(orderby){
+	//정은이 데이터가 넘어와야하므로 인자 받기
+	function callMap2(orderby,check_in,check_out,people_count,search){
 		//정렬 기준에 맞춰 지도에서 마커를 다시 띄워야 하기 때문에
 		//이전에 있던 내용물을 비워야 해서 함수 안에서 초기화!!!
 		locations=[];
@@ -37,12 +36,13 @@ $(document).ready(function(){
 			type:'post',
 			url:'accomList.do',
 			dataType:'json',
-			data:{orderby:orderby, im_ac_num:im_ac_num, check_in:check_in, check_out:check_out, people_count:people_count, search:search},//정렬 조건 선택시 HTTP 요청과 함께 서버로 보낼 데이터(옵션값)
+			data:{orderby:orderby, check_in:check_in, check_out:check_out, people_count:people_count, search:search},//정렬 조건 선택시 HTTP 요청과 함께 서버로 보낼 데이터(옵션값)
 			async:false,//코드가 일시 중지(완료 되기를 기다리는 다른 코드)
 			cache:false,
 			timeout:30000,
 			success:function(data){
 				var list = data.list;
+				
 				//반복문을 통해 데이터 출력
 				$(list).each(function(index, item){
 					locations.push(item.acc_address1);
@@ -50,6 +50,9 @@ $(document).ready(function(){
 					prices.push(item.ro_price);
 					styles.push(item.acc_theme);
 					grades.push(item.ag_grade);
+					
+					var serviceSplit = item.se_name.split(',', 2);
+					var service = serviceSplit[0]+' '+serviceSplit[1];
 					
 					//최대,최소값 구하기
 					getPrice();
@@ -64,22 +67,26 @@ $(document).ready(function(){
 					output += '	<div class="2ndRow">';
 					output += '		<div class="2ndRowLeftCol" style="float: left;">';
 					if(item.ag_grade != null){
-						output += '			<div class="starRates" style="color:red;">'+item.ag_grade+'점</div>';
+						output += '			<div class="starRates" style="color:#70A5FA;font-size:15px;font-weight:bold;">'+item.ag_grade+'점</div>';
 					}else if(item.ag_grade == null){
-						output += '			<div class="starRates" style="font-style:italic;">아직 평점이 없네요.</div>';					
+						output += '			<div class="starRates" style="font-style:italic;font-size:15px;">아직 평점이 없네요.</div>';					
 					}
 					output += '			<div class="reviews" style="font-size:12px;">이용후기 <b>'+item.review_count+'</b>건</div>';
-					output += '			<div class="benefits">와이파이 무료 등</div>';
+					output += '			<div class="benefits" style="font-size:15px;font-weight:bold;color:#63C355;">'+service+'</div>';
 					output += '		</div>';
 					output += '		<div class="2ndRowRightCol" style="float: right;">';
 					output += '			<div class="accomPrice" data-price="'+item.ro_price+'" style="font-weight:bold;">'+numberWithCommas(item.ro_price)+'원</div>';
-				if(item.acc_grade == null || item.acc_grade == ''){
+				if(item.ro_sub == 'h'){
 					//커스텀 데이터 속성 사용 : JQuery에서 HTML 태그의 click 기능을 구현할 때 HTML에 있는 특정 값을 가져와서 사용해야 할 경우
 					output += '			<input type="button" data-linknum="'+item.acc_num+'" class="btn btn-warning hotelLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
-				}else{
+				}
+				if(item.ro_sub == 'p'){
 					output += '			<input type="button" data-linknum="'+item.acc_num+'" class="btn btn-warning houseLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;">';
 				}
 					output += '		</div>';
+				if(item.member_auth == 3){
+					output += '		<div class="3rdRow" style="color:#D900ED;font-weight:bold;float:right;padding-top:10px;">슈퍼호스트입니다.</div>';
+				}
 					output += '	</div>';
 					output += '</div>';//.mapsCard-content end
 					output += '</div>';//.mapsCard-container end
@@ -145,7 +152,7 @@ $(document).ready(function(){
 		}
 	}
 	
-	//====================상세(현재는 임시로 모임) 페이지====================//
+	//====================상세 페이지====================//
 	//jQuery UI 다이얼로그
 	$('#mapList_dialog').dialog({
 		width:'100%',
@@ -154,7 +161,7 @@ $(document).ready(function(){
 	});
 	$('#opener2').on('click', function() {
 		$('#mapList_dialog').dialog('open');
-		callMap2();
+		callMap2(orderby,check_in,check_out,people_count,search);
 		$('.ui-dialog-titlebar').hide();
 		$('.ui-dialog').css('zIndex','10000');
 	});
@@ -286,7 +293,7 @@ $(document).ready(function(){
 			$('#mapList').empty();
 			$('#perNightPriceAbove').empty();
 			$('#perNightPriceBelow').empty();
-			callMap2(orderby);
+			callMap2(orderby,check_in,check_out,people_count,search);
 		}
 	}).selectmenu('menuWidget').addClass('overflow');
 		
@@ -339,44 +346,39 @@ $(document).ready(function(){
 		$('.arrow_box').removeClass('changed');
 	});
 	
-	//말풍선에 마우스 오버시 해당 컨테이너 자동스크롤 위한 변수 선언
-	var step = 150;
-	var scrolling = false;
-	
 	//말풍선에 마우스 올리면 반응
 	$(document).on('mouseenter', '.arrow_box', function(){
 		var target = $(this).attr('data-address');
 		
-		scrolling = true;
-	    scrollContent('up');//함수 호출
 		$('.mapsCard-container').each(function(index,item){
 			var check = $(this).attr('data-address1');
-			//console.log(target + ',' + check);
+			//스크롤 탑은 무조건 0에서 시작
+			//인덱스 * 태그 높이 --> 1 * 162, 2* 162...반복
+			var offsetTop = 0+(index*162);
+			var scmove = $(this).offset().top;//실제 태그 top좌표
+			
 			if(target == check){
 				$(this).addClass('on');
-				$(this).animate({
-					scrollTop: '-=' + step + 'px'
-				});
+				$('#output').animate({scrollTop:offsetTop}, 600);//두번째 속성은 duration(number), easing(String) 등
 			}
 		});
 	});
 	
 	$(document).on('mouseleave', '.arrow_box', function(){
 		$('.mapsCard-container').removeClass('on');
-		// Cancel scrolling continuously:
-	    scrolling = false;
 	});
 	
-	//스크롤 위치 감지 함수
-	function scrollContent(direction) {
-	    var amount = (direction === 'up' ? '-=1px' : '+=1px');
-	    $('.mapsCard-container').animate({
-	        scrollTop: amount
-	    }, 1, function() {
-	        if (scrolling) {
-	            // If we want to keep scrolling, call the scrollContent function again:
-	            scrollContent(direction);
-	        }
-	    });
-	}
+	//====================재검색 버튼 클릭시====================//
+	$(document).on('click', '#research', function(event){
+		event.preventDefault();
+		$('#output').empty();
+		$('#mapList').empty();
+		$('#perNightPriceAbove').empty();
+		$('#perNightPriceBelow').empty();
+		check_in = $('#datepicker1').val();
+		check_out = $('#datepicker2').val();
+		people_count = $('#headcount').val();
+		alert(check_in+','+check_out+','+people_count);
+		callMap2(orderby,check_in,check_out,people_count,search);
+	});
 });

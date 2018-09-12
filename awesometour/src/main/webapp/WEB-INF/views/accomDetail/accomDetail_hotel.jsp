@@ -326,7 +326,7 @@
 		</div>
 		<div id="detailMap" class="section-top-border">
 			<h3>지도</h3>
-	
+			<div id="detailMap2" style="width: 100%; height: 300px;"></div>
 		</div>
 	</div>
 </div>

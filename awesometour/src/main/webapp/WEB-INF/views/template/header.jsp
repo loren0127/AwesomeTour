@@ -43,10 +43,10 @@
 	<div id="mapSearch_dialog">
 		<div>
 			<form class="form-inline" style="float:left;" action="" method="get">
-				<div class="form-group mb-2"><i class="fa fa-search" style="font-size:20px"></i></div>
 				<div class="form-group mx-sm-3 mb-2">
-					<label for="searchyouwant" class="sr-only">search</label>
-					<input type="search" class="form-control" name="searchyouwant" id="searchyouwant" placeholder="모임 이름 혹은 주소로 검색하기">
+					<div class="form-group mb-2"><i class="fa fa-search"></i></div>
+					<input type="text" class="form-control popper" id="searchyouwant" placeholder="숙소명/지역구/숙소종류로 검색" style="width:300px;padding-left:40px;">
+					<div class="form-group mb-2"><i class="fa fa-close"></i></div>
 				</div>
 				<input type="submit" value="검색" id="map_search" class="btn btn-warning mb-2">
 			</form>

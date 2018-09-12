@@ -261,6 +261,7 @@
 		<br>
 		<div class="container" style="min-height:300px;" id="detailMap">
 			<h3>지도</h3>
+			<div id="detailMap2" style="width: 100%; height: 300px;"></div>
 		</div>
 </div>
 </div>

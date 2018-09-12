@@ -114,39 +114,6 @@
     border: 1px solid lightgray;
 }
 
-/* .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 5px;
-    background: #D900ED;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 20px;
-    border: 1px solid #D900ED;
-    background: #ffffff;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 10px;
-    height: 20px;
-    border: 1px solid #D900ED;
-    background: #ffffff;
-    cursor: pointer;
-} */
-
 /*dateFilter*/
 #perNight1, #perNight2{
 	text-align:center;
@@ -250,18 +217,11 @@
     border-color: #ffc107;
 }
 
-/*선택조건 표시박스*/
-/* #selectedInMap{
-	padding: 5px 10px;
-    margin-right: 27px;
-    border: 1px solid lightgray;
-} */
-
 /*정렬기준 선택박스*/
 #detailInMap-button{
 	width: 345px;
 }
 
 .overflow {
-	height: 220px;
+	height: 300px;
 }

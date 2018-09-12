@@ -276,7 +276,10 @@ $('#se_form').on("submit",function(event){
 <!-- ====================정은이 폼 끝==================== -->
 
 
-		<!-- Map Dialog 시작 -->
+<!-- Map Dialog 시작 -->
+<div class="section-sepa1" style="max-height: 1000px;">
+	<div class="container">
+		<button id="opener2" style="margin-top:100px;margin-bottom:800px;">지도보기</button>
 		<div id="mapList_dialog">
 			<div>
 				<span class="closer">&times;</span>
@@ -329,18 +332,12 @@ $('#se_form').on("submit",function(event){
 									<option value="recommend">오썸투어 추천으로 볼래요!</option>
 									<option value="rating">투숙객 평점이 좋은 곳은?</option>
 									<option value="minimum">최저가부터 확인하실래요?</option>
-									<optgroup label="호텔 성급을 직접 선택!" id="hotelGrade">
-										<option value="5성">★★★★★</option>
-										<option value="4성">★★★★</option>
-										<option value="3성">★★★</option>
-									</optgroup>
+									<option value="hotelGrade">호텔 4성급 이상만 볼래요!</option>
 									<optgroup label="숙소 테마별로 확인!" id="accomTheme">
-										<option value="quiet">조용한</option>
-										<option value="relax">편안한</option>
+										<option value="relax">조용하고 편안</option>
 										<option value="luxury">럭셔리</option>
 										<option value="business">비지니스</option>
 										<option value="party">파티</option>
-										<option value="romantic">로맨틱</option>
 									</optgroup>
 								</select>
 							</fieldset>	
@@ -350,4 +347,6 @@ $('#se_form').on("submit",function(event){
 				</div>
 			</div>
 		</div>
-		<!-- Map Dialog 끝 -->
+	</div>
+</div>		
+<!-- Map Dialog 끝 -->
