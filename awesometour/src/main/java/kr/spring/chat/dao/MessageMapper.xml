@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="kr.spring.chat.dao.MessageMapper">
+
+	<!-- Message list -->
+	<select id="selectMessageList" parameterType="map" resultType="messageCommand">
+		SELECT message_num, message_title, message_receiver, message_sender, message_content, TO_CHAR(message_reg_date,'YYYY-MM-DD') message_reg_date, message_receive_status, message_send_status 
+		FROM (SELECT a.*, rownum rnum 
+		FROM (SELECT *
+		FROM message WHERE message_receiver=#{user_email} OR message_sender=#{user_email} ORDER BY message_num DESC)a)
+		<where>
+			<if test="type=='receive'">
+				<![CDATA[
+	 			rnum>=#{start} AND rnum<=#{end} AND message_receiver=#{user_email} AND message_receive_status=1
+	 			]]>
+			</if>
+			<if test="type=='send'">
+				<![CDATA[
+	 			rnum>=#{start} AND rnum<=#{end} AND message_sender=#{user_email} AND message_send_status=1
+	 			]]>
+			</if>
+ 		</where>
+	</select>
+	
+	
+	<!-- message row count -->
+	<select id="selectMessageRowCount" parameterType="map" resultType="integer">
+		SELECT
+		count(*)
+		FROM message
+		<where>
+			<if test="type == 'receive'">
+				message_receiver=#{user_email} AND message_receive_status=1
+			</if>
+			<if test="type == 'send'">
+				message_sender=#{user_email} AND message_send_status=1
+			</if>
+		</where>
+	</select>
+</mapper>
+
+
+
+
+
+
+

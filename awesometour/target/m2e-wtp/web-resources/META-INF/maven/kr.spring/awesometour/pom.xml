@@ -218,6 +218,18 @@
 			<version>1.4.3</version>
 		</dependency>
 		<!-- email 인증 라이브러리 -->
+		<!-- Web socket library -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- Web socket library -->
 	    <!-- 라이브러리 추가 -->
 	
 		<!-- Test -->

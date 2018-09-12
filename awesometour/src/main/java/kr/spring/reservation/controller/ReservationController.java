@@ -162,7 +162,6 @@ public class ReservationController {
 			log.debug("<<groupCommand>> : "+groupCommand);
 		}
 		groupService.insertGroup(groupCommand);
-		
 	
 		ChatAllCommand command = new ChatAllCommand();
 		command.setChat_all_title(g_name);
@@ -174,15 +173,13 @@ public class ReservationController {
 		chatService.insertChatAllGroup(command);
 		}
 		
-
-		
 		//¸â¹ö »ðÀÔ
 		ChatMemberCommand memberCommand = new ChatMemberCommand();
 		memberCommand.setMember_email(email);
-		memberCommand.setChat_all_num_member_fk(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+		memberCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
 		Map<String,Object> m_map = new HashMap<String, Object>();
 		m_map.put("member_email", email);
-		m_map.put("chat_all_num", memberCommand.getChat_all_num_member_fk());
+		m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
 		
 		if(reservationService.selectGroupMemberCount(m_map)==0)		
 		chatService.insertChatMember(memberCommand);

@@ -93,7 +93,7 @@ public class ChatController {
 		PagingUtil receivePage = new PagingUtil(receiveCurrentPage, receiveMessageCount, rowCount, pageCount, "selectChatMain.do", "&selected=receiveMessageList");
 		selectMap.put("start", receivePage.getStartCount());
 		selectMap.put("end", receivePage.getEndCount());
-
+		
 		List<MessageCommand> receiveMessageList = null;
 		if(receiveMessageCount > 0) {
 			receiveMessageList = messageService.selectMessageList(selectMap);
@@ -111,12 +111,12 @@ public class ChatController {
 		mav.addObject("sendMessageCount", sendMessageCount);
 		mav.addObject("sendMessagePagingHtml", sendPage.getPagingHtml());
 		mav.addObject("sendMessageList", sendMessageList);
-
+		
 		//My receive message list
 		mav.addObject("receiveMessageCount", receiveMessageCount);
 		mav.addObject("receivePagingHtml", receivePage.getPagingHtml());
 		mav.addObject("receiveMessageList", receiveMessageList);
-
+		
 		mav.addObject("listCount", listCount);
 		mav.addObject("selectChatMemberList", selectChatMemberList);
 		mav.addObject("selected", "mainChat");
@@ -231,8 +231,7 @@ public class ChatController {
 	
 	@RequestMapping(value="/chat/insertMessageSend.do", method=RequestMethod.GET)
 	public ModelAndView insertMessageSendForm(HttpSession session, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage) {
-		ModelAndView mav = chatModelAndView("insertMessageSend", session, sendCurrentPage, receiveCurrentPage);
-		mav.addObject("selected", "sendMessageList");
+		ModelAndView mav = chatModelAndView("insertMessageSend", session, sendCurrentPage, receiveCurrentPage, "sendMessageList");
 		return mav;
 	}
 	
@@ -245,16 +244,13 @@ public class ChatController {
 		messageService.insertMessageSend(messageCommand);
 		//Message send end
 		
-		ModelAndView mav = chatModelAndView("selectChatMain", session, sendCurrentPage, receiveCurrentPage);
-		mav.addObject("selected", "receiveMessageList");
+		ModelAndView mav = chatModelAndView("selectChatMain", session, sendCurrentPage, receiveCurrentPage, "receiveMessageList");
 		return mav;
 	}
 	
 	@RequestMapping(value="/chat/selectMessageReceive.do", method=RequestMethod.GET)
 	public ModelAndView selectMessageReceive(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage) {
-		
 		ModelAndView mav = chatModelAndView("selectMessageReceive", session, sendCurrentPage, receiveCurrentPage);
-		
 		return mav;
 	}
 }
