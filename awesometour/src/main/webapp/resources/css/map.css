@@ -96,6 +96,12 @@
 }
 /*컨테이너에 마우스 진입 끝*/
 
+@media screen and (max-width: 600px) {
+	#mapList_dialog {
+		width: 25vw;
+	}
+}
+
 /*지도 다이얼로그 상단*/
 .map-header{
 	box-shadow: 0 3px 5px 0 rgba(136, 136, 136, .15);
@@ -121,6 +127,7 @@
 
 /*headcountFilter*/
 .headcountFilter{
+	width: fit-content;
 	padding: 5px 10px;
     border: 1px solid lemonchiffon;
     background: lemonchiffon;
@@ -167,14 +174,28 @@
     position: relative;
 }
 
-@media screen and (max-width: 1280px)
-.mapsCard-content .2ndRow .2ndRowLeftCol {
-    width: 50%;
+@media screen and (max-width: 1280px) {
+	.mapsCard-content, .2ndRow, .2ndRowLeftCol {
+		width: 50vw;
+	}
 }
 
-@media screen and (max-width: 1280px)
-.mapsCard-content .2ndRow .2ndRowRightCol {
-    width: 50%;
+@media screen and (max-width: 1280px) {
+	.mapsCard-content, .2ndRow, .2ndRowRightCol {
+		width: 50vw;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.mapsCard-content, .2ndRow, .2ndRowLeftCol {
+		width: 25vw;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.mapsCard-content, .2ndRow, .2ndRowRightCol {
+		width: 25vw;
+	}
 }
 
 .2ndRowLeftCol {

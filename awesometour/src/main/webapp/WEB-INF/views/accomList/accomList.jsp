@@ -363,70 +363,55 @@
 </form>
 <!-- ====================정은이 폼 끝==================== -->
 
-<!-- Map -->
-<div class="section-sepa1" style="max-height: 1000px;">
-	<div class="container">
+<!-- Map Dialog -->
 		<div id="mapList_dialog">
 			<div>
 				<span class="closer">&times;</span>
 			</div>
 			<div class="map-header">
-				<div class="mapFilter" style="padding-bottom: 10px">
-					<form class="form-inline" action="" method="get">
-						<div class="col-3 col-xs-3 priceFilter"
-							style="padding-right: 10px;">
-							<span style="font-size: 13px;">1박당 요금</span>
-							<div id="slider-range" style="width: 260px; font-size: .7em;"></div>
-							<input type="text" id="perNightPriceAbove" readonly> <label
-								for="perNightPriceAbove"
-								style="display: inline-block; font-size: 13px;">이상&nbsp;&nbsp;&nbsp;</label>
-							<input type="text" id="perNightPriceBelow" readonly> <label
-								for="perNightPriceBelow"
-								style="display: inline-block; font-size: 13px;">이하</label>
+				<div class="mapFilter col-lg-12 col-xs-12" style="padding-bottom:10px">
+					<form class="form-inline" action="accomList.do" method="get">
+						<div class="col-lg-auto col-xs-3 priceFilter" style="padding-right:10px;">
+							<span style="font-size:13px;">1박당 요금</span>
+							<div id="slider-range" style="width:260px;font-size: .7em;"></div>
+								<input type="text" id="perNightPriceAbove" readonly>
+								<label for="perNightPriceAbove" style="display:inline-block;font-size:13px;">이상&nbsp;&nbsp;&nbsp;</label>
+								<input type="text" id="perNightPriceBelow" readonly>
+								<label for="perNightPriceBelow" style="display:inline-block;font-size:13px;">이하</label>
 						</div>
-						<div class="col-auto dateFilter" style="padding-right: 10px;">
-							<label for="datepicker1" style="display: inline-block;"><i
-								class="fa fa-calendar"></i></label> <input type="text"
-								name="datepicker1" id="datepicker1" style="width: 100px;">
-							&nbsp;&nbsp;&nbsp; <label for="datepicker2"
-								style="display: inline-block;"><i class="fa fa-calendar"></i></label>
-							<input type="text" name="datepicker2" id="datepicker2"
-								style="width: 100px;">
+						<div class="col-lg-auto col-xs-auto dateFilter" style="padding-right:10px;">
+							<label for="datepicker1" style="display:inline-block;"><i class="fa fa-calendar"></i></label>
+							<input type="text" name="datepicker1" id="datepicker1" style="width:100px;">
+							&nbsp;&nbsp;&nbsp;
+							<label for="datepicker2" style="display:inline-block;"><i class="fa fa-calendar"></i></label>
+							<input type="text" name="datepicker2" id="datepicker2" style="width:100px;">
 						</div>
-						<div class="col-auto headcountFilter">
-							<label for="headcount" style="display: inline-block;">인원수&nbsp;</label>
-							<input type="button" value="-" id="count_m"> <input
-								type="text" value="1" id="headcount"
-								style="text-align: center; width: 50px;"> <input
-								type="button" value="+" id="count_p">
+						<div class="col-lg-auto col-xs-auto headcountFilter">
+							<label for="headcount" style="display:inline-block;">인원수&nbsp;</label>
+							<input type="button" value="-" id="count_m">
+							<input type="text" value="1" id="headcount" style="text-align:center; width:50px;">
+							<input type="button" value="+" id="count_p">
 						</div>
-						<div class="col-auto">
-							<input type="submit" value="재검색" id="research"
-								class="btn btn-warning"
-								style="font-size: .8em; font-weight: bold;">
+						<div class="col-lg-auto col-xs-auto">
+							<input type="submit" value="재검색" id="research" class="btn btn-warning" style="font-size: .8em;font-weight: bold;">
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="map-body" style="height: 765px;">
-				<div class="map-mapArea" id="mapList"
-					style="width: calc(100% - 450px); height: 765px; float: right;"></div>
+				<div class="map-mapArea" id="mapList" style="width: calc(100% - 450px);height: 765px;float:right;"></div>
 				<div class="map-sidePanel" style="width: 450px;">
-					<div>
-						예약 가능 숙소&nbsp;<span>0</span>개
-					</div>
+					<div>예약 가능 숙소&nbsp;<span>0</span>개</div>
 					<div>
 						<i class="fa fa-calendar-check-o"></i>&nbsp;<span id="perNight3"></span>박
-						(<input type="text" id="perNight1"
-							style="width: 100px; border: none;">-<input type="text"
-							id="perNight2" style="width: 100px; border: none;">)
+						(<input type="text" id="perNight1" style="width:100px;border:none;">-<input type="text" id="perNight2" style="width:100px;border:none;">)
 					</div>
-					<!-- <div id="selectedInMap">선택 조건 표시박스</div> -->
-					<div id="checkedInMap" style="margin-top: 5px;">
+					
+					<div id="checkedInMap" style="margin-top:5px;">
 						<form action="#">
-							<fieldset style="border: none;">
-								<label for="detailInMap" style="display: inline-block;">정렬
-									기준&nbsp;</label> <select name="detailInMap" id="detailInMap">
+							<fieldset style="border:none;">
+								<label for="detailInMap" style="display:inline-block;">정렬 기준&nbsp;</label>
+								<select name="detailInMap" id="detailInMap">
 									<option disabled selected>상세 조건을 직접 선택하세요.</option>
 									<option value="recommend">오썸투어 추천으로 볼래요!</option>
 									<option value="rating">투숙객 평점이 좋은 곳은?</option>
@@ -439,13 +424,10 @@
 										<option value="party">파티</option>
 									</optgroup>
 								</select>
-							</fieldset>
+							</fieldset>	
 						</form>
 					</div>
-					<div id="output"
-						style="padding-bottom: 15px; height: 700px; overflow-y: scroll;"></div>
+					<div id="output" style="padding-bottom:15px;height: 700px; overflow-y: scroll;"></div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>

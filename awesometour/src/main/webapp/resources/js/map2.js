@@ -378,7 +378,7 @@ $(document).ready(function(){
 		check_in = $('#datepicker1').val();
 		check_out = $('#datepicker2').val();
 		people_count = $('#headcount').val();
-		alert(check_in+','+check_out+','+people_count);
+		//alert(check_in+','+check_out+','+people_count);
 		callMap2(orderby,check_in,check_out,people_count,search);
 	});
 });

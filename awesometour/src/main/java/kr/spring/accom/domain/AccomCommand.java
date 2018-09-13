@@ -19,6 +19,9 @@ public class AccomCommand {
 	private String ag_grade;
 	private String member_auth;
 	private int review_count;
+	private String rv_start_date;
+	private String rv_end_date;
+	private String se_name;
 	
 	public int getAcc_num() {
 		return acc_num;
@@ -128,6 +131,24 @@ public class AccomCommand {
 	public void setReview_count(int review_count) {
 		this.review_count = review_count;
 	}
+	public String getRv_start_date() {
+		return rv_start_date;
+	}
+	public void setRv_start_date(String rv_start_date) {
+		this.rv_start_date = rv_start_date;
+	}
+	public String getRv_end_date() {
+		return rv_end_date;
+	}
+	public void setRv_end_date(String rv_end_date) {
+		this.rv_end_date = rv_end_date;
+	}
+	public String getSe_name() {
+		return se_name;
+	}
+	public void setSe_name(String se_name) {
+		this.se_name = se_name;
+	}
 	@Override
 	public String toString() {
 		return "AccomCommand [acc_num=" + acc_num + ", acc_host=" + acc_host + ", acc_name=" + acc_name + ", acc_grade="
@@ -135,6 +156,7 @@ public class AccomCommand {
 				+ ", acc_phone=" + acc_phone + ", acc_zipcode=" + acc_zipcode + ", acc_address1=" + acc_address1
 				+ ", acc_address2=" + acc_address2 + ", acc_lati=" + acc_lati + ", acc_longi=" + acc_longi
 				+ ", ro_price=" + ro_price + ", ro_sub=" + ro_sub + ", ag_grade=" + ag_grade + ", member_auth="
-				+ member_auth + ", review_count=" + review_count + "]";
+				+ member_auth + ", review_count=" + review_count + ", rv_start_date=" + rv_start_date + ", rv_end_date="
+				+ rv_end_date + ", se_name=" + se_name + "]";
 	}
 }
