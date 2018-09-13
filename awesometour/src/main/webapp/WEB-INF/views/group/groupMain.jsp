@@ -146,6 +146,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 
 					<li class="nav-item">
 						<select class="form-control"  name="hobby" id="hobby">
+							<option value="">관심사</option>
 							<option value="야외활등">야외활동</option>
 							<option value="기술">기술</option>
 							<option value="스포츠">스포츠</option>
@@ -199,7 +200,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 				 		 !fn:endsWith(list.g_imageName,'.png') &&
 				 		  !fn:endsWith(list.g_imageName,'.PNG') &&
 				 		  !fn:endsWith(list.g_imageName,'.GIF') }">
-				<img class="rounded" src="../resources/img/mbr-1.jpg" style=" max-width:100%;   " >
+				<img class="rounded groupListImg" src="../resources/img/mbr-1.jpg" style=" max-width:100%;   " >
 		</c:if>
 		</div>
 				<h5 style="margin: 10px;">${list.g_name}</h5>

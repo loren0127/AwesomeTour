@@ -1,23 +1,23 @@
 @charset "UTF-8";
 
 @media screen and (min-width:1440px) {
-  	img .groupListImg{
-    	 height: 210px;
+  	img.groupListImg{
+    	 height: 210px!important;
   		}
 	}
 	@media screen and (min-width:966px) and (max-width:1440px) {
-  	img .groupListImg{
-    	 max-height: 12vw; 
+  	img.groupListImg{
+    	 max-height: 12vw!important;
   		}
 	}
 	@media screen and (min-width:760px) and (max-width:966px) {
-  	img .groupListImg{
-    	 max-height: 15vw; 
+  	img.groupListImg{
+    	 max-height: 15vw!important;
   		}
 	}
 	@media screen and (max-width:760px) {
-  	img .groupListImg{
-    	 max-height: auto;
+  	img.groupListImg{
+    	 max-height: auto!important;
   		}
 	}
 	#group_nav li {
@@ -69,7 +69,7 @@
  	
 
  #pageArea{ /* img 마우스 오버시*/
-      border: gray  solid 1px;
+      border: #aaaaaa solid 1px;
  
 }
 
