@@ -24,8 +24,8 @@
     text-indent: -9999px;
     cursor: pointer;
 }
-.starR1.on{background-position:0 0;}
-.starR2.on{background-position:-15px 0;}
+.starR1.plus{background-position:0 0;}
+.starR2.plus{background-position:-15px 0;}
 
 .star-color{
 	font-size:20px;
@@ -147,18 +147,19 @@
 		<div class="container col-sm-12" style="min-height:300px;">
 			<input type="hidden" name="check_in" value="${check_in}" id="check_in">
 			<input type="hidden" name="check_out" value="${check_out}" id="check_out">
+			<input type="hidden" name="people_count" value="${people_count}" id="people_count">
 			<input type="hidden" name="start_date" value="${privateDetail2.start_date}" id="start_date">
 			<input type="hidden" name="end_date" value="${privateDetail2.end_date}" id="end_date">
 			<h3>예약 가능 여부</h3>
 			<p>*예약 가능 날짜만 참고하세요!</p>
 			<br>
 			<!--  <input type="text" value="" id="datepicker">-->
-			<div class="col-sm-6 col-md-12" id="datepicker" style="float:left;width:30%;"></div>
-			<div class="col-sm-6 col-md-12" id="datepicker2" style="float:left;width:30%;"></div>
+			<div class="col-sm-6 col-md-12" id="datepicker_accomDetail" style="float:left;width:30%;"></div>
+			<div class="col-sm-6 col-md-12" id="datepicker2_accomDetail" style="float:left;width:30%;"></div>
 		</div>
 		<br><br><br>
 		<div style="padding-top:50px;">
-		<input type="button" class="btn-reply button_hover reservation_button" style="width:100px;clear:both;<c:if test="${disableCount == 0}">display:none;</c:if>" value="예약하기">
+		<a href="${pageContext.request.contextPath}/reservation/confirm.do?im_ac_num=${privateDetail.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count=${people_count}&ro_room_num=0" class="btn-reply button_hover reservation_button" style="width:100px;clear:both;<c:if test="${disableCount == 0}">display:none;</c:if>">예약하기</a>
 		</div>
 		<br>
 		<!-- 후기 -->
@@ -167,7 +168,7 @@
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
 					<div class="starRev" style="float:left; padding-left:43%;">
-						<span class="starR1 on">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
+						<span class="starR1 plus">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>
 						<span class="starR1">별4_왼쪽</span> <span class="starR2">별4_오른쪽</span>
@@ -238,6 +239,7 @@
 			<br>
             <div class="container">
                 <div class="row">
+                <c:if test="${!empty privateGrade}">
                 <c:forEach var="list" items="${privateGrade}">
                     <div class="col-lg-3 col-sm-6">
                         <div class="accomodation_item text-center">
@@ -255,6 +257,10 @@
                         </div>
                     </div>
                 </c:forEach> 
+                </c:if>
+                 <c:if test="${empty privateGrade}">
+                	<p>현재 예약가능한 평점이 높은 프라이빗 하우스가 없습니다.</p>
+                </c:if>
                 </div>
             </div>
 		</div>

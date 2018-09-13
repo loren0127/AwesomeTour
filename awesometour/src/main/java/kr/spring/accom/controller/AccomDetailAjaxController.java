@@ -1,8 +1,11 @@
 package kr.spring.accom.controller;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -385,7 +388,7 @@ public class AccomDetailAjaxController {
 		//좋아요 등록
 		@RequestMapping("/accomDetail/likeReview.do")
 		@ResponseBody
-		public Map<String,String> likeReview(@RequestParam("al_re_num") int al_re_num,@RequestParam("al_acc_num") int al_acc_num,@RequestParam("al_email") String al_email,@RequestParam("re_email") String re_email,HttpSession session,Model model){
+		public Map<String,String> likeReview(@RequestParam("al_re_num") int al_re_num,@RequestParam("al_acc_num") int al_acc_num,@RequestParam("al_email") String al_email,@RequestParam("re_email") String re_email,HttpSession session){
 			
 			if(log.isDebugEnabled()) {
 				log.debug("<<al_re_num>> : "+al_re_num);
@@ -445,5 +448,47 @@ public class AccomDetailAjaxController {
 			result.put("endList",endList);
 			
 			return result;
+		}
+		
+		//예약제어
+		@RequestMapping("/accomDetail/checkReservationAccomDetail.do")
+		@ResponseBody
+		public Map<String,String> checkReservationAccomDetail(@RequestParam("check_in") String check_in,@RequestParam("check_out") String check_out){
+
+			if(log.isDebugEnabled()) {
+				log.debug("<<check_in>> : "+check_in);
+				log.debug("<<check_out>> : " + check_out);
+			}
+			
+			Map<String,String> map = new HashMap<String,String>();
+			
+			SimpleDateFormat df= new SimpleDateFormat("yyyy/MM/dd");
+			Date date = new Date();
+
+			String today = df.format(date);
+			
+			Date sysdate = null;
+			Date check_date1 = null;
+			Date check_date2 = null;
+			
+			try {
+				sysdate = df.parse(today);
+				check_date1 = df.parse(check_in);
+				check_date2 = df.parse(check_out);
+			}catch(ParseException e) {
+				e.printStackTrace();
+			}
+			
+			int compare = sysdate.compareTo(check_date1);
+			int compare2 = sysdate.compareTo(check_date2);
+			
+
+			if(compare >= 0 || compare2 >= 0) {
+				map.put("result","unable");
+			}else if(compare < 0 || compare2 < 0) {
+				map.put("result", "able");
+			}
+
+			return map;
 		}
 }

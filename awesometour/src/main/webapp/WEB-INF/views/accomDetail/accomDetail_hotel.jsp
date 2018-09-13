@@ -24,8 +24,8 @@
     text-indent: -9999px;
     cursor: pointer;
 }
-.starR1.on{background-position:0 0;}
-.starR2.on{background-position:-15px 0;}
+.starR1.plus{background-position:0 0;}
+.starR2.plus{background-position:-15px 0;}
 
 .star-color{
 	font-size:20px;
@@ -234,7 +234,7 @@
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
 					<div class="starRev" style="float: left; padding-left:43%;">
-						<span class="starR1 on">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
+						<span class="starR1 plus">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>
 						<span class="starR1">별4_왼쪽</span> <span class="starR2">별4_오른쪽</span>
@@ -304,6 +304,7 @@
 			<br>
             <div class="container">
                 <div class="row">
+                <c:if test="${!empty hotelGrade}">
                 <c:forEach var="list" items="${hotelGrade}">
                     <div class="col-lg-3 col-sm-6">
                         <div class="accomodation_item text-center">
@@ -321,6 +322,10 @@
                         </div>
                     </div>
                 </c:forEach> 
+                </c:if>
+                <c:if test="${empty hotelGrade}">
+                	<p>현재 예약가능한 평점이 높은 호텔이 없습니다.</p>
+                </c:if>
                 </div>
             </div>
 		</div>

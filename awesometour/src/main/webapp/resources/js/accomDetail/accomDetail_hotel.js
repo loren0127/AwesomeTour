@@ -41,11 +41,12 @@ $('document').ready(function(){
 						output += '<div class="country startContent" style="margin-left:55px;"><img src="imageView.do?im_ac_num='+item.acc_num+'&ro_room_num='+item.ro_room_num+'&kind=im_cover" style="width:200px;"></div>';
 						output += '<div class="country" style="padding-left:80px;">'+breakfast+'<br>'+WIFI+'<br>'+item.ro_bed_type+'x'+item.ro_bed_count+'개</div>';
 						output += '<div class="visit" style="padding-left:30px;">'+numberWithCommas(item.ro_price)+'원</div>';
-						output += '<div class="visit" style="padding-left:30px;"><input type="button" value="예약하기" class="btn-reply text-uppercase"></div>';
+						output += '<div class="visit" style="padding-left:30px;"><a href="../reservation/confirm.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&ro_room_num='+item.ro_room_num+'" class="btn-reply text-uppercase reservation_click">예약하기</a></div>';
 						output += '</div>';
 						
 						//문서 객체에 추가
 						$('.tableStandard').append(output);
+						
 					});
 					
 					//paging button 처리
@@ -97,7 +98,7 @@ $('document').ready(function(){
 						output += '<div class="country startContent" style="margin-left:55px;"><img src="imageView.do?im_ac_num='+item.acc_num+'&ro_room_num='+item.ro_room_num+'&kind=im_cover" style="width:200px;"></div>';
 						output += '<div class="country" style="padding-left:80px;">'+breakfast+'<br>'+WIFI+'<br>'+item.ro_bed_type+'x'+item.ro_bed_count+'개</div>';
 						output += '<div class="visit" style="padding-left:30px;">'+numberWithCommas(item.ro_price)+'원</div>';
-						output += '<div class="visit" style="padding-left:30px;"><input type="button" value="예약하기" class="btn-reply text-uppercase"></div>';
+						output += '<div class="visit" style="padding-left:30px;"><a href="../reservation/confirm.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&ro_room_num='+item.ro_room_num+'" class="btn-reply text-uppercase reservation_click">예약하기</a></div>';
 						output += '</div>';
 						
 						//문서 객체에 추가
@@ -153,7 +154,7 @@ $('document').ready(function(){
 						output += '<div class="country startContent" style="margin-left:55px;"><img src="imageView.do?im_ac_num='+item.acc_num+'&ro_room_num='+item.ro_room_num+'&kind=im_cover" style="width:200px;"></div>';
 						output += '<div class="country" style="padding-left:80px;">'+breakfast+'<br>'+WIFI+'<br>'+item.ro_bed_type+'x'+item.ro_bed_count+'개</div>';
 						output += '<div class="visit" style="padding-left:30px;">'+numberWithCommas(item.ro_price)+'원</div>';
-						output += '<div class="visit" style="padding-left:30px;"><input type="button" value="예약하기" class="btn-reply text-uppercase"></div>';
+						output += '<div class="visit" style="padding-left:30px;"><a href="../reservation/confirm.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&ro_room_num='+item.ro_room_num+'" class="btn-reply text-uppercase reservation_click">예약하기</a></div>';
 						output += '</div>';
 						
 						//문서 객체에 추가
@@ -208,6 +209,35 @@ $('document').ready(function(){
 	DeluxRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
 	//스위트룸 리스트
 	SuiteRoomListData(1,$('#im_ac_num').val(),$('#check_in').val(),$('#check_out').val(),$('#people_count').val());
+	
+	$(document).on('click','.reservation_click',function(event){
+		var rev_btn = $(this);
+		if($('#user_email').val() == ''){
+			alert('로그인 후 호텔을 예약할 수 있습니다!');
+			return false;
+		}
+		
+		//예약제어
+		$.ajax({
+			type:'post',
+			url:'checkReservationAccomDetail.do',
+			data:{check_in:$('#check_in').val(),check_out:$('#check_out').val()},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){//a태그 click 이벤트 영역이 아님->위에서 this를 보관해서 변수를 받아서 href에 접근(이 부분에서 새로운 this를 받기 때문!)
+				if(data.result == 'unable'){
+					alert('현재 날짜 이후에만 예약이 가능합니다!');
+				}else{
+					location.href = rev_btn.attr('href');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생!');
+			}
+		});
+		event.preventDefault();
+	});
 	
 	
 	//후기 목록
@@ -638,9 +668,9 @@ $('document').ready(function(){
 	
 	//별점 기능
 	$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  var starLength = $('.on').length;
+		  $(this).parent().children('span').removeClass('plus');
+		  $(this).addClass('plus').prevAll('span').addClass('plus');
+		  var starLength = $('.plus').length;
 		  var ag_grade = 0.5*starLength;
 		  $('.starCount').text(ag_grade+'점');
 		  
@@ -801,5 +831,6 @@ $('document').ready(function(){
 	//초기 데이터(목록) 호출
 	$('.paging-link5').hide();
 	selectData(1,$('#im_ac_num').val());
+	
 	
 });
