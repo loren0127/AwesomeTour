@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.accomList.domain.AccomListCommand;
 import kr.spring.accomList.service.AccomListService;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class AccomListAjaxController {
@@ -26,6 +27,9 @@ public class AccomListAjaxController {
 	
 	@Resource
 	AccomListService accomListService;
+	
+	int rowCount = 5;
+	int pageCount = 0;
 	
 	//편의시설 체크 관련 ajax 
 	@RequestMapping("accomList/accomlistajax.do")
@@ -55,9 +59,9 @@ public class AccomListAjaxController {
 		List<String> checklist = Arrays.asList(check);
 		map.put("checklist", checklist);
 		map.put("hotel_grade", hotel_grade);
-
 		
 		if(log.isDebugEnabled()) {
+			log.debug("<<pageNum>> : " + currentPage);
 			log.debug("<<list>> : " + list);
 			log.debug("<<search>> : " + search);
 			log.debug("<<searchtype>> : " + searchtype);
@@ -71,12 +75,20 @@ public class AccomListAjaxController {
 			log.debug("<<hotel_grade>> : " + hotel_grade);
 		}
 		
-		System.out.println(checklist);
-		list = accomListService.selectAccomTotallist(map);
 		
-
+		
 		//총 글의 갯수 또는 검색된 글의 갯수
 		int count = accomListService.selectAccomTotallistCount(map);
+		if(count%rowCount == 0) {			
+			pageCount = count/rowCount;
+		}else {
+			pageCount = count/rowCount +1; 
+		}
+		
+		PagingUtil page = new PagingUtil(currentPage,count,rowCount,pageCount,null);
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		list = accomListService.selectAccomTotallist(map);
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<count>> : " + count);
@@ -87,6 +99,7 @@ public class AccomListAjaxController {
 		mapJson.put("list", list);
 		mapJson.put("count", count);
 		mapJson.put("map", map);
+		mapJson.put("pageHtml", page.getPagingHtml());
 		
 		return mapJson;
 	}

@@ -3,6 +3,7 @@ package kr.spring.accomList.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.accom.domain.ImageCommand;
 import kr.spring.accomList.domain.AccomListCommand;
 
 public interface AccomListService {
@@ -12,4 +13,5 @@ public interface AccomListService {
 	public String selectAcoomSerivce(int se_num);
 	public List<AccomListCommand> selectAccomTotallist(Map<String, Object> map);
 	public int selectAccomTotallistCount(Map<String,Object> map);
+	public ImageCommand selectImageView(Integer im_ac_num);
 }

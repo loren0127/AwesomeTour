@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import kr.spring.accom.domain.ImageCommand;
 import kr.spring.accomList.dao.AccomListMapper;
 import kr.spring.accomList.domain.AccomListCommand;
 
@@ -46,6 +47,12 @@ public class AccomListServiceImpl implements AccomListService{
 	public int selectAccomTotallistCount(Map<String, Object> map) {
 		
 		return accomListMapper.selectAccomTotallistCount(map);
+	}
+
+	@Override
+	public ImageCommand selectImageView(Integer im_ac_num) {
+		
+		return accomListMapper.selectImageView(im_ac_num);
 	}
 
 

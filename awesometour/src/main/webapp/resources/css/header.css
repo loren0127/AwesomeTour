@@ -35,13 +35,6 @@ navbarResponsive li:hover {
   color: black;
 }
 
-/* Map Dialog*/
-@media screen and (max-width: 600px) {
-	#mapSearch_dialog {
-		width:50%;
-	}
-}
-
 /* Map Close Button */
 .closer {
     float: right;
