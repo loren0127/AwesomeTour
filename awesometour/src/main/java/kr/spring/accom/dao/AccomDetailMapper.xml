@@ -368,6 +368,6 @@
  		and rv_start_date < to_date(#{check_out},'YYYY/MM/DD') 
  		]]>
  		AND acc_num=#{im_ac_num})b ON a.acc_num=b.acc_num) 
- 		WHERE b.acc_num is null
+ 		WHERE b.acc_num is null 
 	</select>
 </mapper>

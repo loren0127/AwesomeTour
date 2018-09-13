@@ -433,9 +433,9 @@ $('document').ready(function(){
 	
 	//별점 기능
 	$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  var starLength = $('.on').length;
+		  $(this).parent().children('span').removeClass('plus');
+		  $(this).addClass('plus').prevAll('span').addClass('plus');
+		  var starLength = $('.plus').length;
 		  var ag_grade = 0.5*starLength;
 		  $('.starCount').text(ag_grade+'점');
 		  
@@ -611,21 +611,19 @@ $('document').ready(function(){
 			disabledate += ',' + data.endList.join(',') + '\'';
 			//console.log(disabledate);
 			
-			$('#datepicker').datepicker({
+			$('#datepicker_accomDetail').datepicker({
 				showMonthAfterYear:true,
 				prevText: '<',
 		        nextText: '>',
 				dateFormat:'yy/mm/dd',
 				dayNamesMin:['일','월','화','수','목','금','토'],
-				changeYear:true,
-				changeMonth:true,
-				monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+				monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				yearSuffix: '년',
 				minDate:new Date($('#start_date').val()),
 				maxDate:new Date($('#end_date').val()),
 				onSelect: function(selected) {
 					console.log(selected);
-					$("#datepicker2").datepicker("option","minDate", selected);//selected가 선택된 날짜
+					$("#datepicker2_accomDetail").datepicker("option","minDate", selected);//selected가 선택된 날짜
 				},
 				beforeShowDay: function(day) {
 		            if(disabledate.indexOf($.datepicker.formatDate('yy/mm/dd', day)) != -1) return [false, "disabledate", "beforeShowDay로 블록"];
@@ -633,21 +631,19 @@ $('document').ready(function(){
 				}
 			}).datepicker("setDate", $('#check_in').val()).datepicker("option","onSelect")($('#check_in').val());
 			
-			$('#datepicker2').datepicker({
+			$('#datepicker2_accomDetail').datepicker({
 				showMonthAfterYear:true,
 				prevText: '<',
 		        nextText: '>',
 				dateFormat:'yy/mm/dd',
 				dayNamesMin:['일','월','화','수','목','금','토'],
-				changeYear:true,
-				changeMonth:true,
-				monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+				monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 				yearSuffix: '년',
 				minDate:new Date($('#check_in').val()),
 				maxDate:new Date($('#end_date').val()),
 				onSelect: function(selected) {
 					console.log(selected);
-					$("#datepicker").datepicker("option","maxDate", selected);//selected가 선택된 날짜
+					$("#datepicker_accomDetail").datepicker("option","maxDate", selected);//selected가 선택된 날짜
 				},
 				beforeShowDay: function(day) {
 		            if(disabledate.indexOf($.datepicker.formatDate('yy/mm/dd', day)) != -1) return [false, "disabledate", "beforeShowDay로 블록"];
@@ -660,5 +656,35 @@ $('document').ready(function(){
 		error:function(){
 			alert('네트워크 오류 발생!');
 		}
+	});
+	
+	//예약시 로그인 조건체크
+	$('.reservation_button').click(function(){
+		var rev_btn = $(this);
+		if($('#user_email').val() == ''){
+			alert('로그인 후 프라이빗 하우스를 예약할 수 있습니다!');
+			return false;//a 태그인 경우 return false이고 button인 경우에는 return
+		}
+		
+		//예약제어
+		$.ajax({
+			type:'post',
+			url:'checkReservationAccomDetail.do',
+			data:{check_in:$('#check_in').val(),check_out:$('#check_out').val()},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(data){//a태그 click 이벤트 영역이 아님->위에서 this를 보관해서 변수를 받아서 href에 접근(이 부분에서 새로운 this를 받기 때문!)
+				if(data.result == 'unable'){
+					alert('현재 날짜 이후에만 예약이 가능합니다!');
+				}else{
+					location.href = rev_btn.attr('href');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생!');
+			}
+		});
+		event.preventDefault();
 	});
 });
