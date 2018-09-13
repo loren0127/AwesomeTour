@@ -1,6 +1,6 @@
 $(document).ready(function() {	
 	$('#pe_pop').hide();
-	var today = $.datepicker.formatDate('yyyy/mm/dd', new Date()); //오늘 날짜 구하기
+	var today = $.datepicker.formatDate('yy/mm/dd', new Date()); //오늘 날짜 구하기
 	$('#date_in').val(today);
 
 	//인원수 클릭시 div 활성화
@@ -34,8 +34,12 @@ $(document).ready(function() {
 		$('#people_count').val(new_peo_num);
 		if(new_peo_num>7){
 			alert('8명이상 검색할수 없습니다.');
-			return false;
-		
+			$('#people_plus').attr('disabled',true); 
+		}
+		if(new_peo_num>0){//1초후 다시 버튼활성화
+			setTimeout(function(){
+				$('#people_minus').removeAttr('disabled');
+			}, 1000);
 		}
 	});
 
@@ -45,11 +49,19 @@ $(document).ready(function() {
 		$('#peo_sum_btn').text(new_peo_minus);
 		$('#people_count').val(new_peo_minus);
 		
-		if(new_peo_minus<0){
+		if(new_peo_minus<2){
 			alert('최소인원은 1명입니다.');
-			return false;
-		
+			$('#people_minus').attr('disabled',true); 
 		}
+		if(new_peo_minus>1){
+			$('#people_minus').attr('disabled',false); 
+		}
+		if(new_peo_minus>1){ //2초후 다시 버튼활성화
+			setTimeout(function(){
+				$('#people_plus').removeAttr('disabled');
+			}, 1000);
+		}
+		
 	});
 	// ------------------------------------------------------------------------	
 	
@@ -100,6 +112,7 @@ $(function(selectedDate) {
 	    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 		dayNamesMin:['일','월','화','수','목','금','토'],//default 영문
 		monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],//default 영문
+		yearSuffix: '년',
 		minDate : minDate,
 		onSelect: function(selected){
 			var maxDate = new Date(selected);
@@ -111,11 +124,12 @@ $(function(selectedDate) {
 	});
 	$('#date_in1').datepicker({
 		showMonthAfterYear:true, //default 월 년
-		dateFormat:'yyyy/mm/dd',
+		dateFormat:'yy/mm/dd',
 		monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 	    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 		dayNamesMin:['일','월','화','수','목','금','토'],//default 영문
 		monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],//default 영문
+		yearSuffix: '년',
 		minDate : minDate,
 		onSelect: function(selected){
 			var maxDate = new Date(selected);
@@ -127,11 +141,12 @@ $(function(selectedDate) {
 	});
 	$('#date_out').datepicker({
 		showMonthAfterYear:true, //default 월 년
-		dateFormat:'yyyy/mm/dd',
+		dateFormat:'yy/mm/dd',
 		monthNames: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 	    monthNamesShort: ['1 월','2 월','3 월','4 월','5 월','6 월','7 월','8 월','9 월','10 월','11 월','12 월'], // 개월 텍스트 설정
 		dayNamesMin:['일','월','화','수','목','금','토'],//default 영문
-		monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12']//default 영문
+		monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],//default 영문
+		yearSuffix: '년'
 	
 	});
 
