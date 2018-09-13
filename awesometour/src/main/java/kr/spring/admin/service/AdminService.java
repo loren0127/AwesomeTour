@@ -2,6 +2,9 @@ package kr.spring.admin.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
+
+import kr.spring.admin.domain.AccountCommand;
 import kr.spring.admin.domain.HoldingCommand;
 
 public interface AdminService {
@@ -20,4 +23,6 @@ public interface AdminService {
 	public void updateHd_date(HoldingCommand holdingCommand);
 	public void deleteComplain(HoldingCommand holdingCommand);
 	public void updateHd_date2();
+	public void insertHolding(HoldingCommand holdingCommand);
+	public void insertAccount(AccountCommand accountCommand);
 }

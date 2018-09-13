@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.spring.admin.dao.AdminMapper;
+import kr.spring.admin.domain.AccountCommand;
 import kr.spring.admin.domain.HoldingCommand;
 
 @Service("adminService")
@@ -88,6 +89,18 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void updateHd_date2() {
 		adminMapper.updateHd_date2();
+	}
+
+	@Override
+	public void insertHolding(HoldingCommand holdingCommand) {
+		// TODO Auto-generated method stub
+		adminMapper.insertHolding(holdingCommand);
+	}
+
+	@Override
+	public void insertAccount(AccountCommand accountCommand) {
+		// TODO Auto-generated method stub
+		adminMapper.insertAccount(accountCommand);
 	}
 
 
