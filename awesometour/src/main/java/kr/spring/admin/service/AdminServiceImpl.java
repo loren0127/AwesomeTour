@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.spring.admin.dao.AdminMapper;
+import kr.spring.admin.domain.AccountCommand;
 import kr.spring.admin.domain.HoldingCommand;
 
 @Service("adminService")
@@ -91,6 +92,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+
 	public List<HoldingCommand> selectGroup_gnum() {
 		return adminMapper.selectGroup_gnum();
 	}
@@ -100,6 +102,17 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.delete_gnum(holdingCommand);
 	}
 
+
+	public void insertHolding(HoldingCommand holdingCommand) {
+		// TODO Auto-generated method stub
+		adminMapper.insertHolding(holdingCommand);
+	}
+
+	@Override
+	public void insertAccount(AccountCommand accountCommand) {
+		// TODO Auto-generated method stub
+		adminMapper.insertAccount(accountCommand);
+	}
 
 
 
