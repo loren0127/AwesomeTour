@@ -35,7 +35,6 @@ public class ReservationCommand {
 	}
 	public void setAcc_host(String acc_host) {
 		this.acc_host = acc_host;
-		this.setHost_email(acc_host);
 	}
 	public int getRv_num() {
 		return rv_num;

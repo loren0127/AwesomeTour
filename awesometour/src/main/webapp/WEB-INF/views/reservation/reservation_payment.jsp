@@ -41,19 +41,22 @@ $(function(){
 
 	$("#pm_type").on('change',function(){
 		
-		var type = $("#type option:selected").val();
+		var type = $("#pm_type option:selected").val();
 		
-		if(type == '신용카드' ){
+		
+		if(type == 'c' ){
 			$("#bankType").hide();
 			$("#cardType").show();
-			
 			$("#pm_cardNum").val("");
 			$("#pm_validity").val("");
 			$("#pm_cvc").val("");
-			
 		}else{
 			$("#bankType").show();
 			$("#cardType").hide();
+			$("#pm_cardNum").val("0");
+			$("#pm_validity").val("0");
+			$("#pm_cvc").val("0");
+
 		}
 
 	})
@@ -63,6 +66,12 @@ $(function(){
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
+	$('#payForm').submit(function(){
+		alert($('#pm_deposit_ac').val());
+		if(!$('#agree').prop("checked")){
+			alert("환불 정책에 동의 해 주십시오.");
+			return false;}
+	});
 	
 })
 
@@ -111,14 +120,14 @@ ${rv.ag_grade }점<br>
 </div>
 
 </c:if>
- <form:form commandName="pmCommand">
+ <form:form commandName="pmCommand" id="payForm">
 <div>
  
 	<h3>결제 수단</h3>
 	<br> 
 	<form:select class="form-control"  path="pm_type" style="width:60%">
-		<form:option value="0">신용카드</form:option>
-		<form:option value="1">무통장입금</form:option>
+		<form:option value="c">신용카드</form:option>
+		<form:option value="b">무통장입금</form:option>
 	</form:select>
 	<br>   
 
@@ -127,22 +136,24 @@ ${rv.ag_grade }점<br>
 <h4><label>이메일</label></h4>
 <form:input type="email" class="form-control"  path="pm_email" placeholder="example@email.com" style="width:60%"/>
 예약 내역이 이메일을 통해 전송됩니다.<br>
-<%-- <div id="cardType">
+ <div id="cardType">
 	<h4><label>카드번호</label></h4>
 
-	<form:input class="form-control"  path="pm_cardNum" name="card"  placeholder="카드번호" style="width:60%"/><br>
-	<form:input class="form-control"  path="pm_validity" name="만료일"  placeholder="만료일" style="width:30%; display:inline" />
-	<form:input class="form-control"  path="pm_cvc" placeholder="CVC" style="width:30%;display:inline" />
-</div> --%>
+	<form:input class="form-control"  type="number" path="pm_cardNum" name="card"  placeholder="카드번호" style="width:60%" value=""/><br>
+	<form:input class="form-control"  path="pm_validity" name="만료일"  placeholder="만료일" value="" style="width:30%; display:inline" />
+	<form:input class="form-control"  path="pm_cvc" placeholder="CVC"  value="" style="width:30%;display:inline" />
+</div>
+
 <div id="bankType">
 	<h4><label>입금계좌 선택</label></h4>
 	<form:select class="form-control"  path="pm_deposit_ac" placehoder="입금계좌 선택"  style="width:60%">
 	    <form:option value="0" disabled="true" selected="selected" >-----선택해주세요</form:option>
-		<form:option value="1">신한 123-123-12312</form:option>
-		<form:option value="2">ㄹㄹ 123-123-12312</form:option>
-	</form:select>		
-	<form:input class="form-control"   path="pm_ac_name"  placeholder="입금주" style="width:60%"/><br>
-	
+		<form:option value="신한 123">신한 123-123-12312</form:option>
+		<form:option value="우리 123">우리 123-123-12312</form:option>
+	</form:select>		 
+ 	 	<form:input class="form-control"   path="pm_depositor"  placeholder="입금주" style="width:60%"/><br>
+ 	
+
 </div>
 <br>
 <br> 
@@ -156,11 +167,11 @@ ${rv.ag_grade }점<br>
 체크인 30일 전까지 예약을 취소하면 전액 환불됩니다. 그 이후 체크인 전에 취소하면 50%가 환불됩니다.<br>
 숙소 이용규칙, 환불 정책, 및 게스트 환불 정책에 동의합니다. 또한, 서비스 수수료를 포함하여 명시된 총 금액을 결제하는 데 동의합니다<br>
 
-<input type="checkbox">위의 환불 정책에 동의 합니다.<br>
+<input type="checkbox" id="agree">위의 환불 정책에 동의 합니다.<br>
 </div>
 <div class="state" style="margin-bottom:30px">
 
-<input type="submit"   class="btn btn-primary" value="예약 요청">
+<input type="submit" class="btn btn-primary" value="예약 요청">
 </div>
 </form:form>
 </div>

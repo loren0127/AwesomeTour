@@ -14,7 +14,7 @@
 			  var hobbyArray = hobby.split(',');
 			  var appendText = ''
 			  for(var i in hobbyArray){
-				  appendText += '<div class="col-4" ><div class="hobby_small rounded" style="height:30px; width:100%; margin: auto; background-color:#dedede"><h7>'+hobbyArray[i]+'</h7></div></div>';
+				  appendText += '<div class="col-4" ><div class="hobby_small d" style=" border: 1px solid #54B7FD; border-radius: 8px; color: #54B7FD; font-weight: 700; font-size:12px;padding: 2px; width:100%; margin: auto;">'+hobbyArray[i]+'</div></div>';
 			  }
 			  
 			  $(this).append(appendText);
@@ -26,7 +26,7 @@
 		 makeHobby();
 	  //다이얼 로그 설정
 	  var dialog = $( "#addDialog" ).dialog({
-		  height:500,
+		  height:700,
 		  position: {my: "center center", at: "center 10000", of: $("#list")},
 	      autoOpen: false,
 	      width: "auto",

@@ -70,10 +70,6 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
     } 
 });    
 	
-	if (window.sessionStorage) {
-	
-	    var email = sessionStorage.getItem('email');
-	}
 	
 	if(${chat}==0){
 	
@@ -129,9 +125,8 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 		  var hobbyArray = hobby.split(',');
 		  var appendText = ''
 		  for(var i in hobbyArray){
-			  appendText += '<div class="col-4"><div class="hobby_small rounded" style="height:30px; width:100%;text-align:center;background-color:white; margin: auto;"><h7>'+hobbyArray[i]+'</h7></div></div>';
-		  }
-		  
+			  appendText += '<div class="col-4" style="padding : 0  50px "><div class="hobby_small rounded" style="    border: 1px solid #54B7FD; border-radius: 8px;color: #54B7FD;height:30px; width:100%;text-align:center;margin: auto;"><h7>'+hobbyArray[i]+'</h7></div></div>';
+		  }		  
 		  $(this).append(appendText);
 		 
 	  });
@@ -147,17 +142,17 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 			cache:false,
 			timeout:30000,
 			success:function(data){  
-				var appendText = "<h5>추천 숙소</h5><br>"; 
+				var appendText = "<h5 style='margin: 30px;'>추천 숙소</h5><br>"; 
 				
 				if(data.result == 'success'){
 					var list = data.accomMap;
 					$(list).each(function(index,item){
-						appendText+='<div class="rounded"  style=" margin:20px; background-color:#e1e1e1; width:300px; padding: 10px;  text-align:center">';
+						appendText+='<div class="rounded"  style=" margin:20px; width:300px; padding: 10px; box-shadow: 2px 2px 2px 2px #efefef; text-align:center">';
 						appendText+='<h5><a href="../accomDetail/accomDetail_';
 						if(item.acc_grade == null){
 							appendText+='private';
 						}else{
-							appendText+='hotel';
+							appendText+='hotel'; 
 						}//@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,
  					//   @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
 					 //  @RequestParam("search") String search,Model model
@@ -169,14 +164,14 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 						}
 						appendText+='&check_in='+today+'&check_out='+today+'&people_count=1&search='+item.ACC_ADDRESS1+'">'+item.ACC_NAME+'</a></h5>';
 						appendText+='<div class="row">';
-						appendText+='<div class="col-5"><img src="../resources/img/mbr-1.jpg" align="center" style="width:100%;" ></div><div class="col-7">';
+						appendText+='<div class="col-5" ><img src="../resources/images/mbr-1.jpg" align="center" style="width:100%; hight:100px" ></div><div class="col-7">';
 
 						appendText+='<font size="3em ">'+item.ACC_ADDRESS1+item.ACC_ADDRESS2+'</font> <br>';
 						
 						if(item.COUNT>0){
-						appendText+='<font size="2em " color="red">현재<b> '+item.COUNT+'명</b>이 예약중.</font><br></div>';
+						appendText+='<font size="2em " color="red">현재<b> '+item.COUNT+'명</b>이 예약중.</font><br>';
 						}
-						appendText+='</div>';
+						appendText+='</div></div>';
 						appendText+='</div>';
 					 });
 		 				$('#recAcc').append(appendText);
@@ -198,7 +193,17 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 
 
 </script>
- 
+ <style>
+ @media ( max-width: 575px ) {
+ #title{text-align:center}
+ #title img{
+ 	margin-left:50px;
+ }
+ #mainImg img{
+ 	max-height:300px!important;
+ }
+}
+ </style>
     
 <!DOCTYPE html>
 <br><br><br><br>
@@ -206,22 +211,22 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 
 	<div class="container" >
 		<div class="row">
-			<div class="col-10">
+			<div class="col-xs-12 col-sm-10" id="title">
 			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
 	 		<h1 >${group.g_name}</h1>
 	 		<c:forEach var="list" items="${memberList}">
 	 		
 	 			<c:if test="${list.member_email == group.member_email}">
+					<div >
 		 			<c:if test="${fn:endsWith(list.member_filename,'.jpg') ||
 								 fn:endsWith(list.member_filename,'.JPG') ||
 								 fn:endsWith(list.member_filename,'.gif') ||
 								 fn:endsWith(list.member_filename,'.GIF') }">
-						<img src="../member/imageView.do?member_email=${list.member_email}" style="width:50px; height:50px " align="left">		
+						<img src="../member/imageView.do?member_email=${list.member_email}" style="margin: 0 10px; width:50px; height:50px " align="left">		
 					</c:if>
 					<c:if test="${empty list.member_filename}">
-						<img class="rounded-circle" src="../resources/img/rome.jpg" style="width:50px; height:50px" align="left">
+						<img class="rounded-circle" src="../resources/images/rome.jpg" style="margin: 0 10px;width:50px; height:50px" align="left">
 					</c:if>
-					<div style="margin-left:70px;">
 					주최자 :  ${list.member_nickname} <font color="gray">${list.member_email}</font> <br>
 					공개여부 : 
 					
@@ -242,26 +247,26 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	 		<input type="hidden" id="private" value="${group.g_isPrivate}">
 			</div>
  		
-	 		<div class="col-2"> 		
-				<button class="btn" id="group_in" style="margin:30px">그룹 참가</button>
-				<button class="btn" id="chat_in" style="margin:30px" onclick="window.open.()">채팅 참가</button>
+	 		<div class=" col-xs-12 col-sm-2 " style="    text-align: center;"> 		
+				<button class="btn" id="group_in" style="margin:30px;    width: 150px;    height: 50px;">그룹 참가</button>
+				<button class="btn" id="chat_in" style="margin:30px;    width: 150px;    height: 50px;" onclick="window.open.()">채팅 참가</button>
 				
 			</div>
 		</div>
 	</div>
 
 	
-<div style="background-color:#f5f6f7;">
+<div>
 	<div class="container" >
 		<div class="row" >
 
 
-	<div class="col-9" style="background-color:#f5f6f7; padding:10px 0 ;"> 
+	<div class="col-xs-12 col-sm-9" style=" padding:10px 0 ;"> 
 
 		<div style="margin:50px; min-height:150px; " >
 			<h4>소개</h4>
-			<hr size="10%" style="width: 4%; float: left;  background-color: black;  margin: 8px 0 0;">  			<br>
-			<div style="text-align:center">
+			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
+			<div style="text-align:center" id="mainImg">
 			<c:if test="${fn:endsWith(group.g_imageName,'.jpg') ||
 					 		 fn:endsWith(group.g_imageName,'.JPG') ||
 					 		 fn:endsWith(group.g_imageName,'.gif') ||
@@ -277,7 +282,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 					 		 !fn:endsWith(group.g_imageName,'.png') &&
 					 		  !fn:endsWith(group.g_imageName,'.PNG') &&
 					 		  !fn:endsWith(group.g_imageName,'.GIF') }">
-					<img class="rounded" src="../resources/img/mbr-1.jpg"   style=" max-width:100%; margin:5px 0 ;  max-height:20vw;" >
+					<img class="rounded" src="../resources/images/mbr-1.jpg"   style=" max-width:100%; margin:5px 0 ;  max-height:20vw;" >
 			</c:if>
 	 		</div>
 	 		<br><span style="margin-left:10px">${group.g_explain}</span><br>
@@ -285,7 +290,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	 
 		<div style="margin:50px; min-height:150px">
 			<h4>위치</h4>
-			<hr size="10%" style="width: 4%; float: left;  background-color: black;  margin: 8px 0 0;">  
+			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
 			<br>
 			
 			<div id="map" style="width:100%; height:300px; max-height:300px; " ></div>
@@ -295,7 +300,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	
 		<div style="margin:50px; min-height:150px">
 			<h4>관심사 </h4>
-			<hr size="10%" style="width: 4%;  height: 4%;float: left;  background-color: black;  margin: 8px 0 0;">  			
+			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
 			<br>
 			<br>
 			<div class="row hobby">
@@ -305,10 +310,10 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	
 		<div style="margin:50px; min-height:150px">
 			<h4> 사용자</h4>
-			<hr size="10%" style="width: 4%; float: left;  background-color: black;  margin: 8px 0 0;">  			<br>
+			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
 			<br><div class="row">
 				<c:forEach var="list" items="${memberList}">
-					<div class="col-3  rounded"  style="text-align:center;padding:10px 5px; background-color:white;  margin: 0 10px">
+					<div class="col-xs-12 col-sm-3  rounded"  style="text-align:center;padding:10px 5px; background-color:white;  margin: 10px 10px">
 					
 							<c:if test="${fn:endsWith(list.member_filename,'.jpg') ||
 									  fn:endsWith(list.member_filename,'.JPG') ||
@@ -321,7 +326,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 							</c:if>
 							<c:if test="${empty list.member_filename}">
 								<div class="align-center">
-									<img class="rounded-circle" src="../resources/img/rome.jpg" style="max-width:150px;">
+									<img class="rounded-circle" src="../resources/images/rome.jpg" style="max-width:150px;">
 								</div>
 							</c:if><br>
 							${list.member_nickname}
@@ -334,9 +339,9 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	</div>
 
 
-	<div class="col-3 rounded"   style="padding:50px; " >
+	<div class="col-sm-3 rounded"   style="padding:50px; " >
 	
-	<div class="rounded sticky-top" id="recAcc"  style="background-color:white; float:left; top: 100px; box-shadow: 2px 2px 2px 2px #efefef;">
+	<div class="rounded sticky-top" id="recAcc"  style="border: 1px solid #dae0e5; float:left; top: 100px; box-shadow: 2px 2px 2px 2px #efefef;">
 	</div>
 	</div>
 

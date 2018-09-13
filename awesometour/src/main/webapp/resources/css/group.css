@@ -1,22 +1,22 @@
 @charset "UTF-8";
 
 @media screen and (min-width:1440px) {
-  	img {
+  	img .groupListImg{
     	 height: 210px;
   		}
 	}
 	@media screen and (min-width:966px) and (max-width:1440px) {
-  	img {
+  	img .groupListImg{
     	 max-height: 12vw; 
   		}
 	}
 	@media screen and (min-width:760px) and (max-width:966px) {
-  	img {
+  	img .groupListImg{
     	 max-height: 15vw; 
   		}
 	}
 	@media screen and (max-width:760px) {
-  	img {
+  	img .groupListImg{
     	 max-height: auto;
   		}
 	}

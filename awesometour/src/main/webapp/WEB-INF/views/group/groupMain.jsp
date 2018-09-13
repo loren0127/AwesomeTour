@@ -127,7 +127,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 </div>
 
 <!-- ----------------------------네비바 --------------------------------------------- -->
- <nav class="navbar navbar-expand-sm justify-content-center" style="background:gray; padding: 10px 0;  line-height:30px; padding-left:50px" >
+ <nav class="navbar navbar-expand-sm justify-content-center" style="background:#c7c7c7; padding: 10px 0;  line-height:30px;" >
    
 				<ul class="nav navbar-nav " id="group_nav">
 			
@@ -137,16 +137,25 @@ $( "#groupAdd" ).button().on( "click", function() {
 					    	<option value="">지역</option>
 					  	  	<option value="서울">서울</option>
 					   		<option value="경기">경기</option>
+					   		<option value="대전">대전</option>
+					   		<option value="광주">광주</option>
+					   		<option value="대구">대구</option>
 					   		<option value="부산">부산</option>
 						</select>
 					</li>
 
 					<li class="nav-item">
 						<select class="form-control"  name="hobby" id="hobby">
-					    	<option value="">취미</option>
-					  	  	<option value="123">123</option>
-					   		<option value="55">55</option>
-					   		<option value="7">7</option>
+							<option value="야외활등">야외활동</option>
+							<option value="기술">기술</option>
+							<option value="스포츠">스포츠</option>
+							<option value="학습">학습</option>
+							<option value="사진촬영">사진촬영</option>
+							<option value="음식">음식</option>
+							<option value="웰빙">웰빙</option>
+							<option value="글쓰기">글쓰기</option>
+							<option value="게임">게임</option>
+					
 						</select>
 					</li>
 				
@@ -174,7 +183,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 	<!-- 시작 -->
 		<div class="col-lg-4 col-md-6 col-sm-12" id="groupPage"  style="text-align:center; padding:20px ">
 			<div class="rounded" onclick="location.href='groupDetail.do?g_num=${list.g_num}'" id="pageArea" style="padding:10px 10px;" >
-		<div class="rounded"  style="height:auto;  max-width:100%;">
+		<div class="rounded groupListImg"  style="height:auto;  max-width:100%;">
 		<c:if test="${fn:endsWith(list.g_imageName,'.jpg') ||
 				 		 fn:endsWith(list.g_imageName,'.JPG') ||
 				 		 fn:endsWith(list.g_imageName,'.gif') ||
@@ -182,7 +191,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 				 		 fn:endsWith(list.g_imageName,'.PNG') ||
 				 		 fn:endsWith(list.g_imageName,'.GIF') }">
 
-				<img  class="rounded" src="../group/imageView.do?g_num=${list.g_num}" style="  max-width:100%; ">
+				<img  class="rounded groupListImg" src="../group/imageView.do?g_num=${list.g_num}" style="  max-width:100%; ">
 		</c:if>
 		<c:if test="${!fn:endsWith(list.g_imageName,'.jpg') &&
 				 		!fn:endsWith(list.g_imageName,'.JPG') &&
@@ -260,16 +269,29 @@ $( "#groupAdd" ).button().on( "click", function() {
         <form:input type="file" name="upload" path="upload"/><br>
        <label for="g_close_date">취미(최대 3개까지 가능)
        </label>
-
-     	<form:checkbox path="g_hobby" value="취미 1"  onClick="count_ck(this);" style="display:inline" />취미 1
-		<form:checkbox path="g_hobby" value="취미 2"  onClick="count_ck(this);"  style="display:inline"/>취미 2
-		<form:checkbox path="g_hobby" value="취미 3"  onClick="count_ck(this);" style="display:inline"/>취미 3 
-      <br>
-   		
-     	 <form:checkbox path="g_hobby" value="취미 4"  onClick="count_ck(this);" style="display:inline"/>취미 1
-		<form:checkbox path="g_hobby" value="취미 5"  onClick="count_ck(this);" style="display:inline"/>취미 2
-		<form:checkbox path="g_hobby" value="취미 6"  onClick="count_ck(this);" style="display:inline"/>취미 3 
-      
+	
+		<div class="row">
+ 
+      <div class="col-4">
+     	 	<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="야외활등"/>야외활동<br>
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="기술"/>기술<br>
+			<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="스포츠"/>스포츠<br>
+      </div>
+			
+	 <div class="col-4">
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="학습"/>학습<br>
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="사진촬영"/>사진촬영<br>
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="음식"/>음식<br>
+			
+	 </div>
+	 
+	<div class="col-4">
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="건강과 웰빙"/>건강과 웰빙<br>
+			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="글쓰기"/>글쓰기<br>
+			<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="게임"/>게임<br>
+     </div>
+     
+		</div>
   </div>
   <!-------------------------- 탭 3-------------------- -->
   <div id="tabs-4">
