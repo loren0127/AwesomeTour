@@ -78,11 +78,10 @@ public interface AdminMapper {
 	public void updateHd_date2();
 	
 	
+	//종료된 그룹
+	@Select("SELECT g_num FROM group_table WHERE g_close_date < sysdate+1")
+	public List<HoldingCommand> selectGroup_gnum();
 	
-	
-	
-	
-	
-	
-	
+	@Delete("DELETE FROM group_table WHERE g_num=#{g_num}")
+	public void delete_gnum(HoldingCommand holdingCommand);
 }

@@ -20,4 +20,6 @@ public interface AdminService {
 	public void updateHd_date(HoldingCommand holdingCommand);
 	public void deleteComplain(HoldingCommand holdingCommand);
 	public void updateHd_date2();
+	public List<HoldingCommand> selectGroup_gnum();
+	public void delete_gnum(HoldingCommand holdingCommand);
 }

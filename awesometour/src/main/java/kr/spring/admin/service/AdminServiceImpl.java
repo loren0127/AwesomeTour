@@ -90,6 +90,17 @@ public class AdminServiceImpl implements AdminService{
 		adminMapper.updateHd_date2();
 	}
 
+	@Override
+	public List<HoldingCommand> selectGroup_gnum() {
+		return adminMapper.selectGroup_gnum();
+	}
+
+	@Override
+	public void delete_gnum(HoldingCommand holdingCommand) {
+		adminMapper.delete_gnum(holdingCommand);
+	}
+
+
 
 
 
