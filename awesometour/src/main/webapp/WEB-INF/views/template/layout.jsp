@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +15,10 @@
 <link href="${pageContext.request.contextPath}/resources/css/body.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/map.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet">
 <!-- JavaScript -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
@@ -31,6 +33,12 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
+	
+	<c:if test="${not empty user_email}">
+		<div style="position:fixed;z-index:20000;bottom: 10px;right: 5px;">
+			<a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chat/selectChatMain.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1100, height=620'); return false;"><img alt="icon" src="${pageContext.request.contextPath}/resources/img/chat_icon.png" style="width:70px;"></a>
+		</div>
+	</c:if>
 	<div id="main_body">
 		<tiles:insertAttribute name="body"/>
 	</div>

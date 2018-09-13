@@ -7,10 +7,10 @@
 <header class="masthead text-white text-center">
 	<div class="container">
 		<div class="row">
-			<div class="col-xl-9 mx-auto">
+			<div class="col-lg-9 col-xs-6 mx-auto">
 				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
 			</div>
-			<div style="margin:0 auto;">
+			<div class="col-lg-10 col-md-9 col-xs-12 mx-auto">
 				<form id="search_form" action="../accomList/accomList.do">
 					<div class="form-row" ><!-- style="width: 1200px; margin-left: 100px;" -->
 						<!-- 변경한 내용임 -->
@@ -68,11 +68,11 @@
 	<h3 class="text-center" style="padding-top: 3rem;">오썸투어는요</h3>
 	<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<div class="col-lg-12 content">
+			<div class="content">
 				<!-- 1st row -->
-				<div class="row">
+				<div class="row" style="margin:0 20px;">
 					<!--first card-->
-					<div class="card-us col-sm-12 col-md-6">
+					<div class="card-us col-xs-3 col-md-6 col-lg-6">
 						<div class="row text-center">
 							<div style="margin-right: 1rem;">
 								<i class="fa-history fa"></i>
@@ -82,7 +82,7 @@
 						<p>하루 24시간 언제나 여러분을 도와드립니다. 전 세계 어디에서나 언제든 오썸투어 지원팀에 연락주세요.</p>
 					</div>
 					<!--second card-->
-					<div class="card-us col-sm-12 col-md-6">
+					<div class="card-us col-xs-3 col-md-6 col-lg-6">
 						<div class="row text-center">
 							<div style="margin-right: 1rem;">
 								<i class="fa-comments fa"></i>
@@ -93,9 +93,9 @@
 					</div>
 				</div>
 				<!-- 2nd row -->
-				<div class="row">
+				<div class="row" style="margin:0 20px;">
 					<!--third card-->
-					<div class="card-us col-sm-12 col-md-6">
+					<div class="card-us col-xs-3 col-md-6 col-lg-6">
 						<div class="row text-center">
 							<div style="margin-right: 1rem;">
 								<i class="fa-krw fa"></i>
@@ -107,7 +107,7 @@
 						고객을 먼저 생각하는 당사의 서비스를 더 자세히 알아보세요.</p>
 					</div>
 					<!--fourth card-->
-					<div class="card-us col-sm-12 col-md-6">
+					<div class="card-us col-xs-3 col-md-6 col-lg-6">
 						<div class="row text-center">
 							<div style="margin-right: 1rem;">
 								<i class="fa-thumbs-up fa"></i>
@@ -128,7 +128,7 @@
 		<h3 class="text-center" style="padding-top: 3rem;">추천 숙소</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>STANDARD</h4>
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>STANDARD</h4>
@@ -164,7 +164,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>STANDARD</h4>
@@ -182,7 +182,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>STANDARD</h4>
@@ -210,7 +210,7 @@
 		<h3 class="text-center" style="padding-top: 3rem;">여행객들의 말말말</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>쪽쪽쪽 쵝오!!!</h4>
@@ -227,7 +227,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>쪽쪽쪽 쵝오!!!</h4>
@@ -244,7 +244,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>쪽쪽쪽 쵝오!!!</h4>
@@ -261,7 +261,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>쪽쪽쪽 쵝오!!!</h4>
@@ -288,7 +288,7 @@
 		<h3 class="text-center" style="padding-top: 3rem;">인기 모임</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 				<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>랄랄라</h4>
@@ -306,7 +306,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>랄랄라</h4>
@@ -324,7 +324,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>랄랄라</h4>
@@ -342,7 +342,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-md-6 col-lg-3">
+			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
 						<h4>랄랄라</h4>

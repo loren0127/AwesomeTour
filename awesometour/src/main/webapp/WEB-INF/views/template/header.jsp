@@ -6,14 +6,12 @@
 	<div class="container">
 		<a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/main/main.do"><i class="fa fa-font" style="font-size:51px;color:#d900ed;"></i><span style="font-size:32px;color:#d900ed;weight:bold;">wesome Tour</span></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
-				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color:rgb(33, 37, 41, .7);">
-          Menu&nbsp;<i class="fa fa-bars"></i>
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #d900ed;font-size: 30px;border: none;">
+          <i class="fa fa-bars"></i>
         </button>
-        <div class="navbar-collapse collapse" id="navbarResponsive">
+        <div class="navbar-collapse collapse" id="navbarResponsive" style="font-color:#222222;font-weight:bold;">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;">지도</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="${pageContext.request.contextPath}/awesomeMenu/group.do">지도보기</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -30,9 +28,7 @@
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li><!-- 테스트 -->
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="${pageContext.request.contextPath}/mypage/mypageForm.do">마이페이지</a></li><!-- 테스트 -->
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="${pageContext.request.contextPath}/chat/selectChatMemberList.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1000, height=620'); return false;">채팅</a></li><!-- Test -->
+						href="${pageContext.request.contextPath}/mypage/mypageMemberDetail.do">마이페이지</a></li><!-- 테스트 -->
 				</c:if>
 				<c:if test="${(!empty user_email) && (user_auth == 4) }">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/admin/adminMainForm.do">관리자 페이지</a></li><!-- 테스트 -->
@@ -46,13 +42,13 @@
 <div class="container">
 	<div id="mapSearch_dialog">
 		<div>
-			<form class="form-inline" style="float:left;">
-				<div class="form-group mb-2"><i class="fa fa-search" style="font-size:20px"></i></div>
+			<form class="form-inline" style="float:left;" action="" method="get">
 				<div class="form-group mx-sm-3 mb-2">
-					<label for="searchyouwant" class="sr-only">search</label>
-					<input type="search" class="form-control" name="searchyouwant" id="searchyouwant" placeholder="모임 이름 혹은 주소로 검색하기">
+					<div class="form-group mb-2"><i class="fa fa-search"></i></div>
+					<input type="text" class="form-control popper" id="searchyouwant" placeholder="숙소명/지역구/숙소종류로 검색" style="width:300px;padding-left:40px;">
+					<div class="form-group mb-2"><i class="fa fa-close"></i></div>
 				</div>
-				<input type="submit" value="검색" class="btn btn-warning mb-2" style="color:white;">
+				<input type="submit" value="검색" id="map_search" class="btn btn-warning mb-2">
 			</form>
 			<span class="closer">&times;</span>
 		</div>

@@ -1,5 +1,21 @@
 @charset "UTF-8";
-/* The Close Button */
+/* navbar Hide */
+#mainNav{
+	transition:transform .35s ease-in-out;
+}
+
+.hidden {
+	transform:translateY(-100%);
+}
+
+/* Map Dialog*/
+@media screen and (max-width: 600px) {
+	#mapSearch_dialog {
+		width:50%;
+	}
+}
+
+/* Map Close Button */
 .closer {
     float: right;
     font-size: 45px;
@@ -12,4 +28,24 @@
     color: #d900ed;
     text-decoration: none;
     opacity: .75;
+}
+
+/* Map Search Form */
+.fa-search{
+	font-size:17px;
+	position:absolute;
+	margin:3px 10px;
+}
+.fa-close{
+	font-size:17px;
+	position:absolute;
+	margin-top:4px;
+	margin-left:-25px;
+	cursor:pointer;
+}
+.fa-close:hover{
+	color:#d900ed;
+}
+.arrow_box a:hover{
+	color:#d900ed;
 }

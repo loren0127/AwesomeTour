@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.container {
+  width: 100%;
+}
+
+/* On screens that are 992px wide or less, go to two columns */
+@media screen and (max-width: 992px) {
+  .container {
+    width: 100%;
+  }
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}
