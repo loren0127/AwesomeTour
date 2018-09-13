@@ -1,11 +1,38 @@
 @charset "UTF-8";
-/* navbar Hide */
-#mainNav{
+/* 내비게이션 */
+#mainNav {
 	transition:transform .35s ease-in-out;
+}
+
+#mainNav .fa-font {
+	font-size:51px;
+	color:#d900ed;
+}
+
+#mainNav span {
+	font-size:32px;
+	color:#d900ed;
+	weight:bold;
+}
+
+#mainNav button {
+	color: #d900ed;
+	font-size: 30px;
+	border: none;
 }
 
 .hidden {
 	transform:translateY(-100%);
+}
+
+#navbarResponsive {
+	font-color:#222222;
+	font-weight:bold;
+}
+
+navbarResponsive li:hover {
+  background-color: #ddd;
+  color: black;
 }
 
 /* Map Dialog*/

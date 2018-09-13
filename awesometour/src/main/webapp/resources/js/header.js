@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var prev = 0;
 	$(window).scroll(function() {
-		//스크롤 내리면 헤더 흐려짐
+		
 		/*if($(this).scrollTop() < 50)
 	        $('#mainNav').css('opacity','1');
 	    else
