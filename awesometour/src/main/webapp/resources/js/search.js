@@ -84,19 +84,6 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 	});
-	
-	//검색시 끝날짜 설정하지않으면 비활성화
-/*	$('#search').click(function(){
-		var search = $('#date_out').val();
-		if(search == ''){
-			alert('시작날짜와 끝날짜를 설정하세요');
-			$('#search').attr('disabled',true); //버튼 비활성화
-		}else{
-			$('#search').attr('disabled',false); //버튼 활성화
-		}
-	});*/
-	
-	//평점 버튼 클릭시 이벤트
 
 	
 });
