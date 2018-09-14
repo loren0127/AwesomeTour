@@ -127,9 +127,6 @@ public class AccomListController {
 			if(kind.equals("im_cover")) {
 				mav.addObject("imageFile", image.getIm_cover());
 				mav.addObject("filename", image.getIm_cover_name());
-			}else if(kind.equals("im_image2")) {
-				mav.addObject("imageFile", image.getIm_image2());
-				mav.addObject("filename", image.getIm_image2_name());
 			}
 			
 			if(log.isDebugEnabled()) {
