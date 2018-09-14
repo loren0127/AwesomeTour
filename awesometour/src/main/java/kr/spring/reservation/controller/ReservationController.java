@@ -36,7 +36,7 @@ import kr.spring.reservation.domain.PaymentCommand;
 import kr.spring.reservation.domain.ReservationCommand;
 import kr.spring.reservation.service.ReservationService;
 
-
+//수정용 주석
 @Controller
 public class ReservationController {
 	

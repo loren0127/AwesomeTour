@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import kr.spring.group.domain.GroupCommand;
 import kr.spring.member.domain.MemberCommand;
 public interface GroupMapper {
-	
+	//수정용 주석
 	@Select("SELECT COUNT(*) FROM group_table WHERE g_isSearch = 0")
 	public int selectRowCount(Map<String,Object> map);
 	public int selectRowCountFilter(Map<String,Object> map);

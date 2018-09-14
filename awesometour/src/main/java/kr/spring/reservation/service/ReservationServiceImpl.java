@@ -14,11 +14,11 @@ import kr.spring.reservation.dao.ReservationMapper;
 import kr.spring.reservation.domain.PaymentCommand;
 import kr.spring.reservation.domain.ReservationCommand;
 
-
+//수정용 주석
 @Service("reservationService")
 public class ReservationServiceImpl implements ReservationService{
-
-	 @Resource
+ 
+	@Resource
 	 private ReservationMapper reservationMapper;
 	
 	@Override
