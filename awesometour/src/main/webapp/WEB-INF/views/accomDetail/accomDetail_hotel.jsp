@@ -47,7 +47,6 @@
 							<div class="carousel-item active">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageView.do?im_ac_num=${hotelDetail.acc_num}&ro_room_num=${hotel.ro_room_num}&kind=im_cover"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 						</c:if>
@@ -55,7 +54,6 @@
 							<div class="carousel-item">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageView.do?im_ac_num=${hotelDetail.acc_num}&ro_room_num=${hotel.ro_room_num}&kind=im_image2"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 						</c:if>
@@ -63,7 +61,6 @@
 							<div class="carousel-item">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageView.do?im_ac_num=${hotelDetail.acc_num}&ro_room_num=${hotel.ro_room_num}&kind=im_image3"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 						</c:if>
@@ -233,7 +230,7 @@
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
-					<div class="starRev" style="float: left; padding-left:43%;">
+					<div class="starRev" style="float: left;">
 						<span class="starR1 plus">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>

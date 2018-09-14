@@ -3600,6 +3600,53 @@ h1, h2, h3, h4, h5, h6 {
   color: #f3c300;
 }
 
+ @media screen and (max-width: 999px){
+     #datepicker2_accomDetail{
+     	float:left;
+        width:100%;
+        padding-top:30px;
+     }
+  }
+  @media screen and (min-width: 1000px){
+     #datepicker2_accomDetail{
+     	float:left;
+        width:30%;
+     }
+  }
+  @media screen and (max-width: 999px){
+     .reservation_link{
+	     padding-top:55%;
+     }
+  }
+  @media screen and (min-width: 1000px){
+     .reservation_link{
+	     padding-top:30px;
+     }
+  }
+  @media screen and (max-width: 999px){
+     .carousel-item img{
+	     width: 100%; 
+	     height:100%;
+     }
+  }
+  @media screen and (min-width: 1000px){
+     .carousel-item img{
+	     width:1200px;
+	     height:500px;
+     }
+  }
+  @media screen and (max-width: 999px){
+     .starRev{
+	     padding-left:30%;
+     }
+  }
+  @media screen and (min-width: 1000px){
+     .starRev{
+	     padding-left:43%;
+     }
+  }
+  
+
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
