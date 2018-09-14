@@ -54,7 +54,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		//Insert chat message log
 		ChatAllTalkCommand chatAllTalkCommand = new ChatAllTalkCommand();
 		chatAllTalkCommand.setMember_email(user_email);
-		chatAllTalkCommand.setChat_all_talk_content(message.getPayload());
+		chatAllTalkCommand.setChat_all_talk_content(StringUtil.useNoHtml(message.getPayload()));
 		chatAllTalkCommand.setChat_all_talk_reg_date(setChat_all_talk_reg_date);
 		
 		String talk_split[] = message.getPayload().split("\\|");

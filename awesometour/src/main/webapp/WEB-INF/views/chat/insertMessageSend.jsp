@@ -7,8 +7,8 @@ function buttonSubmit() {
 }
 
 </script>
-<div class="container">
-	<div class="mesgs" id="mesgs">
+<div class="col-sm-12 col-md-6">
+	<div class="mesgs" id="mesgs" style="width: 100%;">
 		<div class="msg_history" id="chatMessageArea">
 			<div class="form-group">
 				<form:form id="messageSendForm" commandName="messageCommand" action="insertMessageSend.do">
@@ -26,7 +26,7 @@ function buttonSubmit() {
 						<li style="padding-bottom:10px;">
 							<label for="message_sender">받는이</label>
 							<div class="input-group mb-3">
-							<form:input class="form-control form-control-sm" path="message_sender"/>
+								<form:input class="form-control form-control-sm" path="message_sender"/>
 								<div class="input-group-append">
 									<button class="btn btn-success btn-sm" type="submit">확인</button>
 								</div>
@@ -36,11 +36,10 @@ function buttonSubmit() {
 					</ul>
 					<hr>
 					<ul>
-						<li>
-							<label for="">쪽지 종류</label>
-							<div class="input-group mb-3">
-								
-							</div>
+						<li style="padding-bottom:10px;">
+							<label for="message_content">내용</label>
+							<form:textarea class="form-control form-control-sm" path="message_content"/>
+							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
 						</li>
 					</ul>
 					<hr>

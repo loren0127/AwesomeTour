@@ -1,40 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="mesgs" id="mesgs">
+<div class="mesgs col-sm-12 col-md-6" id="mesgs">
 	<div class="msg_history" id="chatMessageArea">
-		<!-- My chat message(left) -->
-				<!-- My chat message(left) -->
-					<div class="outgoing_msg">
-						<div class="sent_msg">
-							<p>콘텐츠 부분</p>
-							<span class="time_date">쪽지 생성일</span>
-						</div>
-					</div>
-					<hr>
-
-				<!-- Other user chat message(right) -->
-					<div class="outgoing_msg">
-						<div class="incoming_msg_img">
-							<img src="https://ptetutorials.com/images/user-profile.png"
-								alt="sunil">
-						</div>
-						<div class="received_msg">
-							<div class="received_withd_msg">
-								<p>콘텐츠 부분</p>
-								<span class="time_date">쪽지 생성일</span>
-							</div>
-						</div>
-					</div>
-					<hr>
-	</div>
-	<div class="type_msg">
-		<div class="input_msg_write">
-			<input type="text" class="write_msg" placeholder="Type a message"
-				id="message" style="padding-right: 55px;" disabled>
-			<button class="msg_send_btn" type="button" id="sendBtn"
-				style="margin-right: 15px;">
-				<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-			</button>
+		<div class="outgoing_msg">
+			<div class="sent_msg_long">
+				<p style="text-align: center;">제목  : ${messageCommand.message_title}</p>
+			</div>
 		</div>
+		<div class="outgoing_msg">
+			<div class="sent_msg_long">
+				<p style="text-align: center;">보낸이  : ${messageCommand.message_sender}</p>
+			</div>
+		</div>
+		<div class="outgoing_msg">
+			<div class="sent_msg_long">
+				<p style="text-align: center;">받는이  : ${messageCommand.message_receiver}</p>
+			</div>
+		</div>
+		<hr>
+
+		<!-- Other user chat message(right) -->
+		<div class="outgoing_msg" style="text-align:center;">
+			<div class="incoming_msg_img">
+				<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+			</div>
+			<div class="received_msg_long">
+				<div class="received_withd_msg_long">
+					<p>${messageCommand.message_content}</p>
+					<span class="time_date">작성일 : ${messageCommand.message_reg_date}</span>
+				</div>
+			</div>
+		</div>
+		<hr>
 	</div>
 </div>

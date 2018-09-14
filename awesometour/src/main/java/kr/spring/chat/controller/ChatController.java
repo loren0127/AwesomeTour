@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
+
 import kr.spring.chat.domain.ChatAllAndMemberCommand;
 import kr.spring.chat.domain.ChatAllCommand;
 import kr.spring.chat.domain.ChatAllTalkCommand;
@@ -23,6 +25,7 @@ import kr.spring.chat.domain.MessageCommand;
 import kr.spring.chat.service.ChatService;
 import kr.spring.chat.service.MessageService;
 import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 
 @Controller
 public class ChatController {
@@ -181,6 +184,8 @@ public class ChatController {
 		messageCommand.setMessage_receiver(user_email);
 		
 		//Message send start
+		messageCommand.setMessage_content(StringUtil.useBrNoHtml(messageCommand.getMessage_content()));
+		messageCommand.setMessage_title(StringUtil.useBrNoHtml(messageCommand.getMessage_title()));
 		messageService.insertMessageSend(messageCommand);
 		//Message send end
 		
@@ -191,8 +196,13 @@ public class ChatController {
 	
 	@RequestMapping(value="/chat/selectMessageDetail.do", method=RequestMethod.GET)
 	public ModelAndView selectMessageReceive(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage, @RequestParam(value="checked", defaultValue="mainChat")String selected) {
-		ModelAndView mav = chatModelAndView("selectMessageDetail", session, sendCurrentPage, receiveCurrentPage, selected);
 		
+		//Message select start
+		MessageCommand messageCommand = messageService.selectMessageDetail(message_num);
+		//Message select end
+		
+		ModelAndView mav = chatModelAndView("selectMessageDetail", session, sendCurrentPage, receiveCurrentPage, selected);
+		mav.addObject("messageCommand", messageCommand);
 		return mav;
 	}
 }

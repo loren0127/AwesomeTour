@@ -120,6 +120,7 @@
 			</nav>
 
 			<!-- Tiles body area start -->
+			
 			<!-- Tiles body area end -->
 	</div>
 	

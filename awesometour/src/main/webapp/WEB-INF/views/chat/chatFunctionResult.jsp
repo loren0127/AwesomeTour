@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Message div start -->
-<div class="mesgs">
+<div class="mesgs col-sm-12 col-md-6">
 	<div class="msg_history">
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">

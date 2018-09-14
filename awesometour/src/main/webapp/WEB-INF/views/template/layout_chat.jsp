@@ -7,16 +7,67 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
-<link
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/chat.css"
-	style="text/css" rel="stylesheet">
-				
+<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/chat.css" style="text/css" rel="stylesheet">
+<style>
+@media all and (max-width: 768px) {
+    #hide_nav {
+    display:inline-flex;
+    }
+}
+
+@media all and (min-width: 768px) {
+    #hide_nav {
+    display:none;
+    }
+}
+</style>
+<script type="text/javascript">
+var status = 1;
+$(document).ready(function() {
+	$(window).resize(function() {
+		var windowSize = $(window).width();
+		if(windowSize >= 768) {
+			$('.inbox_people').css('display', 'inline');
+			$('.mesgs').css('display', 'inline');
+			status = 1;
+		} else {
+			$('.mesgs').css('display', 'inline');
+			$('.inbox_people').css('display', 'none');
+			status = 0;
+		}
+	});
+	
+	$(document).on('click', '#sidebarCollapse', function() {
+		if(status == 1) {
+			$('.inbox_people').css('display', 'none');
+			$('.mesgs').css('display', 'inline');
+			status = 0;
+		} else {
+			$('.inbox_people').css('display', 'inline');
+			$('.mesgs').css('display', 'none');
+			status = 1;
+		}
+	});
+});
+</script>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-dark sticky-top" id="hide_nav" style="height: 50px; width: 100%;">
+	<button type="button" id="sidebarCollapse" class="btn btn-primary" style="">
+		<svg class="svg-inline--fa fa-align-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="align-left" role="img"
+			xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" style="width:14px;">
+			<path fill="currentColor" d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path>
+		</svg>
+		<span></span>
+	</button>
+</nav>
+	
+	
 <div class="messaging">
 	<div class="inbox_msg">
+	<div class="row">
 		<!-- Message list div start -->
-		<div class="inbox_people">
+		<div  class="inbox_people col-12 col-md-6">
 			<div class="headind_srch">
 				<div class="recent_heading">
 					<h4>대화방</h4>
@@ -31,6 +82,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="inbox_chat">
 				<c:if test="${!empty user_email}">
 					<ul class="nav nav-tabs" role="tablist">
@@ -226,4 +278,5 @@
 		<tiles:insertAttribute name="body" />
 		<!-- Message div end -->
 	</div>
+</div>
 </div>

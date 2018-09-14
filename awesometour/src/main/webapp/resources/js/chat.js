@@ -84,7 +84,7 @@ function appendMessage(message) {
 		$("#mesgs").scrollTop($("#mesgs")[0].scrollHeight);
 		$("#chatMessageArea").scrollTop($("#chatMessageArea")[0].scrollHeight);
 	} else if(splitMessage[1] == undefined) {
-		var sendMessage = '<div class="outgoing_msg"><div class="received_msg"><div class="received_withd_msg"><p>' + splitMessage[0] + '</p><span class="time_date">' + getTimeStamp() + '</span></div></div></div><hr>'
+		var sendMessage = '<div class="outgoing_msg"><div class="received_msg_long"><div class="received_withd_msg_long"><p>' + splitMessage[0] + '</p><span class="time_date">' + getTimeStamp() + '</span></div></div></div><hr>'
 		$('#chatMessageArea').append(sendMessage);
 		
 		$("#mesgs").scrollTop($("#mesgs")[0].scrollHeight);
