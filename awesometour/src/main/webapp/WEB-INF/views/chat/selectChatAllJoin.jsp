@@ -4,7 +4,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/chat.js"></script>
 
 		<!-- Message div start -->
-		<div class="mesgs" id="mesgs">
+		<div class="mesgs col-sm-12 col-md-6" id="mesgs">
 			<div class="msg_history" id="chatMessageArea">
 				<!-- My chat message(left) -->
 				<c:if test="${!empty chatAllTalkCommandList}">

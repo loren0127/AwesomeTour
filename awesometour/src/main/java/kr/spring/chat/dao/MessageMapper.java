@@ -9,7 +9,7 @@ import kr.spring.chat.domain.MessageCommand;
 	public int selectMessageRowCount(Map<String, Object> map);
 	public List<MessageCommand> selectMessageList(Map<String, Object> map);
 	
-	@Insert("INSERT INTO message(message_num, message_receiver, message_sender, message_title, message_content) VALUES(message_seq.NEXTVAL, #{message_receiver}, #{message_sender}, #{message_title}, #{message_content})")
+	@Insert("INSERT INTO message(message_num, message_receiver, message_sender, message_title, message_content, message_url, message_type) VALUES(message_seq.NEXTVAL, #{message_receiver}, #{message_sender}, #{message_title}, #{message_content}, #{message_url}, #{message_type})")
 	public void insertMessageSend(MessageCommand command);
 	
 	@Select("SELECT * FROM message WHERE message_num=#{message_num}")

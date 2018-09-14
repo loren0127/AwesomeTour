@@ -19,11 +19,6 @@ function buttonSubmit() {
 							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
 						</li>
 						<li style="padding-bottom:10px;">
-							<label for="message_title">형식</label>
-							<%-- <form:input class="form-control form-control-sm" path="message_title"/> --%>
-							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
-						</li>
-						<li style="padding-bottom:10px;">
 							<label for="message_sender">받는이</label>
 							<div class="input-group mb-3">
 								<form:input class="form-control form-control-sm" path="message_sender"/>
@@ -34,7 +29,26 @@ function buttonSubmit() {
 							<%-- <form:errors path="message_receiver" cssClass="error-color" /> --%>
 						</li>
 					</ul>
+					
 					<hr>
+					
+					<ul>
+						<li style="padding-bottom:10px;">
+							<label for="message_type">쪽지 종류</label>
+							<form:select path="message_type" class="form-control-sm">
+								<form:option value="normal">쪽지</form:option>
+								<form:option value="chatInvite">채팅신청</form:option>
+								<form:option value="groupInvite">그룹신청</form:option>
+							</form:select>
+							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
+							
+							<form:input class="form-control form-control-sm" path="message_URL" placeholder="초대링크"/>
+							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
+						</li>
+					</ul>
+					
+					<hr>
+					
 					<ul>
 						<li style="padding-bottom:10px;">
 							<label for="message_content">내용</label>
