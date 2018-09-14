@@ -13,4 +13,5 @@ public interface ReservationService {
 	public int selectGroupMemberCount(Map<String, Object> m_map);
 
 
+
 }

@@ -9,6 +9,18 @@
 .state{
 	margin : 50px 30px;
 }
+
+
+ @media ( max-width:766px ) {
+ 
+ 	.sticky-top{
+ 	display:none;
+ 	}
+ 	#yogu{
+ 	width:100%!important ;
+ 	}
+ }
+ 
 </style>
 <script>
 $(function(){
@@ -60,11 +72,11 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 
 
 <!-- ------------ 사이드 메뉴 ---------------- -->
-<div class="rounded sticky-top" style="float:right; border:1px solid black ; top: 100px; padding-left:10px" >
+<div class="rounded sticky-top" style="float:right; border:1px solid #aaaaaa ; top: 100px; padding: 5px  10px; " >
 <div class="row">
-<div class="col-6">
-${rv.acc_name }   <br>
-${rv.ag_grade }점<br>
+<div class="col-6" style="padding: 20px;">
+<h6>${rv.acc_name }</h6> 
+평점 : ${rv.ag_grade }점<br>
 </div>
 <div class="col-6">
 <img style="max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover">
@@ -84,9 +96,9 @@ ${rv.ag_grade }점<br>
 <input type="hidden" id="rv_money" name="rv_money">
 
 <hr  style="width:90%" noshade>
-<span style="font-size:12px; padding-left:15px">
+<span style="font-size:12px;" >
 	안심할 수 있는 예약 모든 여행 <br> 
-	<a href="#" style="font-size:12px; padding-left:15px"> 게스트 환불 정책</a>에 따라 보호받습니다.
+	<a href="#" style="font-size:12px;"> 게스트 환불 정책</a>에 따라 보호받습니다.
 </span>
 </div>
 <!-- ------------ 사이드 메뉴 ---------------- -->
@@ -94,11 +106,11 @@ ${rv.ag_grade }점<br>
 <div class="state">
 	<input type="hidden" name="acc_num" value="${rv.acc_num}">
 	<h3>숙박 정보</h3><br>
-	<ul> 
-		<li><img style="max-height:300px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover"></li>
-		<li>숙소 이름 : ${rv.acc_name }</li>
-		<li>주소 : ${rv.acc_address1} ${rv.acc_address2}</li>
-		<li>숙소 편의 서비스 : ${rv.se_name}</li>
+	<ul style="list-style: none;"> 
+		<li ><img style="max-height:300px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover"></li>
+		<li><b>숙소 이름</b> : ${rv.acc_name }</li>
+		<li><b>주소</b> : ${rv.acc_address1} ${rv.acc_address2}</li>
+		<li><b>숙소 편의 서비스</b> : ${rv.se_name}</li>
 	</ul>
 </div>
 
@@ -113,7 +125,7 @@ ${rv.ag_grade }점<br>
 <div class="state">  
 	<h3>특별 요정하기</h3>
 	<span style="font-size:12px">고객님의 특별 요청 사항을 호스트에게 예약 완료 즉시 전달하겠습니다.</span><br>
-<div class="rounded" style="background-color:gray; padding:15px; width:60%;" >
+<div class="rounded" style="background-color:#aaaaaa; padding:15px; width:60%;" id="yogu">
 	<p>
 		<b>애완 동물(이용 가능 여부는 여건에 따라 달라질 수 있음)</b><br> 
 		<input type="checkbox" name="rv_request" value="애완동물 데려감">&nbsp;데려간다.<br>
@@ -126,10 +138,11 @@ ${rv.ag_grade }점<br>
 
 <div class="state">
 <h3>Awesome Tour 예약 팁</h3>
+<span style="font-size:12pt">
 각 숙소만의 특징이 있으며, 공간과 편의시설이 숙소마다 다릅니다.<br>
 숙소를 존중하는 마음으로 이용해 주세요. 호스트의 소중한 집이니까요.<br>
 숙박 전과 숙박 기간 중에 그룹 채팅을 통해 활발히 소통하세요!<br>
-
+</span>
 </div>
 
 <div class="state" style="margin-bottom:30px">
