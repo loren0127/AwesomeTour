@@ -66,7 +66,7 @@
 				WHERE rv_end_date > to_date(#{check_in,jdbcType=VARCHAR},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out,jdbcType=VARCHAR},'YYYY/MM/DD')
 				]]>
-				AND acc_num = ${im_ac_num}
+				AND acc_num = #{im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 
 	</select>
@@ -90,7 +90,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
-		AND acc_num = ${im_ac_num}
+		AND acc_num = #{im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -116,7 +116,7 @@
 				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 				]]>
-				AND acc_num = ${im_ac_num}
+				AND acc_num = #{im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 	</select>
 	<select id="selectDeluxRoom" parameterType="map" resultType="hotelDetailCommand">
@@ -139,7 +139,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
-		AND acc_num = ${im_ac_num}
+		AND acc_num = #{im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end} 
@@ -165,7 +165,7 @@
 				WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 				AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 				]]>
-				AND acc_num = ${im_ac_num}
+				AND acc_num = #{im_ac_num}
 				)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null
 	</select>
 	<select id="selectSuiteRoom" parameterType="map" resultType="hotelDetailCommand">
@@ -188,7 +188,7 @@
 		WHERE rv_end_date > to_date(#{check_in},'YYYY/MM/DD')
 		AND rv_start_date < to_date(#{check_out},'YYYY/MM/DD')
 		]]>
-		AND acc_num = ${im_ac_num}
+		AND acc_num = #{im_ac_num}
 		)a JOIN (SELECT ro_num,ro_room_num as rv_room_num FROM accom_room WHERE ro_sub='h' AND ro_acc_num=#{im_ac_num})b ON a.rv_ro_num=b.ro_num)cr ON br.ro_room_num=cr.rv_room_num WHERE rv_start_date is null)f) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
