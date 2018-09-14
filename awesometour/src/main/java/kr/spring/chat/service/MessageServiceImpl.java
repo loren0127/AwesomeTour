@@ -12,7 +12,7 @@ public class MessageServiceImpl implements MessageService {
 	private MessageMapper messageMapper;
  	@Override
 	public int selectMessageRowCount(Map<String, Object> map) {
-		return messageMapper.selectMessageRowCount(map);
+		return messageMapper.selectMessageRowCount(map); 
 	}
  	@Override
 	public List<MessageCommand> selectMessageList(Map<String, Object> map) {
@@ -21,5 +21,9 @@ public class MessageServiceImpl implements MessageService {
 	
 	public void insertMessageSend(MessageCommand command) {
 		messageMapper.insertMessageSend(command);
+	}
+	
+	public MessageCommand selectMessageDetail(int message_num) {
+		return messageMapper.selectMessageDetail(message_num);
 	}
 }

@@ -10,5 +10,7 @@ public interface MessageService {
 	public int selectMessageRowCount(Map<String, Object> map);
 	public List<MessageCommand> selectMessageList(Map<String, Object> map);
 	
-	public void insertMessageSend(MessageCommand command);
+	public void insertMessageSend(MessageCommand command); 
+	
+	public MessageCommand selectMessageDetail(int message_num);
 }
