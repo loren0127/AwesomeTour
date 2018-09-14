@@ -34,10 +34,13 @@ public class AdminController {
 		
 		List<HoldingCommand> list = adminService.selectHolding();
 		
+		
+		
 		if(log.isDebugEnabled()) {
 			log.debug("<<selectHolding>> : " + list);
 		}
 		model.addAttribute("list",list);
+		
 		return "adminHolding";
 	}
 	

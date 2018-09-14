@@ -114,7 +114,7 @@
 	                    </div>
 	                     <div class="col-md-6 gallery_item">
 	                        <div class="gallery_img" style="align:center;">
-	                            <img src="${pageContext.request.contextPath}/resources/images/2.png" alt=""><br>
+	                            <img src="${pageContext.request.contextPath}/resources/images/2.PNG" alt=""><br>
 	                            <input type="radio" name="ra" value="내향">내향
 	                        </div>
 	                    </div>

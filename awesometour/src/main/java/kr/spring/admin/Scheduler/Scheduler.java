@@ -96,6 +96,13 @@ public class Scheduler {
 	}
 	
 
-	
+	//기간 지난 그룹 제거
+	@Scheduled(cron = "0 43 10 * * *")
+	public void delete_group() {
+		List<HoldingCommand> list2 = adminService.selectGroup_gnum();
 		
+		for(HoldingCommand rv_num : list2) {
+			adminService.delete_gnum(rv_num);
+		}
+	}
 }

@@ -88,7 +88,8 @@
 					</div>
 					<div id="host" class="container tab-pane">
 						<hr>
-						<li><a href="#">호스트 기능</a><hr></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/mypage/mypageComplainList.do">컴플레인 관리</a><hr></li>
+						<li><a href="#">호스트 관리</a><hr></li>
 					</div>
 				</div>
 			</ul>
@@ -120,7 +121,9 @@
 			</nav>
 
 			<!-- Tiles body area start -->
-			
+			<div class="container">
+				<tiles:insertAttribute name="body" />
+			</div>
 			<!-- Tiles body area end -->
 	</div>
 	

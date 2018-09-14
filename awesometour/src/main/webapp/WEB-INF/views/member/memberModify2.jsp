@@ -105,7 +105,7 @@
 	               </div>
 	                 <hr style="height:15px;">
 				<div class="align-center">
-					<input type="submit" value="가입" class="btn btn-warning">
+					<input type="submit" value="수정완료" class="btn btn-warning">
 					<input type="button" value="홈으로" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 				</div>
 			</form:form>

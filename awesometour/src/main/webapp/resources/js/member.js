@@ -121,8 +121,14 @@ $(document).ready(function() {
 		
 		if(idReg.test(newPassword1)){
 			 $('#message_unique').text('');
+			 $('#message_unique2').text('');
+			 $('#message_unique3').text('');
+			 $('#message_unique4').text('');
 		 }else{
-			 $('#message_unique').text("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지, 영문은 대소문자를 구분합니다.");
+			 $('#message_unique').text("비밀번호는 영문,숫자,특수문자");
+			 $('#message_unique2').text("(!@$%^&* 만 허용)");
+			 $('#message_unique3').text("를 사용하여 6~16자까지");
+			 $('#message_unique4').text("영문은 대소문자를 구분합니다.");
 		 }
 		
 		

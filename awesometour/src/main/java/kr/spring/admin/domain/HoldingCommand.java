@@ -25,6 +25,24 @@ public class HoldingCommand {
 	
 	private String acc_host;
 	
+	
+	private int g_num;
+	private String g_close_date;
+	
+	
+	
+	public int getG_num() {
+		return g_num;
+	}
+	public void setG_num(int g_num) {
+		this.g_num = g_num;
+	}
+	public String getG_close_date() {
+		return g_close_date;
+	}
+	public void setG_close_date(String g_close_date) {
+		this.g_close_date = g_close_date;
+	}
 	public String getAcc_host() {
 		return acc_host;
 	}

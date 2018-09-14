@@ -91,8 +91,20 @@ $(document).ready(function() {
 
 		if(idReg.test(newPassword1)){
 			$('#message_member_passwd2').text('');
+			$('#message_member_passwd3').text('');
+			$('#message_member_passwd4').text('');
+			$('#message_member_passwd5').text('');
 		}else{
-			$('#message_member_passwd2').text("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지, 영문은 대소문자를 구분합니다.");
+			
+			var output = "비밀번호는 영문,숫자,특수문자";
+			var output2 = "(!@$%^&* 만 허용)를 사용하여 6~16자까지";
+			var output3 = " 사용하여 6~16자까지";
+			var output4 = "영문은 대소문자를 구분합니다.";
+			/*$('#message_member_passwd2').text("비밀번호는 영문,숫자,특수문자(!@$%^&* 만 허용)를 사용하여 6~16자까지, 영문은 대소문자를 구분합니다.");*/
+			$('#message_member_passwd2').text(output);
+			$('#message_member_passwd3').text(output2);
+			$('#message_member_passwd4').text(output3);
+			$('#message_member_passwd5').text(output4);
 		}
 
 

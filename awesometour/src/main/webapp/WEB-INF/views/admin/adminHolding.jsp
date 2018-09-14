@@ -29,7 +29,7 @@
 			</div>
 		</div>
 	</div>
-	<%-- <c:forEach var="i" items="${ list3}">
-	${i.at_pin }<br>
+	<%-- <c:forEach var="i" items="${ list2}">
+	${i.g_num }<br>
 	</c:forEach> --%>
 </div>

@@ -29,7 +29,7 @@
 	border: 0; 
 	} */
 	
-	 @media screen and (max-width: 1200px){
+	 @media screen and (max-width: 1020px){
 	  	#div1{
 	  		display:none;
 	  	}
@@ -71,6 +71,9 @@
 					name="member_passwd2" id="member_passwd2" class="form-control">
 				<span id="message_member_passwd"></span>
 				<span id="message_member_passwd2"></span>
+				<span id="message_member_passwd3"></span>
+				<span id="message_member_passwd4"></span>
+				<span id="message_member_passwd5"></span>
 			</div>
 			<div class="form-group">
 				<label for="member_nickname">닉네임</label>
@@ -102,9 +105,9 @@
 			</div>
 		</form:form>
 	</div>
-</div>
-
-<%-- <div class="page-main-style">
+</div> 
+<%-- 
+<div class="page-main-style">
 	<h1>회원정보수정</h1>
 	<form:form commandName="command" action="update.do" id="modify_form" enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>	
@@ -141,8 +144,6 @@
 		</div>
 	</form:form>
 </div>
+
  --%>
-
-
-
 
