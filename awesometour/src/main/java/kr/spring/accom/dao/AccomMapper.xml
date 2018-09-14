@@ -12,9 +12,11 @@
 	<select id="selectList" parameterType="java.util.Map" resultType="AccomCommand">
 		SELECT price.*, grade.ag_grade, auth.member_auth, service.se_name,
 		review.review_count, book.rv_start_date, book.rv_end_date FROM
-		(SELECT a.*, r.ro_price, r.ro_sub, r.ro_pe_count FROM accom a, accom_room r
-		where a.acc_num = r.ro_acc_num ORDER BY r.ro_sub ASC)price RIGHT OUTER
-		JOIN
+		(SELECT * FROM ((SELECT * FROM accom)a) JOIN 
+		(SELECT aa.ro_sub, aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM 
+		((SELECT ro_price, ro_sub, ro_pe_count FROM accom_room)aa) 
+		JOIN (SELECT ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY ro_acc_num)bb 
+		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num)price RIGHT OUTER JOIN
 		(SELECT a.*, m.member_auth, m.member_email FROM accom a, member_auth m where
 		a.acc_host = m.member_email)auth ON price.acc_host = auth.member_email
 		RIGHT OUTER JOIN
@@ -82,7 +84,10 @@
 			<if test="search == '하우스' or search == '프라이빗하우스' or search == '게스트하우스'">
 				OR <![CDATA[price.ro_sub = 'p']]>
 			</if>
-			<if test="orderby == 'rating' or orderby == 'recommend' or orderby == 'relax' or orderby == 'luxury' or orderby == 'business' or orderby == 'party'">
+			<if test="orderby == 'rating'">
+				ORDER BY grade.ag_grade DESC
+			</if>
+			<if test="orderby == 'recommend' or orderby == 'relax' or orderby == 'luxury' or orderby == 'business' or orderby == 'party'">
 				ORDER BY price.ro_price ASC
 			</if>
 			<if test="orderby == 'hotelGrade'">
