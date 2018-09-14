@@ -93,14 +93,14 @@
 		<property name="dataSource" ref="dataSource"/>
 		<!-- value값으로 명시된 패키지 아래의 모든 클래스를 스캔해서 빈 객체를 생성하고 자동 알리아스를 준다. 첫 글자가 소문자 -->
 																		<!-- 쉼표로 나열해서 추가 -->
-		<property name="typeAliasesPackage" value="kr.spring.accom.domain,kr.spring.member.domain,kr.spring.group.domain,kr.spring.accomList.domain,kr.spring.admin.domain,kr.spring.reservation.domain,kr.spring.chat.domain"/>
+		<property name="typeAliasesPackage" value="kr.spring.accom.domain,kr.spring.member.domain,kr.spring.group.domain,kr.spring.accomList.domain,kr.spring.admin.domain,kr.spring.reservation.domain,kr.spring.chat.domain,kr.spring.mypage.domain"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 									<!-- value값으로 명시된 패키지 안에서 mapper를 찾는다. 
 									(대박)myBatis는 내부에서 인터페이스를 인식해서 자동으로 클래스를 만들고 추상메소드를 구현한다.
 									-->
 															<!-- 쉼표로 나열해서 추가 -->
-		<property name="basePackage" value="kr.spring.accom.dao,kr.spring.member.dao,kr.spring.group.dao,kr.spring.accomList.dao,kr.spring.admin.dao,kr.spring.reservation.dao,kr.spring.chat.dao"/>
+		<property name="basePackage" value="kr.spring.accom.dao,kr.spring.member.dao,kr.spring.group.dao,kr.spring.accomList.dao,kr.spring.admin.dao,kr.spring.reservation.dao,kr.spring.chat.dao,kr.spring.mypage.dao"/>
 		
 	</bean>
 	 <!-- 메일보내기 -->
