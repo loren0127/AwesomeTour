@@ -8,13 +8,13 @@
 	대문페이지는 데이터 작업 없이 뷰 호출을 하기 때문에 servlet-context.xml에서 <view-controller>태그의 view-name값 -->
 										<!-- 실제 실행될 페이지 : layout 페이지에 의해 하단 속성 태그를 통해 header와 footer, menu가 조합된다. -->
 	<definition name="groupMain" extends="main">
-		<put-attribute name="title" value="그룹"/>
+		<put-attribute name="title" value="그룹 리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/group/groupMain.jsp"/>
 	</definition>
 	
 	<definition name="groupDetail" extends="main">
 		<put-attribute name="title" value="그룹 상세보기"/>
 		<put-attribute name="body" value="/WEB-INF/views/group/groupDetail.jsp"/>
-	</definition>
+	</definition > 
 	
 </tiles-definitions>
