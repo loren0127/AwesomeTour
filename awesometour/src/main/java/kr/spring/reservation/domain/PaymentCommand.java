@@ -4,15 +4,15 @@ public class PaymentCommand {
 	int pm_num;
 	String pm_name;
 	String pm_email;
-	int pm_type;
+	char pm_type;
 	// 카드일시
 	int pm_cardNum;
 	int pm_cvc;
 	int pm_validity;
 	//계좌 일시
 	int pm_account;
-	String pm_ac_name;
-	int pm_deposit_ac;
+	String pm_depositor;
+	String pm_deposit_ac;
 	
 	String rv_message;
 
@@ -35,12 +35,14 @@ public class PaymentCommand {
 	public void setPm_email(String pm_email) {
 		this.pm_email = pm_email;
 	}
-	public int getPm_type() {
+	
+	public char getPm_type() {
 		return pm_type;
 	}
-	public void setPm_type(int pm_type) {
+	public void setPm_type(char pm_type) {
 		this.pm_type = pm_type;
 	}
+
 	public int getPm_cardNum() {
 		return pm_cardNum;
 	}
@@ -65,18 +67,18 @@ public class PaymentCommand {
 	public void setPm_account(int pm_account) {
 		this.pm_account = pm_account;
 	}
-	public String getPm_ac_name() {
-		return pm_ac_name;
+	public String getPm_depositor() {
+		return pm_depositor;
 	}
-	public void setPm_ac_name(String pm_ac_name) {
-		this.pm_ac_name = pm_ac_name;
+	public void setPm_depositor(String pm_depositor) {
+		this.pm_depositor = pm_depositor;
 	}
-	public int getPm_deposit_ac() {
+	public String getPm_deposit_ac() {
 		return pm_deposit_ac;
 	}
-	public void setPm_deposit_ac(int pm_deposit_ac) {
+	public void setPm_deposit_ac(String pm_deposit_ac) {
 		this.pm_deposit_ac = pm_deposit_ac;
-	}
+	}        
 	
 	public String getRv_message() {
 		return rv_message;
@@ -88,7 +90,7 @@ public class PaymentCommand {
 	public String toString() {
 		return "PaymentCommand [pm_num=" + pm_num + ", pm_name=" + pm_name + ", pm_email=" + pm_email + ", pm_type="
 				+ pm_type + ", pm_cardNum=" + pm_cardNum + ", pm_cvc=" + pm_cvc + ", pm_validity=" + pm_validity
-				+ ", pm_account=" + pm_account + ", pm_ac_name=" + pm_ac_name + ", pm_deposit_ac=" + pm_deposit_ac
+				+ ", pm_account=" + pm_account + ", pm_depositor=" + pm_depositor + ", pm_deposit_ac=" + pm_deposit_ac
 				+ ", rv_message=" + rv_message + "]";
 	}
 	
