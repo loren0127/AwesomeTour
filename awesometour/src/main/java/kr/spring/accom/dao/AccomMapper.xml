@@ -98,4 +98,16 @@
 				ORDER BY price.ro_price ASC
 			</if>
 	</select>
+	
+	<select id="selectImage" parameterType="integer" resultType="ImageCommand">
+		SELECT img.im_ac_num, img.im_cover, img.im_cover_name, img.im_image2,
+		img.im_image2_name FROM (SELECT
+		im_ac_num,im_ro_num,im_cover,im_cover_name,im_image2,im_image2_name
+		FROM accom_image)img RIGHT OUTER JOIN (SELECT aa.ro_num, aa.ro_sub,
+		aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM ((SELECT ro_num,
+		ro_price, ro_sub, ro_pe_count FROM accom_room)aa) JOIN (SELECT
+		ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY
+		ro_acc_num)bb ON aa.ro_price = bb.ro_price)room_num ON img.im_ro_num =
+		room_num.ro_num WHERE img.im_ac_num=#{im_ac_num}
+	</select>
 </mapper>

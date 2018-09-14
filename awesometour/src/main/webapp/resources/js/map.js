@@ -137,7 +137,7 @@ $(document).ready(function(){
 		$('#mapSearch_dialog').dialog('open');
 		callMapFirst();
 		$('.ui-dialog-titlebar').hide();
-		$('.ui-dialog').css('zIndex','10000');
+		$('.ui-dialog').css('zIndex','10001');
 		$('.ui-dialog-content').css('overflow','hidden');
 		initForm();
 	});

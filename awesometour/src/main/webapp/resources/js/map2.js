@@ -5,13 +5,13 @@ $(document).ready(function(){
 	}
 	
 	//JSON 문자열로 생성된 주소와 상호명 받을 배열 선언 -> push 함수 사용시 초기화 먼저!
-	var locations=[],contents=[],prices=[],styles=[],grades=[];
+	var locations=[],prices=[],styles=[],grades=[];
 	//select태그(id=detailInMap)에서 선택되는 옵션값을 받기 위한 변수 선언
 	var orderby;
-	var check_in;//-->정은이 검색 리스트 받을 때는 $(selector).val()값 선언
-	var check_out;
-	var people_count;
-	var search;
+	var check_in = $('#date_in1').val();//-->정은이 검색 리스트 받을 때는 $(selector).val()값 선언
+	var check_out = $('#date_out').val();
+	var people_count = $('#people').val();
+	var search = $('#je_search').val();
 	
 	//지도가 뜨는 걸 한 발 늦도록 하기 위해 함수화
 	//정은이 데이터가 넘어와야하므로 인자 받기
@@ -19,7 +19,7 @@ $(document).ready(function(){
 		//정렬 기준에 맞춰 지도에서 마커를 다시 띄워야 하기 때문에
 		//이전에 있던 내용물을 비워야 해서 함수 안에서 초기화!!!
 		locations=[];
-		contents=[];
+		//contents=[];
 		prices=[];
 		styles=[];
 		grades=[];
@@ -46,7 +46,7 @@ $(document).ready(function(){
 				//반복문을 통해 데이터 출력
 				$(list).each(function(index, item){
 					locations.push(item.acc_address1);
-					contents.push(item.acc_name);
+					//contents.push(item.acc_name);
 					prices.push(item.ro_price);
 					styles.push(item.acc_theme);
 					grades.push(item.ag_grade);
@@ -163,7 +163,7 @@ $(document).ready(function(){
 		$('#mapList_dialog').dialog('open');
 		callMap2(orderby,check_in,check_out,people_count,search);
 		$('.ui-dialog-titlebar').hide();
-		$('.ui-dialog').css('zIndex','10000');
+		$('.ui-dialog').css('zIndex','10001');
 		$('#perNight1').blur();
 		$('#perNight2').blur();
 	});
