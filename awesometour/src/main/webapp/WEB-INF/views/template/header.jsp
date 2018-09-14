@@ -11,7 +11,7 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;">지도</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;" data-tooltip-text="지도에서 직접 검색하세요.">지도</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
@@ -42,15 +42,15 @@
 <div class="container">
 	<div id="mapSearch_dialog">
 		<div>
-			<form class="form-inline" style="float:left;" action="main.do" method="get">
-				<div class="form-group mx-sm-3 mb-2">
-					<div class="form-group mb-2"><i class="fa fa-search"></i></div>
-					<input type="text" class="form-control" id="searchyouwant" placeholder="숙소명/지역구/숙소종류로 검색" style="width:300px;padding-left:40px;">
-					<div class="form-group mb-2"><i class="fa fa-close"></i></div>
+			<form action="main.do" method="get">
+				<div style="display:inline-flex;margin-bottom:10px;">
+					<div><i class="fa fa-search" style="margin-top:9px"></i></div>
+					<input type="text" class="form-control" id="searchyouwant" placeholder="숙소명/지역/종류로 검색" style="width:100%;padding-left:40px;">
+					<div><i class="fa fa-close" style="margin-top:10px"></i></div>
+					<input type="submit" value="검색" id="map_search" class="btn btn-warning" style="margin-left:10px;">
 				</div>
-				<input type="submit" value="검색" id="map_search" class="btn btn-warning mb-2">
-			</form>
 			<span class="closer">&times;</span>
+			</form>
 		</div>
 		<div id="mapSearch" style="width: 100%; height: 700px;"></div>
 	</div>

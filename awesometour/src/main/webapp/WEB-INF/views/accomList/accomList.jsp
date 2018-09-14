@@ -158,12 +158,7 @@ $(function() {
 						alert('해당조건에 부합하는 숙소가 없습니다');
 					}
 				});
-	$('#opener2').on('click',function(){
-		alert('진입');
-		$('#search_top').hide();
-	});
 	}
-
 });
 
 
@@ -175,7 +170,7 @@ $(function() {
 	<!-- 검색창 끝-->
 
 	<div class="sticky-top" id="search_top"
-		style="z-index: 1000000; background-color: rgba(0, 123, 255, .25);margin-top: 65px; ">
+		style="z-index: 9999; background-color: white;margin-top: 65px;">
 		<!-- 검색 시작 -->
 		<div class="form-row" style="width: 100%;margin-left: 300px;">
 			<div>
@@ -242,8 +237,8 @@ $(function() {
 				<button id="opener2" style="position: absolute;border: 0;margin-left: 25px;margin-top: 5px;background-color: inherit;">숙소 위치 확인!<br>
 				<i class="fa fa-map-marker" style="font-size: 30px;color:red;"></i></button>
 				<img src="../resources/images/지도.jpg"><br>
-				<span>지도를 클릭하여 위치를 확인하세요!</span>
-					<span style="text-align: center;"><b>편의시설</b></span>
+				<div>
+				<span style="text-align: center;"><b>편의시설</b></span>
 				<ul style="list-style: none;">
 					<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
 					<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
@@ -280,7 +275,7 @@ $(function() {
 					<li><input type="radio" value="4" name="hotel_grade">★★★★</li>
 					<li><input type="radio" value="5" name="hotel_grade">★★★★★</li>
 				</ul>
-
+				</div>
 			</div>
 
 

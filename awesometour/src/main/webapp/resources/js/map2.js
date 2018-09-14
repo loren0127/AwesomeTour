@@ -164,6 +164,8 @@ $(document).ready(function(){
 		callMap2(orderby,check_in,check_out,people_count,search);
 		$('.ui-dialog-titlebar').hide();
 		$('.ui-dialog').css('zIndex','10000');
+		$('#perNight1').blur();
+		$('#perNight2').blur();
 	});
 	$('.closer').on('click', function() {
 		$('#mapList_dialog').dialog('close');

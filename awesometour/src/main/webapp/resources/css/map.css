@@ -1,4 +1,7 @@
 @charset "UTF-8";
+
+input:focus { outline: none; }
+
 /*커스텀오버레이*/
 .arrow_box {
 	position: relative;
@@ -96,9 +99,9 @@
 }
 /*컨테이너에 마우스 진입 끝*/
 
-@media screen and (max-width: 600px) {
-	#mapList_dialog {
-		width: 25vw;
+@media screen and (max-width: 1000px) {
+	.map-header {
+		display:none;
 	}
 }
 

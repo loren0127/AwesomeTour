@@ -12,4 +12,11 @@ $(document).ready(function(){
 		$('#mainNav').toggleClass('hidden', scrollTop > prev);
 		prev = scrollTop;
 	});
+	
+	$('#map_search').click(function(){
+		if($('#searchyouwant').val()==''){
+			alert('검색어를 입력하세요.');
+			return false;
+		}
+	});
 });
