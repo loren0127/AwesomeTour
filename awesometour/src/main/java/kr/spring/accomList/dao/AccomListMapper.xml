@@ -32,14 +32,12 @@
 			b.acc_grade is not null
 		</if>
 		<if test="search !=''">
-			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||
-			'%'
+			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||'%'
 		</if>
 
 		<if test="search !=''">
 			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE
-			ro_pe_count >=
-			1)
+			ro_pe_count >=#{people_count})
 		</if>
 		<if test="search !=''">
 
@@ -82,13 +80,10 @@
 			b.acc_grade is not null
 		</if>
 		<if test="search !=''">
-			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||
-			'%'
+			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||'%'
 		</if>
 		<if test="search !=''">
-			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE
-			ro_pe_count >=
-			1)
+			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE ro_pe_count >=#{people_count})
 		</if>
 		<if test="search !=''">
 
@@ -132,13 +127,11 @@
 		</if>
 		<if test="search !=''">
 			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE
-			ro_pe_count >=
-			1)
+			ro_pe_count >=#{people_count})
 		</if>
 		<if test="se_name !=''">
 			<foreach collection="checklist" item="type">
-				AND s.se_name LIKE '%'
-				|| #{type,jdbcType=VARCHAR} || '%'
+				AND s.se_name LIKE '%'|| #{type,jdbcType=VARCHAR} || '%'
 			</foreach>
 		</if>
 		<if test="hotel_grade !=''">
@@ -201,18 +194,15 @@
 			b.acc_grade is not null
 		</if>
 		<if test="search !=''">
-			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||
-			'%'
+			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} || '%'
 		</if>
 		<if test="search !=''">
 			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE
-			ro_pe_count >=
-			1)
+			ro_pe_count >=#{people_count})
 		</if>
 		<if test="se_name !=''">
 			<foreach collection="checklist" item="type">
-				AND s.se_name LIKE '%'
-				|| #{type,jdbcType=VARCHAR} || '%'
+				AND s.se_name LIKE '%'|| #{type,jdbcType=VARCHAR} || '%'
 			</foreach>
 		</if>
 		<if test="hotel_grade !=''">
