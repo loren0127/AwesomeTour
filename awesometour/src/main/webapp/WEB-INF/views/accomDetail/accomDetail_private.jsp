@@ -31,6 +31,7 @@
 	font-size:20px;
 	color:#d900ed;
 }
+
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/accomDetail/accomDetail_private.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
@@ -43,19 +44,16 @@
 							<div class="carousel-item active">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageViewPrivate.do?im_ac_num=${privateDetail.acc_num}&kind=im_cover"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 							<div class="carousel-item">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageViewPrivate.do?im_ac_num=${privateDetail.acc_num}&kind=im_image2"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 							<div class="carousel-item">
 								<img
 									src="${pageContext.request.contextPath}/accomDetail/imageViewPrivate.do?im_ac_num=${privateDetail.acc_num}&kind=im_image3"
-									style="width: 1200px; height: 500px;"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 			</div>
@@ -96,7 +94,7 @@
 				<div class="comments-area" style="background-color:#f8f9fa;">
 						<div class="row">
 							<div class="col-md-3">
-								<img src="${pageContext.request.contextPath}/member/imageView.do?member_email=${privateDetail.member_email}" alt="" style="width:100px;">
+								<img src="${pageContext.request.contextPath}/member/imageView.do?member_email=${privateDetail.member_email}" alt="" style="width:100px;" onerror="this.src='${pageContext.request.contextPath}/resources/images/NoImage.gif'">
 							</div>
 							<br><br>
 								
@@ -112,7 +110,7 @@
 					</div>
 				</div>
 				<br><br>
-			<div class="container col-sm-12 col-md-12" style="background-color: white;">
+			<div class="container" style="background-color: white;">
 				<br> <br>
 				<h4>
 					한 눈에 보기&nbsp;<b>∨</b>
@@ -154,11 +152,11 @@
 			<p>*예약 가능 날짜만 참고하세요!</p>
 			<br>
 			<!--  <input type="text" value="" id="datepicker">-->
-			<div class="col-sm-6 col-md-12" id="datepicker_accomDetail" style="float:left;width:30%;"></div>
-			<div class="col-sm-6 col-md-12" id="datepicker2_accomDetail" style="float:left;width:30%;"></div>
+			<div id="datepicker_accomDetail" style="float:left;width:30%;"></div>
+			<div id="datepicker2_accomDetail"></div>
 		</div>
 		<br><br><br>
-		<div style="padding-top:50px;">
+		<div class="reservation_link">
 		<a href="${pageContext.request.contextPath}/reservation/confirm.do?im_ac_num=${privateDetail.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count=${people_count}&ro_room_num=0" class="btn-reply button_hover reservation_button" style="width:100px;clear:both;<c:if test="${disableCount == 0}">display:none;</c:if>">예약하기</a>
 		</div>
 		<br>
@@ -167,7 +165,7 @@
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
-					<div class="starRev" style="float:left; padding-left:43%;">
+					<div class="starRev" style="float:left;">
 						<span class="starR1 plus">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>
