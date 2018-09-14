@@ -13,4 +13,5 @@ public interface MessageService {
 	public void insertMessageSend(MessageCommand command); 
 	
 	public MessageCommand selectMessageDetail(int message_num);
+	public void updateMessageRead(Map<String, Object> map);
 }

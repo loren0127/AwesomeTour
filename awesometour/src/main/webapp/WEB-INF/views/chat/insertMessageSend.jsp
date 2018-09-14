@@ -19,9 +19,9 @@ function buttonSubmit() {
 							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
 						</li>
 						<li style="padding-bottom:10px;">
-							<label for="message_sender">받는이</label>
+							<label for="message_receiver">받는이</label>
 							<div class="input-group mb-3">
-								<form:input class="form-control form-control-sm" path="message_sender"/>
+								<form:input class="form-control form-control-sm" path="message_receiver"/>
 								<div class="input-group-append">
 									<button class="btn btn-success btn-sm" type="submit">확인</button>
 								</div>

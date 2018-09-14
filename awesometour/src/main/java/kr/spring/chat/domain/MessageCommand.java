@@ -11,8 +11,8 @@ package kr.spring.chat.domain;
 	
 	private String message_reg_date; //String type
 	
-	private int receive_status; //Receiver message delete status
-	private int sende_status; //Sender message delete status
+	private int message_receive_status; //Receiver message delete status
+	private int message_sende_status; //Sender message delete status
 	
 	private String message_URL; //Send URL(None URL link: "0")
 	
@@ -60,19 +60,20 @@ package kr.spring.chat.domain;
  	public void setMessage_reg_date(String message_reg_date) {
 		this.message_reg_date = message_reg_date;
 	}
- 	public int getReceive_status() {
-		return receive_status;
+ 	
+ 	public int getMessage_receive_status() {
+		return message_receive_status;
 	}
- 	public void setReceive_status(int receive_status) {
-		this.receive_status = receive_status;
+	public void setMessage_receive_status(int message_receive_status) {
+		this.message_receive_status = message_receive_status;
 	}
- 	public int getSende_status() {
-		return sende_status;
+	public int getMessage_sende_status() {
+		return message_sende_status;
 	}
- 	public void setSende_status(int sende_status) {
-		this.sende_status = sende_status;
+	public void setMessage_sende_status(int message_sende_status) {
+		this.message_sende_status = message_sende_status;
 	}
- 	public String getMessage_URL() {
+	public String getMessage_URL() {
 		return message_URL;
 	}
 	public void setMessage_URL(String message_URL) {
@@ -90,7 +91,7 @@ package kr.spring.chat.domain;
 		return "MessageCommand [message_num=" + message_num + ", message_receiver=" + message_receiver
 				+ ", message_sender=" + message_sender + ", message_title=" + message_title + ", message_content="
 				+ message_content + ", message_reg_date_type=" + message_reg_date_type + ", message_reg_date="
-				+ message_reg_date + ", receive_status=" + receive_status + ", sende_status=" + sende_status
-				+ ", message_URL=" + message_URL + ", message_type=" + message_type + "]";
+				+ message_reg_date + ", message_receive_status=" + message_receive_status + ", message_sende_status="
+				+ message_sende_status + ", message_URL=" + message_URL + ", message_type=" + message_type + "]";
 	}
 }

@@ -247,11 +247,15 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</div>
-							<c:if test="${receiveMessageCount>0}">
+							<c:if test="${receiveMessageCount > 0}">
 								<c:forEach var="receiveMessageCommand" items="${receiveMessageList}">
 									<div class="chat_list">
 										<div class="chat_people">
 											<div class="chat_img">
+													<c:if test="${receiveMessageCommand.message_receive_status == 1}">
+														<span class="badge badge-pill badge-warning" style="margin-bottom: -15; position: relative;">N</span>
+													</c:if>
+													
 												<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
 											</div>
 											<div class="chat_ib">

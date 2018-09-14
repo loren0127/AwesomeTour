@@ -1,8 +1,11 @@
 package kr.spring.chat.dao;
  import java.util.List;
 import java.util.Map;
- import org.apache.ibatis.annotations.Insert;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.chat.domain.MessageCommand;
  public interface MessageMapper {
@@ -14,4 +17,10 @@ import kr.spring.chat.domain.MessageCommand;
 	
 	@Select("SELECT * FROM message WHERE message_num=#{message_num}")
 	public MessageCommand selectMessageDetail(int message_num);
-} 
+	
+	@Update("UPDATE message SET message_receive_status=0 WHERE message_receiver=#{user_email} AND message_num=#{message_num}")
+	public void updateMessageRead(Map<String, Object> map);
+	
+	@Delete("DELETE message WHERE message")
+	public void deleteMessageColumn();
+}

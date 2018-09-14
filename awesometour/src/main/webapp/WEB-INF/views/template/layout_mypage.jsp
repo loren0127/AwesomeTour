@@ -72,7 +72,7 @@
 					<div id="member" class="container tab-pane active">
 						<hr>
 						<li><a href="#">내 정보관리</a><hr></li>
-						<li><a href="#">내 예약관리</a><hr></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/mypageReservationList.do">내 예약관리</a><hr></li>
 						<li><a href="#">내 그룹관리</a><hr></li>
 					</div>
 					<div id="host" class="container tab-pane">

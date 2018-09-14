@@ -39,10 +39,18 @@
 				</c:if>
 				<c:if test="${messageCommand.message_type == 'chatInvite'}">
 					<div class="sent_msg_long">
+						<a href="/awesometour/chat/insertMessageSend.do"><p style="text-align: center;">답장하기</p></a>
+					</div>
+					<hr>
+					<div class="sent_msg_long">
 						<a href="${messageCommand.message_URL}"><p style="text-align: center;">채팅 참여하기</p></a>
 					</div>
 				</c:if>
 				<c:if test="${messageCommand.message_type == 'groupInvite'}">
+					<div class="sent_msg_long">
+						<a href="/awesometour/chat/insertMessageSend.do"><p style="text-align: center;">답장하기</p></a>
+					</div>
+					<hr>
 					<div class="sent_msg_long">
 						<a href="${messageCommand.message_URL}"><p style="text-align: center;">그룹 참여하기</p></a>
 					</div>

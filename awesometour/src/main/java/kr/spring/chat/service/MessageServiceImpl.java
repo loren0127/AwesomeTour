@@ -26,4 +26,7 @@ public class MessageServiceImpl implements MessageService {
 	public MessageCommand selectMessageDetail(int message_num) {
 		return messageMapper.selectMessageDetail(message_num);
 	}
+	public void updateMessageRead(Map<String, Object> map) {
+		messageMapper.updateMessageRead(map);
+	}
 }

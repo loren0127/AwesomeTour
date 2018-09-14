@@ -13,12 +13,12 @@
 		<where>
 			<if test="type=='receive'">
 				<![CDATA[
-	 			rnum>=#{start} AND rnum<=#{end} AND message_receiver=#{user_email} AND message_receive_status=1
+	 			rnum>=#{start} AND rnum<=#{end} AND message_receiver=#{user_email} AND message_receive_status!=-1
 	 			]]>
 			</if>
 			<if test="type=='send'">
 				<![CDATA[
-	 			rnum>=#{start} AND rnum<=#{end} AND message_sender=#{user_email} AND message_send_status=1
+	 			rnum>=#{start} AND rnum<=#{end} AND message_sender=#{user_email} AND message_send_status!=-1
 	 			]]>
 			</if>
  		</where>
@@ -32,10 +32,10 @@
 		FROM message
 		<where>
 			<if test="type == 'receive'">
-				message_receiver=#{user_email} AND message_receive_status=1
+				message_receiver=#{user_email} AND message_receive_status!=-1
 			</if>
 			<if test="type == 'send'">
-				message_sender=#{user_email} AND message_send_status=1
+				message_sender=#{user_email} AND message_send_status!=-1
 			</if>
 		</where>
 	</select>
