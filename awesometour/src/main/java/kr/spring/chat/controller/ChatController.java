@@ -186,6 +186,10 @@ public class ChatController {
 		//Message send start
 		messageCommand.setMessage_content(StringUtil.useBrNoHtml(messageCommand.getMessage_content()));
 		messageCommand.setMessage_title(StringUtil.useBrNoHtml(messageCommand.getMessage_title()));
+		
+		if(messageCommand.getMessage_type().equals("normal")) {
+			messageCommand.setMessage_URL("");
+		}
 		messageService.insertMessageSend(messageCommand);
 		//Message send end
 		

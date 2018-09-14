@@ -38,17 +38,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/mypage.css">
 
-<!-- Font Awesome JS -->
-<script defer=""
-	src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-	integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-	crossorigin="anonymous"></script>
-<script defer=""
-	src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-	integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-	crossorigin="anonymous"></script>
-</head>
-
 <body>
 	<tiles:insertAttribute name="header"/>
 	<div style="padding-top: 100px;"></div>
@@ -107,15 +96,15 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 
-					<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary">
 						<svg class="svg-inline--fa fa-align-left fa-w-14"
 							aria-hidden="true" data-prefix="fas" data-icon="align-left"
 							role="img" xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 448 512" data-fa-i2svg="">
+							viewBox="0 0 448 512" data-fa-i2svg="" style="width:15px;">
 							<path fill="currentColor"
 								d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path></svg>
 						<!-- <i class="fas fa-align-left"></i> -->
-						<span>Toggle</span>
+						<span>메뉴</span>
 					</button>
 				</div>
 			</nav>
@@ -128,10 +117,9 @@
 	</div>
 	
 	<!-- Popper.JS -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
-		integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+			integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+			crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
         $(document).ready(function () {

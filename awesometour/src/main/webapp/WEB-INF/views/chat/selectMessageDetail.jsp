@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="mesgs col-sm-12 col-md-6" id="mesgs">
+<div class="mesgs col-sm-12 col-md-6" id="mesgs" style="padding:5px 0px 0 5px;">
 	<div class="msg_history" id="chatMessageArea">
 		<div class="outgoing_msg">
 			<div class="sent_msg_long">
@@ -30,7 +30,13 @@
 					<span class="time_date">작성일 : ${messageCommand.message_reg_date}</span>
 				</div>
 			</div>
+			
 			<div class="outgoing_msg">
+				<c:if test="${messageCommand.message_type == 'normal'}">
+					<div class="sent_msg_long">
+						<a href="/awesometour/chat/insertMessageSend.do"><p style="text-align: center;">답장하기</p></a>
+					</div>
+				</c:if>
 				<c:if test="${messageCommand.message_type == 'chatInvite'}">
 					<div class="sent_msg_long">
 						<a href="${messageCommand.message_URL}"><p style="text-align: center;">채팅 참여하기</p></a>
@@ -43,6 +49,5 @@
 				</c:if>
 			</div>
 		</div>
-		<hr>
 	</div>
 </div>
