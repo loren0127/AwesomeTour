@@ -272,7 +272,7 @@ public class ReservationController {
 			HoldingCommand hold = new HoldingCommand();
 			hold.setAcc_num(reservationCommand.getAcc_num());
 			hold.setAt_money(reservationCommand.getRv_money());
-			hold.setHd_account(paymentCommand.getPm_deposit_ac());
+			hold.setHd_account("card");
 			hold.setHd_deposit(1);
 			adminService.insertHolding(hold);
 

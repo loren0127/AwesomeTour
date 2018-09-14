@@ -4,6 +4,39 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 
+<style>
+.state{
+	margin : 50px 30px;
+}
+#noSeePrice{
+ 	display:none;
+ 	}
+
+ @media ( max-width:766px ) {
+ 
+ 	input[type="text"]{
+ 	width:100%!important}
+ 	input[type="email"]{
+ 	width:100%!important}
+ 	
+ 	.sticky-top{
+ 	display:none;
+ 	}
+ 	#yogu{
+ 	width:100%!important ;
+ 	}
+ 	#payMain{
+ 	width:100%!important ;
+ 	}
+ 	#noSeePrice{
+ 	display:inline!important ;
+ 	}
+ 	#pm_validity{
+ 	margin-bottom:30px!important;
+ 	}
+ }
+ 
+</style>
     
 <script>
 $(function(){
@@ -21,15 +54,24 @@ $(function(){
 	var subDate = parseInt(diff/currDay+1);
 	
 	$("#during_date").append(subDate);
+	$("#during_date2").append(subDate);
+
 	$("#money_sp").append(numberWithCommas($("#money").val()));
-	
+	$("#money_sp2").append(numberWithCommas($("#money").val()));
+
 	$("#money_sum_sp").append(numberWithCommas(($("#money").val()*subDate)));
+	$("#money_sum_sp2").append(numberWithCommas(($("#money").val()*subDate)));
+
 	$("#money_sum").val(($("#money").val()*subDate));
 	
 	$("#fee_sp").append(numberWithCommas($("#money_sum").val()*0.1));
+	$("#fee_sp2").append(numberWithCommas($("#money_sum").val()*0.1));
+
 	$("#fee").val($("#money_sum").val()*0.1);
 	
 	$("#acc_money_sp").append(numberWithCommas(Number($("#money_sum").val())+Number($("#fee").val())));
+	$("#acc_money_sp2").append(numberWithCommas(Number($("#money_sum").val())+Number($("#fee").val())));
+
 	$("#acc_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 	
 	
@@ -110,10 +152,49 @@ ${rv.ag_grade }점<br>
 </span>
 </div>
 <!-- ------------ 사이드 메뉴 ---------------- -->
-
-
-<div style="width:70%">
+<div style="width:70%" id="payMain">
 <h1>결제하기</h1>
+<br>
+<div style="width:100%" id="noSeePrice">
+<h2>가격</h2>
+<div class="row">
+	<div class="col-6">
+	<span id="money_sp2"></span>원 x <span id="during_date2"></span>박<br>
+	수수료 (10%) <br>
+ 
+	</div>
+	
+	<div class="col-1">
+	 = <br>
+	 = <br>
+
+	</div>
+	
+	<div class="col-4">
+	<span id="money_sum_sp2"></span>원<br>
+	<span id="fee_sp2"></span>원<br>
+
+	</div>
+</div>
+	 <hr  noshade>
+<div class="row">	
+	
+	<div class="col-6">
+	총합계 <br> 
+	</div>
+	<div class="col-1">
+	 = <br>
+	</div>
+	
+	<div class="col-4">
+	<span id="acc_money_sp2"></span>원<br>
+	</div>
+</div>
+</div>
+<br>
+
+
+
  <c:if test="${count>0}" > 
 <div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
@@ -135,11 +216,11 @@ ${rv.ag_grade }점<br>
 <form:input class="form-control"  path="pm_name"  placeholder="홍길동" style="width:60%"/><br>
 <h4><label>이메일</label></h4>
 <form:input type="email" class="form-control"  path="pm_email" placeholder="example@email.com" style="width:60%"/>
-예약 내역이 이메일을 통해 전송됩니다.<br>
+예약 내역이 이메일을 통해 전송됩니다.<br><br>
  <div id="cardType">
 	<h4><label>카드번호</label></h4>
 
-	<form:input class="form-control"  type="number" path="pm_cardNum" name="card"  placeholder="카드번호" style="width:60%" value=""/><br>
+	<form:input class="form-control"  path="pm_cardNum" name="card"  placeholder="카드번호" style="width:60%" value=""/><br>
 	<form:input class="form-control"  path="pm_validity" name="만료일"  placeholder="만료일" value="" style="width:30%; display:inline" />
 	<form:input class="form-control"  path="pm_cvc" placeholder="CVC"  value="" style="width:30%;display:inline" />
 </div>
@@ -161,7 +242,7 @@ ${rv.ag_grade }점<br>
 인사말을 전하고 여행 목적을 알려주세요<br>
 <form:textarea class="form-control" path="rv_message"   rows="5" cols="20"  placeholder="회원님의 여행에 대해 자세히 알려주시면 호스트가 준비하는데 도움이 됩니다."/>
 </div>
-
+<br><br>
 <div>
 <h3>환불 정책</h3>
 체크인 30일 전까지 예약을 취소하면 전액 환불됩니다. 그 이후 체크인 전에 취소하면 50%가 환불됩니다.<br>

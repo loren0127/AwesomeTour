@@ -60,6 +60,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 
 //---------------------------현재날짜 구하기
 	var today = new Date();
+	today.setDate(today.getDate() + 1);
 	var dd = today.getDate();
 	var mm = today.getMonth()+1; //January is 0!
 	var yyyy = today.getFullYear();
@@ -72,9 +73,7 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 	    mm='0'+mm
 	} 
 
-	today = yyyy+'/'+mm+'/'+dd;
-	
-  
+	today = yyyy+'/'+mm+'/'+dd;  
   
   
 	if($('#chat_btn').val()==0){
