@@ -44,21 +44,22 @@ var currYear = currMonth * 12; // 년 만듬
 var subDate = parseInt(diff/currDay+1);
 
 $("#during_date").append(subDate);
-$("#money_sp").append(numberWithCommas($("#money").val()));
+$("#money_sp").append("₩"+numberWithCommas($("#money").val()));
 
-$("#money_sum_sp").append(numberWithCommas(($("#money").val()*subDate)));
+$("#money_sum_sp").append("₩"+numberWithCommas(($("#money").val()*subDate)));
 $("#money_sum").val(($("#money").val()*subDate));
 
-$("#fee_sp").append(numberWithCommas($("#money_sum").val()*0.1));
+$("#fee_sp").append("₩"+numberWithCommas($("#money_sum").val()*0.1));
 $("#fee").val($("#money_sum").val()*0.1);
 
-$("#rv_money_sp").append(numberWithCommas(Number($("#money_sum").val())+Number($("#fee").val())));
+$("#rv_money_sp").append("₩"+numberWithCommas(Number($("#money_sum").val())+Number($("#fee").val())));
 $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
+
 
 })
 
 </script>
-<form action="payment.do" >
+<form action="payment.do"  method="post">
 <br><br><br><br>
 <div class="container">
 <h1>예약 정보 확인</h1>
@@ -72,18 +73,18 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 
 
 <!-- ------------ 사이드 메뉴 ---------------- -->
-<div class="rounded sticky-top" style="float:right; border:1px solid #aaaaaa ; top: 100px; padding: 5px  10px; " >
+<div class="rounded sticky-top" style="float:right; border:1px solid silver ; top: 100px; padding-left:10px; font-size:10pt" >
 <div class="row">
-<div class="col-6" style="padding: 20px;">
+<div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 
-평점 : ${rv.ag_grade }점<br>
+${rv.ag_grade }점<br>
 </div>
 <div class="col-6">
-<img style="max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover">
+<img style=" padding: 10px; max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
 </div>
 </div>
 <hr  style="width:90%" noshade>
-인원수 ${rv.rv_people }명<br>
+인원수 : ${rv.rv_people }명<br>
 날짜 <span id="check_in">${rv.rv_startdate }</span> ~<span id="check_out">${rv.rv_enddate}</span> <br>
 <hr  style="width:90%" noshade>
 <span id="money_sp"></span>원 x <span id="during_date"></span>박 = <span id="money_sum_sp"></span>원<br>
@@ -107,7 +108,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 	<input type="hidden" name="acc_num" value="${rv.acc_num}">
 	<h3>숙박 정보</h3><br>
 	<ul style="list-style: none;"> 
-		<li ><img style="max-height:300px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover"></li>
+		<li ><img style="max-height:300px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover"></li>
 		<li><b>숙소 이름</b> : ${rv.acc_name }</li>
 		<li><b>주소</b> : ${rv.acc_address1} ${rv.acc_address2}</li>
 		<li><b>숙소 편의 서비스</b> : ${rv.se_name}</li>
@@ -138,7 +139,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 
 <div class="state">
 <h3>Awesome Tour 예약 팁</h3>
-<span style="font-size:12pt">
+<span style="font-size:10pt">
 각 숙소만의 특징이 있으며, 공간과 편의시설이 숙소마다 다릅니다.<br>
 숙소를 존중하는 마음으로 이용해 주세요. 호스트의 소중한 집이니까요.<br>
 숙박 전과 숙박 기간 중에 그룹 채팅을 통해 활발히 소통하세요!<br>

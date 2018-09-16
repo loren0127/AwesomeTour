@@ -9,6 +9,11 @@
   	img.groupListImg{
     	 max-height: 12vw!important;
   		}
+  		
+  	.hobby .col-4{
+    	 padding-left: 0;
+  	}
+  	
 	}
 	@media screen and (min-width:760px) and (max-width:966px) {
   	img.groupListImg{

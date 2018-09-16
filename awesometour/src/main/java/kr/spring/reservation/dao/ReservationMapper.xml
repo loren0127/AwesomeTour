@@ -8,14 +8,14 @@
 		pm_cardNum, pm_cvc,pm_validity) 
 		</if>
 		<if test="pm_type == 'b'">
-		pm_account,pm_depositor,pm_deposit_ac)
+		pm_depositor,pm_deposit_ac)
 		</if>
 		VALUES (rv_seq.currval,#{pm_name},#{pm_email},#{pm_type},
 		<if test="pm_type == 'c'">
 		#{pm_cardNum}, #{pm_cvc},#{pm_validity}) 
 		</if>
 		<if test="pm_type == 'b'">
-		#{pm_account},#{pm_depositor},#{pm_deposit_ac})
+		#{pm_depositor},#{pm_deposit_ac})
 		</if>
 	</insert>
 	

@@ -2,6 +2,7 @@ package kr.spring.reservation.controller;
 
 
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.spring.accom.domain.HotelDetailCommand;
+import kr.spring.accom.service.AccomDetailService;
 import kr.spring.admin.domain.AccountCommand;
 import kr.spring.admin.domain.HoldingCommand;
 import kr.spring.admin.service.AdminService;
@@ -52,13 +55,21 @@ public class ReservationController {
 	private ChatService chatService;
 	@Resource
 	private AdminService adminService;
+	@Resource
+	private AccomDetailService accomDetailService;
 	@RequestMapping("/reservation/confirm.do")
 	public String confirm(@RequestParam("im_ac_num") int acc_num,@RequestParam("check_in") String check_in,
 						  @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
-						  @RequestParam("ro_room_num") int ro_num,HttpSession session) {
+						  @RequestParam("ro_room_num") int ro_room_num,HttpSession session) {
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("acc_num", acc_num);
+		map.put("ro_room_num",ro_room_num);
+		int ro_num = reservationService.selectRoNum(map);
+		if(log.isDebugEnabled()) {
+			log.debug("<<ro_num>> : "+ro_num);
+		}
 		map.put("ro_num",ro_num);
+
 		int count = reservationService.selectReservationCount(acc_num);
 		ReservationCommand reservationCommand = reservationService.selectRerservationAcc(map);
 		reservationCommand.setAcc_num(acc_num);
@@ -66,7 +77,6 @@ public class ReservationController {
 		reservationCommand.setRv_people(people_count);
 		reservationCommand.setRv_startdate(check_in);
 		reservationCommand.setRv_enddate(check_out);
-		reservationCommand.setRo_num(ro_num);
 		reservationCommand.setHost_email(reservationCommand.getAcc_host());
 		if(log.isDebugEnabled()) {
 			log.debug("<<rv>> : "+reservationCommand);
@@ -88,7 +98,7 @@ public class ReservationController {
 		return "reservationResult";
 					}
 
-	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.GET)
+	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.POST)
 	public String payment(@RequestParam("acc_num") int acc_num,@RequestParam("rv_money") int rv_money,
 						@RequestParam(value="rv_request", defaultValue="") String rv_request, Model model,HttpSession session) {
 
@@ -114,7 +124,7 @@ public class ReservationController {
 		return "reservationPayment";
 	}
 	
-	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.POST)
+	@RequestMapping(value="/reservation/result.do" ,method=RequestMethod.POST)
 	public String result(@ModelAttribute("pmCommand") PaymentCommand paymentCommand,
 						HttpSession session,Model model) {
 	
@@ -145,12 +155,84 @@ public class ReservationController {
 		
 		
 		//이름생성
-		Calendar c = Calendar.getInstance();
+ 		////////////////////////
+ 		String todayYY = reservationCommand.getRv_startdate().substring(0, 4);
+ 		String todayMM = reservationCommand.getRv_startdate().substring(5, 7);
+ 		String todayDD = reservationCommand.getRv_startdate().substring(8, 10);
 
- 		String week = String.valueOf(c.get(Calendar.WEEK_OF_MONTH));
- 		int month = c.get(Calendar.MONTH+1);
+ 		 
 
- 		String g_name =reservationCommand.getAcc_name()+" "+month+"월 "+week+"주 예약자"; 
+ 		// 오늘 일자를 받아서 int 형으로 치환 한다.
+ 		int year = Integer.parseInt(todayYY);
+ 		int month = Integer.parseInt(todayMM)-1;   // 월은 0 부터 시작이기 때문에 -1 을 해준다.
+ 		int day = Integer.parseInt(todayDD);
+
+ 		 
+
+ 		int monday = 0;
+ 		int friday = 0;
+
+ 		 
+
+ 		// calendar 선언.
+ 		Calendar to_day = Calendar.getInstance();
+ 		//오늘 일자를 setup 한다.
+ 		to_day.set(year, month, day);
+
+
+ 		// 오늘을 기준으로 해당 주의 월요일 과 금요일을 구한다.
+ 		int today_week =  to_day.get(Calendar.DAY_OF_WEEK); // 오늘이 무슨 요일인지 int 형으로 반환.
+
+ 		if(today_week == Calendar.MONDAY) // 먼저 월요일을 구하기 위해 오늘이 월요일인지 체크 한다.
+ 		{
+ 		    monday = day;
+ 		    friday = day + (Calendar.FRIDAY - Calendar.MONDAY); 
+ 		    // 오늘이 월요일이면 오늘 일자에  금요일과 월요일의 일차수를 뺀 만큼 더하면 금요일 일자가 나온다.
+ 		}
+ 		else if(today_week == Calendar.FRIDAY) // 오늘 일자가 금요일인지 체크 한다.
+ 		{
+ 		    // 오늘이 금요일이면 오늘 일자에  금요일과 월요일의 일차수를 뺀 만큼 빼면 월요일 일자가 나온다.
+ 		    monday = day - (Calendar.FRIDAY - Calendar.MONDAY);
+ 		    friday = day;
+ 		}
+ 		else if(today_week == Calendar.SUNDAY)
+ 		{
+ 		    // today_week 가 일요일 이면 오늘 일자에 sunday(1)를 더하여 monday 일자를 구함.
+ 		    monday = day + Calendar.SUNDAY; 
+ 		    friday = day + (Calendar.FRIDAY - Calendar.SUNDAY);
+ 		    // 오늘이 일요일이면 friday(6) 에 sunday(1)을 뺀 만큼 더하여 금요일 일자를 구함.
+ 		}
+ 		else if(today_week == Calendar.SATURDAY)
+ 		{
+ 		    // 오늘이 토요일이면 saturday(7) 에서 monday(2)를 뺀 후 오늘일자에서 뺀 뒤 월요일 일자를 구함.
+ 		    monday = day - (Calendar.SATURDAY - Calendar.MONDAY);
+ 		    // 오늘이 토요일이면 saturday(7) 에서 friday(6)을 뺀 후 오늘일자에서 뺀 뒤 금요일 일자를 구함.
+ 		    friday = day - (Calendar.SATURDAY - Calendar.FRIDAY);    
+ 		}
+ 		else  // 화 , 수 , 목 일 때
+ 		{
+ 		    // 오늘 일자 표시 에서 monday(2) 를 뺀 후 오늘 일자에서 해당 일자를 뺀다.
+ 		    monday = day - (today_week - Calendar.MONDAY);
+ 		    // friday(6) 에서 오늘 일자 표시를 뺀 후 오늘일자에 해당 일자를 더한다. 
+ 		    friday = day + (Calendar.FRIDAY - today_week);
+ 		}
+
+ 		 
+
+ 		//이번주의 주차를 구한다.
+ 		//주차는 월요일을 기준으fw로 해당 달의 주차를 표시 한다.
+
+ 		to_day = Calendar.getInstance(); // to_day 를 초기화 한다.
+
+ 		to_day.set(year, month, monday); // 월요일에 해당하는 주차 구하기 위해 월요일 일자를 입력.
+
+ 		int this_week =  to_day.get(Calendar.WEEK_OF_MONTH); // 이번 주의 월요일에 해당하는 주차를 가져온다.
+
+ 		 
+ 	   
+ 		////////////////
+ 		
+ 		String g_name =reservationCommand.getAcc_name()+" "+month+"월 "+this_week+"주 예약자"; 
  		//reservationCommand.getName() 
 
  		//이름으로 조회
@@ -169,18 +251,29 @@ public class ReservationController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
  		Calendar cal = Calendar.getInstance();
  		cal.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
- 		String close_date = formatter.format(c.getTime());
+ 		to_day.add(Calendar.DATE, 7);
+ 		String close_date = formatter.format(to_day.getTime());
+ 		Map<String, Object> mapImage = new HashMap<String, Object>(); 
+ 		mapImage.put("im_ac_num", reservationCommand.getAcc_num());
+ 		mapImage.put("ro_room_num", reservationCommand.getRo_room_num());
 
+ 		
+ 		
+		HotelDetailCommand image = accomDetailService.selectHotelImage(mapImage);
+
+ 		
 		groupCommand.setG_close_date(close_date);
 		groupCommand.setG_explain(g_name+" 위한 그룹입니다!");
-		groupCommand.setG_image(reservationCommand.getIm_cover());
+		groupCommand.setG_image(null);
 		groupCommand.setG_name(g_name);
-		groupCommand.setG_imageName(reservationCommand.getIm_cover_name());
+		groupCommand.setG_imageName(image.getIm_cover_name());
 		groupCommand.setG_isPrivate(1);
 		groupCommand.setG_isSearch(1);
 		groupCommand.setMember_email(reservationCommand.getHost_email());
 		groupCommand.setG_address1(reservationCommand.getAcc_address1());
 		groupCommand.setG_address2(reservationCommand.getAcc_address2());
+		groupCommand.setG_hobby("예약전용");
+
 		if(log.isDebugEnabled()) {
 			log.debug("<<groupCommand>> : "+groupCommand);
 		}
@@ -195,6 +288,16 @@ public class ReservationController {
 		command.setChat_all_member_max(100);
 		//그룹 채팅 생성
 		chatService.insertChatAllGroup(command);
+		//호스트 삽입
+		ChatMemberCommand hostCommand = new ChatMemberCommand();
+		hostCommand.setMember_email(reservationCommand.getHost_email());
+		hostCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+		Map<String,Object> m_map = new HashMap<String, Object>();
+		m_map.put("member_email", email);
+		m_map.put("chat_all_num", hostCommand.getChat_all_num_member());
+		
+		if(reservationService.selectGroupMemberCount(m_map)==0)		
+		chatService.insertChatMember(hostCommand);
 		}
 		
 

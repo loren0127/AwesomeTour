@@ -24,14 +24,13 @@ function count_ck(obj){
 		if(chkbox[i].checked){
 
 			chkCnt++;
-
+	
 		}
-
 	}
 
 	if(chkCnt>3){
 
-		alert("최대 3개만 가능합니다");
+		alert("최소 1개이상 최대 3개만 가능합니다");
 
 		obj.checked = false;
 
@@ -116,18 +115,24 @@ $( "#groupAdd" ).button().on( "click", function() {
 	});
 
   });
-
+  
+  
+  ////////////////////////////////////////////
+  
+  
+    
 
 })
 </script>
 <div class="container section-sepa1" style="padding-Top:100px;padding-bottom: 25px;">
-
+<c:if test="${!empty user_email }">
 	<button class="btn pull-right" id="groupAdd">그룹 생성</button>
+</c:if>
 	<h2 > 모임</h2>
 </div>
 
 <!-- ----------------------------네비바 --------------------------------------------- -->
- <nav class="navbar navbar-expand-sm justify-content-center" style="background:#c7c7c7; padding: 10px 0;  line-height:30px;" >
+ <nav class="navbar navbar-expand-sm justify-content-center" style="background:#c7c7c7;   line-height:30px;" >
    
 				<ul class="nav navbar-nav " id="group_nav">
 			
@@ -223,6 +228,8 @@ $( "#groupAdd" ).button().on( "click", function() {
     <!-- ===========================================모달================================================== -->
 
 <div   id="addDialog"  class="container" title="그룹 생성">
+  <p class="validateTips"></p>
+
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">1.이름 및 소개</a></li>
@@ -264,9 +271,11 @@ $( "#groupAdd" ).button().on( "click", function() {
   <div id="tabs-3">
   	  <label for="g_close_date">마감일시</label>
        <form:input type="date"  path="g_close_date" id="g_close_date" class="text ui-widget-content ui-corner-all"/>
-      미입력시 기본 1달로 생성 됩니다<br><br>
+      <br>
       
        <label for="upload">사진 등록</label>
+       <img id="LoadImg" style="height: 150px;">
+       
         <form:input type="file" name="upload" path="upload"/><br>
        <label for="g_close_date">취미(최대 3개까지 가능)
        </label>
@@ -274,22 +283,22 @@ $( "#groupAdd" ).button().on( "click", function() {
 		<div class="row">
  
       <div class="col-4">
-     	 	<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="야외활등"/>야외활동<br>
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="기술"/>기술<br>
-			<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="스포츠"/>스포츠<br>
+     	 	<form:checkbox path="g_hobby"   onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="야외활등"/>야외활동<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="기술"/>기술<br>
+			<form:checkbox path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="스포츠"/>스포츠<br>
       </div>
 			
 	 <div class="col-4">
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="학습"/>학습<br>
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="사진촬영"/>사진촬영<br>
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="음식"/>음식<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="학습"/>학습<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="사진촬영"/>사진촬영<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="음식"/>음식<br>
 			
 	 </div>
 	 
 	<div class="col-4">
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="건강과 웰빙"/>건강과 웰빙<br>
-			<form:checkbox  path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="글쓰기"/>글쓰기<br>
-			<form:checkbox path="g_hobby"  onClick="count_ck(this);" style="display:inline"  value="게임"/>게임<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="건강과 웰빙"/>건강과 웰빙<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="글쓰기"/>글쓰기<br>
+			<form:checkbox path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="게임"/>게임<br>
      </div>
      
 		</div>
@@ -297,7 +306,10 @@ $( "#groupAdd" ).button().on( "click", function() {
   <!-------------------------- 탭 3-------------------- -->
   <div id="tabs-4">
   	 <label for="g_close_date">초대 하기</label>
-  	  <a href="#">+</a> 
+  	  <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; ">
+  	  
+  	  <div style="color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'><b>+</b></div>
+  	  </div> 
 	
   </div>
 

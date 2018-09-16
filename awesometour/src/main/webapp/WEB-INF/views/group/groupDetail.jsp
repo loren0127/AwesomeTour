@@ -209,11 +209,21 @@ $('.hobby').each(function(element, index){
 
 </script>
  <style>
+#sm_title{
+	display:none;
+}
+
+#big_title{
+	display:block;
+}
+
  @media ( max-width: 575px ) {
- #title{text-align:center}
- #title img{
- 	margin-left:50px!important;
- }
+#sm_title{
+	display:block;
+}
+#big_title{
+	display:none;
+}
  #mainImg img{
  	max-height:300px!important;
  }
@@ -231,14 +241,15 @@ $('.hobby').each(function(element, index){
  </style>
     
 <!DOCTYPE html>
-<br><br><br><br>
+<br><br><br>
 
 
-	<div class="container" >
+	<div id="map" style="width:100%; height:200px;    position: absolute;"  ></div>
+	<div class="container"style="width:100%; height:200px; z-index:1000; position:relative" >
+	
 		<div class="row">
 			<div class="col-xs-12 col-sm-10" id="title">
-			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
-	 		<h1 >${group.g_name}</h1>
+			
 	 		<c:forEach var="list" items="${memberList}">
 	 		
 	 			<c:if test="${list.member_email == group.member_email}">
@@ -247,27 +258,18 @@ $('.hobby').each(function(element, index){
 								 fn:endsWith(list.member_filename,'.JPG') ||
 								 fn:endsWith(list.member_filename,'.gif') ||
 								 fn:endsWith(list.member_filename,'.GIF') }">
-						<img src="../member/imageView.do?member_email=${list.member_email}" style="margin: 0 10px; width:50px; height:50px " align="left">		
+						<img src="../member/imageView.do?member_email=${list.member_email}" style="border:3px solid white ;margin: 0 10px; width:150px; height:150px; bottom: -300px;
+    left: 10px; position: absolute;" align="left">		
 					</c:if>
 					<c:if test="${empty list.member_filename}">
-						<img class="rounded-circle" src="../resources/images/rome.jpg" style="margin: 0 10px;width:50px; height:50px" align="left">
+						<img class="rounded-circle" src="../resources/images/rome.jpg" style="border:3px solid white ;margin: 0 10px; width:150px; height:150px; bottom: -300px;
+    left: 10px; position: absolute;" align="left">		
 					</c:if>
-					주최자 :  ${list.member_nickname} <font color="gray">${list.member_email}</font> <br>
-					공개여부 : 
 					
-					<c:if test="${group.g_isPrivate == 0 }">
-					공개
-					</c:if>
-					<c:if test="${group.g_isPrivate == 1 }">
-					비공개
-					</c:if>
-					</div> 
-					 
+					</div>
 				</c:if>
-			</c:forEach>
-			<c:if test="${list.member_email == group.member_email}">
-	 			<a href="groupUpdate.do&&g_num='+${group.g_num}+'" class="btn" id="group_update" >수정</a>
-	 		</c:if>
+		</c:forEach>
+			
 	 		<input type="hidden" id="g_num" value="${group.g_num}">
 	 		<input type="hidden" id="g_name" value="${group.g_name}">
 	 		<input type="hidden" id="chat_btn" value="${chat}">
@@ -275,20 +277,39 @@ $('.hobby').each(function(element, index){
 			</div>
  		
 	 		<div class=" col-xs-12 col-sm-2 " style="    text-align: center;"> 		
-				<button class="btn" id="group_in" style="margin:30px;    width: 150px;    height: 50px;">그룹 참가</button>
-				<button class="btn" id="chat_in" style="margin:30px;    width: 150px;    height: 50px;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'>채팅 참가</button>
-				
+				<c:if test="${list.member_email == group.member_email}">
+	 			<a href="groupUpdate.do&&g_num='+${group.g_num}+'" class="btn" id="group_update" >수정</a>
+	 		</c:if>
+	 		
+			 				
 			</div>
 		</div>
 	</div>
 
+	<div  style="  height:70px; box-shadow: 2px 2px 2px 2px #efefef; padding-left:30%"> 	
+		<div class="container" >
+			<button class="btn" id="group_in" style="  margin :15px 30px ; float:right;  width: 100px;    height: 40px;">그룹 참가</button>
+			<button class="btn" id="chat_in" style="  margin :15px 30px ; float:right;  width: 100px;    height: 40px;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'>채팅 참가</button>
+	<div id="big_title" style="    padding-top: 10px;">
+			<B style="font-size:24pt">${group.g_name}</B>
+			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
+	</div>
+		</div>	
+	</div>
 	
 <div>
 	<div class="container" >
 		<div class="row" >
 
-
 	<div class="col-xs-12 col-sm-9" style=" padding:10px 0 ;"> 
+
+		<div style="margin:10px 50px; min-height:50px" id="sm_title">
+		<br>
+			<span style="color:gray;">${group.g_reg_date}~${group.g_close_date}</span><br>
+			<h2 >${group.g_name}</h2>
+
+		</div>
+
 
 		<div style="margin:50px; min-height:150px; " >
 			<h4>소개</h4>
@@ -312,17 +333,32 @@ $('.hobby').each(function(element, index){
 					<img class="rounded" src="../resources/images/mbr-1.jpg"   style=" max-width:100%; margin:5px 0 ;  max-height:20vw;" >
 			</c:if>
 	 		</div>
-	 		<br><span style="margin-left:10px">${group.g_explain}</span><br>
+	 		<br>
+	 	
+	 		<div style="margin-left:10px">
+	 			<c:forEach var="list" items="${memberList}">
+		 			<c:if test="${list.member_email == group.member_email}">
+			 		주최자 :  ${list.member_nickname} <font color="gray">${list.member_email}</font> <Br>
+		 			</c:if>
+		 		</c:forEach>
+					공개여부 : 
+					<c:if test="${group.g_isPrivate == 0 }">
+					공개
+					</c:if>
+					<c:if test="${group.g_isPrivate == 1 }">
+					비공개
+					</c:if><br>
+					<p style="padding-top:10px">
+	 		${group.g_explain}</p> </div><br>
 		</div>
 	 
 		<div style="margin:50px; min-height:150px">
-			<h4>위치</h4>
+			<h4>주소</h4>
 			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
 			<br>
-			
-			<div id="map" style="width:100%; height:300px; max-height:300px; " ></div>
-				<span id="add1">${group.g_address1 }</span> ${group.g_address2 }
-				<br>
+			<br>
+			<span id="add1">${group.g_address1 }</span> ${group.g_address2 }
+
 		</div>
 	
 		<div style="margin:50px; min-height:150px">
@@ -340,7 +376,7 @@ $('.hobby').each(function(element, index){
 			<hr size="10%" style="width: 80%; float: left;  background-color:#dae0e5;  margin: 8px 0 0;">  			<br>
 			<br><div class="row">
 				<c:forEach var="list" items="${memberList}">
-					<div class="col-xs-12 col-sm-3  rounded"  style="text-align:center;padding:10px 5px;     box-shadow: 2px 2px 2px 2px #efefef;  margin: 10px 10px">
+					<div class="col-sm-12 col-md-6 col-lg-3 rounded"  style="text-align:center;padding:10px 5px;     box-shadow: 2px 2px 2px 2px #efefef;  margin: 10px 10px">
 					
 							<c:if test="${fn:endsWith(list.member_filename,'.jpg') ||
 									  fn:endsWith(list.member_filename,'.JPG') ||

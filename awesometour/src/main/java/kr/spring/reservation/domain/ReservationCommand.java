@@ -1,6 +1,7 @@
 package kr.spring.reservation.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class ReservationCommand {
 	private int rv_num;
@@ -12,6 +13,7 @@ public class ReservationCommand {
 	private String host_email;
 	private String member_email;
 	private int ro_num;
+	private int ro_room_num;
 	private String ro_sub;
 	private int ro_price;
 	private Date rv_reg_date;
@@ -30,6 +32,14 @@ public class ReservationCommand {
 	private String acc_out;
 	private String se_name;
 	
+	
+	
+	public int getRo_room_num() {
+		return ro_room_num;
+	}
+	public void setRo_room_num(int ro_room_num) {
+		this.ro_room_num = ro_room_num;
+	}
 	public String getAcc_host() {
 		return acc_host;
 	}
@@ -184,13 +194,14 @@ public class ReservationCommand {
 	public String toString() {
 		return "ReservationCommand [rv_num=" + rv_num + ", rv_money=" + rv_money + ", rv_people=" + rv_people
 				+ ", acc_num=" + acc_num + ", rv_startdate=" + rv_startdate + ", rv_enddate=" + rv_enddate
-				+ ", host_email=" + host_email + ", member_email=" + member_email + ", ro_num=" + ro_num + ", ro_sub="
-				+ ro_sub + ", ro_price=" + ro_price + ", rv_reg_date=" + rv_reg_date + ", rv_status=" + rv_status
-				+ ", rv_message=" + rv_message + ", rv_request=" + rv_request + ", acc_name=" + acc_name + ", ag_grade="
-				+ ag_grade + ", im_cover_name=" + im_cover_name + ", acc_address1=" + acc_address1 + ", acc_address2="
-				+ acc_address2 + ", acc_in=" + acc_in + ", acc_out=" + acc_out + ", se_name=" + se_name + "]";
+				+ ", host_email=" + host_email + ", member_email=" + member_email + ", ro_num=" + ro_num
+				+ ", ro_room_num=" + ro_room_num + ", ro_sub=" + ro_sub + ", ro_price=" + ro_price + ", rv_reg_date="
+				+ rv_reg_date + ", rv_status=" + rv_status + ", rv_message=" + rv_message + ", rv_request=" + rv_request
+				+ ", acc_host=" + acc_host + ", acc_name=" + acc_name + ", ag_grade=" + ag_grade + ", im_cover_name=" + im_cover_name + ", acc_address1=" + acc_address1
+				+ ", acc_address2=" + acc_address2 + ", acc_in=" + acc_in + ", acc_out=" + acc_out + ", se_name="
+				+ se_name + "]";
 	}
 
-	
+		
 	
 }

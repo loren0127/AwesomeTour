@@ -48,9 +48,130 @@
 	      }
 	    });
 	 
+	  
+	  
+	    var g_name = $( "#g_name" ),
+	      g_explain = $( "#g_explain" ),
+	      g_address1 = $( "#g_address1" ),
+	      g_address2 = $( "#g_address2" ),
+	      g_close_date = $( "#g_close_date" ),
+	      upload = $( "#upload" ),g_hobby
+	      g_hobby = $( "#g_hobby" ),
+	      allFields = $( [] ).add( g_name ).add( g_explain ).add( g_address1 ).add( g_address2 ).add( g_close_date ).add( upload ).add( g_hobby ),
+	      tips = $( ".validateTips" );
+	  
+	   function updateTips( t ) {
+	      tips
+	        .text( t )
+	        .addClass( "ui-state-highlight" );
+	      setTimeout(function() {
+	        tips.removeClass( "ui-state-highlight", 1500 );
+	      }, 500 );
+	    }
+	 
+	    function checkLength( o, n, min, max ,view) {
+	      if ( o.val().length > max || o.val().length < min ) {
+	        o.addClass( "ui-state-error" );
+	        updateTips(  n + " 는(은)  " +
+	          min + "자 이상" + max + "자 미만 입니다." );
+	        $( "#tabs" ).tabs({ active: view });
+
+	        return false;
+	      } else {
+	        return true;
+	      }
+	    }
+	 
+	    function checkRegexp( o, regexp, n ,view) {
+	      if ( !( regexp.test( o.val() ) ) ) {
+	        o.addClass( "ui-state-error" );
+	        updateTips( n );
+	        $( "#tabs" ).tabs({ active: view });
+
+	        return false;
+	      } else {
+	        return true;
+	      }
+	    }
+	    
+	    function checkEmpty( o, regexp, n ,view) {
+		      if (  o.val() == '' || typeof o.val() == 'undefined' ) {
+		        o.addClass( "ui-state-error" );
+		        updateTips( n );
+		        $( "#tabs" ).tabs({ active: view });
+		        return false;
+		      } else {
+		        return true;
+		      }
+		    }
+	    
+	    function count_ck(view){
+
+	    	var chkbox = document.getElementsByName("g_hobby");
+	    	var chkCnt = 0;
+	    	for(var i=0;i<chkbox.length; i++){
+	    		if(chkbox[i].checked){
+	    			chkCnt++;
+	    		}
+	    		
+	    	}
+	    	if( chkCnt==0){
+		        updateTips( "취미를 최소 1개이상 체크해야 합니다" );
+		        $( "#tabs" ).tabs({ active: view });
+
+	    		return false;
+
+	    	}
+
+	    	return true;
+	    }
+
+	    
+	  
 	  	//그룹 생성
 	    var form = dialog.find( "form" ).on( "submit", function( event ) {
+	    	
 	      event.preventDefault();
+	      
+	      
+	      
+	      var valid = true;
+	      allFields.removeClass( "ui-state-error" );
+	      
+	  
+	 
+	      valid = valid && checkLength( g_name, "그룹 이름", 1, 16 ,0);
+	      valid = valid && checkLength( g_explain, "그룹 소개", 1, 800 ,0);
+	      valid = valid && checkEmpty( g_address1, "주소", "주소를 입력해 주세요",1);
+	      valid = valid && checkEmpty( g_address2, "나머지주소", "나머지 주소를 입력해 주세요",1);
+	      valid = valid && checkEmpty( g_close_date, "종료일", "종료일을 채워주세요",2 );
+	      valid = valid && checkEmpty( upload, "이미지", "이미지를 추가해주세요",2 );
+	      valid = valid && count_ck(2);
+
+
+
+	      //valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+	      //valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+	      //valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+	 
+	      if ( !$("#g_private").prop("checked")){
+	    	  
+	    	  $("#g_private").val("0");
+	    	  
+	      }
+	      
+	      if ( !$("#g_search").prop("checked")){
+	    	  
+	    	  $("#g_search").val("0");
+	    	  
+	      }
+
+	    	  
+	      
+	      
+	      if ( valid ) {
+	        
+	   
 	 		$('#groupInsert').ajaxSubmit({
 	    	  	type:'post',
 				//data:data,
@@ -78,6 +199,8 @@
 				}
 	    	  
 	      })
+	      
+	      }
 	    });
 	    //다이얼로그 출력 버튼
 	    $( "#groupAdd" ).button().on( "click", function() {
@@ -157,10 +280,10 @@
 											image.endsWith('.png') ||
 											image.endsWith('.PNG') ||
 											image.endsWith('.GIF') ){
-								appendText+='<img  class="rounded" src="../group/imageView.do?g_num='+item.g_num+'" style=" max-width:100%; ">';
+								appendText+='<img  class="rounded groupListImg" src="../group/imageView.do?g_num='+item.g_num+'" style=" max-width:100%; ">';
 										}
 								}else {
-								appendText+='<img class="rounded" src="../resources/img/mbr-1.jpg" style="  max-width:100%; " >';
+								appendText+='<img class="rounded groupListImg" src="../resources/img/mbr-1.jpg" style="  max-width:100%; " >';
 										}
 								appendText+='</div>';
 								appendText+='<h5 style="margin: 10px;">'+item.g_name+'</h5>';
@@ -197,4 +320,17 @@
 		      })
 	    });
 	     
+	    
+	 $('#upload').change(function(){
+	          if(this.files && this.files[0]) {
+	               var reader = new FileReader();
+	               reader.onload = function (e) {
+	                    $('#LoadImg').attr('src', e.target.result);
+	               }
+	               reader.readAsDataURL(this.files[0]);
+	          }
+	 })
+	     
+
+
 } );

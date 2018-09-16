@@ -48,9 +48,10 @@ $("#recGr").hide();
 <div class="container" >
 
 <div style="margin:30px 0">
-<h1>예약 정보 확인</h1>
+<h1>예약 완료</h1>
 </div>
-
+<h3>감사합니다! 예약이 완료 되었습니다.</h3>
+<br>
 <input type="hidden" id="money" name="money" value="${rv.ro_price}">
 <input type="hidden" id="money_sum" name="money_sum" >
 <input type="hidden" id="fee" name="fee">
@@ -70,7 +71,7 @@ $("#recGr").hide();
 		
 	</div>
 	<div class="col-3" style="padding: 5% 0;">
-	<img style="max-height:200px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_num}&kind=im_cover">
+	<img style="max-height:200px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
 	</div>
 
 	<hr  style="width:90%" noshade>
