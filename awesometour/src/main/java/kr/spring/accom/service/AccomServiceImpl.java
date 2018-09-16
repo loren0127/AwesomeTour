@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import kr.spring.accom.dao.AccomMapper;
 import kr.spring.accom.domain.AccomCommand;
 import kr.spring.accom.domain.ImageCommand;
+import kr.spring.accom.domain.ReviewCommand;
+import kr.spring.group.domain.GroupCommand;
 
 @Service("accomService")
 public class AccomServiceImpl implements AccomService{//飘罚黎记 贸府
@@ -26,5 +28,20 @@ public class AccomServiceImpl implements AccomService{//飘罚黎记 贸府
 	@Override
 	public ImageCommand selectImage(Integer im_ac_num) {
 		return accomMapper.selectImage(im_ac_num);
+	}
+
+	@Override
+	public List<AccomCommand> selectRecommendList(Map<String, Object> map) {
+		return accomMapper.selectRecommendList(map);
+	}
+
+	@Override
+	public ReviewCommand selectReviewList(Integer acc_num) {
+		return accomMapper.selectReviewList(acc_num);
+	}
+
+	@Override
+	public List<GroupCommand> selectGroupList(Map<String, Object> map) {
+		return accomMapper.selectGroupList(map);
 	}
 }

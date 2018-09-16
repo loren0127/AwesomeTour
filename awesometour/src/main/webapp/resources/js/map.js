@@ -14,7 +14,7 @@ $(document).ready(function(){
     var getNextday = year+"/"+month+"/"+(day+1);
 	
 	//JSON 문자열로 생성된 주소와 상호명 받을 배열 선언 -> push 함수 사용시 초기화 먼저!
-	var locations=[],contents=[],numbers=[];
+	var locations=[],contents=[],numbers=[],types=[];
 	var check_in = getToday;
 	var check_out = getNextday;
 	var people_count;
@@ -39,6 +39,7 @@ $(document).ready(function(){
 		locations=[];
 		contents=[];
 		numbers=[];
+		types=[];
 		
 		/*
 		 * $.ajax({옵션}) 메소드는 HTTP 요청을 만드는 강력하고도 직관적인 방법을 제공
@@ -68,6 +69,7 @@ $(document).ready(function(){
 					locations.push(item.acc_address1);
 					contents.push(item.acc_name);
 					numbers.push(item.acc_num);
+					types.push(item.ro_sub);
 				});
 			},
 			error:function(request,status,error){
@@ -100,7 +102,8 @@ $(document).ready(function(){
 				var content = '<div class="arrow_box">대한민국 호텔미텔미</div>';
 				if(locations.indexOf(address)>=0){
 					content = contents[locations.indexOf(address)];
-					im_ac_num = numbers[locations.indexOf(address)];
+					var im_ac_num = numbers[locations.indexOf(address)];
+					var type = types[locations.indexOf(address)];
 				}
 				
 				// 정상적으로 검색이 완료됐으면 
@@ -110,7 +113,12 @@ $(document).ready(function(){
 			        map.setCenter(new daum.maps.LatLng(result[0].y, result[0].x));
 			        
 					var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-					var custom_content = '<div class="arrow_box">'+content+'<br><a href="../accomDetail/accomDetail_hotel.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&search='+search+'" style="text-decoration:none"><i class="fa fa-arrow-right"></i>직접 확인</a></div>';
+					if(type == 'h'){
+						var custom_content = '<div class="arrow_box">'+content+'<br><a href="../accomDetail/accomDetail_hotel.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&search='+search+'" style="text-decoration:none"><i class="fa fa-arrow-right"></i>직접 확인</a></div>';
+					}
+					if(type == 'p'){
+						var custom_content = '<div class="arrow_box">'+content+'<br><a href="../accomDetail/accomDetail_private.do?im_ac_num='+im_ac_num+'&check_in='+check_in+'&check_out='+check_out+'&people_count='+people_count+'&search='+search+'" style="text-decoration:none"><i class="fa fa-arrow-right"></i>직접 확인</a></div>';
+					}
 					
 					// 커스텀 오버레이를 생성합니다
 					var customOverlay = new daum.maps.CustomOverlay({

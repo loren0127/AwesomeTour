@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>	
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 <!-- Masthead -->
@@ -128,78 +129,40 @@
 		<h3 class="text-center" style="padding-top: 3rem;">추천 숙소</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
+			<c:forEach var="list" items="${recommedList}" varStatus="status">
+			<c:if test="${status.count <= 4}">
+			<div class="col-sm-12 col-md-6 col-lg-3">
+				<div class="card-recom align-center">
 					<div>
-						<h4>STANDARD</h4>
+						<img src="${pageContext.request.contextPath}/main/imageView.do?im_ac_num=${list.acc_num}&kind=im_image2" style="width:100%;">
 					</div>
 					<div>
-						<span data-type="currency">$</span>
-						<span data-type="price">100</span><br>
-						<span data-type="price-term">Per Day</span>
+						<c:if test="${list.ro_sub} == 'h'">
+							<span>호텔</span>
+						</c:if>
+						<c:if test="${list.ro_sub} == 'p'">
+							<span>프라이빗 하우스</span>
+						</c:if>
+						<span style="font-size:20px;font-weight:bold;">${list.acc_name}</span><br>
 					</div>
 					<div>
-						블라블라블라
+						<span><fmt:formatNumber value="${list.ro_price}" type="currency"></fmt:formatNumber>/박</span>
+						<span>이용후기 <b>${list.review_count}</b>건</span>
 					</div>
 					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>STANDARD</h4>
-					</div>
-					<div>
-						<span data-type="currency">$</span>
-						<span data-type="price">100</span><br>
-						<span data-type="price-term">Per Day</span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
+						<c:if test="${list.ro_sub} == 'h'">
+							<input type="button" class="btn btn-warning hotelLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_hotel.do?im_ac_num=${list.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count${people_count}&search=${search}'">
+						</c:if>
+						<c:if test="${list.ro_sub} == 'p'">
+							<input type="button" class="btn btn-warning houseLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${list.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count${people_count}&search=${search}'">
+						</c:if>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>STANDARD</h4>
-					</div>
-					<div>
-						<span data-type="currency">$</span>
-						<span data-type="price">100</span><br>
-						<span data-type="price-term">Per Day</span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>STANDARD</h4>
-					</div>
-					<div>
-						<span data-type="currency">$</span>
-						<span data-type="price">100</span><br>
-						<span data-type="price-term">Per Day</span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
+			</c:if>
+			</c:forEach>	
 		</div>
 	</div>
 </div>
