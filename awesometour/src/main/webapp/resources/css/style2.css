@@ -1654,7 +1654,7 @@ button:focus {
 }
 
 .comments-area {
-  background: #fbf7fc;
+  background: #f8f9fa;
   border: 1px solid #eee;
   padding: 50px 30px;
   margin-top: 50px;
@@ -3643,6 +3643,18 @@ h1, h2, h3, h4, h5, h6 {
   @media screen and (min-width: 1000px){
      .starRev{
 	     padding-left:43%;
+     }
+  }
+   @media screen and (max-width: 999px){
+     .about_content{
+     	 width:80%;
+	     padding-left: 8%;
+     }
+  }
+  @media screen and (min-width: 1000px){
+     .about_content{
+	     width:55%;
+	     padding-left: 8%;
      }
   }
   

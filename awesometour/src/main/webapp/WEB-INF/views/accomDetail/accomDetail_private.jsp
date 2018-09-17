@@ -148,6 +148,7 @@
 			<input type="hidden" name="people_count" value="${people_count}" id="people_count">
 			<input type="hidden" name="start_date" value="${privateDetail2.start_date}" id="start_date">
 			<input type="hidden" name="end_date" value="${privateDetail2.end_date}" id="end_date">
+			<input type="hidden" name="acc_name" value="${privateDetail.acc_name}" id="acc_name">
 			<h3>예약 가능 여부</h3>
 			<p>*예약 가능 날짜만 참고하세요!</p>
 			<br>
@@ -263,8 +264,9 @@
             </div>
 		</div>
 		<br>
-		<div class="container" style="min-height:300px;" id="detailMap">
-			<h3>지도</h3>
+		<h3>지도</h3>
+		<div class="container" style="width:100%; height:300px;max-height:300px;" id="detailMap">
+			<span id="address">${privateDetail.acc_address1}</span>
 		</div>
 </div>
 </div>
