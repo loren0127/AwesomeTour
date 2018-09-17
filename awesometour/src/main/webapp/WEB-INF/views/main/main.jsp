@@ -64,7 +64,7 @@
 </header>
 
 <!-- About Us -->
-<div class="section-sepa1" style="max-height: 1000px;">
+<div class="section-sepa1" style="max-height: 2000px;">
 	<div class="container align-center">
 	<h3 class="text-center" style="padding-top: 3rem;">오썸투어는요</h3>
 	<div class="underline align-center"><div class="line"></div></div>
@@ -124,133 +124,95 @@
 </div>
 
 <!-- Recommendation -->
-<div class="section-sepa2" style="max-height: 1000px;">
+<div class="section-sepa2" style="max-height: 2000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">추천 숙소</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<c:forEach var="list" items="${recommedList}" varStatus="status">
+			<c:forEach var="recommend" items="${recommedList}" varStatus="status">
 			<c:if test="${status.count <= 4}">
-			<div class="col-sm-12 col-md-6 col-lg-3">
-				<div class="card-recom align-center">
-					<div>
-						<img src="${pageContext.request.contextPath}/main/imageView.do?im_ac_num=${list.acc_num}&kind=im_image2" style="width:100%;">
+			<c:set var="now" value="<%=new java.util.Date()%>"/>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="card-recom align-left">
+					<div style="margin-bottom: 10px;">
+						<img src="${pageContext.request.contextPath}/main/imageView.do?im_ac_num=${recommend.acc_num}&kind=im_image2" style="width:100%;">
 					</div>
 					<div>
-						<c:if test="${list.ro_sub} == 'h'">
-							<span>호텔</span>
+						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'h'}">
+							<span style="font-size:14px;margin-top:5px;">호텔</span>
 						</c:if>
-						<c:if test="${list.ro_sub} == 'p'">
-							<span>프라이빗 하우스</span>
+						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'p'}">
+							<span style="font-size:14px;margin-top:5px;">프라이빗 하우스</span>
 						</c:if>
-						<span style="font-size:20px;font-weight:bold;">${list.acc_name}</span><br>
+						<br><span style="font-size:18px;font-weight:bold;">${recommend.acc_name}</span><br>
 					</div>
 					<div>
-						<span><fmt:formatNumber value="${list.ro_price}" type="currency"></fmt:formatNumber>/박</span>
-						<span>이용후기 <b>${list.review_count}</b>건</span>
+						<span style="font-size:14px;"><fmt:formatNumber value="${recommend.ro_price}" type="currency"></fmt:formatNumber>/박</span><br>
+						<span style="font-size:14px;">이용후기 <b>${recommend.review_count}</b>건</span>
 					</div>
-					<div>
-						<c:if test="${list.ro_sub} == 'h'">
-							<input type="button" class="btn btn-warning hotelLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
-							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_hotel.do?im_ac_num=${list.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count${people_count}&search=${search}'">
+					<div style="margin-top: 10px;margin-bottom: 10px;">
+						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'h'}">
+							<input type="button" class="btn btn-default hotelLink_main" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_hotel.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count${people_count}&search=${recommend.acc_address1}'">
 						</c:if>
-						<c:if test="${list.ro_sub} == 'p'">
-							<input type="button" class="btn btn-warning houseLink" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
-							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${list.acc_num}&check_in=${check_in}&check_out=${check_out}&people_count${people_count}&search=${search}'">
+						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'p'}">
+							<input type="button" class="btn btn-default houseLink_main" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count${people_count}&search=${recommend.acc_address1}'">
 						</c:if>
 					</div>
 				</div>
 			</div>
 			</c:if>
-			</c:forEach>	
+			</c:forEach>
 		</div>
 	</div>
 </div>
 
 <!-- REVIEW -->
-<div class="section-sepa1" style="max-height: 1000px;">
+<div class="section-sepa1" style="max-height: 2000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">여행객들의 말말말</h3>
 		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>쪽쪽쪽 쵝오!!!</h4>
+			<c:forEach var="review" items="${reviewList}" varStatus="status">
+			<div class="col-xs-12 col-md-6 col-lg-6">
+				<div class="card align-left">
+				<div>
+					<div style="float:left;margin-right:10px;">
+						<c:if test="${status.count == 1}">
+						<img class="profile" src="${pageContext.request.contextPath}/resources/img/user1.jpg" width="48px" height="48px" title="${review.re_email}님의 프로필" style="cursor:pointer;">
+						</c:if>
+						<c:if test="${status.count == 2}">
+						<img class="profile" src="${pageContext.request.contextPath}/resources/img/user2.jpg" width="48px" height="48px" title="${review.re_email}님의 프로필" style="cursor:pointer;">
+						</c:if>
+						<c:if test="${status.count == 3}">
+						<img class="profile" src="${pageContext.request.contextPath}/resources/img/user3.jpg" width="48px" height="48px" title="${review.re_email}님의 프로필" style="cursor:pointer;">
+						</c:if>
+						<c:if test="${status.count == 4}">
+						<img class="profile" src="${pageContext.request.contextPath}/resources/img/user4.jpg" width="48px" height="48px" title="${review.re_email}님의 프로필" style="cursor:pointer;">
+						</c:if>
 					</div>
-					<div>
-						<span data-type="id">홍현기</span><br>
-						<span data-type="score"><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i></span>
+					<div style="float:left;">
+						<span><b>${review.re_email}</b></span><br>
+						<span style="font-size:15px;"><fmt:formatDate value="${review.re_reg_date}" pattern="yyyy년 MM월 dd일"/></span>
 					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
+				</div>
+					<div style="margin-top:10px;">
+						${review.re_content}
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>쪽쪽쪽 쵝오!!!</h4>
-					</div>
-					<div>
-						<span data-type="id">홍현기</span><br>
-						<span data-type="score"><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i></span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>쪽쪽쪽 쵝오!!!</h4>
-					</div>
-					<div>
-						<span data-type="id">홍현기</span><br>
-						<span data-type="score"><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i></span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>쪽쪽쪽 쵝오!!!</h4>
-					</div>
-					<div>
-						<span data-type="id">홍현기</span><br>
-						<span data-type="score"><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i><i class="fa-star-o fa"></i></span>
-					</div>
-					<div>
-						블라블라블라
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
 
 <!-- MEETING -->
-<div class="section-sepa2" style="max-height: 1000px;">
+<div class="section-sepa2" style="max-height: 2000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">인기 모임</h3>
 		<div class="underline align-center"><div class="line"></div></div>
-				<div class="row">
+		<div class="row">
 			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-center">
 					<div>
@@ -263,60 +225,6 @@
 					</div>
 					<div>
 						서울 공중 화장실의 깨끗함을 느껴보아요!()
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>랄랄라</h4>
-					</div>
-					<div>
-						<span>모임2</span><br>
-						<span>장소</span><br>
-						<span>서울 공중 화장실</span>
-					</div>
-					<div>
-						서울 공중 화장실의 깨끗함을 느껴보아요!(구라)
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>랄랄라</h4>
-					</div>
-					<div>
-						<span>모임3</span><br>
-						<span>장소</span><br>
-						<span>서울 공중 화장실</span>
-					</div>
-					<div>
-						서울 공중 화장실의 깨끗함을 느껴보아요!(구라)
-					</div>
-					<div>
-						<button class="btn">View More</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
-					<div>
-						<h4>랄랄라</h4>
-					</div>
-					<div>
-						<span>모임4</span><br>
-						<span>장소</span><br>
-						<span>서울 공중 화장실</span>
-					</div>
-					<div>
-						서울 공중 화장실의 깨끗함을 느껴보아요!(구라)
 					</div>
 					<div>
 						<button class="btn">View More</button>
