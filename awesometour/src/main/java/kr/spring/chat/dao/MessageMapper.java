@@ -22,5 +22,14 @@ import kr.spring.chat.domain.MessageCommand;
 	public void updateMessageRead(Map<String, Object> map);
 	
 	@Delete("DELETE message WHERE message")
-	public void deleteMessageColumn();
+	public void deleteMessage();
+	
+	@Update("UPDATE message SET message_send_status=-1 WHERE message_sender=#{user_email} AND message_num=#{message_num}")
+	public void updateMessageSendStatus(Map<String, Object> map);
+	
+	@Update("UPDATE message SET message_receive_status=-1 WHERE message_receiver=#{user_email} AND message_num=#{message_num}")
+	public void updateMessageReceiveStatus(Map<String, Object> map);
+	
+	@Select("SELECT message_send_status, message_receive_status FROM message WHERE message_num=#{message_num}")
+	public Map<String, Object> selectMessageStatus(int message_num);
 }

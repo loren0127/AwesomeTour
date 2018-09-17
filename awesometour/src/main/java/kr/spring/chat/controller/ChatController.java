@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
 import kr.spring.chat.domain.ChatAllAndMemberCommand;
 import kr.spring.chat.domain.ChatAllCommand;
 import kr.spring.chat.domain.ChatAllTalkCommand;
@@ -181,7 +179,7 @@ public class ChatController {
 	@RequestMapping(value="/chat/insertMessageSend.do", method=RequestMethod.POST)
 	public ModelAndView insertMessageSendSubmit(HttpSession session, @ModelAttribute("messageCommand")MessageCommand messageCommand, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage) {
 		String user_email = (String)session.getAttribute("user_email");
-		messageCommand.setMessage_receiver(user_email);
+		messageCommand.setMessage_sender(user_email);
 		
 		//Message send start
 		messageCommand.setMessage_content(StringUtil.useBrNoHtml(messageCommand.getMessage_content()));
@@ -199,14 +197,56 @@ public class ChatController {
 	}
 	
 	@RequestMapping(value="/chat/selectMessageDetail.do", method=RequestMethod.GET)
-	public ModelAndView selectMessageReceive(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage, @RequestParam(value="checked", defaultValue="mainChat")String selected) {
+	public ModelAndView selectMessageDetail(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage, @RequestParam(value="checked", defaultValue="mainChat")String selected) {
+		String user_email = (String)session.getAttribute("user_email");
 		
 		//Message select start
 		MessageCommand messageCommand = messageService.selectMessageDetail(message_num);
 		//Message select end
 		
+		Map<String, Object> readMap = new HashMap<String, Object>();
+		
+		readMap.put("message_num", message_num);
+		readMap.put("user_email", user_email);
+		messageService.updateMessageRead(readMap);
+		
 		ModelAndView mav = chatModelAndView("selectMessageDetail", session, sendCurrentPage, receiveCurrentPage, selected);
 		mav.addObject("messageCommand", messageCommand);
+		return mav;
+	}
+	
+	@RequestMapping(value="/chat/updateMessageSendStatus.do")
+	public ModelAndView updateMessageSendStatus(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage) {
+		String user_email = (String)session.getAttribute("user_email");
+		Map<String, Object> sendStatusMap = new HashMap<String, Object>();
+		
+		sendStatusMap.put("user_email", user_email);
+		sendStatusMap.put("message_num", message_num);
+		
+		messageService.updateMessageSendStatus(sendStatusMap);
+		
+		Map<String, Object> checkStatus = messageService.selectMessageStatus(message_num);
+		
+		checkStatus.get("message_send_status");
+		checkStatus.get("");
+		
+		ModelAndView mav = chatModelAndView("chatFunctionResult", session, sendCurrentPage, receiveCurrentPage, "sendMessageList");
+		mav.addObject("chatResult", "messageSend");
+		return mav;
+	}
+	
+	@RequestMapping(value="/chat/updateMessageReceiveStatus.do")
+	public ModelAndView updateMessageReceiveStatus(HttpSession session, @RequestParam(value="message_num")int message_num, @RequestParam(value="pageNum", defaultValue="1")int sendCurrentPage,  @RequestParam(value="pageNum", defaultValue="1")int receiveCurrentPage) {
+		String user_email = (String)session.getAttribute("user_email");
+		Map<String, Object> sendStatusMap = new HashMap<String, Object>();
+		
+		sendStatusMap.put("user_email", user_email);
+		sendStatusMap.put("message_num", message_num);
+		
+		messageService.updateMessageReceiveStatus(sendStatusMap);
+		
+		ModelAndView mav = chatModelAndView("chatFunctionResult", session, sendCurrentPage, receiveCurrentPage, "receiveMessageList");
+		mav.addObject("chatResult", "messageSend");
 		return mav;
 	}
 }

@@ -14,6 +14,10 @@
     #hide_nav {
     display:inline-flex;
     }
+    
+    .inbox_people {
+    display:none;
+    }
 }
 
 @media all and (min-width: 768px) {
@@ -23,15 +27,17 @@
 }
 </style>
 <script type="text/javascript">
-var status = 1;
+var status = 1; //1: inbox_people view, 0: mesgs view
 $(document).ready(function() {
 	$(window).resize(function() {
 		var windowSize = $(window).width();
 		if(windowSize >= 768) {
+			alert('resize 동작1');
 			$('.inbox_people').css('display', 'inline');
 			$('.mesgs').css('display', 'inline');
 			status = 1;
 		} else {
+			alert('resize 동작2');
 			$('.mesgs').css('display', 'inline');
 			$('.inbox_people').css('display', 'none');
 			status = 0;
@@ -39,15 +45,24 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '#sidebarCollapse', function() {
-		if(status == 1) {
+		if(status == 0) {
+			alert('sidebarCollapse 버튼 동작1 : ' + status);
 			$('.inbox_people').css('display', 'none');
 			$('.mesgs').css('display', 'inline');
-			status = 0;
+			status = 1;
 		} else {
+			alert('sidebarCollapse 버튼 동작2 : ' + status);
 			$('.inbox_people').css('display', 'inline');
 			$('.mesgs').css('display', 'none');
-			status = 1;
+			status = 0;
 		}
+	});
+	
+	$(document).on('click', '.hide_a', function() {
+		alert('hide_a click 동작');
+		$('.inbox_people').css('display', 'none');
+		$('.mesgs').css('display', 'inline');
+		status = 0;
 	});
 });
 </script>
@@ -129,7 +144,7 @@ $(document).ready(function() {
 											</div>
 											<div class="chat_ib">
 												<h5>
-													<a href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=friend">${chatMemberCommand.chat_all_title}</a>
+													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=friend">${chatMemberCommand.chat_all_title}</a>
 													<br><br>
 													<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
 												</h5>
@@ -162,7 +177,7 @@ $(document).ready(function() {
 											</div>
 											<div class="chat_ib">
 												<h5>
-													<a href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=group">${chatMemberCommand.chat_all_title}</a>
+													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=group">${chatMemberCommand.chat_all_title}</a>
 													<br><br>
 													<a href="#" data-toggle="modal" data-target="#groupChatMemberList">사용자 보기</a>
 													<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
@@ -171,13 +186,12 @@ $(document).ready(function() {
 												<div class="modal" id="groupChatMemberList">
 													<div class="modal-dialog">
 														<div class="modal-content">
-
 															<!-- Modal Header -->
 															<div class="modal-header">
 																<h5 class="modal-title">${chatMemberCommand.chat_all_title}</h5>
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 															</div>
-
+															
 															<!-- Modal body -->
 															<div class="modal-body">
 																<span>- 사용자 목록 -</span><br>
@@ -202,14 +216,7 @@ $(document).ready(function() {
 								<div class="chat_people">
 									<div class="chat_ib">
 										<h5>
-											- <a href="${pageContext.request.contextPath}/chat/insertMessageSend.do?">쪽지 보내기</a>
-										</h5>
-									</div>
-								</div>
-								<div class="chat_people">
-									<div class="chat_ib">
-										<h5>
-											- <a href="">기록 삭제하기</a>
+											- <a class="hide_a" href="${pageContext.request.contextPath}/chat/insertMessageSend.do?">쪽지 보내기</a>
 										</h5>
 									</div>
 								</div>
@@ -223,7 +230,8 @@ $(document).ready(function() {
 											</div>
 											<div class="chat_ib">
 												<h5>
-													<a href="selectMessageDetail.do?message_num=${sendMessageCommand.message_num}&checked=sendMessageList">${sendMessageCommand.message_title}</a>
+													<a class="hide_a" href="selectMessageDetail.do?message_num=${sendMessageCommand.message_num}&checked=sendMessageList">${sendMessageCommand.message_title}</a>
+													<button class="btn btn-light btn-sm" style="float:right;" onclick="location.href='updateMessageSendStatus.do?message_num=${sendMessageCommand.message_num}'">삭제</button>
 													<br><br>
 													<span class="chat_date">${sendMessageCommand.message_reg_date}</span>
 												</h5>
@@ -261,6 +269,7 @@ $(document).ready(function() {
 											<div class="chat_ib">
 												<h5>
 													<a href="selectMessageDetail.do?message_num=${receiveMessageCommand.message_num}&checked=receiveMessageList">${receiveMessageCommand.message_title}</a>
+													<button class="btn btn-light btn-sm" style="float:right;" onclick="location.href='updateMessageReceiveStatus.do?message_num=${receiveMessageCommand.message_num}'">삭제</button>
 													<br><br>
 													<span class="chat_date">${receiveMessageCommand.message_reg_date}</span>
 												</h5>

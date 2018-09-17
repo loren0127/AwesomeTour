@@ -29,4 +29,16 @@ public class MessageServiceImpl implements MessageService {
 	public void updateMessageRead(Map<String, Object> map) {
 		messageMapper.updateMessageRead(map);
 	}
+	
+	public void updateMessageSendStatus(Map<String, Object> map) {
+		messageMapper.updateMessageSendStatus(map);
+	}
+	
+	public void updateMessageReceiveStatus(Map<String, Object> map) {
+		messageMapper.updateMessageReceiveStatus(map);
+	}
+	
+	public Map<String, Object> selectMessageStatus(int message_num) {
+		return messageMapper.selectMessageStatus(message_num);
+	}
 }
