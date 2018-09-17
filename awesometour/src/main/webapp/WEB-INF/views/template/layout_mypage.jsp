@@ -7,8 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Collapsible sidebar using Bootstrap 4</title>
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
@@ -71,7 +69,7 @@
 				<div class="tab-content">
 					<div id="member" class="container tab-pane active">
 						<hr>
-						<li><a href="#">내 정보관리</a><hr></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/mypageMemberDetail.do">내 정보관리</a><hr></li>
 						<li><a href="${pageContext.request.contextPath}/mypage/mypageReservationList.do">내 예약관리</a><hr></li>
 						<li><a href="#">내 그룹관리</a><hr></li>
 					</div>

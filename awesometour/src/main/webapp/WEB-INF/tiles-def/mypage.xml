@@ -8,7 +8,7 @@
 	<definition name="mypageMemberDetail" template="/WEB-INF/views/template/layout_mypage.jsp">
 		<put-attribute name="title" value="awesome tour mypage"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageMemberDetail.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
 	

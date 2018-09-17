@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.domain.MemberCommand;
@@ -27,20 +29,6 @@ public class MypageController {
 	@Resource
 	private MyPageService mypageService;
 	
-	@RequestMapping(value="/mypage/mypageMemberDetail.do")
-	public ModelAndView mypageMain(HttpSession session) {
-		String user_email = (String)session.getAttribute("user_email");
-		
-		MemberCommand memberCommand = memberService.selectMemb(user_email);
-		
-		System.out.println(memberCommand);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberCommand", memberCommand);
-		mav.setViewName("mypageMemberDetail");
-		return mav;
-	}
-	
-	
 	@RequestMapping(value="/mypage/mypageComplainList.do")
 	public String mypageComplainList(HttpSession session,Model model) {
 		
@@ -54,9 +42,9 @@ public class MypageController {
 		
 		int count = mypageService.selectRowCount(map);
 		
-		int more = 1;//다음페이지있음
-		if(1>=Math.ceil((double)count/5)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-			more = 0;//다음페이지없음
+		int more = 1;//�떎�쓬�럹�씠吏��엳�쓬
+		if(1>=Math.ceil((double)count/5)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+			more = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 		}
 		model.addAttribute("more",more);
 		model.addAttribute("user_email",user_email);
@@ -74,6 +62,26 @@ public class MypageController {
 		model.addAttribute("mypage",mypageCommand);
 		
 		return "mypageComplainDetail";
+	}
+	
+	
+	@RequestMapping(value="/mypage/mypageMemberDetail.do", method=RequestMethod.GET)
+	public ModelAndView selectMypageMemberDetail(HttpSession session) {
+		String user_email = (String)session.getAttribute("user_email");
+		MemberCommand memberCommand = memberService.selectMemb(user_email);
 		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mypageMemberDetail");
+		mav.addObject("memberCommand", memberCommand);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/mypageReservationList.do", method=RequestMethod.GET)
+	public ModelAndView mypageReservationList() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mypageReservationList");
+		return mav;
 	}
 }
