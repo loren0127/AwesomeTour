@@ -77,7 +77,6 @@
 			<b style="color: #d900ed;">${privateDetail.acc_theme}</b>테마
 		</div>
 		<br> <br><br><br>
-		<div>${privateDetail.acc_name}에문의하기</div>
 		<hr size="1" noshade>
 	 	<div style="padding-left: 30%;">
 			<span>【 숙소 100배 즐기기 】</span> <span style="padding-left:10%;">
@@ -104,7 +103,16 @@
 								<p>가입일 : ${privateDetail.member_reg_date}</p>
 							</div>
 							<div style="padding-left:26%;">
-							<a href="#" class="btn-reply button_hover" style="width:100px;">연락하기</a>
+							<input type="button" class="btn-reply button_hover" style="width:100px;" id="host_message_button" value="연락하기">
+							</div>
+							<div id="accomDetail_dialog" title="메시지 보내기">
+							<br>
+							<p style="text-align:center;"><b>${privateDetail.member_nickname}</b>님에게 문의하기</p>
+							<form>
+								<input type="hidden" name="message_receiver" id="message_receiver" value="${privateDetail.acc_host}">
+								<input type="text" name="message_title" placeholder="제목 입력" size="37" id="message_title"><br><br>
+								<textarea rows="6" cols="40" placeholder="내용 입력" name="message_content" id="message_content"></textarea>
+							</form>
 							</div>
 						</div>
 					</div>

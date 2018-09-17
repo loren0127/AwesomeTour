@@ -15,6 +15,7 @@ public class HotelDetailCommand {
 	private String acc_in;
 	private String acc_out;
 	private String acc_theme;
+	private String acc_host;
 	//별점 테이블
 	private double ag_grade;
 	//서비스테이블
@@ -49,6 +50,13 @@ public class HotelDetailCommand {
 	private int rv_room_num;
 	private int rv_room_count;
 		
+	
+	public String getAcc_host() {
+		return acc_host;
+	}
+	public void setAcc_host(String acc_host) {
+		this.acc_host = acc_host;
+	}
 	public int getRo_pe_count() {
 		return ro_pe_count;
 	}

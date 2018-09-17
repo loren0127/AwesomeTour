@@ -82,4 +82,7 @@ public interface AccomDetailService {
 	public List<String> selectRvDateStart(Integer im_ac_num);
 	public List<String> selectRvDateEnd(Integer im_ac_num);
 	
+	//문의하기 insert(프라이빗 하우스)
+	public void insertHostMessageAccomDetail(Map<String,Object> map);
+	
 }

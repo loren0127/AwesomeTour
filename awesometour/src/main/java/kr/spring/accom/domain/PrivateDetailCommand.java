@@ -26,6 +26,7 @@ public class PrivateDetailCommand {
 	private String acc_in;
 	private String acc_out;
 	private String acc_theme;
+	private String acc_host;
 	//서비스 테이블
 	private String se_name;
 	//멤버테이블(호스트 소개)
@@ -48,6 +49,12 @@ public class PrivateDetailCommand {
 	private Date member_reg_date;
 	
 	
+	public String getAcc_host() {
+		return acc_host;
+	}
+	public void setAcc_host(String acc_host) {
+		this.acc_host = acc_host;
+	}
 	public String getMember_nickname() {
 		return member_nickname;
 	}
