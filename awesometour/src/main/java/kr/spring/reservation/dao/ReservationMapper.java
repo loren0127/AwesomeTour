@@ -13,7 +13,7 @@ public interface ReservationMapper {
 	
 	@Select("SELECT COUNT(*) FROM reservation WHERE  TO_CHAR(rv_reg_date,'YYYY/MM/DD') = TO_CHAR(SYSDATE,'YYYY/MM/DD') AND acc_num = #{acc_num}")
 	public int selectReservationCount(Integer acc_num);
-	@Insert("INSERT INTO RESERVATION (RV_NUM,ACC_NUM,RO_NUM,MEMBER_EMAIL,RV_REG_DATE,RV_STATUS,RV_MONEY,RV_START_DATE,RV_END_DATE,RV_PEOPLE,RV_MESSAGE,RV_REQUEST,host_email) VALUES (rv_seq.nextval,#{acc_num},#{ro_num},#{member_email},sysdate,0,#{rv_money},#{rv_startdate},#{rv_enddate},#{rv_people},#{rv_message ,jdbcType=VARCHAR},#{rv_request , jdbcType=VARCHAR},#{host_email}")
+	@Insert("INSERT INTO RESERVATION (RV_NUM,ACC_NUM,RO_NUM,MEMBER_EMAIL,RV_REG_DATE,RV_STATUS,RV_MONEY,RV_START_DATE,RV_END_DATE,RV_PEOPLE,RV_MESSAGE,RV_REQUEST,host_email) VALUES (rv_seq.nextval,#{acc_num},#{ro_num},#{member_email},sysdate,0,#{rv_money},#{rv_startdate},#{rv_enddate},#{rv_people},#{rv_message ,jdbcType=VARCHAR},#{rv_request , jdbcType=VARCHAR},#{host_email})")
 	public int insertReservation(ReservationCommand reservationCommand);
 	
 	public int insertPayment(PaymentCommand command);
