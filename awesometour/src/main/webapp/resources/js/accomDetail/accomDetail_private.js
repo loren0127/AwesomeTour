@@ -772,6 +772,8 @@ $('document').ready(function(){
 		    				alert('네트워크 오류 발생!');
 		    			}
 		    		});
+	  	    		
+	  	    		 $( this ).dialog( "close" );
 		    	},
 	              type: "submit"
 	          },
