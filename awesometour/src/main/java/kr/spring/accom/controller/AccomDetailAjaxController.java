@@ -491,4 +491,34 @@ public class AccomDetailAjaxController {
 
 			return map;
 		}
+		@RequestMapping("/accomDetail/hostMessage.do")
+		@ResponseBody
+		public Map<String,String> hostMessageInsert(@RequestParam("message_title") String message_title,@RequestParam("message_content") String message_content,@RequestParam("message_receiver") String message_receiver,@RequestParam("message_sender") String message_sender,HttpSession session){
+
+			if(log.isDebugEnabled()) {
+				log.debug("<<message_title>> : "+message_title);
+				log.debug("<<message_content>> : " + message_content);
+				log.debug("<<message_receiver>> : " + message_receiver);
+				log.debug("<<message_sender : >>" + message_sender);
+			}
+			
+			Map<String,String> map = new HashMap<String,String>();
+			
+			String user_email = (String)session.getAttribute("user_email");
+			
+			Map<String,Object> mapMessage = new HashMap<String,Object>();
+			mapMessage.put("message_title", message_title);
+			mapMessage.put("message_content", message_content);
+			mapMessage.put("message_receiver", message_receiver);
+			mapMessage.put("message_sender", message_sender);
+			
+			if(user_email == null) {
+				map.put("result", "logout");
+			}else {
+				accomDetailService.insertHostMessageAccomDetail(mapMessage);
+				map.put("result", "success");
+			}
+		
+			return map;
+		}
 }

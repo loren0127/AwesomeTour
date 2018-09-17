@@ -115,7 +115,22 @@
 			<b style="color: #d900ed;">${hotelDetail.acc_theme}</b>테마
 		</div>
 		<br> <br><br><br>
-		<div>${hotelDetail.acc_name}에문의하기</div>
+		<div><input type="button" class="btn-reply button_hover" style="font-size:12px;" id="hotel_host_message" value="문의하기"></div>
+		<div id="accomDetail_dialog" title="메시지 보내기">
+			<br>
+			<p style="text-align: center;">
+				<b>${hotelDetail.acc_name}</b>에 문의하기
+			</p>
+			<form>
+				<input type="hidden" name="message_receiver" id="message_receiver"
+					value="${hotelDetail.acc_host}"> <input type="text"
+					name="message_title" placeholder="제목 입력" size="37"
+					id="message_title"><br>
+				<br>
+				<textarea rows="6" cols="40" placeholder="내용 입력"
+					name="message_content" id="message_content"></textarea>
+			</form>
+		</div>
 		<hr size="1" noshade>
 		<div style="padding-left: 30%;">
 			<span>【 숙소 100배 즐기기 】</span> <span style="padding-left: 10%;">

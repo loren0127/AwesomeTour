@@ -185,4 +185,9 @@ public class AccomDetailServiceImpl implements AccomDetailService{
 	public Integer selectPrivateDisableCount(Map<String, Object> map) {
 		return accomDetailMapper.selectPrivateDisableCount(map);
 	}
+
+	@Override
+	public void insertHostMessageAccomDetail(Map<String, Object> map) {
+		accomDetailMapper.insertHostMessageAccomDetail(map);
+	}
 }

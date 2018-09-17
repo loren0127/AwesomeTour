@@ -873,4 +873,54 @@ $('document').ready(function(){
 		} 
 	}); 
 	
+	 dialog = $('#accomDetail_dialog').dialog({
+	      autoOpen: false,
+	      height: 400,
+	      width: 350,
+	      modal: true,
+	      buttons:[
+	          {
+	              text: "보내기",
+	              click: function(){
+	  	    		$.ajax({
+		    			type:'post',
+		    			url:'hostMessage.do',
+		    			data:{message_title:$('#message_title').val(),message_content:$('#message_content').val(),message_receiver:$('#message_receiver').val(),message_sender:$('#user_email').val()},
+		    			dataType:'json',
+		    			cache:false,
+		    			timeout:30000,
+		    			success:function(data){
+		    				if(data.result == 'logout'){
+		    					alert('로그인 후 메시지를 보낼 수 있습니다!');
+		    				}else if(data.result == 'success'){
+		    					alert('메시지가 전송되었습니다!');
+		    				}
+		    			},
+		    			error:function(){
+		    				alert('네트워크 오류 발생!');
+		    			}
+		    		});
+		    	},
+	              type: "submit"
+	          },
+	          {
+	              text: "취소",
+	              click: function() {
+	                  $( this ).dialog( "close" );
+	              }
+	          }
+	      ],
+	      close: function() {
+	        form[ 0 ].reset();
+	      }
+	    });
+	 
+	    form = dialog.find( "form" ).on( "submit", function( event ) {
+	      event.preventDefault();
+	    });
+	    
+	    $( "#hotel_host_message" ).button().on( "click", function() {
+	        dialog.dialog( "open" );
+	     });
+	
 });

@@ -101,4 +101,8 @@ public interface AccomDetailMapper {
 	
 	//리뷰 작성 후 리뷰 5개, 예약 내역 5개 이상이면 슈퍼호스트 업데이트
 	public void updateSuperHost(Map<String,Object> map);
+	
+	//문의하기 insert(프라이빗 하우스)
+	@Insert("INSERT INTO message (message_num,message_receiver,message_sender,message_title,message_reg_date,message_receive_status,message_send_status,message_content,message_url,message_type) VALUES (message_seq.nextval,#{message_receiver},#{message_sender},#{message_title},SYSDATE,-1,1,#{message_content},0,0)")
+	public void insertHostMessageAccomDetail(Map<String,Object> map);
 }

@@ -37,7 +37,7 @@
 	         WHERE ro_acc_num=#{im_ac_num})b ON i.im_ro_num=b.ro_num WHERE b.ro_room_num=#{ro_room_num}
 	</select>
 	<select id="selectHotelDetail" parameterType="Integer" resultType="hotelDetailCommand">
-		SELECT a.acc_num,a.acc_name,a.acc_address1,a.acc_grade,a.acc_in,a.acc_out,a.acc_theme,ROUND(b.ag_grade,1) ag_grade
+		SELECT a.acc_num,a.acc_name,a.acc_address1,a.acc_grade,a.acc_in,a.acc_out,a.acc_theme,ROUND(b.ag_grade,1) ag_grade,a.acc_host
 		    FROM accom a LEFT OUTER JOIN 
 		        (SELECT ag_acc_num,AVG(ag_grade) ag_grade 
 		            FROM accom_grade 
