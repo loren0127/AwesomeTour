@@ -56,7 +56,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationMapper.selectGroupMemberCount(map);
 	}
 
-
-	
+	@Override
+	public int selectRoNum(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return reservationMapper.selectRoNum(map);
+	}
 
 }
