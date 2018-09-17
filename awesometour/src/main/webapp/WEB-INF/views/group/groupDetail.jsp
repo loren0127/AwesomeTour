@@ -216,6 +216,13 @@ $('.hobby').each(function(element, index){
 #big_title{
 	display:block;
 }
+@media ( min-width: 575px ) and ( max-width: 992px ) {
+#big_title{
+	display:block;
+	margin-left:50px;
+}
+
+}
 
  @media ( max-width: 575px ) {
 #sm_title{
@@ -286,12 +293,12 @@ $('.hobby').each(function(element, index){
 		</div>
 	</div>
 
-	<div  style="  height:70px; box-shadow: 2px 2px 2px 2px #efefef; padding-left:30%"> 	
+	<div  style="  height:70px; box-shadow: 2px 2px 2px 2px #efefef; padding-left:25%"> 	
 		<div class="container" >
-			<button class="btn" id="group_in" style="  margin :15px 30px ; float:right;  width: 100px;    height: 40px;">그룹 참가</button>
-			<button class="btn" id="chat_in" style="  margin :15px 30px ; float:right;  width: 100px;    height: 40px;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'>채팅 참가</button>
-	<div id="big_title" style="    padding-top: 10px;">
-			<B style="font-size:24pt">${group.g_name}</B>
+			<button class="btn" id="group_in" style="  margin :15px 30px ; margin-right:12%; float:right;  width: 100px;    height: 40px;">그룹 참가</button>
+			<button class="btn" id="chat_in" style="  margin :15px 30px ; margin-right:12%; float:right;  width: 100px;    height: 40px;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'>채팅 참가</button>
+	<div id="big_title" >
+			<B style="font-size:24pt">${group.g_name}</B><br>
 			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
 	</div>
 		</div>	

@@ -268,7 +268,7 @@ $(function(){
 <div class="row">
 <div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 
-${rv.ag_grade }점<br>
+<i class="fa fa-heart" style="color:#ffc107"></i> ${rv.ag_grade }점<br>
 </div>
 <div class="col-6">
 <img style=" padding: 10px; max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
@@ -294,9 +294,18 @@ ${rv.ag_grade }점<br>
 </span>
 </div>
 <!-- ------------ 사이드 메뉴 ---------------- -->
+
+
 <div style="width:70%" id="payMain">
 <h1>결제하기</h1>
 <br>
+ <c:if test="${count>0}" > 
+<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
+서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
+</div>
+<br>
+
+</c:if> 
   <div style="  margin-bottom: 10px;   font-size: 15pt;  width: 80%;" class="validateTips ">               
   </div>
 
@@ -340,12 +349,7 @@ ${rv.ag_grade }점<br>
 
 
 
- <c:if test="${count>0}" > 
-<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
-서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
-</div>
 
-</c:if> 
  <form:form commandName="pmCommand" id="payForm" action="result.do">
 	<div>
  

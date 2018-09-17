@@ -77,7 +77,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 <div class="row">
 <div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 
-${rv.ag_grade }점<br>
+<i class="fa fa-heart" style="color:#ffc107"></i> ${rv.ag_grade }점<br>
 </div>
 <div class="col-6">
 <img style=" padding: 10px; max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">

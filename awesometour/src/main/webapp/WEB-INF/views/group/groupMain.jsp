@@ -238,7 +238,7 @@ $( "#groupAdd" ).button().on( "click", function() {
     <li><a href="#tabs-4">4.초대</a></li>
   </ul> 
   <form:form commandName="command"  id="groupInsert" >
-    <!-------------------------- 탭 1-------------------- -->
+    <!-------------------------- 탭 1 ---------------------->
   <div id="tabs-1">
      <label for="g_name">그룹명</label>
       <form:input path="g_name"  class="text ui-widget-content ui-corner-all"/>
@@ -254,7 +254,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 <a href="#" class="btn" id="move-2">다음</a>
   </div>
   
-      <!-------------------------- 탭 2-------------------- -->
+      <!-------------------------- 탭 2 ---------------------->
   
   <div id="tabs-2">
       <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
@@ -267,7 +267,7 @@ $( "#groupAdd" ).button().on( "click", function() {
    
   </div> 
   
-      <!-------------------------- 탭 3-------------------- -->
+      <!-------------------------- 탭 3 -------------------- -->
   <div id="tabs-3">
   	  <label for="g_close_date">마감일시</label>
        <form:input type="date"  path="g_close_date" id="g_close_date" class="text ui-widget-content ui-corner-all"/>

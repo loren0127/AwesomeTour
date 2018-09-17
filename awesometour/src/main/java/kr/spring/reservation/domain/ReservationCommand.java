@@ -23,7 +23,7 @@ public class ReservationCommand {
 	//--------------------------------
 	private String acc_host;
 	private String acc_name;
-	private int ag_grade;
+	private Double ag_grade;
 	private byte[] im_cover;
 	private String im_cover_name;
 	private String acc_address1;
@@ -142,10 +142,10 @@ public class ReservationCommand {
 	public void setAcc_name(String acc_name) {
 		this.acc_name = acc_name;
 	}
-	public int getAg_grade() {
+	public Double getAg_grade() {
 		return ag_grade;
 	}
-	public void setAg_grade(int ag_grade) {
+	public void setAg_grade(Double ag_grade) {
 		this.ag_grade = ag_grade;
 	}
 	public byte[] getIm_cover() {

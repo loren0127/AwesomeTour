@@ -61,13 +61,16 @@ $("#recGr").hide();
 <div class="rounded "  style="border:1px solid gray">
 <div class="container">
 <div class="row ">
-	<div class="col-9" style="text-align:center;padding: 5% 0;" >
+	<div class="col-8" style="text-align:center;padding: 5% 0;" >
 		<br>
-		<h3>${rv.acc_name }</h3>   <br>
-		평점 : ${rv.ag_grade }점<br>
+		<h3>${rv.acc_name }</h3>   
 		${rv.acc_address1} ${rv.acc_address2}<br>
-		서비스 : ${rv.se_name }<br>
-			체크인 가능 시간: ${rv.acc_in} 이후와 체크아웃 가능 시간:${rv.acc_out}까지
+		<i class="fa fa-heart" style="color:#ffc107"></i> : ${rv.ag_grade }점<br>
+		체크인 가능 시간 : ${rv.acc_in} 이후 <br>
+		체크아웃 가능 시간 :${rv.acc_out}까지<br>
+		<span style="color:#D900ED">
+		 ${rv.se_name }<br>
+		</span>
 		
 	</div>
 	<div class="col-3" style="padding: 5% 0;">
@@ -139,7 +142,7 @@ $("#recGr").hide();
 
 <div id="recGr" style="margin:30px auto">
  <a class="btn btn-primary" href="../main/main.do">홈으로</a>
-<a class="btn btn-primary" href="../main/main.do">마이페이지</a> 
+<a class="btn btn-primary" href="../mypage/mypageMemberDetail.do">마이페이지</a> 
 </div>
 </div>
 </div>
