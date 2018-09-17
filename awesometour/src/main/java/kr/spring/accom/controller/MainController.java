@@ -32,7 +32,7 @@ public class MainController {
 	//==========메인 페이지 추천 숙소 및 리뷰 불러오기==========//
 	@RequestMapping("/main/main.do")
 	public String mainList(@RequestParam(value="people_count", defaultValue="1") int people_count, Model model){
-		if(log.isDebugEnabled()) {
+	if(log.isDebugEnabled()) {
 			log.debug("<<people_count>> : "+ people_count);
 		}
 		
@@ -46,7 +46,7 @@ public class MainController {
 		List<ReviewCommand> reviewList = null;
 		//리뷰 리스트
 		reviewList = accomService.selectReviewList();
-		
+				
 		if(log.isDebugEnabled()) {
 			log.debug("<<추천리스트>> : "+recommedList);
 			log.debug("<<리뷰리스트>> : "+reviewList);

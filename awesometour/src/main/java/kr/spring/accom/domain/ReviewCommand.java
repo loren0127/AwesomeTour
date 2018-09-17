@@ -1,5 +1,7 @@
 package kr.spring.accom.domain;
 
+import java.sql.Date;
+
 import kr.spring.util.DurationFromNow;
 
 public class ReviewCommand {
@@ -7,6 +9,7 @@ public class ReviewCommand {
 	private int re_acc_num;
 	private String re_email;
 	private String re_reg_date;
+	private Date reg_date;
 	private String re_content;
 	private String re_ip;
 	
@@ -53,6 +56,12 @@ public class ReviewCommand {
 	}
 	public void setRe_reg_date(String re_reg_date) {
 		this.re_reg_date = DurationFromNow.getTimeDiffLabel(re_reg_date);
+	}
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
 	public String getRe_content() {
 		return re_content;
@@ -126,6 +135,13 @@ public class ReviewCommand {
 	public void setAl_count(int al_count) {
 		this.al_count = al_count;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "ReviewCommand [re_num=" + re_num + ", re_acc_num=" + re_acc_num + ", re_email=" + re_email
+				+ ", re_reg_date=" + re_reg_date + ", reg_date=" + reg_date + ", re_content=" + re_content + ", re_ip="
+				+ re_ip + ", ag_num=" + ag_num + ", ag_email=" + ag_email + ", ag_grade=" + ag_grade + ", ag_acc_num="
+				+ ag_acc_num + ", al_num=" + al_num + ", al_email=" + al_email + ", al_re_num=" + al_re_num
+				+ ", al_like=" + al_like + ", al_acc_num=" + al_acc_num + ", al_count=" + al_count
+				+ ", member_nickname=" + member_nickname + "]";
+	}
 }
