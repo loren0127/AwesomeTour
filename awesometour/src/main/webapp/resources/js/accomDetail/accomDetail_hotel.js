@@ -873,9 +873,26 @@ $('document').ready(function(){
 		} 
 	}); 
 	
+
+	$(document).on('keyup','#message_title',function(){
+		var dialogTitleLength = $(this).val().length;
+	    
+	    if(dialogTitleLength >= 25){
+	    	alert('25자 미만으로 입력해주세요!');
+	    }
+	});
+	
+	$(document).on('keyup','#message_content',function(){
+		var dialogContentLength = $(this).val().length;
+	    
+	    if(dialogContentLength >= 300){
+	    	alert('300자 미만으로 입력해주세요!');
+	    }
+	});
+	
 	 dialog = $('#accomDetail_dialog').dialog({
 	      autoOpen: false,
-	      height: 400,
+	      height: 410,
 	      width: 350,
 	      modal: true,
 	      buttons:[
