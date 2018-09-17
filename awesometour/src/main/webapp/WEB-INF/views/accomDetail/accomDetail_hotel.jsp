@@ -37,7 +37,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 
 <div class="container" style="min-height: 3500px;">
-	<div class="comments-area" style="min-height: 5000px;">
+	<div class="comments-area" style="min-height: 4600px;">
 		<div id="carouselExampleControls" class="carousel slide"
 			data-ride="carousel">
 			<div class="carousel-inner">
@@ -199,8 +199,8 @@
 					한 눈에 보기&nbsp;<b>∨</b>
 				</h4>
 				<div class="row">
-					<div class="col-md-6 d_flex align-items-center" style="text-align:left;">
-						<div class="about_content" style="width:50%;padding-left: 8%;">
+					<div class="col-sm-12 col-md-6 d_flex align-items-center" style="text-align:left;">
+						<div class="about_content">
 							<h5 class="title title_color">편의시설 및 서비스</h5>
 							<c:forEach var="service" items="${serviceNameArray}">
 								<ul>
@@ -326,9 +326,10 @@
                 </div>
             </div>
 		</div>
-		<div id="detailMap" class="section-top-border">
-			<h3>지도</h3>
-	
+		<h3>지도</h3>
+		<input type="hidden" value="${hotelDetail.acc_name}" name="acc_name" id="acc_name">
+		<div id="detailMap" class="section-top-border" style="width:100%; height:300px;max-height:300px;">
+			<span id="address">${hotelDetail.acc_address1}</span>
 		</div>
 	</div>
 </div>
