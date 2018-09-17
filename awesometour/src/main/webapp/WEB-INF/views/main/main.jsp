@@ -153,11 +153,11 @@
 					<div style="margin-top: 10px;margin-bottom: 10px;">
 						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'h'}">
 							<input type="button" class="btn btn-default hotelLink_main" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
-							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_hotel.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count${people_count}&search=${recommend.acc_address1}'">
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_hotel.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count=${people_count}&search=${recommend.acc_address1}'">
 						</c:if>
 						<c:if test="${!empty recommend.ro_sub && recommend.ro_sub eq 'p'}">
 							<input type="button" class="btn btn-default houseLink_main" value="자세히 보기" style="font-size: .8em;font-weight: bold;" 
-							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count${people_count}&search=${recommend.acc_address1}'">
+							onclick="location.href='${pageContext.request.contextPath}/accomDetail/accomDetail_private.do?im_ac_num=${recommend.acc_num}&check_in=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&check_out=<fmt:formatDate value="${now}" pattern="yyyy/MM/dd"/>&people_count=${people_count}&search=${recommend.acc_address1}'">
 						</c:if>
 					</div>
 				</div>
