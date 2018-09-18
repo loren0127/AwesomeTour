@@ -72,7 +72,7 @@ public class MypageController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypageMemberDetail");
-		mav.addObject("memberCommand", memberCommand);
+		mav.addObject("member", memberCommand);
 		
 		return mav;
 	}

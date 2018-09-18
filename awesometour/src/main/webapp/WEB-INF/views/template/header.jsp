@@ -15,7 +15,7 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="${pageContext.request.contextPath}/awesomeMenu/recommend.do">추천</a></li>
+					href="#">추천</a></li>
 				<c:if test="${empty user_email}">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/login.do">로그인</a></li><!-- 로그아웃 -->
@@ -23,8 +23,6 @@
 						href="${pageContext.request.contextPath}/mail/mailForm.do">회원가입</a></li><!-- 마이페이지 -->
 				</c:if>
 				<c:if test="${!empty user_email}">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="${pageContext.request.contextPath}/member/detailCheck.do">회원정보 수정</a></li><!-- 테스트 -->
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a></li><!-- 테스트 -->
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"

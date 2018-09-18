@@ -63,14 +63,11 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		if(talk_split.length == 3) { //Insert chat message
 			chat_all_talk_content = talk_split[2];
 			chat_all_num = Integer.parseInt(talk_split[0]);
-			System.out.println(chat_all_talk_content + " :: " + chat_all_num);
 			chatAllTalkCommand.setChat_all_talk_content(chat_all_talk_content);
 			chatAllTalkCommand.setChat_all_num(chat_all_num);
-			System.out.println(chatAllTalkCommand.toString());
 			chatService.insertChatAllTalkMessageLog(chatAllTalkCommand);
 		} else if(talk_split.length == 2) { //Not insert chat message
 			chat_all_talk_content = talk_split[1];
-			System.out.println(chat_all_talk_content);
 		} else { //Error
 			throw new Exception();
 		}

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.mypage.domain.MyPageCommand;
+import kr.spring.reservation.domain.ReservationCommand;
 
 public interface MyPageMapper {
 	//SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM map_store ORDER BY ms_num)a) WHERE rnum >= ? AND rnum <= ? 
@@ -27,6 +28,11 @@ public interface MyPageMapper {
 			"VALUES (message_seq.nextval,#{message_receiver},#{message_sender},#{message_title},sysdate,-1,1,#{message_content},0,0)")
 	public void insert_message1(Map<String,Object> mapper);
 	
+	//Reservation --------------------
 	
+	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email}")
+	public int selectReservationRowCount(String user_email);
 	
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM reservation WHERE member_email=#{user_email})a) WHERE rnum >= #{start} AND rnum <= #{end} AND TO_DATE(rv_start_date, 'YYYY-MM-DD') BETWEEN SYSDATE AND ADD_MONTHS(SYSDATE, 3)")
+	public List<ReservationCommand> selectReservationList(Map<String, Object> map);
 }

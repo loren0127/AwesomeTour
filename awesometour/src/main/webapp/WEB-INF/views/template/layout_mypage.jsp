@@ -33,8 +33,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/map2.js"></script>
 
 <!-- Mypage layout css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 
 <body>
 	<tiles:insertAttribute name="header"/>
@@ -83,7 +82,7 @@
 
 			<ul class="list-unstyled CTAs">
 				<li>
-					<a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+					<a href="#" class="download">Download source</a></li>
 				<li>
 			</ul>
 		</nav>
@@ -108,7 +107,7 @@
 			</nav>
 
 			<!-- Tiles body area start -->
-			<div class="container">
+			<div class="container" id="mypageBody">
 				<tiles:insertAttribute name="body" />
 			</div>
 			<!-- Tiles body area end -->
@@ -124,6 +123,15 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
+            
+            $('#sidebarCollapse').on('click', function() {
+            	if($('#sidebar').is('.active') === true) {
+            		$('#mypageBody').hide();
+            	} else {
+            		$('#mypageBody').show();
+            	}
+            });
+            
         });
     </script>
    </div>

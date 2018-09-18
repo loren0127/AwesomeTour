@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.mypage.dao.MyPageMapper;
 import kr.spring.mypage.domain.MyPageCommand;
+import kr.spring.reservation.domain.ReservationCommand;
 
 @Service("mypageService")
 public class MyPageServiceImpl implements MyPageService{
@@ -45,12 +46,13 @@ public class MyPageServiceImpl implements MyPageService{
 	public void insert_message1(Map<String, Object> mapper) {
 		mypageMapper.insert_message1(mapper);
 	}
-
-
-
-
-
-
-
 	
+	//Reservation -----
+	public int selectReservationRowCount(String user_email) {
+		return mypageMapper.selectReservationRowCount(user_email);
+	}
+	
+	public List<ReservationCommand> selectReservationList(Map<String, Object> map) {
+		return mypageMapper.selectReservationList(map);
+	}
 }

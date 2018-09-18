@@ -41,6 +41,12 @@ $(document).ready(function() {
 			$('.mesgs').css('display', 'inline');
 			$('.inbox_people').css('display', 'none');
 			status = 1;
+			
+			$(document).on('click', '.hide_a', function() {
+				$('.inbox_people').css('display', 'none');
+				$('.mesgs').css('display', 'inline');
+				status = 1;
+			});
 		}
 	});
 	
@@ -54,12 +60,6 @@ $(document).ready(function() {
 			$('.mesgs').css('display', 'none');
 			status = 0;
 		}
-	});
-	
-	$(document).on('click', '.hide_a', function() {
-		$('.inbox_people').css('display', 'none');
-		$('.mesgs').css('display', 'inline');
-		status = 1;
 	});
 });
 </script>

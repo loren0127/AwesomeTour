@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.mypage.domain.MyPageCommand;
 import kr.spring.mypage.service.MyPageService;
+import kr.spring.reservation.domain.ReservationCommand;
 import kr.spring.util.PagingUtil;
 
 
@@ -56,7 +57,7 @@ public class MypageAjaxController {
 		
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		mapJson.put("count", count);
-		mapJson.put("rowCount", rowCount);
+		mapJson.put("rowCount", 7);
 		mapJson.put("list", list);
 		
 		return mapJson;
@@ -64,10 +65,27 @@ public class MypageAjaxController {
 	
 	@RequestMapping(value="/mypage/mypageReservationListAjax.do", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> mypageReservationListAjax() {
+	public Map<String, Object> mypageReservationListAjax(HttpSession session, @RequestParam(value="pageNum",defaultValue="1")int currentPage) {
+		String user_email = (String)session.getAttribute("user_email");
 		
+		int count = mypageService.selectReservationRowCount(user_email);
+		
+		PagingUtil pageUtil = new PagingUtil(currentPage, count, rowCount, pageCount, null);
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		jsonMap.put("start", pageUtil.getStartCount());
+		jsonMap.put("end", pageUtil.getEndCount());
 		
+		
+		List<ReservationCommand> reservationList = null;
+		if(count > 0) {
+			reservationList = mypageService.selectReservationList(jsonMap);
+		} else {
+			reservationList = Collections.emptyList();
+		}
+		
+		jsonMap.put("count", count);
+		jsonMap.put("rowCount", rowCount);
+		jsonMap.put("reservationList", reservationList);
 		return jsonMap;
 	}
 	

@@ -21,9 +21,7 @@ public class ChatAjaxController {
 	@RequestMapping("/chat/chatEmailChecked.do")
 	@ResponseBody
 	public Map<String, Object> chatEmailChecked(String member_email) {
-		System.out.println("Ajax 진입 1");	
 		MemberCommand member = memberService.seleccheckEmail(member_email);
-		System.out.println("Ajax 진입 2");
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		if(member != null) {
 			jsonMap.put("result", "EmailDuplicated");
