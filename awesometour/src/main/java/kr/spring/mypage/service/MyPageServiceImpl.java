@@ -41,6 +41,16 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 
+	@Override
+	public void insert_message1(Map<String, Object> mapper) {
+		mypageMapper.insert_message1(mapper);
+	}
+
+
+
+
+
+
 
 	
 }

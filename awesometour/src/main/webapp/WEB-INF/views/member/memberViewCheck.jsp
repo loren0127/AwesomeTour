@@ -11,6 +11,12 @@
 	  	}
 	  
 	  }
+	  
+	  #check_view:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
 </style>
 <div class="container section-sepa1" style="height: 800px;">
 	<section class="about_history_area section_gap"
@@ -28,7 +34,7 @@
 							</div>
 							<br>
 							<div align="center">
-								<input type="submit" value="확인" class="btn btn-warning">
+								<input type="submit" value="확인" class="btn btn-warning mb-2" id="check_view">
 							</div>
 						</form>
 					</div>

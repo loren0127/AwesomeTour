@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,5 +69,36 @@ public class MypageAjaxController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		return jsonMap;
+	}
+	
+	@RequestMapping("/mypage/complain_dialog2.do")
+	@ResponseBody
+	public Map<String, String> complainDialogInsert(@RequestParam("message_title")String message_title,
+												@RequestParam("message_content")String message_content,
+												@RequestParam("message_receiver")String message_receiver,
+												@RequestParam("message_sender")String message_sender,
+			HttpSession session,HttpServletRequest request) {
+		
+		
+		
+		Map<String,String> map = new HashMap<String, String>();
+		String user_email = (String)session.getAttribute("user_email");
+		
+		Map<String,Object> mapper = new HashMap<String,Object>();
+		mapper.put("message_title", message_title);
+		mapper.put("message_content", message_content);
+		mapper.put("message_sender", message_sender);
+		mapper.put("message_receiver", message_receiver);
+		
+		
+		if(user_email == null) {
+			//로그인이 안되어 있는 경우
+			map.put("result", "logout");
+		}else{
+			//쪽지 전송
+			map.put("result", "success");
+			mypageService.insert_message1(mapper);
+		}
+		return map;
 	}
 }

@@ -25,7 +25,71 @@ public class MyPageCommand {
 	private String member_complain_title;
 	private int member_rv_num;
 	
+	private String message_receiver;
+	private String message_sender;
+	private String message_title;
+	private Date message_reg_date;
+	private int message_receive_status;
+	private int message_send_status;
+	private String message_content;
+	private String message_url;
+	private String message_type;
 	
+	
+	public String getMessage_receiver() {
+		return message_receiver;
+	}
+	public void setMessage_receiver(String message_receiver) {
+		this.message_receiver = message_receiver;
+	}
+	public String getMessage_sender() {
+		return message_sender;
+	}
+	public void setMessage_sender(String message_sender) {
+		this.message_sender = message_sender;
+	}
+	public String getMessage_title() {
+		return message_title;
+	}
+	public void setMessage_title(String message_title) {
+		this.message_title = message_title;
+	}
+	public Date getMessage_reg_date() {
+		return message_reg_date;
+	}
+	public void setMessage_reg_date(Date message_reg_date) {
+		this.message_reg_date = message_reg_date;
+	}
+	public int getMessage_receive_status() {
+		return message_receive_status;
+	}
+	public void setMessage_receive_status(int message_receive_status) {
+		this.message_receive_status = message_receive_status;
+	}
+	public int getMessage_send_status() {
+		return message_send_status;
+	}
+	public void setMessage_send_status(int message_send_status) {
+		this.message_send_status = message_send_status;
+	}
+	public String getMessage_content() {
+		return message_content;
+	}
+	public void setMessage_content(String message_content) {
+		this.message_content = message_content;
+	}
+	public String getMessage_url() {
+		return message_url;
+	}
+	public void setMessage_url(String message_url) {
+		this.message_url = message_url;
+	}
+	public String getMessage_type() {
+		return message_type;
+	}
+	public void setMessage_type(String message_type) {
+		this.message_type = message_type;
+	}
 	public int getMember_rv_num() {
 		return member_rv_num;
 	}

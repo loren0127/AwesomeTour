@@ -10,18 +10,24 @@
 	  	}
 	  
 	  }
+	  
+	  #login_button:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
 </style>
 	<div class="container section-sepa1"  style="height: 800px;">
 	<section class="about_history_area section_gap" style="margin-bottom:200px;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 d_flex align-items-center">
-                        <div class="about_content" style="margin-left:100px;">
+                        <div class="about_content" style="margin-left:10%;">
 							<form:form commandName="command" action="login.do" id="login_form">
 							
 								<div align="center" style="margin-top:45px;">
 									<h4>로그인</h4>
-									<form:input path="member_email" class="form-control" placeholder="이메일" style="max-width:500px;"/> 
+									<form:input path="member_email" class="form-control" placeholder="이메일" style="max-width:500px;" size="180"/> 
 									<form:errors path="member_email" cssClass="error-color" />
 								</div>
 								<br>
@@ -32,7 +38,7 @@
 								<form:errors element="div" cssClass="error-color" style=""/>
 								<br> <br>
 								<div align="center">
-									<input type="submit" value="로그인" class="btn btn-warning">
+									<input type="submit" value="로그인" class="btn btn-warning mb-2" id="login_button" class="">
 								</div>
 							</form:form>
 						</div>

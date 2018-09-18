@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.domain.CodeCommand;
 import kr.spring.member.domain.MemberCommand;
+import kr.spring.mypage.domain.MyPageCommand;
 
 
 @Service("memberService")
@@ -124,6 +125,7 @@ public class MemberServiceImpl implements MemberService{
 	public MemberCommand selectCheckPw(MemberCommand memberCommand) {
 		return memberMapper.selectCheckPw(memberCommand);
 	}
+
 
 
 

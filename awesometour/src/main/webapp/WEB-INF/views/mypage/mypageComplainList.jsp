@@ -11,20 +11,20 @@
 			<div class="table-head">
 				<div class="serial" align="center">호텔이름</div>
 				<div class="serial">방번호</div>
-				<div class="serial">사유</div>
-				<div class="serial"></div>
+				<div class="serial" style="margin-left:2%">사유</div>
 				<div class="serial">고객이메일</div>
 				<div class="serial"></div>
 				<div class="serial">보낸날짜</div>
 				<div class="serial">숙박 종료날짜</div>
 			</div>
+			
 			<input type="hidden" value="${user_email }" id="user_email" name="user_email">
 				<div id="output">
-					
 				</div>
 				<div class="paging-link" style="text-align:center;<c:if test="${more == 0}">display:none;</c:if>">
 					<a href="#" style="color: #222; font-weight: bold;">더보기&nbsp;<b>∨</b></a>
-				</div>
+			</div>
 		</div>
 	</div>
-</div>
+
+	</div>

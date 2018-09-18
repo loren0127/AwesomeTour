@@ -3,11 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <style>
-	  @media screen and (max-width: 767px){
+	  @media screen and (max-width: 900px){
 	  	#div1{
 	  		display:none;
 	  	}
 	  
+	  }
+	  
+	  #delete_view:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+	   #modify_view:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
 	  }
 </style>
 <div class="container section-sepa1" style="margin-top:100px;">
@@ -34,7 +45,7 @@
           <h1>회원 정보</h1>
        <br>
        <br>
-       <div style="float:right;padding:200px 50px;border-width:10px;border-color:#ffc004;border-style:solid;" id="div1">
+       <div style="float:right;padding:200px 30px;border-width:10px;border-color:#ffc004;border-style:solid;" id="div1">
         		회원정보 페이지입니다.<br>
         		회원정보 수정을 원하시면 수정버튼을<br>
         		탈퇴를 원하시면 탈퇴버튼을<br>
@@ -86,8 +97,8 @@
               <span>${member.member_content}</span>
             </div>
             <div class="form-group text-center">
-              <input type="button" value="수정 " class="btn btn-default"  onclick="location.href='update.do'">
-			<input type="button" value="탈퇴" class="btn btn-warning" onclick="location.href='memberdeleteCheck.do'">
+              <input type="button" value="수정 " class="btn btn-warning mb-2" id="modify_view" onclick="location.href='update.do'">
+			<input type="button" value="탈퇴" class="btn btn-warning mb-2" id="delete_view" onclick="location.href='memberdeleteCheck.do'">
             </div>
           </form>
 </div>

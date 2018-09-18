@@ -3,6 +3,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/confirmEmail.js"></script>
+<style>
+	  #email_check:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+	 
+	  #home_check:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+</style>
 <script type="text/javascript">
 </script>
 	<div class="container section-sepa1">
@@ -52,8 +65,8 @@
 				<br>
 			</div>
 			<div align="center">
-				<input type="submit" value="인증하기" class="btn btn-warning" name="email_check" id="email_check">
-				<input type="button" value="홈으로" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
+				<input type="submit" value="인증하기" class="btn btn-warning mb-2" name="email_check" id="email_check">
+				<input type="button" value="홈으로" class="btn btn-warning mb-2" id="home_check" onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 			</div>
 		</form>
 		<br><br><br><br><br><br><br><br><br><br><br>

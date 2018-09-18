@@ -9,6 +9,11 @@
 	  		display:none;
 	  	}
 	  }
+	  #mail_check:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
 </style>
 	<div class="container section-sepa1"  style="height: 50%;">
 	<section class="about_history_area section_gap">
@@ -32,7 +37,7 @@
 								</div>
 								<br> <br>
 								<div align="center" style="margin-left:80%;">
-									<input type="submit" value="인증하기" class="btn btn-warning">
+									<input type="submit" value="인증하기" class="btn btn-warning mb-2" id="mail_check">
 								</div>
 							</form>
 						</div>

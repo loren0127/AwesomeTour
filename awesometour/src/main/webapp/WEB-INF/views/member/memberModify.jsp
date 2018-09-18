@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/confirmPasswd.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/confirmPasswd.js"></script>
 <style>
 	.filebox label { 
 	display: inline-block; 
@@ -17,7 +16,7 @@
 	border-bottom-color: #e2e2e2; 
 	border-radius: .25em; 
 	}
-	/* .filebox input[type="file"] { 
+	.filebox input[type="file"] { 
 	/* 파일 필드 숨기기 */ 
 	position: absolute; 
 	width: 1px; 
@@ -27,15 +26,50 @@
 	overflow: hidden; 
 	clip:rect(0,0,0,0); 
 	border: 0; 
-	} */
+	}
 	
-	 @media screen and (max-width: 1020px){
+	 @media screen and (max-width: 1090px){
 	  	#div1{
 	  		display:none;
 	  	}
+	  	#data-type{
+	  		display:none;
+	  	}
+	  }
 	  
+	  #passwd_check:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+	  #upload:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+	  #home_modify:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
+	  }
+	  #next_modify:hover{
+		color: #212529;
+		background-color: #fff;
+	    border-color: #ffc107;
 	  }
 </style>
+<script type="text/javascript">
+	function getThumbnailPrivew(input, targetId) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            var element = window.document.getElementById(targetId);
+	            element.setAttribute("src", e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+</script>
 <div class="container section-sepa1" style="margin-top: 100px;">
 	<h1>회원 정보 수정</h1>
 	<br> <br>
@@ -58,7 +92,7 @@
 			<div class="form-group">
 				<label for="member_current_passwd">현재 비밀번호</label><br>
 				<input type="password" name="member_current_passwd"  id="member_current_passwd" class="form-control" style="max-width:200px; display:inline;">
-					<input type="button" id="passwd_check" value="비밀번호 확인" class="btn btn-warning" >
+					<input type="button" id="passwd_check" value="비밀번호 확인" class="btn btn-warning mb-2" ><br>
 					<span id="message_current_passwd"></span>
 			</div>
 			<div class="form-group">
@@ -85,11 +119,14 @@
 			<div class="form-group">
 				<div class="filebox">
 					<label for="upload">프로필</label>
-					<input type="file" name="upload" id="upload"/>
+					<!-- <input type="file" name="upload" id="upload"/> -->
+					<input type="file" name="upload" id="upload" accept=".bmp, .gif, .jpg, .png" onchange="getThumbnailPrivew(this, 'data-type');" 
+					class="btn btn-warning mb-2">
 				</div>
 			</div>
 			<div class="align-center">
-				<img src="imageView.do?member_email=${member.member_email}" style="max-width:500px" id="data-type">
+					<img src="imageView.do?member_email=${member.member_email}" id="data-type" class="img-circle" width="70%" height="70%">
+				<%-- <img src="imageView.do?member_email=${member.member_email}" style="max-width:500px" id="data-type" class="data-type" name="data-type"> --%>
 			</div>
 			<br>
 			<div class="form-group">
@@ -99,8 +136,8 @@
 				
 			</div>
 			<div class="form-group text-center">
-				<input type="submit" value="다음" class="btn btn-default"> <input
-					type="button" value="홈으로" class="btn btn-warning"
+				<input type="submit" value="다음" class="btn btn-warning mb-2" id="next_modify"> <input
+					type="button" value="홈으로" class="btn btn-warning mb-2" id="home_modify"
 					onclick="location.href='${pageContext.request.contextPath}/main/main.do'">
 			</div>
 		</form:form>

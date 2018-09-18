@@ -82,8 +82,8 @@ public class MailController {
       
       codeCommand.setCode_code(code_code);
       codeCommand.setCode_email(code_email);
-      mailSender.send(message);
       memberService.insertCode(codeCommand);
+      mailSender.send(message);
     } catch(Exception e){
       System.out.println(e);
     }

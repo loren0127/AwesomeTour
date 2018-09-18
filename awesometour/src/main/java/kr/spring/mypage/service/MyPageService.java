@@ -10,4 +10,5 @@ public interface MyPageService {
 	public List<MyPageCommand> selectMypageList(Map<String,Object> map);
 	public int selectRowCount(Map<String,Object> map);
 	public MyPageCommand select_complain(int num);
+	public void insert_message1(Map<String,Object> mapper);
 }

@@ -2,6 +2,7 @@ package kr.spring.member.service;
 
 import kr.spring.member.domain.CodeCommand;
 import kr.spring.member.domain.MemberCommand;
+import kr.spring.mypage.domain.MyPageCommand;
 
 public interface MemberService {
 	public void insert(MemberCommand member);
