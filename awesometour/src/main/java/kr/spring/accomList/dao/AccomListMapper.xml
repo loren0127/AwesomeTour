@@ -20,7 +20,7 @@
 		on b.acc_num = r.ro_acc_num
 		left outer join member_auth m on b.ACC_HOST
 		=m.MEMBER_EMAIL
-		left outer join accom_grade g on b.acc_num = g.ag_acc_num
+		left outer join accom_grade g on b.acc_host= g.ag_email
 		left outer
 		join accom_service s on b.acc_num = s.se_acc_num
 		WHERE ro_sub = #{searchtype}
@@ -55,7 +55,7 @@
 		on b.acc_num = r.ro_acc_num
 		left outer join member_auth m on b.ACC_HOST
 		=m.MEMBER_EMAIL
-		left outer join accom_grade g on b.acc_num = g.ag_acc_num
+		left outer join accom_grade g on b.acc_host= g.ag_email
 		left outer
 		join accom_service s on b.acc_num = s.se_acc_num
 		WHERE ro_sub = #{searchtype}
@@ -84,7 +84,7 @@
 		on b.acc_num = r.ro_acc_num
 		left outer join member_auth m on b.ACC_HOST
 		=m.MEMBER_EMAIL
-		left outer join accom_grade g on b.acc_num = g.ag_acc_num
+		left outer join accom_grade g on b.acc_host= g.ag_email
 		left outer
 		join accom_service s on b.acc_num = s.se_acc_num
 
@@ -144,7 +144,7 @@
 		on b.acc_num = r.ro_acc_num
 		left outer join member_auth m on b.ACC_HOST
 		=m.MEMBER_EMAIL
-		left outer join accom_grade g on b.acc_num = g.ag_acc_num
+		left outer join accom_grade g on b.acc_host= g.ag_email
 		left outer
 		join accom_service s on b.acc_num = s.se_acc_num
 		WHERE ro_sub = #{searchtype}
