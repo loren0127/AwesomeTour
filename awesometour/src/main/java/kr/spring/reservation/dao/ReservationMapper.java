@@ -23,12 +23,14 @@ public interface ReservationMapper {
 
 	public int selectReservationGroup(Map<String,Object> map);
 
-	@Select("SELECT * FROM (SELECT acc_num,acc_host,acc_name, acc_address1, acc_address2,acc_in, acc_out, acc_num anum FROM accom ) a join (SELECT se_name,se_acc_num FROM accom_service ) s on a.acc_num = s.se_acc_num join (SELECT avg(ag_grade) ag_grade,ag_acc_num FROM accom_grade group by ag_acc_num) g on s.se_acc_num = g.ag_acc_num join (SELECT ro_num,ro_room_num,ro_acc_num, ro_sub,ro_price FROM accom_Room) o on g.ag_acc_num = o.ro_acc_num WHERE a.acc_num = #{acc_num} AND o.ro_num=#{ro_num}")
 	public ReservationCommand selectRerservationAcc(Map<String,Integer> map);
 	@Select("SELECT count(*) FROM  chat_member WHERE chat_all_num = #{chat_all_num} and member_email = #{member_email} ")
 	public int selectGroupMemberCount(Map<String,Object> map);
 	
 	@Select("SELECT ro_num FROM  accom_room WHERE ro_room_num = #{ro_room_num} and ro_acc_num = #{acc_num} ")
 	public int selectRoNum(Map<String,Integer> map);
+	
+	@Select("SELECT count(*) FROM  accom_grade WHERE ag_acc_num = #{acc_num} ")
+	public int selectGradeCount(Integer acc_num);
 
 }

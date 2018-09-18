@@ -462,11 +462,11 @@ $(function() {
 								style="width: 100px;">
 						</div>
 						<div class="col-auto headcountFilter">
-							<label for="headcount" style="display: inline-block;">인원수&nbsp;</label>
-							<input type="button" value="-" id="count_m"> <input
+							<label for="headcount" style="display: inline-block;font-weight:bold;">인원수&nbsp;</label>
+							<input type="button" value="-" id="count_m" class="plus_minus"> <input
 								type="text" value="1" id="headcount"
-								style="text-align: center; width: 50px;"> <input
-								type="button" value="+" id="count_p">
+								style="text-align: center; width: 50px;border: none;font-weight:bold;"> <input
+								type="button" value="+" id="count_p" class="plus_minus">
 						</div>
 						<div class="col-auto">
 							<input type="submit" value="재검색" id="research"

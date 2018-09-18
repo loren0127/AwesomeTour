@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <!DOCTYPE html>
@@ -77,7 +78,9 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 <div class="row">
 <div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 
+<c:if test=" ${!empty rv.ag_grade }">
 <i class="fa fa-heart" style="color:#ffc107"></i> ${rv.ag_grade }점<br>
+</c:if>
 </div>
 <div class="col-6">
 <img style=" padding: 10px; max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
@@ -111,15 +114,30 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 		<li ><img style="max-height:300px;max-width:300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover"></li>
 		<li><b>숙소 이름</b> : ${rv.acc_name }</li>
 		<li><b>주소</b> : ${rv.acc_address1} ${rv.acc_address2}</li>
-		<li><b>숙소 편의 서비스</b> : ${rv.se_name}</li>
+		<c:set var="array" value="${fn:split(rv.se_name,',')}" />
+		<li><div class="row" style="padding-left: 15px;"><b>서비스 </b>: 
+									<!-- 서비스를 배열형태로 반환하여 실행함 -->
+									<c:forEach var="hobby" items="${array}" begin="0" end="2">
+										<div class="col-3" style="margin: auto;display: contents;">
+											<div class="hobby_small rounded"
+												style="height: 30px; width: max-content; text-align: center;color: #D900ED;margin-right: 10px;">
+												<h6>&nbsp;${hobby}</h6>
+											</div> 
+										</div>
+									</c:forEach> <div class="col-3" style="margin: auto;display: contents;">
+									<div class="hobby_small rounded"
+												style="height: 30px; margin-right: 10px;">
+												<h6> 외 ${fn:length(array)-3}개</h6>
+											</div></div>
+		</div></li>
 	</ul>
 </div>
 
 <div class="state">
 	<h3>체크인/아웃 시간</h3><br>
 	<ul>
-		<li>체크인 가능 시간 : ${rv.rv_startdate } ${rv.acc_in} 이후 </li>
-		<li>체크아웃 시간 : ${rv.rv_enddate} ${rv.acc_out} 까지</li>
+		<li>체크인 가능 시간 : ${rv.rv_start_date } ${rv.acc_in} 이후 </li>
+		<li>체크아웃 시간 : ${rv.rv_end_date} ${rv.acc_out} 까지</li>
 	</ul>
 </div>
 

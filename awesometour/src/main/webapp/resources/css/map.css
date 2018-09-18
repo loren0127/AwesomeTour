@@ -132,8 +132,29 @@ input:focus { outline: none; }
 .headcountFilter{
 	width: fit-content;
 	padding: 5px 10px;
-    border: 1px solid lemonchiffon;
-    background: lemonchiffon;
+	box-shadow: 0 3px 5px 0 rgba(136, 136, 136, .15);
+	color: rgb(0, 132, 137);
+}
+
+.headcountFilter input{
+	color: rgb(0, 132, 137);
+}
+
+.plus_minus {
+    display: inline-block !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    position: relative !important;
+    touch-action: manipulation !important;
+    width: 32px !important;
+    height: 32px !important;
+    box-shadow: none !important;
+    border-radius: 50% !important;
+    border-style: solid !important;
+    border-color: rgb(0, 132, 137) !important;
+    background: transparent !important;
+    border-width: 1px !important;
 }
 
 /*map-sidePanel*/

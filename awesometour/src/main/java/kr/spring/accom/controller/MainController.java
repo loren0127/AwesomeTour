@@ -11,12 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.accom.domain.AccomCommand;
-import kr.spring.accom.domain.ImageCommand;
 import kr.spring.accom.domain.ReviewCommand;
 import kr.spring.accom.service.AccomService;
+import kr.spring.group.domain.GroupCommand;
 
 @Controller
 public class MainController {
@@ -32,7 +31,7 @@ public class MainController {
 	//==========메인 페이지 추천 숙소 및 리뷰 불러오기==========//
 	@RequestMapping("/main/main.do")
 	public String mainList(@RequestParam(value="people_count", defaultValue="1") int people_count, Model model){
-	if(log.isDebugEnabled()) {
+		if(log.isDebugEnabled()) {
 			log.debug("<<people_count>> : "+ people_count);
 		}
 		
@@ -46,41 +45,25 @@ public class MainController {
 		List<ReviewCommand> reviewList = null;
 		//리뷰 리스트
 		reviewList = accomService.selectReviewList();
-				
+		List<GroupCommand> groupList = null;
+		//그룹 리스트
+		groupList = accomService.selectGroupList();
+		
 		if(log.isDebugEnabled()) {
 			log.debug("<<추천리스트>> : "+recommedList);
 			log.debug("<<리뷰리스트>> : "+reviewList);
+			log.debug("<<그룹리스트>> : "+groupList);
 		}
 		
 		model.addAttribute("recommedList", recommedList);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("groupList", groupList);
 		model.addAttribute("people_count", people_count);
 
 		return "main";//tiles 식별자
 	}
 	
-	//숙소 이미지 불러오기
-	@RequestMapping("/main/imageView.do")
-	public ModelAndView viewImage(@RequestParam("im_ac_num") int im_ac_num, @RequestParam("kind") String kind) {
-
-		if(log.isDebugEnabled()) {
-			log.debug("<<im_ac_num>> : "+ im_ac_num);
-			log.debug("<<kind>> : " + kind);
-		}
-
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("im_ac_num", im_ac_num);
-
-		ImageCommand image = accomService.selectImage(im_ac_num);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("imageView");
-
-		if(kind.equals("im_image2")) {
-			mav.addObject("imageFile", image.getIm_image2());
-			mav.addObject("filename", image.getIm_image2_name());
-		}
-
-		return mav;
-	}
+	//숙소 이미지 불러오기 --> 맵 뷰 사용
+	
+	//그룹 이미지 불러오기 --> 그룹 뷰 사용
 }

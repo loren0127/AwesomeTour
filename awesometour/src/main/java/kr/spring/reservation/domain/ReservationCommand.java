@@ -8,8 +8,8 @@ public class ReservationCommand {
 	private int rv_money;
 	private int rv_people;
 	private int acc_num;
-	private String rv_startdate;
-	private String rv_enddate;
+	private String rv_start_date;
+	private String rv_end_date;
 	private String host_email;
 	private String member_email;
 	private int ro_num;
@@ -70,17 +70,17 @@ public class ReservationCommand {
 	public void setAcc_num(int acc_num) {
 		this.acc_num = acc_num;
 	}
-	public String getRv_startdate() {
-		return rv_startdate;
+	public String getRv_start_date() {
+		return rv_start_date;
 	}
-	public void setRv_startdate(String rv_startdate) {
-		this.rv_startdate = rv_startdate;
+	public void setRv_start_date(String rv_start_date) {
+		this.rv_start_date = rv_start_date;
 	}
-	public String getRv_enddate() {
-		return rv_enddate;
+	public String getRv_end_date() {
+		return rv_end_date;
 	}
-	public void setRv_enddate(String rv_enddate) {
-		this.rv_enddate = rv_enddate;
+	public void setRv_end_date(String rv_end_date) {
+		this.rv_end_date = rv_end_date;
 	}
 	public String getHost_email() {
 		return host_email;
@@ -193,7 +193,7 @@ public class ReservationCommand {
 	@Override
 	public String toString() {
 		return "ReservationCommand [rv_num=" + rv_num + ", rv_money=" + rv_money + ", rv_people=" + rv_people
-				+ ", acc_num=" + acc_num + ", rv_startdate=" + rv_startdate + ", rv_enddate=" + rv_enddate
+				+ ", acc_num=" + acc_num + ", rv_startdate=" + rv_start_date + ", rv_enddate=" + rv_end_date
 				+ ", host_email=" + host_email + ", member_email=" + member_email + ", ro_num=" + ro_num
 				+ ", ro_room_num=" + ro_room_num + ", ro_sub=" + ro_sub + ", ro_price=" + ro_price + ", rv_reg_date="
 				+ rv_reg_date + ", rv_status=" + rv_status + ", rv_message=" + rv_message + ", rv_request=" + rv_request

@@ -28,7 +28,7 @@
 	border: 0; 
 	}
 	
-	 @media screen and (max-width: 1090px){
+	 @media screen and (max-width: 1200px){
 	  	#div1{
 	  		display:none;
 	  	}
