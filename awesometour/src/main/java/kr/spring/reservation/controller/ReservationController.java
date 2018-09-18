@@ -63,9 +63,12 @@ public class ReservationController {
 	public String confirm(@RequestParam("im_ac_num") int acc_num,@RequestParam("check_in") String check_in,
 						  @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
 						  @RequestParam("ro_room_num") int ro_room_num,HttpSession session) {
+		
+		int reCount = reservationService.selectGradeCount(acc_num);
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		map.put("acc_num", acc_num);
 		map.put("ro_room_num",ro_room_num);
+		map.put("reCount",reCount);
 		int ro_num = reservationService.selectRoNum(map);
 		if(log.isDebugEnabled()) {
 			log.debug("<<ro_num>> : "+ro_num);
@@ -77,8 +80,8 @@ public class ReservationController {
 		reservationCommand.setAcc_num(acc_num);
 		reservationCommand.setRo_num(ro_num);
 		reservationCommand.setRv_people(people_count);
-		reservationCommand.setRv_startdate(check_in);
-		reservationCommand.setRv_enddate(check_out);
+		reservationCommand.setRv_start_date(check_in);
+		reservationCommand.setRv_end_date(check_out);
 		reservationCommand.setHost_email(reservationCommand.getAcc_host());
 		if(log.isDebugEnabled()) {
 			log.debug("<<rv>> : "+reservationCommand);
@@ -154,9 +157,9 @@ public class ReservationController {
 		
 		//이름생성
  		////////////////////////
- 		String todayYY = reservationCommand.getRv_startdate().substring(0, 4);
- 		String todayMM = reservationCommand.getRv_startdate().substring(5, 7);
- 		String todayDD = reservationCommand.getRv_startdate().substring(8, 10);
+ 		String todayYY = reservationCommand.getRv_start_date().substring(0, 4);
+ 		String todayMM = reservationCommand.getRv_start_date().substring(5, 7);
+ 		String todayDD = reservationCommand.getRv_start_date().substring(8, 10);
  		// 오늘 일자를 받아서 int 형으로 치환 한다.
  		int year = Integer.parseInt(todayYY);
  		int month = Integer.parseInt(todayMM)-1;   // 월은 0 부터 시작이기 때문에 -1 을 해준다.
@@ -221,7 +224,7 @@ public class ReservationController {
  	   
  		////////////////
  		
- 		String g_name =reservationCommand.getAcc_name()+" "+month+"월 "+this_week+"주 예약자"; 
+ 		String g_name =reservationCommand.getAcc_name()+" "+(month+1)+"월 "+this_week+"주 예약자"; 
  		//reservationCommand.getName() 
 
  		//이름으로 조회
@@ -320,13 +323,15 @@ public class ReservationController {
 	      
 	      messageHelper.setFrom(setfrom); 
 	      messageHelper.setTo(paymentCommand.getPm_email());
+	      
 	      messageHelper.setSubject("Awesome Tour 예약완료 되었습니다."); 
 	      String appandEmail ="<h1>AWESOME TOUR</h1>"; 
+	      
 	      appandEmail +="<h2>예약 정보</h2>";
 	      appandEmail +="-------------------------------------------------<br>";
 
 	      appandEmail +="예약 숙소 : "+reservationCommand.getAcc_name()+"<br>";
-	      appandEmail +="예약 일시 : "+reservationCommand.getRv_startdate()+"~"+reservationCommand.getRv_enddate()+"<br>";
+	      appandEmail +="예약 일시 : "+reservationCommand.getRv_start_date()+"~"+reservationCommand.getRv_end_date()+"<br>";
 	      appandEmail +="예약 이메일 : "+email+"<br>";
 	      appandEmail +="<h2>결제 정보</h2>";
 	      appandEmail +="결제 수단 : ";

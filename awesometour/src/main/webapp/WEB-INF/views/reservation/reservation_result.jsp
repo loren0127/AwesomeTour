@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    
     
 <!DOCTYPE html>
 <script>
@@ -65,12 +67,28 @@ $("#recGr").hide();
 		<br>
 		<h3>${rv.acc_name }</h3>   
 		${rv.acc_address1} ${rv.acc_address2}<br>
-		<i class="fa fa-heart" style="color:#ffc107"></i> : ${rv.ag_grade }점<br>
-		체크인 가능 시간 : ${rv.acc_in} 이후 <br>
-		체크아웃 가능 시간 :${rv.acc_out}까지<br>
-		<span style="color:#D900ED">
-		 ${rv.se_name }<br>
-		</span>
+		<c:if test=" ${!empty rv.ag_grade }">
+		<i class="fa fa-heart" style="color:#ffc107"></i> ${rv.ag_grade }점<br>
+		</c:if>	
+			<c:set var="array" value="${fn:split(rv.se_name,',')}" />
+			<div class="row" style="padding-left: 20%; text-align:center; margin: 5px auto ">
+			<!-- 서비스를 배열형태로 반환하여 실행함 -->
+			<c:forEach var="hobby" items="${array}" begin="0" end="4">
+				<div class="" style="padding: 0;">
+					<div class="hobby_small rounded" style="display:inline-block;height: 30px; width: max-content; text-align: center;color: #D900ED;margin-right: 10px;">
+						<h6>&nbsp;${hobby}</h6>
+					</div> 
+				</div>
+			</c:forEach> 
+			<div class="col-4" style="margin: auto;display: contents; ">
+					<div class="hobby_small rounded"style="height: 30px; margin-right: 10px;">
+						등
+					</div>
+			</div>
+			
+			</div>
+		<b>체크인 가능 시간</b> : ${rv.acc_in} 이후 <br>
+		<b>체크아웃 가능 시간</b> :${rv.acc_out}까지<br>
 		
 	</div>
 	<div class="col-3" style="padding: 5% 0;">
@@ -91,7 +109,7 @@ $("#recGr").hide();
 	
 	<div class="col-7">
 		${rv.rv_people }명<br>
-		<span id="check_in">${rv.rv_startdate }</span> ~ <span id="check_out">${rv.rv_enddate}</span> <br>
+		<span id="check_in">${rv.rv_start_date }</span> ~ <span id="check_out">${rv.rv_end_date}</span> <br>
 	</div>
 
 	<hr  style="width:90%" noshade>

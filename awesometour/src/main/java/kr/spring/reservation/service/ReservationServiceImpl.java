@@ -62,4 +62,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationMapper.selectRoNum(map);
 	}
 
+	@Override
+	public int selectGradeCount(Integer acc_num) {
+		// TODO Auto-generated method stub
+		return reservationMapper.selectGradeCount(acc_num);
+	}
+
 }

@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <style>
 
@@ -272,8 +274,9 @@ $(function(){
 <div class="row">
 <div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 
+<c:if test=" ${!empty rv.ag_grade }">
 <i class="fa fa-heart" style="color:#ffc107"></i> ${rv.ag_grade }점<br>
-</div>
+</c:if></div>
 <div class="col-6">
 <img style=" padding: 10px; max-height:100px;max-width:100px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
 </div>
