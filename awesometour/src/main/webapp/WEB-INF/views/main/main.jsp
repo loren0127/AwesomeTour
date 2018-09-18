@@ -156,7 +156,7 @@
 						<div class="card-recom align-left">
 							<div style="margin-bottom: 10px;">
 								<img
-									src="${pageContext.request.contextPath}/main/imageView.do?im_ac_num=${recommend.acc_num}&kind=im_image2"
+									src="${pageContext.request.contextPath}/accomList/imageView.do?im_ac_num=${recommend.acc_num}&kind=im_image2"
 									style="width: 100%;">
 							</div>
 							<div>
@@ -240,7 +240,7 @@
 							<div style="float: left;">
 								<span><b>${review.re_email}</b></span><br> <span
 									style="font-size: 15px;"><fmt:formatDate
-										value="${review.re_reg_date}" pattern="yyyy년 MM월 dd일" /></span>
+										value="${review.reg_date}" pattern="yyyy년 MM월 dd일" /></span>
 							</div>
 						</div>
 						<div style="margin-top: 10px;">${review.re_content}</div>
@@ -260,11 +260,11 @@
 			<c:forEach var="group" items="${groupList}" varStatus="status">
 			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-left">
-					<div>
+					<div style="margin-bottom: 10px;">
 						<img src="${pageContext.request.contextPath}/group/imageView.do?g_num=${group.g_num}" style="width:100%;">
 					</div>
 					<div>
-						<span style="font-size: 18px; font-weight: bold;">${group.g_name}</span><br>
+						<span style="font-size: 18px; font-weight: bold;margin-top:5px;">${group.g_name}</span><br>
 						<span style="font-size: 14px;">주최지 <b>${group.g_address2}</b></span><br>
 						<span style="font-size: 14px;">관심사 <b>${group.g_name}</b></span>
 					</div>
