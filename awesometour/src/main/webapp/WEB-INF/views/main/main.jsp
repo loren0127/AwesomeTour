@@ -265,8 +265,8 @@
 					</div>
 					<div>
 						<span style="font-size: 18px; font-weight: bold;margin-top:5px;">${group.g_name}</span><br>
-						<span style="font-size: 14px;">주최지 <b>${group.g_address2}</b></span><br>
-						<span style="font-size: 14px;">관심사 <b>${group.g_name}</b></span>
+						<span style="font-size: 14px;">주최지 <b style="color:#ffc107;">${group.g_address2}</b></span><br>
+						<span style="font-size: 14px;">관심사 <b style="color:#ffc107;">${group.g_name}</b></span>
 					</div>
 					<div style="margin-top: 10px;margin-bottom: 10px;">
 						<input type="button" class="btn btn-default hotelLink_main" value="참여하기" style="font-size: .8em;font-weight: bold;" 
