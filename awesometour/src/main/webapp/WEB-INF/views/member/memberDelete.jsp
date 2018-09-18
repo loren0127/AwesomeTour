@@ -24,9 +24,9 @@
 							<div align="center">
 							<h4>인증코드가 전송되었습니다.</h4>
 							<h4>코드를 입력하시면 정상적으로 회원탈퇴가 진행됩니다.</h4>
-								<input type="text" name="code_email" id="code_email" style="width: 50%" placeholder="이메일" class="form-control" value="${user_email }" readonly="true">
+								<input type="text" name="code_email" id="code_email" style="max-width:500px;" size="180" placeholder="이메일" class="form-control" value="${user_email }" readonly="true">
 									<br>
-								<input type="text" name="code_code" id="code_code" style="width: 50%" placeholder="코드입력" class="form-control">
+								<input type="text" name="code_code" id="code_code" style="max-width:500px;" size="180" placeholder="코드입력" class="form-control">
 								<span id="message_check"></span>
 								<br>
 								<input type="button" class="btn btn-warning" id="delete_check" value="코드인증">

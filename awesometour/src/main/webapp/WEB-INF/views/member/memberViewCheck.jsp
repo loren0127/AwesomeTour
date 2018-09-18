@@ -29,8 +29,8 @@
 							action="${pageContext.request.contextPath}/member/detailChecking.do"
 							method="post" id="view_Check" name="view_Check">
 							<div align="center">
-								<input type="text" name="member_email" size="120" style="width: 50%" value="${user_email }" readonly="true" class="form-control"> <br>
-								<input type="password" name="member_passwd" id="member_passwd" style="width: 50%" size="120" placeholder="비밀번호" class="form-control">
+								<input type="text" name="member_email" style="max-width:500px;" size="180" value="${user_email }" readonly="true" class="form-control"> <br>
+								<input type="password" name="member_passwd" id="member_passwd" style="max-width:500px;" size="180" placeholder="비밀번호" class="form-control">
 							</div>
 							<br>
 							<div align="center">
