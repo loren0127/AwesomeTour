@@ -67,7 +67,7 @@
 			<if test="check_in != '' and check_out != '' and people_count != '' and people_count >= 1">
 				<![CDATA[
 					price.ro_pe_count >= 1 AND price.ro_pe_count <= 8 AND price.ro_num NOT IN 
-					(SELECT ro_num FROM reservation WHERE TO_DATE(rv_end_date,'yyyy/mm/dd') > ${check_in} AND TO_DATE(rv_start_date,'yyyy/mm/dd') < ${check_out})
+					(SELECT ro_num FROM reservation WHERE TO_DATE(rv_end_date,'yyyy/mm/dd') > #{check_in} AND TO_DATE(rv_start_date,'yyyy/mm/dd') < #{check_out})
 				]]>
 			</if>
 			<if test="search != ''">
