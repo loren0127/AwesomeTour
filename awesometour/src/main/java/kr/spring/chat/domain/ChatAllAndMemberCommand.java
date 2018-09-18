@@ -87,7 +87,7 @@ public class ChatAllAndMemberCommand {
 	}
 	
 	private int chat_member_num; //Primary key, Not null
-	private int chat_all_num_member_fk; //Foreign key, Not null
+	private int chat_all_num_member; //Foreign key, Not null
 	private String member_email; //Foreign key, Not null
 	private String chat_member_mod_date; //Default SYSDATE, Not null
 	
@@ -99,11 +99,11 @@ public class ChatAllAndMemberCommand {
 	public void setChat_member_num(int chat_member_num) {
 		this.chat_member_num = chat_member_num;
 	}
-	public int getChat_all_num_member_fk() {
-		return chat_all_num_member_fk;
+	public int getChat_all_num_member() {
+		return chat_all_num_member;
 	}
-	public void setChat_all_num_member_fk(int chat_all_num_member_fk) {
-		this.chat_all_num_member_fk = chat_all_num_member_fk;
+	public void setChat_all_num_member(int chat_all_num_member) {
+		this.chat_all_num_member = chat_all_num_member;
 	}
 	public String getMember_email() {
 		return member_email;

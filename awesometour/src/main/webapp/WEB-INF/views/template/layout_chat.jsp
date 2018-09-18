@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script
@@ -9,6 +11,7 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/chat.css" style="text/css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/chatEmailCheck.js"></script>
 <style>
 @media all and (max-width: 768px) {
     #hide_nav {
@@ -27,31 +30,26 @@
 }
 </style>
 <script type="text/javascript">
-var status = 1; //1: inbox_people view, 0: mesgs view
+var status = 1;
 $(document).ready(function() {
 	$(window).resize(function() {
 		var windowSize = $(window).width();
 		if(windowSize >= 768) {
-			alert('resize 동작1');
 			$('.inbox_people').css('display', 'inline');
 			$('.mesgs').css('display', 'inline');
-			status = 1;
 		} else {
-			alert('resize 동작2');
 			$('.mesgs').css('display', 'inline');
 			$('.inbox_people').css('display', 'none');
-			status = 0;
+			status = 1;
 		}
 	});
 	
 	$(document).on('click', '#sidebarCollapse', function() {
 		if(status == 0) {
-			alert('sidebarCollapse 버튼 동작1 : ' + status);
 			$('.inbox_people').css('display', 'none');
 			$('.mesgs').css('display', 'inline');
 			status = 1;
 		} else {
-			alert('sidebarCollapse 버튼 동작2 : ' + status);
 			$('.inbox_people').css('display', 'inline');
 			$('.mesgs').css('display', 'none');
 			status = 0;
@@ -59,10 +57,9 @@ $(document).ready(function() {
 	});
 	
 	$(document).on('click', '.hide_a', function() {
-		alert('hide_a click 동작');
 		$('.inbox_people').css('display', 'none');
 		$('.mesgs').css('display', 'inline');
-		status = 0;
+		status = 1;
 	});
 });
 </script>
@@ -122,16 +119,47 @@ $(document).ready(function() {
 								<div class="chat_people">
 									<div class="chat_ib">
 										<h5>
-											- <a href="#">친구채팅 생성</a>
+											- <a href="#" data-toggle="modal" data-target="#myModal">채팅 신청</a>
 										</h5>
-									</div>
-								</div>
-								<div class="chat_people">
-									<div class="chat_ib">
-										<h5>
-											- <a href="#">친구채팅 삭제</a>
-										</h5>
-									</div>
+
+											<div class="modal" id="myModal">
+												<div class="modal-dialog">
+													<div class="modal-content">
+
+														<!-- Modal Header -->
+														<div class="modal-header">
+															<h4 class="modal-title">채팅 신청 쪽지</h4>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+
+														<!-- Modal body -->
+														<form:form id="friendChatInvite" commandName="messageCommand" action="insertFriendChatSendMessage.do">
+														<div class="modal-body" >
+															
+																제목: <form:input path="message_title" class="form-control form-control-sm"/>
+																<hr>
+																받는이:
+																<div class="input-group mb-3">
+																	<input id="message_sender_chat" name="message_receiver" class="form-control form-control-sm" type="text" value="">
+																	<div class="input-group-append">
+																		<button class="btn btn-success btn-sm" id="checkedEmailChat" onclick="return false;">이메일 확인</button>
+																	</div>
+																</div>
+																<span id="receiverCheckedMessageChat"></span>
+																<hr>
+																내용 : <form:textarea path="message_content" class="form-control form-control-sm"/><br>
+														</div>
+														
+														<!-- Modal footer -->
+														<div class="modal-footer">
+															<button type="submit">전송</button>
+														</div>
+														
+														</form:form>
+													</div>
+												</div>
+											</div>
+										</div>
 								</div>
 							</div>
 							<c:forEach var="chatMemberCommand" items="${selectChatMemberList}">
@@ -246,15 +274,18 @@ $(document).ready(function() {
 						
 						<!-- 받은 쪽지 -->
 						<div id="receive_message_chat" class="container tab-pane fade <c:if test="${selected eq 'receiveMessageList'}">active show</c:if>">
-							<div class="chat_list">
-								<div class="chat_people">
-									<div class="chat_ib">
-										<h5>
-											- <a href="#">쪽지 삭제하기</a>
-										</h5>
+							<c:if test="${receiveMessageCount < 1}">
+								<div class="chat_list">
+									<div class="chat_people">
+										<div class="chat_ib">
+											<h5>
+												- 쪽지가 없어요!
+											</h5>
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:if>
+							
 							<c:if test="${receiveMessageCount > 0}">
 								<c:forEach var="receiveMessageCommand" items="${receiveMessageList}">
 									<div class="chat_list">

@@ -19,6 +19,7 @@ public interface MessageService {
 	
 	public void updateMessageReceiveStatus(Map<String, Object> map);
 	
+	public MessageCommand selectMessageStatus(int message_num);
 	
-	public Map<String, Object> selectMessageStatus(int message_num);
+	public void deleteMessage(int message_num);
 }

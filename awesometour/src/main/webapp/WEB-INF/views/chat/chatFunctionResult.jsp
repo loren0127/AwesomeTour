@@ -38,6 +38,26 @@
 					<hr>
 				</div>
 			</c:if>
+			
+			<c:if test="${chatResult == 'sendChatInvaite'}">
+				<div class="received_msg">
+					<div class="received_withd_msg">
+						<p>채팅방이 생성되었습니다!</p>
+						<span class="time_date">- 운영자 -</span>
+					</div>
+					<hr>
+				</div>
+			</c:if>
+			
+			<c:if test="${chatResult == 'sendChatInvaiteFailed'}">
+				<div class="received_msg">
+					<div class="received_withd_msg">
+						<p>이미 채팅방이 존재하네요!</p>
+						<span class="time_date">- 운영자 -</span>
+					</div>
+					<hr>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </div>

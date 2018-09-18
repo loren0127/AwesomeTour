@@ -16,7 +16,7 @@ public interface ChatMapper {
 	@Select("SELECT * FROM chat_all WHERE chat_all_num=#{chat_all_num}")
 	public List<ChatAllCommand> chatAllSelectList(Map<String, Object> map);
 	
-	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, a.chat_all_num chat_all_num_member_fk, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
+	@Select("SELECT a.chat_member_num, a.chat_all_num, a.member_email, a.chat_member_mod_date, chat_member_mod_date, b.group_num, b.chat_all_title, b.chat_all_sort, b.chat_all_member_list FROM chat_member a, chat_all b WHERE a.chat_all_num=b.chat_all_num AND a.member_email=#{user_email}")
 	public List<ChatAllAndMemberCommand> selectChatMemberList(Map<String, Object> map);
 	
 	@Select("SELECT COUNT(*) FROM chat_member WHERE member_email=#{user_email}")
@@ -31,16 +31,7 @@ public interface ChatMapper {
 	public void updateChatAllNotice(Map<String, Object> map);
 	
 	//ChatMapper.xml
-	public void insertChatMember(ChatMemberCommand command);
-	
-	public void updateChatAll(Integer chat_all_num);
-	
-	public void updateChatMember(Integer chat_member_num);
-	
-	public void deleteChatAll(Integer chat_all_num);
-	
-	public void deleteChatMember(Integer chat_member_num);
-	
+	public int insertFriendChatCreate(ChatAllCommand command);
 	
 	//Chat join
 	@Select("SELECT * FROM  chat_member INNER JOIN chat_all ON chat_all.chat_all_num=chat_member.chat_all_num WHERE member_email=#{user_email} AND chat_member.chat_all_num=#{chat_all_num}")
@@ -65,4 +56,12 @@ public interface ChatMapper {
 	
 	@Update("UPDATE chat_member SET chat_member_mod_date=SYSDATE WHERE chat_all_num=#{chat_all_num} AND member_email=#{user_email}")
 	public void updateChatAllJoinChange(Map<String, Object> map);
+
+	public void insertChatMember(ChatMemberCommand command);
+	
+	@Select("SELECT chat_all_num FROM chat_all WHERE chat_all_title=#{chat_all_title}")
+	public int selectChatAllNum(String chat_all_title);
+	
+	@Select("SELECT COUNT(*) FROM chat_all, chat_member WHERE chat_all.chat_all_num = chat_member.chat_all_num AND chat_all.group_num=-1 AND (member_email=#{message_sender} OR member_email=#{message_receiver})")
+	public int selectChatOverlapChecked(Map<String, Object> map);
 }

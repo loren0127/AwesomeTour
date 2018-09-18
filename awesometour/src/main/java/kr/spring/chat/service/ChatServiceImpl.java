@@ -43,37 +43,8 @@ public class ChatServiceImpl implements ChatService {
 	public void updateChatAllNotice(Map<String, Object> map) {
 		chatMapper.updateChatAllNotice(map);
 	}
-
-	@Override
-	public void insertChatMember(ChatMemberCommand command) {
-		chatMapper.insertChatMember(command);
-	}
-
-	@Override
-	public void updateChatAll(Integer chat_all_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateChatMember(Integer chat_member_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteChatAll(Integer chat_all_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteChatMember(Integer chat_member_num) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	//Chat overlap 獄쎻뫗占�
+	//Chat overlap �뛾�렮維쀥뜝占�
 	@Override
 	public ChatAllCommand selectChatAllJoin(Map<String, Object> map) {
 		return chatMapper.SelectChatAllJoin(map);
@@ -109,9 +80,22 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public void insertChatAllGroup(ChatAllCommand command) {
-		// TODO Auto-generated method stub
 		chatMapper.insertChatAllGroup(command);
 	}
-
-
+	
+	public int insertFriendChatCreate(ChatAllCommand command) {
+		return chatMapper.insertFriendChatCreate(command);
+	}
+	
+	public void insertChatMember(ChatMemberCommand command) {
+		chatMapper.insertChatMember(command);
+	}
+	
+	public int selectChatAllNum(String chat_all_title) {
+		return chatMapper.selectChatAllNum(chat_all_title);
+	}
+	
+	public int selectChatOverlapChecked(Map<String, Object> map) {
+		return chatMapper.selectChatOverlapChecked(map);
+	}
 }

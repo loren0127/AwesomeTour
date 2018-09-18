@@ -10,10 +10,12 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Resource
 	private MessageMapper messageMapper;
+	
  	@Override
 	public int selectMessageRowCount(Map<String, Object> map) {
 		return messageMapper.selectMessageRowCount(map); 
 	}
+ 	
  	@Override
 	public List<MessageCommand> selectMessageList(Map<String, Object> map) {
 		return messageMapper.selectMessageList(map);
@@ -26,6 +28,7 @@ public class MessageServiceImpl implements MessageService {
 	public MessageCommand selectMessageDetail(int message_num) {
 		return messageMapper.selectMessageDetail(message_num);
 	}
+	
 	public void updateMessageRead(Map<String, Object> map) {
 		messageMapper.updateMessageRead(map);
 	}
@@ -38,7 +41,11 @@ public class MessageServiceImpl implements MessageService {
 		messageMapper.updateMessageReceiveStatus(map);
 	}
 	
-	public Map<String, Object> selectMessageStatus(int message_num) {
+	public MessageCommand selectMessageStatus(int message_num) {
 		return messageMapper.selectMessageStatus(message_num);
+	}
+	
+	public void deleteMessage(int message_num) {
+		messageMapper.deleteMessage(message_num);
 	}
 }

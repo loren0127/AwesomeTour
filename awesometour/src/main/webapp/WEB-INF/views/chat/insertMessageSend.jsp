@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<script>
-function buttonSubmit() {
-	document.messageSendForm.submit();
-}
-
-</script>
 <div class="col-sm-12 col-md-6">
 	<div class="mesgs" id="mesgs" style="width: 100%;">
 		<div class="msg_history" id="chatMessageArea">
@@ -21,32 +15,16 @@ function buttonSubmit() {
 						<li style="padding-bottom:10px;">
 							<label for="message_receiver">받는이</label>
 							<div class="input-group mb-3">
-								<form:input class="form-control form-control-sm" path="message_receiver"/>
+								<form:input class="form-control form-control-sm" id="message_sender" path="message_receiver"/>
 								<div class="input-group-append">
-									<button class="btn btn-success btn-sm" type="submit">확인</button>
+									<button class="btn btn-success btn-sm" id="checkedEmail" onclick="return false;">이메일 확인</button>
 								</div>
 							</div>
+							<span id="receiverCheckedMessage"></span>
 							<%-- <form:errors path="message_receiver" cssClass="error-color" /> --%>
 						</li>
 					</ul>
-					
-					<hr>
-					
-					<ul>
-						<li style="padding-bottom:10px;">
-							<label for="message_type">쪽지 종류</label>
-							<form:select path="message_type" class="form-control-sm">
-								<form:option value="normal">쪽지</form:option>
-								<form:option value="chatInvite">채팅신청</form:option>
-								<form:option value="groupInvite">그룹신청</form:option>
-							</form:select>
-							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
 							
-							<form:input class="form-control form-control-sm" path="message_URL" placeholder="초대링크"/>
-							<%-- <form:errors path="message_title" cssClass="error-color" /> --%>
-						</li>
-					</ul>
-					
 					<hr>
 					
 					<ul>
@@ -57,7 +35,7 @@ function buttonSubmit() {
 						</li>
 					</ul>
 					<hr>
-					<button class="btn btn-link" onclick="buttonSubmit();">보내기</button>
+					<button class="btn btn-link" id="messageSendBtn" type="submit">보내기</button>
 				</form:form>
 			</div>
 		</div>

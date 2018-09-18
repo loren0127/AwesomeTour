@@ -9,6 +9,8 @@ import kr.spring.chat.domain.ChatAllTalkCommand;
 import kr.spring.chat.domain.ChatMemberCommand;
 
 public interface ChatService {
+	
+	
 	public List<ChatAllCommand> selectChatAllList(Map<String, Object> map);
 	
 	public List<ChatAllAndMemberCommand> selectChatMemberList(Map<String, Object> map);
@@ -17,17 +19,7 @@ public interface ChatService {
 	
 	public void insertChatAll(ChatAllCommand command);
 	
-	//public void updateChatAllNotice(Map<String, Object> map);
-	
-	public void insertChatMember(ChatMemberCommand command);
-	
-	public void updateChatAll(Integer chat_all_num);
-	
-	public void updateChatMember(Integer chat_member_num);
-	
-	public void deleteChatAll(Integer chat_all_num);
-	
-	public void deleteChatMember(Integer chat_member_num);
+	public int insertFriendChatCreate(ChatAllCommand command);
 	
 	public ChatAllCommand selectChatAllJoin(Map<String, Object> map);
 	
@@ -46,5 +38,9 @@ public interface ChatService {
 	
 	public void insertChatAllGroup(ChatAllCommand command);
 	
-
+	public void insertChatMember(ChatMemberCommand command);
+	
+	public int selectChatAllNum(String chat_all_title);
+	
+	public int selectChatOverlapChecked(Map<String, Object> map);
 }

@@ -6,21 +6,16 @@
 <mapper namespace="kr.spring.chat.dao.ChatMapper">
 	<!-- 그룹 채팅 -->
 	<insert id="insertChatAllGroup" parameterType="kr.spring.chat.domain.ChatAllCommand">
-		<selectKey keyProperty="chat_all_num" resultType="integer" order="BEFORE">
-			SELECT chat_all_seq.NEXTVAL FROM DUAL
-		</selectKey>
 		INSERT INTO 
 		chat_all(chat_all_num, chat_all_title, chat_all_member_list, group_num, chat_all_member_max, CHAT_ALL_SORT)
-		values(#{chat_all_num}, #{chat_all_title}, #{chat_all_member_list}, #{group_num}, #{chat_all_member_max}, '그룹')
+		values(chat_all_seq.NEXTVAL, #{chat_all_title}, #{chat_all_member_list}, #{group_num}, #{chat_all_member_max}, '그룹')
 	</insert>
 	
-	<insert id="insertChatAllFriend" parameterType="kr.spring.chat.domain.ChatAllCommand">
-		<selectKey keyProperty="chat_all_num" resultType="integer" order="BEFORE">
-			SELECT chat_all_seq.NEXTVAL FROM DUAL
-		</selectKey>
+	<!-- Friend chat -->
+	<insert id="insertFriendChatCreate" parameterType="chatAllCommand">
 		INSERT INTO 
 		chat_all(chat_all_num, chat_all_title, chat_all_member_list)
-		values(#{chat_all_num}, #{chat_all_title}, #{chat_all_member_list})
+		values(chat_all_seq.NEXTVAL, #{chat_all_title}, '친구채팅')
 	</insert>
 	
 	<!-- 채팅방 참여 -->
@@ -29,6 +24,4 @@
 		chat_member(chat_member_num, chat_all_num, member_email) 
 		VALUES(chat_member_seq.NEXTVAL, #{chat_all_num_member}, #{member_email})
 	</insert>
-	<update id="updateChatAll" parameterType="kr.spring.chat.domain.ChatAllCommand">
-	</update>
 </mapper>

@@ -14,7 +14,7 @@ package kr.spring.chat.domain;
 	private int message_receive_status; //Receiver message delete status
 	private int message_sende_status; //Sender message delete status
 	
-	private String message_URL; //Send URL(None URL link: "0")
+	private String message_URL; //Send URL(None URL link: "")
 	
 	private String message_type; //Send message type(normal, chatInvite, groupInvite)
 	
