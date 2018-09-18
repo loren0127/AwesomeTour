@@ -16,7 +16,7 @@
 		(SELECT aa.ro_sub, aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM 
 		((SELECT ro_price, ro_sub, ro_pe_count FROM accom_room)aa) 
 		JOIN (SELECT ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY ro_acc_num)bb 
-		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num)price RIGHT OUTER JOIN
+		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
 		(SELECT a.*, m.member_auth, m.member_email FROM accom a, member_auth m where
 		a.acc_host = m.member_email)auth ON price.acc_host = auth.member_email
 		RIGHT OUTER JOIN
@@ -99,7 +99,7 @@
 			</if>
 	</select>
 	
-	<select id="selectImage" parameterType="integer" resultType="ImageCommand">
+	<select id="selectImage" parameterType="Integer" resultType="ImageCommand">
 		SELECT img.im_ac_num, img.im_cover, img.im_cover_name, img.im_image2,
 		img.im_image2_name FROM (SELECT
 		im_ac_num,im_ro_num,im_cover,im_cover_name,im_image2,im_image2_name
@@ -109,5 +109,31 @@
 		ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY
 		ro_acc_num)bb ON aa.ro_price = bb.ro_price)room_num ON img.im_ro_num =
 		room_num.ro_num WHERE img.im_ac_num=#{im_ac_num}
+	</select>
+	
+	<!-- 메인 페이지에서 추천 숙소(슈퍼호스트) 리스트 -->
+	<select id="selectRecommendList" parameterType="map" resultType="AccomCommand">
+		SELECT price.*, grade.ag_grade, auth.member_auth, service.se_name,
+		review.review_count, book.rv_start_date, book.rv_end_date FROM
+		(SELECT * FROM ((SELECT * FROM accom)a) JOIN 
+		(SELECT aa.ro_sub, aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM 
+		((SELECT ro_price, ro_sub, ro_pe_count FROM accom_room)aa) 
+		JOIN (SELECT ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY ro_acc_num)bb 
+		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
+		(SELECT a.*, m.member_auth, m.member_email FROM accom a, member_auth m where
+		a.acc_host = m.member_email)auth ON price.acc_host = auth.member_email
+		RIGHT OUTER JOIN
+		(SELECT a.*, s.se_name FROM accom a, accom_service s WHERE a.acc_num =
+		s.se_acc_num)service ON auth.acc_num = service.acc_num LEFT OUTER JOIN
+		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
+		ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade GROUP BY ag_acc_num)b
+		ON a.acc_num = b.ag_acc_num)grade
+		ON price.acc_num = grade.acc_num LEFT OUTER JOIN
+		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT re_acc_num,
+		COUNT(*)review_count FROM accom_review GROUP BY re_acc_num)b ON
+		a.acc_num = b.re_acc_num)review
+		ON grade.ag_acc_num = review.re_acc_num LEFT OUTER JOIN (SELECT acc_num,
+		rv_start_date, rv_end_date FROM reservation)book
+		ON review.re_acc_num = book.acc_num WHERE <![CDATA[auth.MEMBER_AUTH = 3]]> ORDER BY price.ro_price ASC
 	</select>
 </mapper>

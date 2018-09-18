@@ -21,8 +21,8 @@ public interface AccomMapper {
 	public List<AccomCommand> selectRecommendList(Map<String,Object> map);
 	
 	//리뷰 불러오기
-	@Select("SELECT re_acc_num, re_content, re_email, re_reg_date FROM accom_review WHERE re_acc_num=#{acc_num}")
-	public ReviewCommand selectReviewList(Integer acc_num);
+	@Select("SELECT * FROM (SELECT re.*, rownum rnum FROM (SELECT re_acc_num, re_email, re_reg_date reg_date, re_content FROM accom_review ORDER BY re_reg_date DESC)re) WHERE rnum >= 1 AND rnum <= 4")
+	public List<ReviewCommand> selectReviewList();
 	
 	//인기 모임 불러오기
 	@Select("")

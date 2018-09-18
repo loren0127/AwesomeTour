@@ -110,7 +110,7 @@
 							<p style="text-align:center;"><b>${privateDetail.member_nickname}</b>님에게 문의하기</p>
 							<form>
 								<input type="hidden" name="message_receiver" id="message_receiver" value="${privateDetail.acc_host}">
-								<input type="text" name="message_title" placeholder="제목 입력" size="37" id="message_title"><br><br>
+								<input type="text" name="message_title" placeholder="제목 입력" size="37" id="message_title" maxlength="90"><br><br>
 								<textarea rows="6" cols="40" placeholder="내용 입력" name="message_content" id="message_content"></textarea>
 							</form>
 							</div>

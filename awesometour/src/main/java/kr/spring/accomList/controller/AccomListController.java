@@ -1,6 +1,7 @@
 package kr.spring.accomList.controller;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import java.util.List;
@@ -24,11 +25,12 @@ import kr.spring.util.PagingUtil;
 @Controller
 public class AccomListController {
 	private Logger log = Logger.getLogger(this.getClass());
-	private int rowCount = 5;
-	private int pageCount = 0;
 	
 	@Resource
 	AccomListService accomListService;
+	int pageNum = 1;
+	int rowCount = 5;
+	int pageCount = 0;
 	
 		//========게시판 글 목록=========//
 		@RequestMapping(value="accomList/accomList.do",method=RequestMethod.GET)
@@ -38,18 +40,26 @@ public class AccomListController {
 				@RequestParam(value="searchtype",defaultValue="") String searchtype,
 				@RequestParam(value="check_in",defaultValue="") String check_in,
 				@RequestParam(value="check_out",defaultValue="") String check_out,
-				@RequestParam(value="people_count",defaultValue="") int people_count
-				
+				@RequestParam(value="people_count",defaultValue="") int people_count,
+				@RequestParam(value="price",defaultValue="") String price, //가격정렬
+				@RequestParam(value="se_name",defaultValue="") String se_name,
+				@RequestParam(value="hotel_grade",defaultValue="") String hotel_grade
 		) {	
 	
 			
 			Map<String, Object> map = new HashMap<String, Object>();
+			String check[] = se_name.split(",");
 			map.put("pageNum", currentPage);
 			map.put("search", search);
 			map.put("searchtype", searchtype);
 			map.put("check_in", check_in);
 			map.put("check_out", check_out);
 			map.put("people_count", people_count);
+			map.put("price", price);
+			map.put("se_name", se_name);
+			List<String> checklist = Arrays.asList(check);
+			map.put("checklist", checklist);
+			map.put("hotel_grade", hotel_grade);
 			//map.put("ro_price", ro_price);
 			
 
@@ -57,20 +67,37 @@ public class AccomListController {
 			int count = accomListService.selectAccomListCount(map);
 			
 			if(log.isDebugEnabled()) {
+				log.debug("<<pageNum>> : " + currentPage);
+				log.debug("<<search>> : " + search);
+				log.debug("<<searchtype>> : " + searchtype);
+				log.debug("<<check_in>> : " + check_in);
+				log.debug("<<check_in>> : " + check_out);
+				log.debug("<<check_out>> : " + check_out);
+				log.debug("<<people_count>> : " + people_count);
+				log.debug("<<price>> : " + price);
+				log.debug("<<se_name>> : " + se_name);
+				log.debug("<<checklist>> : " + checklist);
+				log.debug("<<hotel_grade>> : " + hotel_grade);
+			}
+			
+			
+			if(log.isDebugEnabled()) {
 				log.debug("<<count>> : " + count);
 			}
+			if(log.isDebugEnabled()) {
+				log.debug("<<pageCount>> : " + pageCount);
+			}
+			
 			if(count%rowCount == 0) {			
 				pageCount = count/rowCount;
 			}else {
 				pageCount = count/rowCount +1; 
 			}
-			PagingUtil page = new PagingUtil(currentPage, count, rowCount,pageCount,"accomList.do");
 			
+			PagingUtil page = new PagingUtil(currentPage, count,rowCount,pageCount,"accomList.do");
 			
-
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
-			map.put("pagingHtml",page.getPagingHtml());
 			
 			List<AccomListCommand> list = null;
 			if(count > 0) {
@@ -97,13 +124,12 @@ public class AccomListController {
 			ArrayList<String> arr3 = new ArrayList<String>(arr2); // 중복이 제거된 HashSet을 다시 ArrayList에 삽입
 			
 			System.out.println(arr3);*/
-			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("accomList");
 			mav.addObject("map",map);
 			mav.addObject("count",count);
 			mav.addObject("list",list);
-			
+			mav.addObject("rowCount",rowCount);
 			return mav;
 
 		}

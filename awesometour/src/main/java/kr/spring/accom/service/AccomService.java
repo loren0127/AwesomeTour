@@ -12,6 +12,6 @@ public interface AccomService {
 	public List<AccomCommand> selectList(Map<String,Object> map);
 	public ImageCommand selectImage(Integer im_ac_num);
 	public List<AccomCommand> selectRecommendList(Map<String,Object> map);
-	public ReviewCommand selectReviewList(Integer acc_num);
+	public List<ReviewCommand> selectReviewList();
 	public List<GroupCommand> selectGroupList(Map<String,Object> map);
 }

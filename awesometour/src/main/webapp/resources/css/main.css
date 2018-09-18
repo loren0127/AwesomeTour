@@ -4,6 +4,25 @@
   width: 100%;
 }
 
-.card-recom {
-	margin-top: 50px;
+.profile {
+	background: #D8D8D8 !important;
+    border-radius: 50% !important;
+    border: 2px solid #ffffff !important;
+    overflow: hidden !important;
+}
+
+.hotelLink_main, .houseLink_main{
+	
+}
+
+.hotelLink_main:hover{
+	color: #D900ED;
+	background-color: #fff;
+    border-color: #D900ED;
+}
+
+.houseLink_main:hover{
+	color: #D900ED;
+	background-color: #fff;
+    border-color: #D900ED;
 }

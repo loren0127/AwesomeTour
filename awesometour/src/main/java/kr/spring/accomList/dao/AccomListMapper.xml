@@ -8,29 +8,22 @@
 		SELECT * FROM
 		(SELECT a.*, rownum rnum FROM
 		(SELECT * from accom b
-		left
-		outer join
-		(SELECT min(ro_price)as ro_price,ro_acc_num FROM accom_room
-		GROUP BY
-		ro_acc_num)r
+        left outer join(SELECT min(ro_price) as ro_price,ro_sub,ro_acc_num FROM accom_room r 
+         <![CDATA[
+        WHERE ro_num NOT IN (SELECT ro_num
+			FROM reservation c
+				 		WHERE TO_DATE(c.rv_end_date,'yyyy/mm/dd') >= #{check_in}
+						AND TO_DATE(c.rv_start_date,'yyyy/mm/dd') <= #{check_out}
+			   )
+					]]>
+		group by ro_acc_num,ro_sub)r					
 		on b.acc_num = r.ro_acc_num
-		left outer join
-		(SELECT
-		min(ro_sub)as ro_sub,ro_acc_num FROM accom_room GROUP BY ro_acc_num)u
-		on b.acc_num = u.ro_acc_num
-		left outer join reservation c on b.acc_num
-		= c.acc_num
-		left outer join member_auth m on b.acc_num = m.member_num
+		left outer join member_auth m on b.ACC_HOST
+		=m.MEMBER_EMAIL
 		left outer join accom_grade g on b.acc_num = g.ag_acc_num
 		left outer
 		join accom_service s on b.acc_num = s.se_acc_num
-		WHERE
-		<if test='searchtype =="p"'>
-			b.acc_grade is null
-		</if>
-		<if test='searchtype =="h"'>
-			b.acc_grade is not null
-		</if>
+		WHERE ro_sub = #{searchtype}
 		<if test="search !=''">
 			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||'%'
 		</if>
@@ -39,88 +32,63 @@
 			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE
 			ro_pe_count >=#{people_count})
 		</if>
-		<if test="search !=''">
-
-			AND b.acc_num NOT IN(SELECT acc_num
-			FROM reservation 
-				 				
-				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
-						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
-					]]>
-			)
-		</if>
-		)a)
+		ORDER BY m.member_auth DESC )a)
        		 <![CDATA[
        		 WHERE rnum >= #{start} AND rnum <= #{end}
        		 	]]>
-		ORDER BY member_auth DESC
+		
 	</select>
 
 	<select id="selectAccomListCount" parameterType="map"
 		resultType="integer">
 		SELECT COUNT(*) FROM (
 		SELECT * from accom b
-		left outer join
-		(SELECT min(ro_price)as ro_price,ro_acc_num FROM accom_room GROUP BY
-		ro_acc_num)r
+        left outer join(SELECT min(ro_price) as ro_price,ro_sub,ro_acc_num FROM accom_room r 
+         <![CDATA[
+        WHERE ro_num NOT IN (SELECT ro_num
+			FROM reservation c
+				 		WHERE TO_DATE(c.rv_end_date,'yyyy/mm/dd') >= #{check_in}
+						AND TO_DATE(c.rv_start_date,'yyyy/mm/dd') <= #{check_out}
+			   )
+					]]>
+		group by ro_acc_num,ro_sub)r					
 		on b.acc_num = r.ro_acc_num
-		left outer join
-		(SELECT min(ro_sub)as ro_sub,ro_acc_num FROM accom_room GROUP BY ro_acc_num)u
-		on b.acc_num = u.ro_acc_num
-		left outer join reservation c on b.acc_num = c.acc_num
-		left outer join member_auth m on b.acc_num = m.member_num
+		left outer join member_auth m on b.ACC_HOST
+		=m.MEMBER_EMAIL
 		left outer join accom_grade g on b.acc_num = g.ag_acc_num
-		left outer join accom_service s on b.acc_num = s.se_acc_num
-		WHERE
-		<if test='searchtype =="p"'>
-			b.acc_grade is null
-		</if>
-		<if test='searchtype =="h"'>
-			b.acc_grade is not null
-		</if>
+		left outer
+		join accom_service s on b.acc_num = s.se_acc_num
+		WHERE ro_sub = #{searchtype}
 		<if test="search !=''">
 			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||'%'
 		</if>
 		<if test="search !=''">
 			AND b.acc_num in(SELECT ro_acc_num FROM accom_room WHERE ro_pe_count >=#{people_count})
 		</if>
-		<if test="search !=''">
-
-			AND b.acc_num NOT IN(SELECT acc_num
-			FROM reservation 
-				 				
-				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in}  AND 
-				 		TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
-					]]>
-			))a
-		</if>
+		)a
 	</select>
 
 	<select id="selectAccomTotallist" parameterType="map"
 		resultType="AccomListCommand">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM
 		(SELECT * from accom b
-		left outer join
-		(SELECT min(ro_price)as ro_price,ro_acc_num FROM accom_room GROUP BY
-		ro_acc_num)r
+        left outer join(SELECT min(ro_price) as ro_price,ro_sub,ro_acc_num FROM accom_room r 
+         <![CDATA[
+        WHERE ro_num NOT IN (SELECT ro_num
+			FROM reservation c
+				 		WHERE TO_DATE(c.rv_end_date,'yyyy/mm/dd') >= #{check_in}
+						AND TO_DATE(c.rv_start_date,'yyyy/mm/dd') <= #{check_out}
+			   )
+					]]>
+		group by ro_acc_num,ro_sub)r					
 		on b.acc_num = r.ro_acc_num
-		left outer join
-		(SELECT min(ro_sub)as ro_sub,ro_acc_num FROM accom_room GROUP BY ro_acc_num)u
-		on b.acc_num = u.ro_acc_num
-		left outer join reservation c on b.acc_num = c.acc_num
-		left outer join member_auth m on b.acc_num = m.member_num
+		left outer join member_auth m on b.ACC_HOST
+		=m.MEMBER_EMAIL
 		left outer join accom_grade g on b.acc_num = g.ag_acc_num
-		left outer join accom_service s on b.acc_num = s.se_acc_num
+		left outer
+		join accom_service s on b.acc_num = s.se_acc_num
 
-		WHERE
-		<if test='searchtype =="p"'>
-			b.acc_grade is null
-		</if>
-		<if test='searchtype =="h"'>
-			b.acc_grade is not null
-		</if>
+		WHERE ro_sub = #{searchtype}
 		<if test="search !=''">
 			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} ||
 			'%'
@@ -136,17 +104,6 @@
 		</if>
 		<if test="hotel_grade !=''">
 			AND b.acc_grade LIKE '%' || #{hotel_grade} || '%'
-		</if>
-		<if test="search !=''">
-
-			AND b.acc_num NOT IN(SELECT acc_num
-			FROM reservation 
-				 				
-				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
-						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
-					]]>
-			)
 		</if>
 
 		<!-- <if test="호텔성급 !=''"> AND accom_grade = #{호텔성급} </if> -->
@@ -175,24 +132,22 @@
 		resultType="integer">
 		SELECT COUNT(*) FROM (
 		SELECT * from accom b
-		left outer join
-		(SELECT min(ro_price)as ro_price,ro_acc_num FROM accom_room GROUP BY
-		ro_acc_num)r
+        left outer join(SELECT min(ro_price) as ro_price,ro_sub,ro_acc_num FROM accom_room r 
+         <![CDATA[
+        WHERE ro_num NOT IN (SELECT ro_num
+			FROM reservation c
+				 		WHERE TO_DATE(c.rv_end_date,'yyyy/mm/dd') >= #{check_in}
+						AND TO_DATE(c.rv_start_date,'yyyy/mm/dd') <= #{check_out}
+			   )
+					]]>
+		group by ro_acc_num,ro_sub)r					
 		on b.acc_num = r.ro_acc_num
-		left outer join
-		(SELECT min(ro_sub)as ro_sub,ro_acc_num FROM accom_room GROUP BY ro_acc_num)u
-		on b.acc_num = u.ro_acc_num
-		left outer join reservation c on b.acc_num = c.acc_num
-		left outer join member_auth m on b.acc_num = m.member_num
+		left outer join member_auth m on b.ACC_HOST
+		=m.MEMBER_EMAIL
 		left outer join accom_grade g on b.acc_num = g.ag_acc_num
-		left outer join accom_service s on b.acc_num = s.se_acc_num
-		WHERE
-		<if test='searchtype == "p"'>
-			b.acc_grade is null
-		</if>
-		<if test='searchtype == "h" '>
-			b.acc_grade is not null
-		</if>
+		left outer
+		join accom_service s on b.acc_num = s.se_acc_num
+		WHERE ro_sub = #{searchtype}
 		<if test="search !=''">
 			AND b.acc_address1 || b.acc_name LIKE '%' || #{search} || '%'
 		</if>
@@ -208,18 +163,7 @@
 		<if test="hotel_grade !=''">
 			AND b.acc_grade LIKE '%' || #{hotel_grade} || '%'
 		</if>
-		<if test="search !=''">
-
-			AND b.acc_num NOT IN(SELECT acc_num
-			FROM reservation 
-				 				
-				 <![CDATA[
-				 		where TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} 
-						AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out}
-					]]>
-			))
-		</if>
-
+		)a
 		<!-- <if test="호텔성급 !=''"> AND accom_grade = #{호텔성급} </if> -->
 		ORDER BY
 		<if test="price == 'DESC' ">

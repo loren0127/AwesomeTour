@@ -36,8 +36,8 @@ public class AccomServiceImpl implements AccomService{//트랜잭션 처리
 	}
 
 	@Override
-	public ReviewCommand selectReviewList(Integer acc_num) {
-		return accomMapper.selectReviewList(acc_num);
+	public List<ReviewCommand> selectReviewList() {
+		return accomMapper.selectReviewList();
 	}
 
 	@Override

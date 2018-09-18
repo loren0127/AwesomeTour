@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.accom.domain.AccomCommand;
 import kr.spring.accom.domain.ImageCommand;
+import kr.spring.accom.domain.ReviewCommand;
 import kr.spring.accom.service.AccomService;
 
+@Controller
 public class MainController {
 	//컨트롤러 -> 서비스 -> DAO
 	
@@ -26,39 +29,32 @@ public class MainController {
 	@Resource
 	private AccomService accomService;
 	
-	//==========메인 페이지 추천 숙소 불러오기==========//
+	//==========메인 페이지 추천 숙소 및 리뷰 불러오기==========//
 	@RequestMapping("/main/main.do")
-	public String mainList(@RequestParam(value="check_in", defaultValue="") String check_in, 
-						   @RequestParam(value="check_out", defaultValue="") String check_out, 
-						   @RequestParam(value="people_count", defaultValue="1") int people_count, 
-						   @RequestParam(value="search", defaultValue="") String search, 
-						   Model model){
-		if(log.isDebugEnabled()) {
-			log.debug("<<check_in>> : "+ check_in);
-			log.debug("<<check_out>> : "+ check_out);
+	public String mainList(@RequestParam(value="people_count", defaultValue="1") int people_count, Model model){
+	if(log.isDebugEnabled()) {
 			log.debug("<<people_count>> : "+ people_count);
-			log.debug("<<search>> : "+ search);
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		//메소드 파라미터의 이름과 key는 동일해야 한다!!!
-		map.put("check_in", check_in);
-		map.put("check_out", check_out);
 		map.put("people_count", people_count);
-		map.put("search", search);
-
-		List<AccomCommand> recommedList = null;
-		recommedList = accomService.selectRecommendList(map);
 		
+		List<AccomCommand> recommedList = null;
+		//추천 숙소 리스트
+		recommedList = accomService.selectRecommendList(map);
+		List<ReviewCommand> reviewList = null;
+		//리뷰 리스트
+		reviewList = accomService.selectReviewList();
+				
 		if(log.isDebugEnabled()) {
 			log.debug("<<추천리스트>> : "+recommedList);
+			log.debug("<<리뷰리스트>> : "+reviewList);
 		}
-
+		
 		model.addAttribute("recommedList", recommedList);
-		model.addAttribute("check_in", check_in);
-		model.addAttribute("check_out", check_out);
+		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("people_count", people_count);
-		model.addAttribute("search", search);
 
 		return "main";//tiles 식별자
 	}
