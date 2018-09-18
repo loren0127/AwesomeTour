@@ -107,6 +107,8 @@
 	
 	<!-- 데이터 작업 없이 뷰 호출 : 메인 페이지 -->
 	<!-- <view-controller path="/main/main.do" view-name="main"/> --><!-- 요청 : view-name 속성을 통해 Tiles 설정을 호출 -->
+		<view-controller path="/group/invite.do" view-name="invite"/>   
+	 
 	<!-- 인터셉터로 로그인 여부 체크(aop보다는 좁은 범위) -->
 	<!-- <interceptors>
 		<interceptor>
