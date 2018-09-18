@@ -197,11 +197,10 @@ $(function() {
 						alert('해당조건에 부합하는 숙소가 없습니다');
 					}
 				});
-	}
+		}
 });
-
-
 </script>
+
 <!-- ====================정은이 폼 시작==================== -->
 <form id="se_form">
 <div>
@@ -209,14 +208,14 @@ $(function() {
 	<!-- 검색창 끝-->
 
 	<div class="sticky-top" id="search_top"
-		style="z-index: 9999; background-color: white;margin-top: 65px;">
+		style="z-index: 9998; background-color: white;margin-top: 65px;">
 		<!-- 검색 시작 -->
 		
 		<div class="form-row" style="width: 100%; background-color: #d5e1ed;height: 70px;">
 						<div style="margin-left: 150px;">
 				<input type="text" style="margin-top: 10px;margin-right: 30px;width: 60%;height: 70%;margin-left: 140px;"
 					id="je_search" name="search"
-					placeholder="구 또는 이름을 검색하세요" value="서울">
+					placeholder="구 또는 이름을 검색하세요" value="${map.search}">
 			</div>
 			<div>
 				<input type="hidden" name="searchtype" value="${map.searchtype}">
@@ -262,10 +261,6 @@ $(function() {
 	<!-- ====================숙소 리스트 시작==================== -->
 	<div class="container" style="min-height: 3500px;">
 		<h2>숙소 목록</h2>
-		<!-- Map Dialog Button Start -->
-
-		<!-- Map Dialog Button End -->
-
 		<div class="row" style="margin-top: 30px;">
 			<div id="map" class="col-3">
 				<button id="opener2" style="position: absolute;border: 0;margin-left: 25px;margin-top: 5px;background-color: inherit;">숙소 위치 확인!<br>
@@ -318,11 +313,7 @@ $(function() {
 				</ul>
 				</div>
 			</div>
-
-
-
 			<div id="col-6" class="col-9">
-
 				<c:if test="${count == 0}">
 					<div class="align-center">등록된 게시물이 없습니다.</div>
 				</c:if>
@@ -426,7 +417,6 @@ $(function() {
 			<!-- ====================숙소 리스트 끝==================== -->
 		</div>
 	</div>
-
 </div>
 </form>
 <!-- ====================정은이 폼 끝==================== -->
@@ -455,16 +445,16 @@ $(function() {
 						<div class="col-auto dateFilter" style="padding-right: 10px;">
 							<label for="datepicker1" style="display: inline-block;"><i
 								class="fa fa-calendar"></i></label> <input type="text"
-								name="datepicker1" id="datepicker1" style="width: 100px;">
+								name="datepicker1" id="datepicker1" value="${map.check_in}" style="width: 100px;">
 							&nbsp;&nbsp;&nbsp; <label for="datepicker2"
 								style="display: inline-block;"><i class="fa fa-calendar"></i></label>
-							<input type="text" name="datepicker2" id="datepicker2"
+							<input type="text" name="datepicker2" value="${map.check_out}" id="datepicker2"
 								style="width: 100px;">
 						</div>
 						<div class="col-auto headcountFilter">
 							<label for="headcount" style="display: inline-block;font-weight:bold;">인원수&nbsp;</label>
 							<input type="button" value="-" id="count_m" class="plus_minus"> <input
-								type="text" value="1" id="headcount"
+								type="text" value="${map.people_count}" id="headcount"
 								style="text-align: center; width: 50px;border: none;font-weight:bold;"> <input
 								type="button" value="+" id="count_p" class="plus_minus">
 						</div>
@@ -481,7 +471,7 @@ $(function() {
 					style="width: calc(100% - 450px); height: 765px; float: right;"></div>
 				<div class="map-sidePanel" style="width: 450px;">
 					<div>
-						예약 가능 숙소&nbsp;<span>0</span>개
+						<span style="font-weight:bold;color: rgb(0, 132, 137);">선택한 날짜</span>
 					</div>
 					<div>
 						<i class="fa fa-calendar-check-o"></i>&nbsp;<span id="perNight3"></span>박
