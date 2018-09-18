@@ -118,8 +118,6 @@ $( "#groupAdd" ).button().on( "click", function() {
   
   
   ////////////////////////////////////////////
-  
-  
     
 
 })
@@ -208,7 +206,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 				<img class="rounded groupListImg" src="../resources/img/mbr-1.jpg" style=" max-width:100%;   " >
 		</c:if>
 		</div>
-				<h5 style="margin: 10px;">${list.g_name}</h5>
+				<p style="text-overflow: ellipsis;margin: 10px; font-size:15pt; white-space: nowrap; overflow: hidden;"><b>${list.g_name}</b></p>
 				<div class="row hobby justify-content-start" style="margin: 0 10px;">
  					<input type="hidden" value="${list.g_hobby}">
  				</div>
@@ -259,7 +257,7 @@ $( "#groupAdd" ).button().on( "click", function() {
   <div id="tabs-2">
       <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
       <label for="g_address1">모임 위치</label>
-      <form:input  path ="g_address1" id="g_address1" class="text ui-widget-content ui-corner-all" style="width:80%; display:inline" />
+      <form:input  readonly="true"  path ="g_address1" id="g_address1" class="text ui-widget-content ui-corner-all" style="width:80%; display:inline" />
 	  <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="display:inline"><br>
       <form:input  path ="g_address2" id="g_address2" class="text ui-widget-content ui-corner-all" placeholder="나머지 주소 입력"/><br>
      	
@@ -274,7 +272,7 @@ $( "#groupAdd" ).button().on( "click", function() {
       <br>
       
        <label for="upload">사진 등록</label>
-       <img id="LoadImg" style="height: 150px;">
+       <img id="LoadImg" src="https://cdn.icon-icons.com/icons2/37/PNG/512/add_archive_application_4473.png" style="margin: 10px 0; height: 120px;" alt="이미지를 등록해주세요" onerror="this.style.display='none'">
        
         <form:input type="file" name="upload" path="upload"/><br>
        <label for="g_close_date">취미(최대 3개까지 가능)
@@ -306,9 +304,14 @@ $( "#groupAdd" ).button().on( "click", function() {
   <!-------------------------- 탭 3-------------------- -->
   <div id="tabs-4">
   	 <label for="g_close_date">초대 하기</label>
-  	  <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; ">
+  	  <div id="inviteID" class="row"  >
+  	  <div class="col-5" >
+  	 	 <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; ">
+  	  		<div style="margin: 0 auto;color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/group/invite.do", "Chat_page_popup", "width=600, height=320");'><b>+</b></div>
+  	 	 </div>
+  	 </div>	   	  
+  	         <form:input type="hidden"  path="inviteMember" />
   	  
-  	  <div style="color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'><b>+</b></div>
   	  </div> 
 	
   </div>

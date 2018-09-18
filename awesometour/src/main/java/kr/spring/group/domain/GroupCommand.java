@@ -23,7 +23,17 @@ public class GroupCommand {
 	private MultipartFile upload;
 	private byte[] g_image;
 	private String g_imageName;
+	private String inviteMember;
 	
+
+	public String getInviteMember() {
+		return inviteMember;
+	}
+
+	public void setInviteMember(String inviteMember) {
+		this.inviteMember = inviteMember;
+	}
+
 	public void setUpload(MultipartFile upload) throws IOException {
 		this.upload = upload;
 		
@@ -122,7 +132,9 @@ public class GroupCommand {
 		return "GroupCommand [g_num=" + g_num + ", g_name=" + g_name + ", g_explain=" + g_explain + ", g_address1="
 				+ g_address1 + ", g_address2=" + g_address2 + ", g_reg_date=" + g_reg_date + ", g_close_date="
 				+ g_close_date + ", g_isPrivate=" + g_isPrivate + ", g_isSearch=" + g_isSearch + ", member_email="
-				+ member_email + ", g_hobby=" + g_hobby + ", upload=" + upload + ", g_imageName=" + g_imageName + "]";
+				+ member_email + ", g_hobby=" + g_hobby + ", upload=" + upload + ", g_image=" + Arrays.toString(g_image)
+				+ ", g_imageName=" + g_imageName + ", inviteMember=" + inviteMember + "]";
 	}
+
 	
 }

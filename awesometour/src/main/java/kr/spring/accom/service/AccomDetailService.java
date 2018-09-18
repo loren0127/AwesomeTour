@@ -85,4 +85,7 @@ public interface AccomDetailService {
 	//문의하기 insert(프라이빗 하우스)
 	public void insertHostMessageAccomDetail(Map<String,Object> map);
 	
+	public void updateSuperHost(Map<String,Object> map);
+
+	
 }

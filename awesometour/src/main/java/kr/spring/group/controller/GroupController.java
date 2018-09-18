@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.chat.domain.ChatMemberCommand;
+import kr.spring.chat.service.ChatService;
 import kr.spring.group.domain.GroupCommand;
 import kr.spring.group.service.GroupService;
 import kr.spring.member.domain.MemberCommand;
@@ -32,6 +35,9 @@ public class GroupController {
 	private ReservationService reservationService;
 	@Resource
 	private GroupService groupService;
+	@Resource
+	private ChatService chatService;
+	
 	//리스트 출력(기본)
 	@RequestMapping("/group/groupMain.do")
 	public ModelAndView list( @RequestParam(value="pageNum",defaultValue="1") int currentPage) {
@@ -65,6 +71,35 @@ public class GroupController {
 		mav.addObject("pagingHtml",page.getPagingHtml());
 		
 		return mav;
+	}
+	
+	@RequestMapping("group/groupInvite.do")
+	public String updateGroup(String member_email,Model model,int chat_all_num, HttpSession session) {
+		
+		String user_email = (String)session.getAttribute("user_email");
+		if(log.isDebugEnabled()) {
+			log.debug("<<user_email>> : " + user_email);
+		}
+		
+		ChatMemberCommand memberCommand = new ChatMemberCommand();
+		memberCommand.setMember_email(member_email);
+		memberCommand.setChat_all_num_member(chat_all_num);
+		Map<String,Object> m_map = new HashMap<String, Object>();
+		m_map.put("member_email", user_email);
+		m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
+		
+		if(reservationService.selectGroupMemberCount(m_map)==0)	{	
+		chatService.insertChatMember(memberCommand);
+
+		model.addAttribute("msg", "그룹에 가입되셨습니다.");
+		}else {
+			
+		model.addAttribute("msg", "이미 가입되어있습니다.");
+
+		}
+		
+		return "alert";
+		
 	}
 	
 	@RequestMapping("group/groupListFilterPaging.do")

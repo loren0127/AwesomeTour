@@ -264,15 +264,17 @@ $('.hobby').each(function(element, index){
 		 			<c:if test="${fn:endsWith(list.member_filename,'.jpg') ||
 								 fn:endsWith(list.member_filename,'.JPG') ||
 								 fn:endsWith(list.member_filename,'.gif') ||
-								 fn:endsWith(list.member_filename,'.GIF') }">
-						<img src="../member/imageView.do?member_email=${list.member_email}" style="border:3px solid white ;margin: 0 10px; width:150px; height:150px; bottom: -300px;
+								 fn:endsWith(list.member_filename,'.GIF') ||
+								 fn:endsWith(list.member_filename,'.png') ||
+								 fn:endsWith(list.member_filename,'.PNG')}">
+						<img  class="rounded-circle" src="../member/imageView.do?member_email=${list.member_email}" style="border:3px solid white ;margin: 0 10px; width:150px; height:150px; bottom: -300px;
     left: 10px; position: absolute;" align="left">		
 					</c:if>
 					<c:if test="${empty list.member_filename}">
 						<img class="rounded-circle" src="../resources/images/rome.jpg" style="border:3px solid white ;margin: 0 10px; width:150px; height:150px; bottom: -300px;
     left: 10px; position: absolute;" align="left">		
 					</c:if>
-					
+	
 					</div>
 				</c:if>
 		</c:forEach>
@@ -303,7 +305,7 @@ $('.hobby').each(function(element, index){
 	</div>
 		</div>	
 	</div>
-	
+		
 <div>
 	<div class="container" >
 		<div class="row" >
@@ -388,15 +390,17 @@ $('.hobby').each(function(element, index){
 							<c:if test="${fn:endsWith(list.member_filename,'.jpg') ||
 									  fn:endsWith(list.member_filename,'.JPG') ||
 									  fn:endsWith(list.member_filename,'.gif') ||
+									  fn:endsWith(list.member_filename,'.png') ||
+					 				  fn:endsWith(list.member_filename,'.PNG') ||
 									  fn:endsWith(list.member_filename,'.GIF') }">
 					
 								<div class="align-center"  >
-									<img src="../member/imageView.do?member_email=${list.member_email}" style="max-width:150px">
+									<img class="rounded-circle" src="../member/imageView.do?member_email=${list.member_email}" style="max-width:150px;height:150px;">
 								</div>
 							</c:if>
 							<c:if test="${empty list.member_filename}">
 								<div class="align-center">
-									<img class="rounded-circle" src="../resources/images/rome.jpg" style="max-width:150px;">
+									<img class="rounded-circle" src="../resources/images/rome.jpg" style="max-width:150px;height:150px;">
 								</div>
 							</c:if><br>
 							${list.member_nickname}

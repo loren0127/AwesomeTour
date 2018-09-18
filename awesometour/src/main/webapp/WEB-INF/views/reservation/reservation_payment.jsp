@@ -46,6 +46,10 @@
 	#mainCon{
 	PADDING: 30PX;
 	}
+	#cntRv{
+ 	 	width:100%!important ;
+ 	
+ 	}
 }
  }
  
@@ -212,7 +216,7 @@ $(function(){
       
       valid = valid && checkRegexp( pm_type,  /^[b-c]$/g,"결제 수단을 선택해 주세요!" );
       valid = valid && checkLength( pm_name, "이름", 2, 16);
-      valid = valid && checkRegexp( pm_email, /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i, "예시 ui@jquery.com" );
+      valid = valid && checkRegexp( pm_email, /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i, "이메일 형식을 입력해 주세요." );
      
       if(pm_type.val()=='c'){
     	  var pattern=/^[0-9]{16}$/g;
@@ -300,12 +304,10 @@ $(function(){
 <h1>결제하기</h1>
 <br>
  <c:if test="${count>0}" > 
-<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
-서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
+<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "  id="cntRv" >
+  <i class="fa fa-info-circle" style="color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
 </div>
-<br>
-
-</c:if> 
+</c:if>
   <div style="  margin-bottom: 10px;   font-size: 15pt;  width: 80%;" class="validateTips ">               
   </div>
 
@@ -371,7 +373,7 @@ $(function(){
 	<h4><label>카드번호</label></h4>
 
 	<form:input class="form-control"  path="pm_cardNum" name="card"  placeholder="카드번호" style="width:60%" value=""/><br>
-	<form:input class="form-control"  path="pm_validity" name="만료일"  placeholder="만료일" value="" style="width:30%; display:inline" />
+	<form:input class="form-control"  path="pm_validity" name="만료일"  placeholder="만료일(YYMM)" value="" style="width:30%; display:inline" />
 	<form:input class="form-control"  path="pm_cvc" placeholder="CVC"  value="" style="width:30%;display:inline" />
 </div>
 

@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.chat.domain.ChatAllCommand;
 import kr.spring.chat.domain.ChatMemberCommand;
+import kr.spring.chat.domain.MessageCommand;
 import kr.spring.chat.service.ChatService;
+import kr.spring.chat.service.MessageService;
 import kr.spring.group.domain.GroupCommand;
 import kr.spring.group.service.GroupService;
 import kr.spring.member.domain.MemberCommand;
@@ -38,6 +40,8 @@ public class GroupAjaxController {
 	private GroupService groupService;
 	@Resource
 	private ChatService chatService;
+	@Resource
+	private MessageService messageService;
 	
 	//리스트 출력(필터)
 	@RequestMapping("group/groupListFilter.do")
@@ -138,15 +142,43 @@ public class GroupAjaxController {
 			chatService.insertChatAllGroup(command);
 			
 			//멤버 삽입
+			int chat_all_num = groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap));
 			ChatMemberCommand memberCommand = new ChatMemberCommand();
 			memberCommand.setMember_email(user_email);
-			memberCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+			memberCommand.setChat_all_num_member(chat_all_num);
 			Map<String,Object> m_map = new HashMap<String, Object>();
 			m_map.put("member_email", user_email);
 			m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
 			
 			if(reservationService.selectGroupMemberCount(m_map)==0)		
 			chatService.insertChatMember(memberCommand);
+			//메세지 보내기
+			String[] memberEmail = groupCommand.getInviteMember().split(",");
+			if(log.isDebugEnabled()) {
+				log.debug("<<memberEmail>> : " + groupCommand.getInviteMember());
+			}
+			for(String member : memberEmail) {
+				if(!member.equals("")) {
+					if(log.isDebugEnabled()) {
+						log.debug("<<member>> : " + member);
+					}
+					MessageCommand msgCommand = new MessageCommand();
+					msgCommand.setMessage_content(groupCommand.getG_name()+"의 초대장입니다.");
+					msgCommand.setMessage_sender(user_email);
+					msgCommand.setMessage_title(groupCommand.getG_name()+" 초대장");
+					msgCommand.setMessage_receiver(member);
+					msgCommand.setMessage_URL("../group/groupInvite.do?member_email="+member+"&chat_all_num="+chat_all_num);
+					msgCommand.setMessage_type("groupList");
+					if(log.isDebugEnabled()) {
+						log.debug("<<msgCommand>> : " + msgCommand);
+					}
+					messageService.insertMessageSend(msgCommand);
+				}
+			}
+			
+			
+			
+			
 
 			map.put("result", "success");
 		}
@@ -154,6 +186,10 @@ public class GroupAjaxController {
 		return map;
 		
 	}
+	
+	
+	
+	
 	
 	//그룹 수정
 	@RequestMapping("group/groupUpdate.do")

@@ -190,4 +190,11 @@ public class AccomDetailServiceImpl implements AccomDetailService{
 	public void insertHostMessageAccomDetail(Map<String, Object> map) {
 		accomDetailMapper.insertHostMessageAccomDetail(map);
 	}
+
+	@Override
+	public void updateSuperHost(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		accomDetailMapper.updateSuperHost(map);
+
+	}
 }

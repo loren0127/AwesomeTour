@@ -57,6 +57,8 @@ public class ReservationController {
 	private AdminService adminService;
 	@Resource
 	private AccomDetailService accomDetailService;
+	
+	//예약 정보 확인
 	@RequestMapping("/reservation/confirm.do")
 	public String confirm(@RequestParam("im_ac_num") int acc_num,@RequestParam("check_in") String check_in,
 						  @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
@@ -90,14 +92,8 @@ public class ReservationController {
 
 		return "reservationConfirm";
 	}
-	
-	@RequestMapping("/reservation/test.do")
 
-	public String confirm() {
-			
-		return "reservationResult";
-					}
-
+	//결제 정보 입력
 	@RequestMapping(value="/reservation/payment.do" ,method=RequestMethod.POST)
 	public String payment(@RequestParam("acc_num") int acc_num,@RequestParam("rv_money") int rv_money,
 						@RequestParam(value="rv_request", defaultValue="") String rv_request, Model model,HttpSession session) {
@@ -124,6 +120,8 @@ public class ReservationController {
 		return "reservationPayment";
 	}
 	
+	
+	//예약 처리
 	@RequestMapping(value="/reservation/result.do" ,method=RequestMethod.POST)
 	public String result(@ModelAttribute("pmCommand") PaymentCommand paymentCommand,
 						HttpSession session,Model model) {
@@ -159,27 +157,18 @@ public class ReservationController {
  		String todayYY = reservationCommand.getRv_startdate().substring(0, 4);
  		String todayMM = reservationCommand.getRv_startdate().substring(5, 7);
  		String todayDD = reservationCommand.getRv_startdate().substring(8, 10);
-
- 		 
-
  		// 오늘 일자를 받아서 int 형으로 치환 한다.
  		int year = Integer.parseInt(todayYY);
  		int month = Integer.parseInt(todayMM)-1;   // 월은 0 부터 시작이기 때문에 -1 을 해준다.
  		int day = Integer.parseInt(todayDD);
-
- 		 
-
+ 		
  		int monday = 0;
  		int friday = 0;
-
- 		 
 
  		// calendar 선언.
  		Calendar to_day = Calendar.getInstance();
  		//오늘 일자를 setup 한다.
  		to_day.set(year, month, day);
-
-
  		// 오늘을 기준으로 해당 주의 월요일 과 금요일을 구한다.
  		int today_week =  to_day.get(Calendar.DAY_OF_WEEK); // 오늘이 무슨 요일인지 int 형으로 반환.
 
@@ -245,59 +234,64 @@ public class ReservationController {
 		if(log.isDebugEnabled()) {
 			log.debug("<<count>> : "+count);
 		}
+		
  		//그룹 없을 때 그룹 생성
 		if(count==0 ){
-		GroupCommand groupCommand = new GroupCommand();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
- 		Calendar cal = Calendar.getInstance();
- 		cal.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
- 		to_day.add(Calendar.DATE, 7);
- 		String close_date = formatter.format(to_day.getTime());
- 		Map<String, Object> mapImage = new HashMap<String, Object>(); 
- 		mapImage.put("im_ac_num", reservationCommand.getAcc_num());
- 		mapImage.put("ro_room_num", reservationCommand.getRo_room_num());
-
- 		
- 		
-		HotelDetailCommand image = accomDetailService.selectHotelImage(mapImage);
-
- 		
-		groupCommand.setG_close_date(close_date);
-		groupCommand.setG_explain(g_name+" 위한 그룹입니다!");
-		groupCommand.setG_image(null);
-		groupCommand.setG_name(g_name);
-		groupCommand.setG_imageName(image.getIm_cover_name());
-		groupCommand.setG_isPrivate(1);
-		groupCommand.setG_isSearch(1);
-		groupCommand.setMember_email(reservationCommand.getHost_email());
-		groupCommand.setG_address1(reservationCommand.getAcc_address1());
-		groupCommand.setG_address2(reservationCommand.getAcc_address2());
-		groupCommand.setG_hobby("예약전용");
-
-		if(log.isDebugEnabled()) {
-			log.debug("<<groupCommand>> : "+groupCommand);
-		}
-		groupService.insertGroup(groupCommand);
-		
+			//종료일 생성
+			GroupCommand groupCommand = new GroupCommand();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	 		Calendar cal = Calendar.getInstance();
+	 		cal.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+	 		to_day.add(Calendar.DATE, 7);
+	 		String close_date = formatter.format(to_day.getTime());
+	 		
+	 		//이미지 가져오기
+	 		Map<String, Object> mapImage = new HashMap<String, Object>(); 
+	 		mapImage.put("im_ac_num", reservationCommand.getAcc_num());
+	 		mapImage.put("ro_room_num", reservationCommand.getRo_room_num());
+			HotelDetailCommand image = accomDetailService.selectHotelImage(mapImage);
+			if(log.isDebugEnabled()) {
+				log.debug("<<image>> : "+image);
+			}
 	
-		ChatAllCommand command = new ChatAllCommand();
-		command.setChat_all_title(g_name);
-		command.setChat_all_member_list(email);
-		int g_num = reservationService.selectReservationGroup(gMap);
-		command.setGroup_num(g_num);
-		command.setChat_all_member_max(100);
-		//그룹 채팅 생성
-		chatService.insertChatAllGroup(command);
-		//호스트 삽입
-		ChatMemberCommand hostCommand = new ChatMemberCommand();
-		hostCommand.setMember_email(reservationCommand.getHost_email());
-		hostCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
-		Map<String,Object> m_map = new HashMap<String, Object>();
-		m_map.put("member_email", email);
-		m_map.put("chat_all_num", hostCommand.getChat_all_num_member());
+			//그룹 생성
+			groupCommand.setG_close_date(close_date);
+			groupCommand.setG_explain(g_name+" 위한 그룹입니다!");
+			groupCommand.setG_image(image.getIm_cover());
+			groupCommand.setG_name(g_name);
+			groupCommand.setG_imageName(image.getIm_cover_name());
+			groupCommand.setG_isPrivate(1);
+			groupCommand.setG_isSearch(1);
+			groupCommand.setMember_email(reservationCommand.getHost_email());
+			groupCommand.setG_address1(reservationCommand.getAcc_address1());
+			groupCommand.setG_address2(reservationCommand.getAcc_address2());
+			groupCommand.setG_hobby("예약전용");
+			if(log.isDebugEnabled()) {
+				log.debug("<<groupCommand>> : "+groupCommand);
+			}
+			groupService.insertGroup(groupCommand);
+			
 		
-		if(reservationService.selectGroupMemberCount(m_map)==0)		
-		chatService.insertChatMember(hostCommand);
+			//채팅 생성
+			ChatAllCommand command = new ChatAllCommand();
+			command.setChat_all_title(g_name);
+			command.setChat_all_member_list(email);
+			int g_num = reservationService.selectReservationGroup(gMap);
+			command.setGroup_num(g_num);
+			command.setChat_all_member_max(100);
+			chatService.insertChatAllGroup(command);
+			
+			
+			//호스트 삽입
+			ChatMemberCommand hostCommand = new ChatMemberCommand();
+			hostCommand.setMember_email(reservationCommand.getHost_email());
+			hostCommand.setChat_all_num_member(groupService.selectGroupChatnum(reservationService.selectReservationGroup(gMap)));
+			Map<String,Object> m_map = new HashMap<String, Object>();
+			m_map.put("member_email", email);
+			m_map.put("chat_all_num", hostCommand.getChat_all_num_member());
+			if(reservationService.selectGroupMemberCount(m_map)==0) {		
+			chatService.insertChatMember(hostCommand);}
+		
 		}
 		
 
@@ -309,7 +303,6 @@ public class ReservationController {
 		Map<String,Object> m_map = new HashMap<String, Object>();
 		m_map.put("member_email", email);
 		m_map.put("chat_all_num", memberCommand.getChat_all_num_member());
-		
 		if(reservationService.selectGroupMemberCount(m_map)==0)		
 		chatService.insertChatMember(memberCommand);
 
@@ -353,25 +346,31 @@ public class ReservationController {
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 		    System.out.println(e);
-
 		}
 		//----------------------------------------------
+		
+		//홀딩
+		 
 		if(paymentCommand.getPm_type()=='b') {
-		HoldingCommand hold = new HoldingCommand();
-		hold.setAcc_num(reservationCommand.getAcc_num());
-		hold.setAt_money(reservationCommand.getRv_money());
-		hold.setHd_account(paymentCommand.getPm_deposit_ac());
-		hold.setHd_deposit(0);
-		adminService.insertHolding(hold);
-		AccountCommand act = new AccountCommand();
-		act.setAt_pin(paymentCommand.getPm_deposit_ac());
-		act.setAt_name("입금자 입금");
-		act.setAt_money(reservationCommand.getRv_money());
-		act.setAt_depositor(paymentCommand.getPm_depositor());
-		adminService.insertAccount(act);
-
+			
+			HoldingCommand hold = new HoldingCommand();
+			hold.setAcc_num(reservationCommand.getAcc_num());
+			hold.setAt_money(reservationCommand.getRv_money());
+			hold.setHd_account(paymentCommand.getPm_deposit_ac());
+			hold.setHd_deposit(0);
+			adminService.insertHolding(hold);
+			//입금----------------------------------
+			//시연을 위에서 삽입
+			AccountCommand act = new AccountCommand();
+			act.setAt_pin(paymentCommand.getPm_deposit_ac());
+			act.setAt_name("입금자 입금");
+			act.setAt_money(reservationCommand.getRv_money());
+			act.setAt_depositor(paymentCommand.getPm_depositor());
+			adminService.insertAccount(act);
+			//---------------------------------------------------
 
 		}else {
+			//카드 대금 홀딩
 			HoldingCommand hold = new HoldingCommand();
 			hold.setAcc_num(reservationCommand.getAcc_num());
 			hold.setAt_money(reservationCommand.getRv_money());
@@ -381,6 +380,10 @@ public class ReservationController {
 
 		}
 		
+		//슈퍼 호스트 업데이트
+		Map<String,Object> upMap = new HashMap<String,Object>();
+		upMap.put("re_acc_num", reservationCommand.getAcc_num());
+		accomDetailService.updateSuperHost(upMap);
 		
 		
 		model.addAttribute("rv",session.getAttribute("rv"));
@@ -390,5 +393,13 @@ public class ReservationController {
 		
 		return "reservationResult";
 	}
+	
+	//테스트용
+	@RequestMapping("/reservation/test.do")
+
+	public String confirm() {
+			
+		return "reservationResult";
+					}
 
 }
