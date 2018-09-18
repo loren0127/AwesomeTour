@@ -46,3 +46,17 @@
     background-color: #222222;
     color: #fff;
 }
+
+/*accomList 페이지 CSS*/
+#opener2{
+	position:absolute;
+	border:none;
+	outline:none;
+	margin-left:120px;
+	margin-top:90px;
+	background-color:inherit;
+	color:black;
+	font-size:18px;
+	font-weight:bold;
+	cursor:pointer;
+}

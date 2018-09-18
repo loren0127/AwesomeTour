@@ -31,12 +31,13 @@
 							</select>
 						</div>
 						<div>
-							<input type="text" class="date_in form-control" name="check_in"
+							<label for="checkin_input">체크인</label>
+							<input type="text" class="date_in form-control" id="checkin_input" name="check_in"
 								value="" style="height: 50px; width: 150px;" autocomplete="off">
 						</div>
 						<div>
-
-							<input type="text" class="date_out form-control" name="check_out"
+							<label for="checkin_output">체크아웃</label>
+							<input type="text" class="date_out form-control" id="checkin_output" name="check_out"
 								value="" style="height: 50px; width: 150px;" autocomplete="off">
 						</div>
 						<div class="people_pop">

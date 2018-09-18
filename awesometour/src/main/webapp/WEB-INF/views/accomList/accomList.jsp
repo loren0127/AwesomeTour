@@ -263,55 +263,50 @@ $(function() {
 		<h2>숙소 목록</h2>
 		<div class="row" style="margin-top: 30px;">
 			<div id="map" class="col-3">
-				<button id="opener2" style="position: absolute;border: 0;margin-left: 25px;margin-top: 5px;background-color: inherit;">숙소 위치 확인!<br>
-				<i class="fa fa-map-marker" style="font-size: 30px;color:red;"></i></button>
-				<img src="../resources/images/지도.jpg" style=" margin-bottom: 40px;"><br>
-					<select name="price" style="width: 100%;height: 40px; color: #fff;background-color: #5392f9;margin-bottom: 20px;">
-			<option value="">선택하세요</option>
-			<option value="ASC">가격 낮은순</option>
-			<option value="DESC">가격 높은순</option>
-			<option value="avg_DESC">평점</option>
-			<option value="test_DESC">추천숙소</option>
-			</select>
-				<div class="sticky-top" style="border: 1px solid #e5e5e5;box-shadow: 0 2px 2px rgba(0,0,0,.12);">
-				<span style="padding-left: 10px;"><b>편의시설</b></span>
-				<ul style="list-style: none;padding-left: 10px;">
-					<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
-					<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
-					<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
-					<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용
-						시설</li>
-					<li><input type="checkbox" value="스파(호텔전용)" name="se_name">스파(호텔전용)</li>
-					<li><input type="checkbox" value="피트니스 센터" name="se_name">피트니스
-						센터</li>
-					<li><input type="checkbox" value="프로젝트 룸" name="se_name">프로젝트
-						룸</li>
-					<li><input type="checkbox" value="주방" name="se_name">주방</li>
-				</ul>
-				<span style="padding-left: 10px;"><b>서비스 및 이용규칙</b></span>
-				<ul style="list-style: none;padding-left: 10px;">
-					<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
-					<li><input type="checkbox" value="24시간 프론트(호텔전용)"
-						name="se_name">24시간 프론트(호텔전용)</li>
-					<li><input type="checkbox" value="룸 서비스" name="se_name">룸
-						서비스</li>
-					<li><input type="checkbox" value="세탁" name="se_name">세탁</li>
-					<li><input type="checkbox" value="어메니티" name="se_name">어메니티</li>
-					<li><input type="checkbox" value="조식" name="se_name">조식</li>
-					<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물
-						허용</li>
-					<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티
-						행사 허용</li>
-				</ul>
-				<span style="padding-left: 10px;"><b>호텔성급</b></span>
-				<ul style="list-style: none;padding-left: 10px;">
-					<li><input type="radio" value="1" name="hotel_grade">★</li>
-					<li><input type="radio" value="2" name="hotel_grade">★★</li>
-					<li><input type="radio" value="3" name="hotel_grade">★★★</li>
-					<li><input type="radio" value="4" name="hotel_grade">★★★★</li>
-					<li><input type="radio" value="5" name="hotel_grade">★★★★★</li>
-				</ul>
+				<div>
+				<button id="opener2">숙소 위치 확인</button>
+				<img src="../resources/images/mappin.jpg" style="margin-bottom:40px;" width="255px">
 				</div>
+				<select name="price" style="width: 100%;height: 40px; color: #fff;background-color: #5392f9;margin-bottom: 20px;">
+					<option value="">선택하세요</option>
+					<option value="ASC">가격 낮은순</option>
+					<option value="DESC">가격 높은순</option>
+					<option value="avg_DESC">평점</option>
+					<option value="test_DESC">추천숙소</option>
+				</select>
+					<div class="sticky-top" style="border: 1px solid #e5e5e5;box-shadow: 0 2px 2px rgba(0,0,0,.12);">
+						<span style="padding-left: 10px;"><b>편의시설</b></span>
+							<ul style="list-style: none;padding-left: 10px;">
+								<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
+								<li><input type="checkbox" value="개인금고" name="se_name">개인금고</li>
+								<li><input type="checkbox" value="주차장" name="se_name">주차장</li>
+								<li><input type="checkbox" value="장애인용 시설" name="se_name">장애인용 시설</li>
+								<li><input type="checkbox" value="스파(호텔전용)" name="se_name">스파(호텔전용)</li>
+								<li><input type="checkbox" value="피트니스 센터" name="se_name">피트니스 센터</li>
+								<li><input type="checkbox" value="프로젝트 룸" name="se_name">프로젝트 룸</li>
+								<li><input type="checkbox" value="주방" name="se_name">주방</li>
+							</ul>
+						<span style="padding-left: 10px;"><b>서비스 및 이용규칙</b></span>
+						<ul style="list-style: none; padding-left: 10px;">
+							<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
+							<li><input type="checkbox" value="24시간 프론트(호텔전용)"
+								name="se_name">24시간 프론트(호텔전용)</li>
+							<li><input type="checkbox" value="룸 서비스" name="se_name">룸서비스</li>
+							<li><input type="checkbox" value="세탁" name="se_name">세탁</li>
+							<li><input type="checkbox" value="어메니티" name="se_name">어메니티</li>
+							<li><input type="checkbox" value="조식" name="se_name">조식</li>
+							<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물 허용</li>
+							<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티행사 허용</li>
+						</ul>
+						<span style="padding-left: 10px;"><b>호텔성급</b></span>
+						<ul style="list-style: none; padding-left: 10px;">
+							<li><input type="radio" value="1" name="hotel_grade">★</li>
+							<li><input type="radio" value="2" name="hotel_grade">★★</li>
+							<li><input type="radio" value="3" name="hotel_grade">★★★</li>
+							<li><input type="radio" value="4" name="hotel_grade">★★★★</li>
+							<li><input type="radio" value="5" name="hotel_grade">★★★★★</li>
+						</ul>
+					</div>
 			</div>
 			<div id="col-6" class="col-9">
 				<c:if test="${count == 0}">
