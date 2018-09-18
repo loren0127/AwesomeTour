@@ -27,10 +27,13 @@ $(document).ready(function() {
 		var nick = $('#member_nickname').val();
 		var exptext =  /^[a-z0-9]{2,10}$/;
 		var exptext2 = /[ㄱ-ㅎㅏ-ㅣA-Za-z0-9]{2,10}$/;
+		var exptext3 = /[^a-zA-Z가-힣0-9]{2,10}$/;
+		var deny_char = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*]{2,10}$/
+
 		
-		if(!exptext.test(nick)){
-			alert('닉네임에 한글과 영어로 2~10자 사이로 입력해주세요');
-			/*alert('영어와 숫자만 가능합니다.2~10');*/
+		if(!deny_char.test(nick)){
+			//alert('닉네임에 한글또는 영어로 2~10자 사이로 입력해주세요');
+			alert('영어, 한글, 숫자만 2~10자로 입력해주세요.');
 			return false;
 		}
 	});
