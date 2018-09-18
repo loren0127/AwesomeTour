@@ -8,8 +8,8 @@ $(document).ready(function(){
 	var locations=[],prices=[],styles=[],grades=[];
 	//select태그(id=detailInMap)에서 선택되는 옵션값을 받기 위한 변수 선언
 	var orderby;
-	var check_in = $('#date_in1').val();//-->정은이 검색 리스트 받을 때는 $(selector).val()값 선언
-	var check_out = $('#date_out').val();
+	var check_in = $('.date_in').val();//-->정은이 검색 리스트 받을 때는 $(selector).val()값 선언
+	var check_out = $('.date_out').val();
 	var people_count = $('#people').val();
 	var search = $('#je_search').val();
 	
@@ -23,6 +23,9 @@ $(document).ready(function(){
 		prices=[];
 		styles=[];
 		grades=[];
+		
+		//숙소 리스트 내에서 재검색할 때 다시 값 받아와야 함
+		search = $('#je_search').val();
 		
 		/*
 		 * $.ajax({옵션}) 메소드는 HTTP 요청을 만드는 강력하고도 직관적인 방법을 제공
@@ -161,11 +164,18 @@ $(document).ready(function(){
 	});
 	$('#opener2').on('click', function() {
 		$('#mapList_dialog').dialog('open');
+		//숙소 리스트 내에서 재검색할 때 다시 값 받아와야 함
+		search = $('#je_search').val();
 		callMap2(orderby,check_in,check_out,people_count,search);
 		$('.ui-dialog-titlebar').hide();
 		$('.ui-dialog').css('zIndex','10001');
-		$('#perNight1').blur();
-		$('#perNight2').blur();
+		$('#datepicker1').datepicker({
+			altField: $('#perNight1').val(check_in)
+		});
+		$('#datepicker2').datepicker({
+			altField: $('#perNight2').val(check_out)
+		});
+		calDate();
 	});
 	$('.closer').on('click', function() {
 		$('#mapList_dialog').dialog('close');
@@ -361,7 +371,7 @@ $(document).ready(function(){
 			
 			if(target == check){
 				$(this).addClass('on');
-				$('#output').animate({scrollTop:offsetTop}, 600);//두번째 속성은 duration(number), easing(String) 등
+				$('#output').animate({scrollTop:offsetTop}, 800);//두번째 속성은 duration(number), easing(String) 등
 			}
 		});
 	});
