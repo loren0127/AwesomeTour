@@ -21,10 +21,12 @@ public interface AccomMapper {
 	public List<AccomCommand> selectRecommendList(Map<String,Object> map);
 	
 	//리뷰 불러오기
-	@Select("SELECT * FROM (SELECT re.*, rownum rnum FROM (SELECT re_acc_num, re_email, re_reg_date reg_date, re_content FROM accom_review ORDER BY re_reg_date DESC)re) WHERE rnum >= 1 AND rnum <= 4")
+	@Select("SELECT * FROM (SELECT re.*, rownum rnum FROM (SELECT re_acc_num, re_email, re_reg_date, re_content FROM accom_review ORDER BY re_reg_date DESC)re) WHERE rnum >= 1 AND rnum <= 4")
 	public List<ReviewCommand> selectReviewList();
 	
 	//인기 모임 불러오기
-	@Select("")
-	public List<GroupCommand> selectGroupList(Map<String,Object> map);
+	@Select("SELECT * FROM (SELECT gr.*, rownum rnum FROM (SELECT g_num, g_name, g_address2, g_hobby, g_reg_date FROM group_table ORDER BY g_reg_date DESC)gr) WHERE rnum >=1 AND rnum <= 4")
+	public List<GroupCommand> selectGroupList();
+	
+	//모임 이미지 불러오기 --> 그룹 뷰 사용
 }

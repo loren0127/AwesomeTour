@@ -10,28 +10,29 @@
 	resultType : 한 건의 데이터를 자바빈에 담는다. (List라고 명시하면 SQL문에 의해 데이터가 처리되기 전 상태라 객체가 비어있어서 예외 발생)
 	-->
 	<select id="selectList" parameterType="java.util.Map" resultType="AccomCommand">
-		SELECT price.*, grade.ag_grade, auth.member_auth, service.se_name,
-		review.review_count, book.rv_start_date, book.rv_end_date FROM
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN 
-		(SELECT aa.ro_sub, aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM 
-		((SELECT ro_price, ro_sub, ro_pe_count FROM accom_room)aa) 
-		JOIN (SELECT ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY ro_acc_num)bb 
-		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
-		(SELECT a.*, m.member_auth, m.member_email FROM accom a, member_auth m where
-		a.acc_host = m.member_email)auth ON price.acc_host = auth.member_email
-		RIGHT OUTER JOIN
-		(SELECT a.*, s.se_name FROM accom a, accom_service s WHERE a.acc_num =
-		s.se_acc_num)service ON auth.acc_num = service.acc_num LEFT OUTER JOIN
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
-		ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade GROUP BY ag_acc_num)b
-		ON a.acc_num = b.ag_acc_num)grade
-		ON price.acc_num = grade.acc_num LEFT OUTER JOIN
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT re_acc_num,
-		COUNT(*)review_count FROM accom_review GROUP BY re_acc_num)b ON
-		a.acc_num = b.re_acc_num)review
-		ON grade.ag_acc_num = review.re_acc_num LEFT OUTER JOIN (SELECT acc_num,
-		rv_start_date, rv_end_date FROM reservation)book
-		ON review.re_acc_num = book.acc_num
+	SELECT price.*, auth.member_auth, service.se_name, grade.ag_grade,
+	review.review_count, book.rv_start_date, book.rv_end_date FROM (SELECT
+	* FROM ((SELECT * FROM accom)a) JOIN
+	(SELECT * FROM (SELECT ROW_NUMBER() OVER(PARTITION BY ro_acc_num ORDER BY
+	MIN(ro_price)) row_num, ro_acc_num, MIN(ro_price) ro_price, ro_num,
+	ro_sub, ro_pe_count FROM accom_room
+	GROUP BY ro_acc_num, ro_num, ro_sub, ro_pe_count) WHERE row_num = 1)b ON
+	a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
+	(SELECT member_auth, member_email FROM member_auth WHERE member_auth >=
+	2)auth ON price.acc_host = auth.member_email RIGHT OUTER JOIN
+	(SELECT se_acc_num, se_name FROM accom_service)service ON price.acc_num =
+	service.se_acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.ag_grade FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
+	ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade
+	GROUP BY ag_acc_num)b ON a.acc_num = b.ag_acc_num)grade ON price.acc_num =
+	grade.acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.review_count FROM ((SELECT * FROM accom)a) JOIN (SELECT
+	re_acc_num, COUNT(*)review_count FROM accom_review GROUP BY
+	re_acc_num)b ON a.acc_num = b.re_acc_num)review
+	ON grade.acc_num = review.acc_num LEFT OUTER JOIN (SELECT member_email,
+	rv_start_date, rv_end_date FROM reservation WHERE rv_start_date IS
+	NULL)book
+	ON price.acc_host = book.member_email 
 		<where>
 			<!-- 
 			orderby는 컨트롤러에서 메소드 파라미터명
@@ -41,9 +42,7 @@
 				grade.ag_grade is not null
 			</if>
 			<if test="orderby == 'recommend'">
-				<![CDATA[
-					auth.MEMBER_AUTH = 3
-				]]>
+				auth.MEMBER_AUTH = 3
 			</if>
 			<if test="orderby == 'hotelGrade'">
 				<![CDATA[
@@ -66,11 +65,10 @@
 				AND
 			</if>
 			<if test="check_in != '' and check_out != '' and people_count != '' and people_count >= 1">
-				price.acc_num NOT IN (SELECT acc_num FROM reservation 
 				<![CDATA[
-					WHERE TO_DATE(rv_end_date,'yyyy/mm/dd') >= #{check_in} AND TO_DATE(rv_start_date,'yyyy/mm/dd') <= #{check_out} AND price.ro_pe_count >= 1 AND price.ro_pe_count <= 8
+					price.ro_pe_count >= 1 AND price.ro_pe_count <= 8 AND price.ro_num NOT IN 
+					(SELECT ro_num FROM reservation WHERE TO_DATE(rv_end_date,'yyyy/mm/dd') > ${check_in} AND TO_DATE(rv_start_date,'yyyy/mm/dd') < ${check_out})
 				]]>
-				)
 			</if>
 			<if test="search != ''">
 				AND price.acc_address1 LIKE '%' || #{search} || '%' 
@@ -79,10 +77,10 @@
 				OR price.acc_name LIKE '%' || #{search} || '%' 
 			</if>
 			<if test="search == '호텔'">
-				OR <![CDATA[price.ro_sub = 'h']]>
+				OR price.ro_sub = 'h'
 			</if>
 			<if test="search == '하우스' or search == '프라이빗하우스' or search == '게스트하우스'">
-				OR <![CDATA[price.ro_sub = 'p']]>
+				OR price.ro_sub = 'p'
 			</if>
 			<if test="orderby == 'rating'">
 				ORDER BY grade.ag_grade DESC
@@ -113,27 +111,28 @@
 	
 	<!-- 메인 페이지에서 추천 숙소(슈퍼호스트) 리스트 -->
 	<select id="selectRecommendList" parameterType="map" resultType="AccomCommand">
-		SELECT price.*, grade.ag_grade, auth.member_auth, service.se_name,
-		review.review_count, book.rv_start_date, book.rv_end_date FROM
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN 
-		(SELECT aa.ro_sub, aa.ro_pe_count, bb.ro_acc_num, bb.ro_price FROM 
-		((SELECT ro_price, ro_sub, ro_pe_count FROM accom_room)aa) 
-		JOIN (SELECT ro_acc_num, MIN(ro_price)ro_price FROM accom_room GROUP BY ro_acc_num)bb 
-		ON aa.ro_price = bb.ro_price)b ON a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
-		(SELECT a.*, m.member_auth, m.member_email FROM accom a, member_auth m where
-		a.acc_host = m.member_email)auth ON price.acc_host = auth.member_email
-		RIGHT OUTER JOIN
-		(SELECT a.*, s.se_name FROM accom a, accom_service s WHERE a.acc_num =
-		s.se_acc_num)service ON auth.acc_num = service.acc_num LEFT OUTER JOIN
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
-		ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade GROUP BY ag_acc_num)b
-		ON a.acc_num = b.ag_acc_num)grade
-		ON price.acc_num = grade.acc_num LEFT OUTER JOIN
-		(SELECT * FROM ((SELECT * FROM accom)a) JOIN (SELECT re_acc_num,
-		COUNT(*)review_count FROM accom_review GROUP BY re_acc_num)b ON
-		a.acc_num = b.re_acc_num)review
-		ON grade.ag_acc_num = review.re_acc_num LEFT OUTER JOIN (SELECT acc_num,
-		rv_start_date, rv_end_date FROM reservation)book
-		ON review.re_acc_num = book.acc_num WHERE <![CDATA[auth.MEMBER_AUTH = 3]]> ORDER BY price.ro_price ASC
+	SELECT price.*, auth.member_auth, service.se_name, grade.ag_grade,
+	review.review_count, book.rv_start_date, book.rv_end_date FROM (SELECT
+	* FROM ((SELECT * FROM accom)a) JOIN
+	(SELECT * FROM (SELECT ROW_NUMBER() OVER(PARTITION BY ro_acc_num ORDER BY
+	MIN(ro_price)) row_num, ro_acc_num, MIN(ro_price) ro_price, ro_num,
+	ro_sub, ro_pe_count FROM accom_room
+	GROUP BY ro_acc_num, ro_num, ro_sub, ro_pe_count) WHERE row_num = 1)b ON
+	a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
+	(SELECT member_auth, member_email FROM member_auth WHERE member_auth >=
+	2)auth ON price.acc_host = auth.member_email RIGHT OUTER JOIN
+	(SELECT se_acc_num, se_name FROM accom_service)service ON price.acc_num =
+	service.se_acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.ag_grade FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
+	ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade
+	GROUP BY ag_acc_num)b ON a.acc_num = b.ag_acc_num)grade ON price.acc_num =
+	grade.acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.review_count FROM ((SELECT * FROM accom)a) JOIN (SELECT
+	re_acc_num, COUNT(*)review_count FROM accom_review GROUP BY
+	re_acc_num)b ON a.acc_num = b.re_acc_num)review
+	ON grade.acc_num = review.acc_num LEFT OUTER JOIN (SELECT member_email,
+	rv_start_date, rv_end_date FROM reservation WHERE rv_start_date IS
+	NULL)book
+	ON price.acc_host = book.member_email WHERE auth.MEMBER_AUTH = 3 ORDER BY price.ro_price ASC
 	</select>
 </mapper>

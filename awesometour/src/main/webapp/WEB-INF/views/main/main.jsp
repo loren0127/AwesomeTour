@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/search.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 <script>
 	$(function() {
 		var date = new Date();
@@ -14,18 +14,15 @@
 		$('.date_in').val(today);
 	});
 </script>
+
 <!-- Masthead -->
 <header class="masthead text-white text-center">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 col-xs-6 mx-auto">
-				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
-			</div>
-			<div class="col-lg-10 col-md-9 col-xs-12 mx-auto">
+			<!-- 폼 영역 -->
+			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
 				<form id="search_form" action="../accomList/accomList.do">
 					<div class="form-row">
-						<!-- style="width: 1200px; margin-left: 100px;" -->
-						<!-- 변경한 내용임 -->
 						<div>
 							<select name="searchtype" style="height: 50px;" id="type"
 								class="form-control">
@@ -72,7 +69,10 @@
 						</div>
 					</div>
 				</form>
-				<!-- 변경한 내용끝-->
+			</div>
+			<!-- 제목 영역 -->
+			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
+				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
 			</div>
 		</div>
 	</div>
@@ -255,25 +255,26 @@
 <div class="section-sepa2" style="max-height: 2000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">인기 모임</h3>
-		<div class="underline align-center">
-			<div class="line"></div>
-		</div>
+		<div class="underline align-center"><div class="line"></div></div>
 		<div class="row">
+			<c:forEach var="group" items="${groupList}" varStatus="status">
 			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="card align-center">
+				<div class="card align-left">
 					<div>
-						<h4>랄랄라</h4>
+						<img src="${pageContext.request.contextPath}/group/imageView.do?g_num=${group.g_num}" style="width:100%;">
 					</div>
 					<div>
-						<span>모임1</span><br> <span>장소</span><br> <span>서울
-							공중 화장실</span>
+						<span style="font-size: 18px; font-weight: bold;">${group.g_name}</span><br>
+						<span style="font-size: 14px;">주최지 <b>${group.g_address2}</b></span><br>
+						<span style="font-size: 14px;">관심사 <b>${group.g_name}</b></span>
 					</div>
-					<div>서울 공중 화장실의 깨끗함을 느껴보아요!()</div>
-					<div>
-						<button class="btn">View More</button>
+					<div style="margin-top: 10px;margin-bottom: 10px;">
+						<input type="button" class="btn btn-default hotelLink_main" value="참여하기" style="font-size: .8em;font-weight: bold;" 
+						onclick="location.href='${pageContext.request.contextPath}/group/groupDetail.do?g_num=${group.g_num}'">
 					</div>
 				</div>
 			</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
