@@ -10,8 +10,8 @@ $(document).ready(function(){
         day = "0" + day;
     }
  
-    var getToday = year+"/"+month+"/"+day;
-    var getNextday = year+"/"+month+"/"+(day+1);
+    var getToday = year+"/"+month+"/"+(day+1);
+    var getNextday = year+"/"+month+"/"+(day+2);
 	
 	//JSON 문자열로 생성된 주소와 상호명 받을 배열 선언 -> push 함수 사용시 초기화 먼저!
 	var locations=[],contents=[],numbers=[],types=[];
