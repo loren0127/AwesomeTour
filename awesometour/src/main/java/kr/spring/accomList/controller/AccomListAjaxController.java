@@ -1,6 +1,5 @@
 package kr.spring.accomList.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +28,7 @@ public class AccomListAjaxController {
 	AccomListService accomListService;
 	
 	int rowCount = 5;
-	int pageCount = 0;
+	int pageCount = 2;
 	
 	//편의시설 체크 관련 ajax 
 	@RequestMapping("accomList/accomlistajax.do")
@@ -84,7 +83,6 @@ public class AccomListAjaxController {
 		}else {
 			pageCount = count/rowCount +1; 
 		}
-		
 		PagingUtil page = new PagingUtil(currentPage,count,rowCount,pageCount,null);
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
