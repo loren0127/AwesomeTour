@@ -1,6 +1,5 @@
 $(document).ready(function() {	
-	$('#pe_pop').show();
-
+/*	$('#pe_pop').show();
 
 	//인원수 클릭시 div 활성화
 	$('.people_pop').click(function(event){
@@ -8,7 +7,7 @@ $(document).ready(function() {
 		$('#pe_pop').show();
 
 		event.preventDefault();
-	});
+	});*/
 	
 	//인원수 체크부분 외 다른 영역을 클릭시 인원수,객실수 버튼이 닫힘.
 	//$('body').click(function(e){
@@ -16,6 +15,8 @@ $(document).ready(function() {
 			//$('#pe_pop').hide();
 		//}
 	//});
+	
+	
 	
 
 
@@ -29,10 +30,10 @@ $(document).ready(function() {
 		$('#people_sum').text(new_peo_num);
 		$('#peo_sum_btn').text(new_peo_num);
 		$('#people_count').val(new_peo_num);
-		if(new_peo_num>7){
-			alert('8명이상 검색할수 없습니다.');
-			$('#people_plus').attr('disabled',true); 
+		if(new_peo_num>7){ 
+			$('#people_plus').attr('disabled',true);
 		}
+
 		if(new_peo_num>0){//1초후 다시 버튼활성화
 			setTimeout(function(){
 				$('#people_minus').removeAttr('disabled');
@@ -46,11 +47,10 @@ $(document).ready(function() {
 		$('#peo_sum_btn').text(new_peo_minus);
 		$('#people_count').val(new_peo_minus);
 		
-		if(new_peo_minus<2){
-			alert('최소인원은 1명입니다.');
+		if(new_peo_minus<=1){
 			$('#people_minus').attr('disabled',true); 
 		}
-		if(new_peo_minus>1){
+		if(new_peo_minus>2){
 			$('#people_minus').attr('disabled',false); 
 		}
 		if(new_peo_minus>1){ //2초후 다시 버튼활성화

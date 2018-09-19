@@ -22,51 +22,41 @@
 			<!-- 폼 영역 -->
 			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
 				<form id="search_form" action="../accomList/accomList.do">
-					<div class="form-row">
-						<div>
-							<select name="searchtype" style="height: 50px;" id="type"
-								class="form-control">
-								<option value="h" id="h">호텔</option>
-								<option value="p" id="p">프라이빗하우스</option>
-							</select>
+					<div class="form-row" id="form_row">
+						<div class="col-lg-12 col-md-12 col-xs-12">
+							<input type="radio" id="h" name="searchtype" value="h" checked/>
+    						<label for="h" class="radio_label">호텔</label>
+    						<input type="radio" id="p" name="searchtype" value="p"/>
+    						<label for="p" class="radio_label">프라이빗 하우스</label>
 						</div>
-						<div>
+						<div class="col-lg-6 col-md-6 col-xs-6">
 							<label for="checkin_input">체크인</label>
-							<input type="text" class="date_in form-control" id="checkin_input" name="check_in"
-								value="" style="height: 50px; width: 150px;" autocomplete="off">
+							<input type="text" class="date_in" id="checkin_input" name="check_in"
+								value="" style="width: 100%;" autocomplete="off">
 						</div>
-						<div>
+						<div class="col-lg-6 col-md-6 col-xs-6">
 							<label for="checkin_output">체크아웃</label>
-							<input type="text" class="date_out form-control" id="checkin_output" name="check_out"
-								value="" style="height: 50px; width: 150px;" autocomplete="off">
+							<input type="text" class="date_out" id="checkin_output" name="check_out"
+								value="" style="width: 100%;" autocomplete="off">
 						</div>
-						<div class="people_pop">
-							<button id="people" name="people" class="btn form-control"
-								style="height: 50px; width: 150px; position: absolute;">
+						<div class="col-lg-12 col-md-12 col-xs-12 people_pop" style="margin-top:10px;">
+								<input type="hidden" name="people_count" id="people_count" value="1">
+							<label for="checkin_input">인원</label>
+							<button id="people_minus" name="minus" style="outline:none;">-</button>
+							<!-- <input type="button" name="minus" id="people_minus" value="-" style="border:none;outline:none;"> -->
+							<button id="people" name="people" style="outline:none;">
 								<span id="peo_sum_btn">1</span>명
 							</button>
-							<input type="hidden" name="people_count" id="people_count"
-								value="1">
-
-							<div class="check" id="pe_pop"
-								style="position: absolute; margin-left: 50px; display: inline-flex; margin-top: 5px; margin-left: 3px;">
-								<input type="button" name="minus" id="people_minus" value="-"
-									class="form-control"
-									style="border: 0; padding-top: 3px; font-size: 20px; margin-right: 75px;">
-								<input type="button" name="people_plus" class="form-control"
-									id="people_plus" value="+" style="border: 0; font-size: 20px;">
-
-							</div>
+							<button id="people_plus" name="people_plus" style="outline:none;">+</button>
+							<!-- <input type="button" name="people_plus" id="people_plus" value="+" style="border:none;outline:none;"> -->
 						</div>
-						<div>
-							<input type="text"
-								style="height: 100%; margin-left: 150px; width: 60%;"
-								name="search" id="address" placeholder="서울" value=""
-								class="form-control">
+						<div class="col-lg-12 col-md-12 col-xs-12" style="margin-top:10px;">
+							<label for="address">위치</label>
+							<input type="text"	name="search" id="address" placeholder="서울" value="" style="width: 100%;">
 						</div>
-						<div>
+						<div class="col-lg-12 col-md-12 col-xs-12" style="margin-top:10px;">
 							<button type="submit" id="search"
-								class="btn btn-block btn-lg btn-primary">검색</button>
+								class="btn btn-block btn-lg btn-warning">검색</button>
 						</div>
 					</div>
 				</form>
@@ -143,7 +133,7 @@
 </div>
 
 <!-- Recommendation -->
-<div class="section-sepa2" style="max-height: 2000px;">
+<div class="section-sepa2" style="max-height: 3000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">추천 숙소</h3>
 		<div class="underline align-center">
@@ -201,7 +191,7 @@
 </div>
 
 <!-- REVIEW -->
-<div class="section-sepa1" style="max-height: 2000px;">
+<div class="section-sepa1" style="max-height: 3000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">여행객들의 말말말</h3>
 		<div class="underline align-center">
@@ -253,7 +243,7 @@
 </div>
 
 <!-- MEETING -->
-<div class="section-sepa2" style="max-height: 2000px;">
+<div class="section-sepa2" style="max-height: 3000px;">
 	<div class="container">
 		<h3 class="text-center" style="padding-top: 3rem;">인기 모임</h3>
 		<div class="underline align-center"><div class="line"></div></div>

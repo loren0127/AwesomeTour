@@ -4,6 +4,10 @@
 	transition:transform .35s ease-in-out;
 }
 
+.hidden {
+	transform:translateY(-100%);
+}
+
 #mainNav .fa-font {
 	font-size:51px;
 	color:#d900ed;
@@ -19,10 +23,6 @@
 	color: #d900ed;
 	font-size: 30px;
 	border: none;
-}
-
-.hidden {
-	transform:translateY(-100%);
 }
 
 #navbarResponsive {
