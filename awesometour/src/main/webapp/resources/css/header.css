@@ -26,12 +26,12 @@
 }
 
 #navbarResponsive {
-	font-color:#222222;
+	color:#222222;
 	font-weight:bold;
 }
 
-navbarResponsive li:hover {
-  background-color: #ddd;
+#navbarResponsive li:hover {
+  background-color: trasparent;
   color: black;
 }
 

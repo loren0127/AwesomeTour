@@ -82,20 +82,18 @@ a:hover, a:focus {
   margin-top: 25px;
 }
 
-body {
+/* body {
   line-height: 24px;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
   font-weight: 300;
   color: #777777;
-}
+} */
 
 section {
   background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Poppins", sans-serif;
   font-weight: 600;
 }
 
@@ -187,7 +185,6 @@ button:focus {
   line-height: 40px;
   font-size: 14px;
   color: #222222;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 
@@ -258,7 +255,7 @@ button:focus {
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /*============== header css =============*/
-.header_area {
+/* .header_area {
   position: absolute;
   top: 0;
   left: 0;
@@ -488,7 +485,7 @@ button:focus {
 
 .navbar_fixed.header_two {
   background: rgba(34, 34, 34, 0.9);
-}
+} */
 
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
@@ -648,7 +645,6 @@ button:focus {
 
 .book_tabel_item .nice-select:after {
   content: "\e874";
-  font-family: 'Linearicons-Free';
   font-size: 13px;
   color: #777777;
   border: 0px;
@@ -703,7 +699,6 @@ button:focus {
 
 .breadcrumb li + li:before {
   content: "\e87a";
-  font-family: 'Linearicons-Free';
   font-size: 14px;
   font-weight: 600;
   vertical-align: middle;
@@ -731,7 +726,6 @@ button:focus {
   line-height: 66px;
   font-weight: bold;
   color: #fff;
-  font-family: "Poppins", sans-serif;
 }
 
 .blog_banner .banner_content p {
@@ -1898,7 +1892,6 @@ button:focus {
   line-height: 26px;
   color: #999;
   border: 1px solid #eeeeee;
-  font-family: "Poppins", sans-serif;
   border-radius: 0px;
   padding-left: 20px;
 }
@@ -1971,7 +1964,6 @@ button:focus {
   text-align: center;
   color: #f3c300;
   padding-bottom: 10px;
-  font-family: "Poppins", sans-serif;
 }
 
 .modal-message .modal-dialog .modal-content .modal-header p {
@@ -3477,7 +3469,7 @@ h1, h2, h3, h4, h5, h6 {
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /*============== footer-area css ===============*/
-.footer-area {
+/* .footer-area {
   background: #04091e;
   padding: 142px 0px;
 }
@@ -3598,7 +3590,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-bottom .footer-social a:hover {
   color: #f3c300;
-}
+} */
 
  @media screen and (max-width: 999px){
      #datepicker2_accomDetail{
