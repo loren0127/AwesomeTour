@@ -77,4 +77,9 @@ public class MyPageServiceImpl implements MyPageService{
 	public ReservationCommand selectReservationDetail(Map<String, Object> map) {
 		return mypageMapper.selectReservationDetail(map);
 	}
+	
+	@Override
+	public void insertComplainSend(MyPageCommand command) {
+		mypageMapper.insertComplainSend(command);
+	}
 }

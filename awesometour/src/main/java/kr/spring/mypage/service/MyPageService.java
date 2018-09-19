@@ -25,4 +25,6 @@ public interface MyPageService {
 	public int selectGradeCount(Integer acc_num);
 	
 	public ReservationCommand selectReservationDetail(Map<String, Object> map);
+	
+	public void insertComplainSend(MyPageCommand command);
 }

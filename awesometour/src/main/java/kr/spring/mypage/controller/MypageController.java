@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,11 @@ public class MypageController {
 	
 	@Resource
 	private ReservationService reservationService;
+	
+	@ModelAttribute("mypageCommand")
+	public MyPageCommand mypageCommandInit() {
+		return new MyPageCommand();
+	}
 	
 	@RequestMapping(value="/mypage/mypageComplainList.do")
 	public String mypageComplainList(HttpSession session,Model model) {
@@ -144,11 +150,13 @@ public class MypageController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/mypage/mypageComplainSend.do", method=RequestMethod.GET)
-	public ModelAndView mypageComplainSendForm(HttpSession session, @ModelAttribute(value="mypageCommand")MyPageCommand mypageCommand) {
+	@RequestMapping(value="/mypage/mypageComplainSend.do", method=RequestMethod.POST)
+	public String mypageComplainSendForm(HttpSession session, @ModelAttribute @Valid MyPageCommand complainCommand) {
 		System.out.println("Complain insert 진입...");
-		ModelAndView mav = new ModelAndView();
+		complainCommand.setMember_email((String)session.getAttribute("user_email"));
+		System.out.println("complainCommand : " + complainCommand);
+		mypageService.insertComplainSend(complainCommand);
 		
-		return mav;
+		return "mypageReservationList";
 	}
 }

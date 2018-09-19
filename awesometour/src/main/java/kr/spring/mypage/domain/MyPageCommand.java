@@ -24,6 +24,7 @@ public class MyPageCommand {
 	private int member_complain_num;
 	private String member_complain_title;
 	private int member_rv_num;
+	private int member_complain_accom_num;
 	
 	private String message_receiver;
 	private String message_sender;
@@ -210,5 +211,10 @@ public class MyPageCommand {
 	public void setHost_email(String host_email) {
 		this.host_email = host_email;
 	}
-	
+	public int getMember_complain_accom_num() {
+		return member_complain_accom_num;
+	}
+	public void setMember_complain_accom_num(int member_complain_accom_num) {
+		this.member_complain_accom_num = member_complain_accom_num;
+	}
 }

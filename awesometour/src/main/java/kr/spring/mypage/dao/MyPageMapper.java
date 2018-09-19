@@ -68,5 +68,8 @@ public interface MyPageMapper {
 	
 	
 	//Complain send ------------------------------------------------------------
+	@Insert("INSERT INTO member_complain(member_complain_num, member_complain_accom_num, member_complain_title, member_complain_content, member_complain_reg_date, member_email, member_rv_end_date, member_rv_num) VALUES(member_complain_seq.NEXTVAL, #{member_complain_accom_num}, #{member_complain_title}, #{member_complain_content}, SYSDATE, #{member_email}, #{member_rv_end_date}, #{member_rv_num})")
+	public void insertComplainSend(MyPageCommand command);
+	
 	
 }
