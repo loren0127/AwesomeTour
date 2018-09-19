@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.mypage.dao.MyPageMapper">  
- 	<select id="selectMypageList"  parameterType="map" resultType="mypageCommand">
+ 	<select id="selectMypageList" parameterType="map" resultType="mypageCommand">
  		SELECT * FROM
 			(SELECT a.*, rownum rnum FROM
 					(SELECT a.acc_num,a.acc_name,b.MEMBER_COMPLAIN_CONTENT,b.MEMBER_COMPLAIN_REG_DATE,b.MEMBER_RV_END_DATE,b.member_email,b.member_complain_num 
@@ -23,7 +23,7 @@
 		<if test="acc_grade_count>0">
 		JOIN (SELECT avg(ag_grade) ag_grade,ag_acc_num FROM accom_grade group by ag_acc_num) g on o.ro_acc_num=g.ag_acc_num 
 		</if>
-		WHERE a.acc_num=#{acc_num} AND o.ro_num=#{ro_num} AND r.member_email=#{user_email}
+		WHERE a.acc_num=#{acc_num} AND o.ro_num=#{ro_num} AND r.member_email=#{user_email} AND r.rv_num=#{rv_num}
 	</select>
 </mapper>
 

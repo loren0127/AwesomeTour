@@ -30,5 +30,15 @@
 	<definition name="mypageReservationDetail" extends="mypageMemberDetail">
 		<put-attribute name="title" value="예약관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageReservationDetail.jsp"/>
+	</definition>
+	
+	<definition name="mypageComplainSend" extends="mypageMemberDetail">
+		<put-attribute name="title" value="예약관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageReservationDetail.jsp"/>
+	</definition>
+	
+	<definition name="mypageComplainSend" extends="mypageMemberDetail">
+		<put-attribute name="title" value="예약관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageComplainSend.jsp"/>
 	</definition> 
 </tiles-definitions>

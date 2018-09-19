@@ -55,6 +55,9 @@
 						<a href="${messageCommand.message_URL}"><p style="text-align: center;">그룹 참여하기</p></a>
 					</div>
 				</c:if>
+				<c:if test="{messageCommand.message_type == 'complainOk'">
+					<a href="${messageCommand.message_URL}"><p style="text-align: center;">환불 동의</p></a>
+				</c:if>
 			</div>
 		</div>
 	</div>

@@ -3,8 +3,10 @@ package kr.spring.mypage.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.mypage.domain.MyPageCommand;
 import kr.spring.reservation.domain.ReservationCommand;
@@ -30,16 +32,16 @@ public interface MyPageMapper {
 	
 	//Reservation --------------------
 	
+	//Select young reservation
 	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email} AND SYSDATE < TO_DATE(rv_end_date)")
 	public int selectReservationRowCount(String user_email);
-	
-	@Select("SELECT a.acc_num, r.ro_num, acc_name, rv_start_date, rv_end_date, rv_people, rv_money FROM reservation r JOIN accom a ON r.acc_num=a.acc_num WHERE r.member_email=#{user_email} AND SYSDATE < TO_DATE(r.rv_end_date)")
+	@Select("SELECT a.acc_num, r.rv_num, r.ro_num, acc_name, rv_start_date, rv_end_date, rv_people, rv_money FROM reservation r JOIN accom a ON r.acc_num=a.acc_num WHERE r.member_email=#{user_email} AND SYSDATE < TO_DATE(r.rv_end_date)")
 	public List<ReservationCommand> selectReservationList(Map<String, Object> map);
 	
+	//Select old reservation
 	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email} AND SYSDATE > TO_DATE(rv_end_date)")
 	public int selectReservationRowCountOld(String user_email);
-	
-	@Select("SELECT acc_name, rv_start_date, rv_end_date, rv_people, rv_money, ro_num FROM (SELECT rownum rnum, a.acc_name, r.rv_start_date, r.rv_end_date, r.rv_people, r.rv_money, r.ro_num FROM accom a, reservation r WHERE (a.acc_num=r.acc_num) AND (r.member_email=#{user_email}) AND SYSDATE > (TO_DATE(r.rv_end_date))) WHERE rnum >= #{start} AND rnum <= #{end}")
+	@Select("SELECT acc_num, acc_name, rv_num, rv_start_date, rv_end_date, rv_people, rv_money, ro_num FROM (SELECT rownum rnum, a.acc_num, a.acc_name, r.rv_num, r.rv_start_date, r.rv_end_date, r.rv_people, r.rv_money, r.ro_num FROM accom a, reservation r WHERE (a.acc_num=r.acc_num) AND (r.member_email=#{user_email}) AND SYSDATE > (TO_DATE(r.rv_end_date))) WHERE rnum >= #{start} AND rnum <= #{end}")
 	public List<ReservationCommand> selectReservationListOld(Map<String, Object> map);
 	
 	
@@ -49,4 +51,22 @@ public interface MyPageMapper {
 	
 	//XML mapping
 	public ReservationCommand selectReservationDetail(Map<String, Object> map);
+	
+	//Reservation cancel ----------------------------------------------------------------------------
+	
+	//Reservation status setting
+	@Update("UPDATE resercation SET rv_status=-1 WHERE rv_num=#{rv_num}")
+	public void updateReservation(int rv_num);
+	
+	//Reservation holding(All commission return(7day not yet))
+	@Delete("DELETE holding FROM holding h JOIN reservation a ON h.rv_num=a.rv_num WHERE rv_num=#{rv_num} AND member_email=#{member_email} AND (TO_DATE(a.rv_start_date) - SYSDATE) < 7")
+	public void deleteHolding(Map<String, Object> map);
+	
+	//Reservation holding(Commission not return(After 7day))
+	@Update("UPDATE holding SET hd_money=(hd_money/11) FROM holding h JOIN reservation r ON h.rv_num=r.rv_num WHERE rv_num=#{rv_num} AND member_email=#{member_email} AND (TO_DATE(a.rv_start_date) - SYSDATE) > 7")
+	public void updateHolding(Map<String, Object> map);
+	
+	
+	//Complain send ------------------------------------------------------------
+	
 }

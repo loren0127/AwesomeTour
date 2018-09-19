@@ -10,10 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.domain.MemberCommand;
@@ -118,7 +118,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage/mypageReservationDetail.do")
-	public ModelAndView mypageReservationDetail(HttpSession session, @RequestParam("acc_num")int acc_num, @RequestParam("ro_num")int ro_num) {
+	public ModelAndView mypageReservationDetail(HttpSession session, @RequestParam("acc_num")int acc_num, @RequestParam("ro_num")int ro_num, @RequestParam("rv_num")int rv_num) {
 		int acc_grade_count = mypageService.selectGradeCount(acc_num);
 		
 		String user_email = (String)session.getAttribute("user_email");
@@ -127,12 +127,28 @@ public class MypageController {
 		reservationAccMap.put("user_email", user_email);
 		reservationAccMap.put("acc_num", acc_num);
 		reservationAccMap.put("ro_num", ro_num);
+		reservationAccMap.put("rv_num", rv_num);
 		ReservationCommand reservationDetail = mypageService.selectReservationDetail(reservationAccMap);
 		System.out.println("rv :: " + reservationDetail);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mypageReservationDetail");
 		mav.addObject("rv", reservationDetail);
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/mypageReservationCancel.do")
+	public ModelAndView mypageReservationCancel() {
+		
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/mypageComplainSend.do", method=RequestMethod.GET)
+	public ModelAndView mypageComplainSendForm(HttpSession session, @ModelAttribute(value="mypageCommand")MyPageCommand mypageCommand) {
+		System.out.println("Complain insert 진입...");
+		ModelAndView mav = new ModelAndView();
+		
 		return mav;
 	}
 }
