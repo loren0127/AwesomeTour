@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var directorList=[];
 	if($('#peo_sum_btn').text() ==1){
 		$('#people_minus').attr('disabled',true); 		
 	}
@@ -47,7 +48,6 @@ $(document).ready(function() {
 		var date = $('.date_out').val();
 		var search = $('#address').val();
 		if(date == ''){
-			alert(date);
 			alert('체크인 날짜와 체크아웃 날짜를 선택하세요.');
 			return false;
 		}
@@ -63,6 +63,57 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 	});
+	
+/*	var directorList = new Array();
+	$('#address').keyup(function (event) {
+		search_auto = $(this).val();
+		director_List(search_auto);
+	});*/
+
+/*	var director_value = '';
+	var director_count = 0;
+	$('#address').keydown(function (event) {
+		search_auto = $(this).val();
+		console.log('search_auto : ' + search_auto);
+		director_List(search_auto);
+	});*/
+
+	$('#address').keypress(function (event) {
+		var search = $(this).val();
+		console.log('search_auto : ' + search);
+		director_List(search);
+	});
+
+	function director_List(search){
+		$.ajax({
+			type: 'post',
+			url: '../main/mainAjax.do',
+			data: {search:search},
+			dataType: 'json',
+			success: function(data) {
+				var list = data.list;
+				var count = data.count;
+				var rowCount = data.rowCount;
+				var currentPage = data.currentPage;
+				directorList = [];
+				$(list).each(function (index, element) {
+						directorList.push(element.acc_name);
+						directorList.push(element.acc_address1);
+						console.log('--------------' +element.acc_name);
+						console.log('--------------' +element.acc_address1);
+				});
+				console.log('list: ' + list + 'directorList : ' + directorList);
+			},
+			error:function(){
+					
+		       }
+		});	
+		$('#address').autocomplete({
+			source: directorList,
+			minLength: 2,
+			max:5
+		}); //자동완성 처리	
+	}
 });
 
 //----------------------------날짜 설정시 선택한 날짜로부터 한달동안만 보여지게 활성화 -----------------------//

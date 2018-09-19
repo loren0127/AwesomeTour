@@ -55,6 +55,17 @@ public class AccomListServiceImpl implements AccomListService{
 		return accomListMapper.selectImageView(im_ac_num);
 	}
 
+	@Override
+	public List<AccomListCommand> selectSearch_auto(Map<String, Object> map) {
+		
+		return accomListMapper.selectSearch_auto(map);
+	}
+
+	@Override
+	public int selectSearch_count(Map<String, Object> map) {
+		
+		return accomListMapper.selectSearch_count(map);
+	}
 
 
 }

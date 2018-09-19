@@ -98,6 +98,7 @@ public class AccomListAjaxController {
 		mapJson.put("count", count);
 		mapJson.put("rowCount", rowCount);
 		mapJson.put("map", map);
+		mapJson.put("search", search);
 		
 		return mapJson;
 	}

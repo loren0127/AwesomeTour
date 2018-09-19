@@ -14,4 +14,6 @@ public interface AccomListService {
 	public List<AccomListCommand> selectAccomTotallist(Map<String, Object> map);
 	public int selectAccomTotallistCount(Map<String,Object> map);
 	public ImageCommand selectImageView(Integer im_ac_num);
+	public List<AccomListCommand> selectSearch_auto(Map<String, Object> map);
+	public int selectSearch_count(Map<String,Object> map);
 }

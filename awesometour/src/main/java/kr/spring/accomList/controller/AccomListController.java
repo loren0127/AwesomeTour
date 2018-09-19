@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.accom.domain.ImageCommand;
@@ -88,11 +89,11 @@ public class AccomListController {
 				log.debug("<<pageCount>> : " + pageCount);
 			}
 				
-				if(count%rowCount == 0) {			
+/*				if(count%rowCount == 0) {			
 					pageCount = count/rowCount;
 				}else {
 					pageCount = count/rowCount +1; 
-				}
+				}*/
 			PagingUtil page = new PagingUtil(currentPage, count,rowCount,pageCount,"accomList.do");
 			
 			map.put("start", page.getStartCount());
@@ -161,4 +162,38 @@ public class AccomListController {
 
 			return mav;
 		}
+		
+		@RequestMapping("/main/mainAjax.do")
+		@ResponseBody
+		public Map<String, Object> getAuto_offList(@RequestParam(value="search",defaultValue="") String search,
+												   @RequestParam(value="pageNum",defaultValue="1") int currentPage){
+			
+			int count;
+				
+			if(log.isDebugEnabled()) {
+				log.debug("<<search>> : " + search);
+			}
+				Map<String, Object> map = new HashMap<String, Object>();
+				Map<String, Object> mapJson = new HashMap<String, Object>();
+				map.put("search", search);
+				
+				List<AccomListCommand> list = accomListService.selectSearch_auto(map);
+				count = accomListService.selectSearch_count(map);
+				
+				PagingUtil page = new PagingUtil(currentPage, count,rowCount,pageCount,"main.do");
+				map.put("start", page.getStartCount());
+				map.put("end", page.getEndCount());
+				
+				mapJson.put("result", "success");
+				mapJson.put("rowCount", rowCount);
+				mapJson.put("currentPage", currentPage);
+				mapJson.put("count", count);
+				mapJson.put("list", list);
+				mapJson.put("search", search);
+				if(log.isDebugEnabled()) {
+					log.debug("<<list>> : " + list);
+				}
+				
+				return mapJson;
+			}
 }

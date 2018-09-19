@@ -181,5 +181,34 @@
 		</if>
 		member_auth DESC
 	</select>
+	
+	<select id="selectSearch_auto" parameterType="map" resultType="AccomListCommand">
+	SELECT a.*, rownum FROM
+		(SELECT 
+			acc_name,acc_address1 
+		FROM accom 
+		<where>
+			<if test="search != ''">
+			 	 acc_address1 || acc_name LIKE '%' || #{search} || '%'
+			</if>
+		</where>
+		)a
+		       		 <![CDATA[
+       		 WHERE rownum >= 1 AND rownum <= 5
+       		 	]]>
+	</select>	
+	
+		<select id="selectSearch_count" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM(
+		SELECT 
+			acc_name,acc_address1 
+		FROM accom 
+		<where>
+			<if test="search != ''">
+			 	 acc_address1 || acc_name LIKE '%' || #{search} || '%'
+			</if>
+		</where>
+		)
+	</select>	
 
 </mapper>

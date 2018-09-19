@@ -18,6 +18,7 @@ public interface AccomListMapper {
 	public int selectAccomTotallistCount(Map<String,Object> map);
 	@Select("SELECT i.im_cover,i.im_cover_name,i.im_ac_num,i.im_num FROM  accom_image i,(select max(im_ro_num)im_ro_num ,im_ac_num FROM accom_image group by im_ac_num) z  WHERE z.im_ro_num = i.im_ro_num and i.im_ac_num=#{im_ac_num} and z.im_ac_num = i.im_ac_num")
 	public ImageCommand selectImageView(Integer im_ac_num);
-	
+	public List<AccomListCommand> selectSearch_auto(Map<String, Object> map);
+	public int selectSearch_count(Map<String,Object> map);
 }
 
