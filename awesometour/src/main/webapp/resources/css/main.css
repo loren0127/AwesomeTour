@@ -29,7 +29,7 @@
 
 /*메인 페이지 검색폼*/
 #form_row{
-	background-color: rgb(255,255,255,.2) !important;
+	background-color: rgb(255,255,255,.3) !important;
     padding: 20px !important;
     border-radius: 2px !important;
 }
@@ -151,11 +151,11 @@ input:disabled + .radio_label:before {
 
 /*위치 검색 버튼*/
 #search{
-	color: #fff;
+	color: #0F1721;
 }
 
 #search:hover{
-	color: #0F1721;
-	background-color: #ffc107;
-    border-color: #ffc107;
+	color: #fff;
+	background-color: #0F1721;
+    border-color: #0F1721;
 }
