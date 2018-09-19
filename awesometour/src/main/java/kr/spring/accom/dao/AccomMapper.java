@@ -25,7 +25,7 @@ public interface AccomMapper {
 	public List<ReviewCommand> selectReviewList();
 	
 	//인기 모임 불러오기
-	@Select("SELECT * FROM (SELECT gr.*, rownum rnum FROM (SELECT g_num, g_name, g_address2, g_hobby, g_reg_date FROM group_table ORDER BY g_reg_date DESC)gr) WHERE rnum >=1 AND rnum <= 4")
+	@Select("SELECT * FROM (SELECT gr.*, rownum rnum FROM (SELECT g_num, g_name, g_address2, g_hobby, g_reg_date, g_isprivate, g_issearch FROM group_table WHERE g_isprivate = 0 AND g_issearch = 0 ORDER BY g_reg_date DESC)gr) WHERE rnum >=1 AND rnum <= 4")
 	public List<GroupCommand> selectGroupList();
 	
 	//모임 이미지 불러오기 --> 그룹 뷰 사용
