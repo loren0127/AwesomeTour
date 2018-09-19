@@ -11,7 +11,11 @@
 	margin : 50px 30px;
 }
 
-
+  input[type="submit"]:hover{
+		color: #212529;
+		background-color: #fff;
+	    border: 1px solid #007bff; 
+	  }
  @media ( max-width:766px ) {
  
  	.sticky-top{
@@ -67,7 +71,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 <div>
  <c:if test="${count>0}" > 
 <div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
-  <i class="fa fa-info-circle" style="color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
+  <i class="fa fa-info-circle" style="margin-top: 2px;color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
 </div>
 </c:if>
 </div>

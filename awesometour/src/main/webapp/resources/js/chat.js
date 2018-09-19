@@ -7,7 +7,7 @@ function connect() {
 	var request = new Request();
 	var chat_all_num = request.getParameter("chat_all_num");
 	
-	webSocket = new WebSocket("ws://localhost:8080/awesometour/chat-ws.do");
+	webSocket = new WebSocket("ws://192.168.10.41:8080/awesometour/chat-ws.do");
 	//주석
 	webSocket.onopen = function(event) {
 		var message = chat_all_num + '|connect';

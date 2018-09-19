@@ -19,7 +19,7 @@
 			<div class="col-lg-4 col-md-4 col-xs-4">
 				<ul class="list-inline mb-2">
 					<li><i class="fa fa-phone"></i>&nbsp;전화&nbsp;
-						<h6>+28 (2) 6959 2150</h6></li>
+						<h6>+82 2 6959 2150</h6></li>
 
 					<li><i class="fa fa-flag"></i>&nbsp;주소&nbsp;
 						<h6>서울 중구 남대문로 120 대일빌딩 2F A Class</h6></li>

@@ -8,6 +8,11 @@
 
 <style>
 
+input[type="submit"]:hover{
+		color: #212529;
+		background-color: #fff;
+	    border: 1px solid #007bff; 
+	  }
 #noSeePrice{
  	display:none;
  	}
@@ -18,6 +23,7 @@
  	width:100%!important}
  	input[type="email"]{
  	width:100%!important}
+ 	
  	
  	.sticky-top{
  	display:none;
@@ -313,10 +319,10 @@ $(function(){
 <br>
  <c:if test="${count>0}" > 
 <div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "  id="cntRv" >
-  <i class="fa fa-info-circle" style="color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
-</div>
+  <i class="fa fa-info-circle" style="margin-top: 2px;color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
+</div><br>
 </c:if>
-  <div style="  margin-bottom: 10px;   font-size: 15pt;  width: 80%;" class="validateTips ">               
+  <div style="border-color: #ffea0a;  margin-bottom: 10px;   font-size: 15pt;  width: 80%;" class="validateTips ">               
   </div>
 
 <div style="width:100%" id="noSeePrice">
@@ -391,7 +397,8 @@ $(function(){
 	    <form:option value="" disabled="disabled" selected="selected" >-----선택해주세요</form:option>
 		<form:option value="신한 123">신한 123-123-12312</form:option>
 		<form:option value="우리 123">우리 123-123-12312</form:option>
-	</form:select>		 
+	</form:select>	
+	<br>	 
  	 	<form:input class="form-control"   path="pm_depositor"  placeholder="입금주" style="width:60%"/><br>
  	
 

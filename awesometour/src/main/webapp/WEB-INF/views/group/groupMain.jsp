@@ -6,6 +6,9 @@
 <style>
 .ui-dialog { z-index: 1040 !important ;}
 
+#move-2 ,#move-3, #move-4{
+border:1px solid #CCCCCC
+}
 </style>
 <script src="../resources/js/jquery.form.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/group.js"></script>
@@ -124,7 +127,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 </script>
 <div class="container section-sepa1" style="padding-Top:100px;padding-bottom: 25px;">
 <c:if test="${!empty user_email }">
-	<button class="btn pull-right" id="groupAdd">그룹 생성</button>
+	<button class="btn btn-default hotelLink_main pull-right" id="groupAdd">그룹 생성</button>
 </c:if>
 	<h2 > 모임</h2>
 </div>
@@ -250,7 +253,7 @@ $( "#groupAdd" ).button().on( "click", function() {
       
        <label for="g_explain"><b>소개</b></label>
       <form:textarea path="g_explain" class="text ui-widget-content ui-corner-all"  rows="8" cols="50"  /><br>
-<a href="#" class="btn btn-info" id="move-2" role="button" id="move-2">다음</a>
+<a href="#" class="btn btn-light hotelLink_main"  id="move-2" role="button" id="move-2">다음</a>
   </div>
   
       <!-------------------------- 탭 2 ---------------------->
@@ -262,7 +265,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 	  <input type="button" class="btn button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="display:inline"><br>
       <form:input  path ="g_address2" id="g_address2" class="text ui-widget-content ui-corner-all" placeholder="나머지 주소 입력"/><br>
      	
-     <a href="#" class="btn btn-info" id="move-3" role="button">다음</a>
+     <a href="#" class="btn btn-light hotelLink_main"  id="move-3" role="button">다음</a>
    
   </div> 
   
@@ -279,7 +282,7 @@ $( "#groupAdd" ).button().on( "click", function() {
       
 	
 		
-		<a href="#" class="btn btn-info" role="button" id="move-4">다음</a>
+		<a href="#" class="btn btn-light hotelLink_main" role="button" id="move-4">다음</a>
 		
   </div>
   <!-------------------------- 탭 3-------------------- -->

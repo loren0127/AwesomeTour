@@ -9,6 +9,9 @@ $(document).ready(function(){
     if ((day+"").length < 2) {//일이 한자리 수인 경우 앞에 0을 붙여주기 위해
         day = "0" + day;
     }
+    if ((month+"").length < 2) {//일이 한자리 수인 경우 앞에 0을 붙여주기 위해
+    	month = "0" + month;
+    }
  
     var getToday = year+"/"+month+"/"+(day+1);
     var getNextday = year+"/"+month+"/"+(day+2);

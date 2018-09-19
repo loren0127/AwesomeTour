@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<style>
+#list_nav li{
+	padding:10px 3px; 
+}
+</style>
+
+<script>
+$(function(){
+	$("#rv").hide();
+	$("#rv_btn").click(function(){
+		$("#rv").animate({
+			    left: "+=50",
+			    height: "toggle"
+			});
+	});
+});
+</script>
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white" id="mainNav">
 	<div class="container">
@@ -11,11 +30,11 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					href="#" id="rv_btn">예약</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger" id="opener1" style="cursor:pointer;" data-tooltip-text="지도에서 직접 검색하세요.">지도</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="${pageContext.request.contextPath}/group/groupMain.do">모임</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#">추천</a></li>
 				<c:if test="${empty user_email}">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="${pageContext.request.contextPath}/member/login.do">로그인</a></li><!-- 로그아웃 -->
@@ -35,6 +54,43 @@
 		</div>
 	</div>
 </nav>
+
+<!-- 성원이가 만든 예약 바 시작 -->
+<nav class="sticky-top navbar-dark navbar-expand-sm justify-content-center">
+	<ul class="nav navbar-nav navbar-dark bg-dark justify-content-center"
+		id="list_nav">
+		<li class="nav-item"><input type="text"
+			style="margin-top: 15px; width: 100%; height: 40px;" id="je_search"
+			name="search" placeholder="구 또는 이름을 검색하세요" value="${map.search}">
+		</li>
+		<li class="nav-item"><input type="hidden" name="searchtype"
+			value="${map.searchtype}"> <input type="text" name="check_in"
+			class="date_in" value="${map.check_in}"
+			style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;"
+			autocomplete="off"></li>
+		<li class="nav-item"><input type="text" name="check_out"
+			class="date_out" value="${map.check_out}"
+			style="height: 40px; width: 150px; margin-top: 15px;"
+			autocomplete="off"></li>
+		<li class="nav-item" id="plus_minus"><input type="hidden"
+			name="people_count" id="people_count" value="1">
+			<button id="people" name="people"
+				style="height: 40px; width: 150px; position: absolute; background-color: white; border: 1px solid #A9A9A9; position: absolute; z-index: 0; margin-top: 15px;">
+				<span id="peo_sum_btn">${map.people_count}</span>명
+			</button> <input type="button" name="minus" id="people_minus" value="-"
+			class="form-control"
+			style="border: 0;; font-size: 20px; width: 40px; position: relative; margin-top: 16px; marging-left: 1px">
+			<input type="button" name="people_plus" class="form-control"
+			id="people_plus" value="+"
+			style="border: 0; font-size: 20px; position: relative; z-index: 1; width: 40px; margin-left: 68px; margin-top: 16px;">
+		</li>
+		<li class="nav-item" id="search_btn">
+			<button type="submit" class="hotelLink_main"
+				style="background-color: white; border: 1px; height: 40px; width: 100px; margin-top: 15px;">검색</button>
+		</li>
+	</ul>
+</nav>
+<!-- 성원이가 만든 예약 바 끝 -->
 
 <!-- Map -->
 <div class="container">

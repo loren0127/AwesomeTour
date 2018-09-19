@@ -76,7 +76,7 @@
 		<div style="float: right; width: 10%;" id="theme_id">
 			<b style="color: #d900ed;">${privateDetail.acc_theme}</b>테마
 		</div>
-		<div style="float:left;width:100%;"><b style="font-size:20px;color: #d900ed;">&#92;<fmt:formatNumber>${privateDetail.ro_price}</fmt:formatNumber></b></div>
+		<div style="float:left;width:100%;"><b style="font-size:20px;color: #d900ed;">₩${privateDetail.ro_price}</b></div>
 		<br> <br><br><br>
 		<hr size="1" noshade>
 	 	<div style="padding-left: 30%;">
@@ -175,7 +175,7 @@
 			<div class="comment-list">
 				<div class="comment-form">
 					<h4>Review&nbsp;&nbsp;<span id="reviewCount"></span></h4>
-					<div class="starRev" style="float:left;">
+					<div class="starRev">
 						<span class="starR1 plus">별1_왼쪽</span> <span class="starR2">별1_오른쪽</span>
 						<span class="starR1">별2_왼쪽</span> <span class="starR2">별2_오른쪽</span>
 						<span class="starR1">별3_왼쪽</span> <span class="starR2">별3_오른쪽</span>

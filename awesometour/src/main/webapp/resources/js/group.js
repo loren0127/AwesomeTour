@@ -33,20 +33,30 @@
 	      maxWidth: 600,
 	      modal: true,
 	     // position :{my: "10 10", at: "center", of: window},
-	      buttons: {
-	        "그룹 생성":function() {
+	      buttons: [
+	    	  
+	    	  
+	      {
+	    	text:"그룹 생성",
+	        "class":"hotelLink_main",
+	        click:function() {
+	        	
 	        	$('#groupInsert').submit();
-	        },
-	        "취소": function() {
-	          dialog.dialog( "close" );
-	        },
+	        }
+	      },
+	     
+	      {
+		    	text:"취소",
+		        "class":"hotelLink_main",
+		        click:function() {
+		        	
+		        	dialog.dialog( "close" );
+		        }
+	      }  
 	      
-	      },  
-	      
-	      close: function() {
-	        form[ 0 ].reset();
-	      }
-	    });
+ ]
+		  
+	  })
 	 
 	  
 	  

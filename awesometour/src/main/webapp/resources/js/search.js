@@ -47,6 +47,7 @@ $(document).ready(function() {
 		var date = $('.date_out').val();
 		var search = $('#address').val();
 		if(date == ''){
+			alert(date);
 			alert('체크인 날짜와 체크아웃 날짜를 선택하세요.');
 			return false;
 		}
