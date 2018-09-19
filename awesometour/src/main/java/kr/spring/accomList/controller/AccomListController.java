@@ -30,7 +30,7 @@ public class AccomListController {
 	AccomListService accomListService;
 	int pageNum = 1;
 	int rowCount = 5;
-	int pageCount = 0;
+	int pageCount = 2;
 	
 		//========게시판 글 목록=========//
 		@RequestMapping(value="accomList/accomList.do",method=RequestMethod.GET)
@@ -87,13 +87,12 @@ public class AccomListController {
 			if(log.isDebugEnabled()) {
 				log.debug("<<pageCount>> : " + pageCount);
 			}
-			
-			if(count%rowCount == 0) {			
-				pageCount = count/rowCount;
-			}else {
-				pageCount = count/rowCount +1; 
-			}
-			
+				
+				if(count%rowCount == 0) {			
+					pageCount = count/rowCount;
+				}else {
+					pageCount = count/rowCount +1; 
+				}
 			PagingUtil page = new PagingUtil(currentPage, count,rowCount,pageCount,"accomList.do");
 			
 			map.put("start", page.getStartCount());
@@ -162,7 +161,4 @@ public class AccomListController {
 
 			return mav;
 		}
-		
-		
-		
 }
