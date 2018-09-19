@@ -3627,9 +3627,9 @@ h1, h2, h3, h4, h5, h6 {
 	     height:500px;
      }
   }
-  @media screen and (max-width: 999px){
+  @media screen and (max-width: 400px){
      .starRev{
-	     padding-left:30%;
+	     padding-left:25%;
      }
   }
   @media screen and (min-width: 1000px){
@@ -3649,7 +3649,22 @@ h1, h2, h3, h4, h5, h6 {
 	     padding-left: 8%;
      }
   }
+   @media screen and (max-width: 999px){
+     #theme_id{
+     	 display:none;
+     }
+  }
   
+  @media screen and (max-width: 999px){
+     #re_second{
+     	 padding-left:39%
+     }
+  }
+  @media screen and (min-width: 1000px){
+     #re_second{
+	     padding-left:47%
+     }
+  }
 
 /*---------------------------------------------------- */
 

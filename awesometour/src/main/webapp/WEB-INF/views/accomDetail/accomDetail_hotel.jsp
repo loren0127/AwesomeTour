@@ -111,7 +111,7 @@
 			</c:if>
 		</div>
 		<div style="float: left; width: 90%;">${hotelDetail.acc_address1}<a href="#detailMap" style="font-size:12px;"><b>자세한 주소</b></a></div>
-		<div style="float: right; width: 10%;">
+		<div style="float: right; width: 10%;" id="theme_id">
 			<b style="color: #d900ed;">${hotelDetail.acc_theme}</b>테마
 		</div>
 		<br> <br><br><br>
@@ -274,7 +274,7 @@
 								<span class="letter-count">300/300</span>
 							</div>
 							<br>
-							<div id="re_second" style="float: left;padding-left:47%;">
+							<div id="re_second" style="float: left;">
 								<input type="submit" class="btn-reply text-uppercase"
 									value="click">
 							</div>

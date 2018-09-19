@@ -73,7 +73,7 @@
 		<h3 style="float: left;width:90%;">${privateDetail.acc_name}</h3>
 		<div style="float: right; width: 10%;font-size:20px;"><span style="padding-right:10%;"><b><i class="fa fa-heart"></i></b>&nbsp;${privateDetail.ag_grade}점</span></div>
 		<div style="float: left; width: 90%;">${privateDetail.acc_address1}<a href="#detailMap" style="font-size:12px;"><b>자세한 주소</b></a></div>
-		<div style="float: right; width: 10%;">
+		<div style="float: right; width: 10%;" id="theme_id">
 			<b style="color: #d900ed;">${privateDetail.acc_theme}</b>테마
 		</div>
 		<div style="float:left;width:100%;"><b style="font-size:20px;color: #d900ed;">&#92;<fmt:formatNumber>${privateDetail.ro_price}</fmt:formatNumber></b></div>
@@ -204,7 +204,7 @@
 								<span class="letter-count">300/300</span>
 							</div>
 							<br>
-							<div id="re_second" style="float: left; padding-left:47%;">
+							<div id="re_second" style="float: left;">
 								<input type="submit" class="btn-reply text-uppercase"
 									value="click">
 							</div>
