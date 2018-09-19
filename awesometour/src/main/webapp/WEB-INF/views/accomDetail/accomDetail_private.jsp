@@ -182,7 +182,7 @@
 						<span class="starR1">별4_왼쪽</span> <span class="starR2">별4_오른쪽</span>
 						<span class="starR1">별5_왼쪽</span> <span class="starR2">별5_오른쪽</span>
 					</div>
-					<span class="starCount" style="float: right; padding-right: 38%;"></span> <br>
+					<span class="starCount" style="float: right; padding-right: 44%;"></span> <br>
 					<br> <br>
 					<form id="re_form">
 						<input type="hidden" name="im_ac_num" value="${privateDetail.acc_num}" id="im_ac_num">
