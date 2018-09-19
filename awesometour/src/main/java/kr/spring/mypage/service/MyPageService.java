@@ -26,5 +26,15 @@ public interface MyPageService {
 	
 	public ReservationCommand selectReservationDetail(Map<String, Object> map);
 	
+	
+	
+	public void deleteHolding(Map<String, Object> map);
+	
+	public void updateHolding(Map<String, Object> map);
+	
+	
+	
 	public void insertComplainSend(MyPageCommand command);
+	
+	public int selectComplainSelectCount(Map<String, Object> map);
 }

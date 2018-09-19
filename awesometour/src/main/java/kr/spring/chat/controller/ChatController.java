@@ -110,6 +110,10 @@ public class ChatController {
 			receiveMessageList = Collections.emptyList();
 		}
 		// My receive message list end
+		
+		//Friend email select(Picture)
+		//String friend_email = chatService.selectChatMemberUserEmail(map);
+		//
 
 		ModelAndView mav = new ModelAndView();
 

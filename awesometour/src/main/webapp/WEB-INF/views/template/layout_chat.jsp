@@ -3,16 +3,19 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <link rel="shortcut icon" href="../resources/images/favicon.ico">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/chat.css" style="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/chatEmailCheck.js"></script>
 <style>
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
 @media all and (max-width: 768px) {
     #hide_nav {
     display:inline-flex;
@@ -125,7 +128,7 @@ $(document).ready(function() {
 											<div class="modal" id="myModal">
 												<div class="modal-dialog">
 													<div class="modal-content">
-
+													
 														<!-- Modal Header -->
 														<div class="modal-header">
 															<h4 class="modal-title">채팅 신청 쪽지</h4>
@@ -200,8 +203,8 @@ $(document).ready(function() {
 									<div class="chat_list">
 										<div class="chat_people">
 											<div class="chat_img">
-												<img src="https://ptetutorials.com/images/user-profile.png"
-													alt="sunil">
+													<img class="rounded-circle" src="${pageContext.request.contextPath}/group/imageView.do?g_num=${chatMemberCommand.group_num}">
+												<!-- <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> -->
 											</div>
 											<div class="chat_ib">
 												<h5>
@@ -254,7 +257,13 @@ $(document).ready(function() {
 									<div class="chat_list">
 										<div class="chat_people">
 											<div class="chat_img">
-												<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+												<c:if test="${not empty sendMessageCommand.message_sender}">
+													<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${sendMessageCommand.message_sender}">
+												</c:if>
+												<c:if test="${empty sendMessageCommand.message_sender}">
+													<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+												</c:if>
+												<!--  -->
 											</div>
 											<div class="chat_ib">
 												<h5>
@@ -295,7 +304,12 @@ $(document).ready(function() {
 														<span class="badge badge-pill badge-warning" style="margin-bottom: -15; position: relative;">N</span>
 													</c:if>
 													
-												<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+													<c:if test="${not empty receiveMessageCommand.message_receiver}">
+														<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${receiveMessageCommand.message_receiver}">
+													</c:if>
+													<c:if test="${empty receiveMessageCommand.message_receiver}">
+														<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+													</c:if>
 											</div>
 											<div class="chat_ib">
 												<h5>

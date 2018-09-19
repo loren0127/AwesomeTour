@@ -38,7 +38,7 @@
 
 <body>
 	<tiles:insertAttribute name="header"/>
-	<div style="padding-top: 100px;"></div>
+	<div style="padding-top: 148px;"></div>
 	
 	<!-- Chat button start -->
 	<div style="position: fixed; z-index: 20000; bottom: 10px; right: 5px;">
@@ -48,7 +48,7 @@
 	</div>
 	<!-- Chat button end -->
 
-	<div class="wrapper">
+	<div class="wrapper" style="margin-top:-50px;">
 		<!-- Sidebar  -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
@@ -57,7 +57,7 @@
 			
 			<ul class="list-unstyled components">
 				<p style="text-align: center;">
-					<img src="${pageContext.request.contextPath}/member/imageView.do?member_email=${user_email}" style="width: 60%;">
+					<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${user_email}" style="width: 60%;">
 				</p>
 					
 				<ul class="nav nav-tabs" role="tablist">

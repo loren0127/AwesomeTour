@@ -71,5 +71,7 @@ public interface MyPageMapper {
 	@Insert("INSERT INTO member_complain(member_complain_num, member_complain_accom_num, member_complain_title, member_complain_content, member_complain_reg_date, member_email, member_rv_end_date, member_rv_num) VALUES(member_complain_seq.NEXTVAL, #{member_complain_accom_num}, #{member_complain_title}, #{member_complain_content}, SYSDATE, #{member_email}, #{member_rv_end_date}, #{member_rv_num})")
 	public void insertComplainSend(MyPageCommand command);
 	
-	
+	//Complain select(Complain duplicated status check)
+	@Select("SELECT COUNT(*) FROM member_complain WHERE member_rv_num=#{rv_num} AND member_complain_accom_num=#{acc_num} AND member_email=#{user_email}")
+	public int selectComplainSelectCount(Map<String, Object> map);
 }

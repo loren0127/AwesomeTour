@@ -3,6 +3,7 @@ package kr.spring.chat.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -37,6 +38,9 @@ public interface ChatMapper {
 	@Select("SELECT * FROM  chat_member INNER JOIN chat_all ON chat_all.chat_all_num=chat_member.chat_all_num WHERE member_email=#{user_email} AND chat_member.chat_all_num=#{chat_all_num}")
 	public ChatAllCommand SelectChatAllJoin(Map<String, Object> map);
 	
+	@Select("SELECT member_email FROM chat_member WHERE chat_all_num=#{chat_all_num} AND member_email!=#{user_email}")
+	public String selectChatMemberUserEmail(Map<String, Object> map);
+	
 	//Chat overlap
 	@Select("SELECT chat_member_status FROM chat_member WHERE member_email=#{user_email} AND chat_all_num=#{chat_all_num}")
 	public int selectChatMemberCheckedJoin(Map<String, Object> map);
@@ -64,4 +68,8 @@ public interface ChatMapper {
 	
 	@Select("SELECT COUNT(*) FROM chat_all, chat_member WHERE chat_all.chat_all_num = chat_member.chat_all_num AND chat_all.group_num=-1 AND (member_email=#{message_sender} OR member_email=#{message_receiver})")
 	public int selectChatOverlapChecked(Map<String, Object> map);
+	
+	//Group chat delete need group_num / Friend chat need group_num = -1
+	@Delete("DELETE chat_member WHERE group_num=#{group_num} AND member_email=#{user_email}")
+	public void deleteChatMember(Map<String, Object> map);
 }

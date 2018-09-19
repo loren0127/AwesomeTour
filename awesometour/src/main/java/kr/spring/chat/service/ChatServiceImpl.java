@@ -98,4 +98,14 @@ public class ChatServiceImpl implements ChatService {
 	public int selectChatOverlapChecked(Map<String, Object> map) {
 		return chatMapper.selectChatOverlapChecked(map);
 	}
+	
+	@Override
+	public void deleteChatMember(Map<String, Object> map) {
+		chatMapper.deleteChatMember(map);
+	}
+	
+	//User Email select
+	public String selectChatMemberUserEmail(Map<String, Object> map) {
+		return chatMapper.selectChatMemberUserEmail(map);
+	}
 }

@@ -34,6 +34,9 @@ public interface ChatService {
 	//Chat message log select
 	public List<ChatAllTalkCommand> selectChatAallTalkMessageLog(int chat_all_num);
 	
+	//User Email select
+	public String selectChatMemberUserEmail(Map<String, Object> map);
+	
 	public void updateChatAllJoinChange(Map<String, Object> map);
 	
 	public void insertChatAllGroup(ChatAllCommand command);
@@ -43,4 +46,6 @@ public interface ChatService {
 	public int selectChatAllNum(String chat_all_title);
 	
 	public int selectChatOverlapChecked(Map<String, Object> map);
+	
+	public void deleteChatMember(Map<String, Object> map);
 }

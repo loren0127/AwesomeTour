@@ -24,7 +24,7 @@
 						<c:if test="${!(chatAllTalkCommand.member_email eq user_email)}">
 							<div class="outgoing_msg">
 								<div class="incoming_msg_img">
-									<img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+									<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${chatAllTalkCommand.member_email}">
 								</div>
 								 ${chatAllTalkCommand.member_email}
 								<div class="received_msg">
@@ -43,7 +43,7 @@
 				<div class="input_msg_write">
 					<input type="text" class="write_msg" placeholder="Type a message" id="message" style="padding-right:55px;" disabled>
 					<button class="msg_send_btn" type="button" id="sendBtn" style="margin-right:15px;">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+						<i class="fa fa-paper-plane-o" aria-hidden="true">☞</i>
 					</button>
 				</div>
 			</div>

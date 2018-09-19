@@ -79,7 +79,22 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	@Override
+	public void deleteHolding(Map<String, Object> map) {
+		mypageMapper.deleteHolding(map);
+	}
+	
+	@Override
+	public void updateHolding(Map<String, Object> map) {
+		mypageMapper.updateHolding(map);
+	}
+	
+	@Override
 	public void insertComplainSend(MyPageCommand command) {
 		mypageMapper.insertComplainSend(command);
+	}
+	
+	@Override
+	public int selectComplainSelectCount(Map<String, Object> map) {
+		return mypageMapper.selectComplainSelectCount(map);
 	}
 }
