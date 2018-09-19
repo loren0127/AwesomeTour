@@ -48,11 +48,33 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	//Reservation -----
+	@Override
 	public int selectReservationRowCount(String user_email) {
 		return mypageMapper.selectReservationRowCount(user_email);
 	}
 	
+	@Override
 	public List<ReservationCommand> selectReservationList(Map<String, Object> map) {
 		return mypageMapper.selectReservationList(map);
+	}
+	
+	@Override
+	public List<ReservationCommand> selectReservationListOld(Map<String, Object> map) {
+		return mypageMapper.selectReservationListOld(map);
+	}
+	
+	@Override
+	public int selectReservationRowCountOld(String user_email) {
+		return mypageMapper.selectReservationRowCountOld(user_email);
+	}
+	
+	@Override
+	public int selectGradeCount(Integer acc_num) {
+		return mypageMapper.selectGradeCount(acc_num);
+	}
+	
+	@Override
+	public ReservationCommand selectReservationDetail(Map<String, Object> map) {
+		return mypageMapper.selectReservationDetail(map);
 	}
 }

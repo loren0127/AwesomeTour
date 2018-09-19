@@ -11,10 +11,20 @@
 							WHERE acc_host=#{user_email} ORDER BY a.acc_num)a) 
  			 <![CDATA[
  				WHERE rnum >= #{start} AND rnum <= #{end}
- 			]]>    
- 			
+ 			]]>
  	</select>
  	
+ 	
+ 	<select id="selectReservationDetail" parameterType="map" resultType="ReservationCommand">
+		SELECT DISTINCT * FROM (SELECT acc_num,acc_host,acc_name, acc_address1, acc_address2,acc_in, acc_out, acc_num anum FROM accom ) a 
+		JOIN (SELECT se_name,se_acc_num FROM accom_service ) s ON a.acc_num = s.se_acc_num 
+		JOIN (SELECT ro_num,ro_room_num,ro_acc_num, ro_sub,ro_price FROM accom_Room) o ON s.se_acc_num=o.ro_acc_num 
+		JOIN (SELECT ro_num, rv_num, member_email, rv_reg_date, rv_status, rv_money, rv_start_date, rv_end_date, rv_people FROM reservation) r ON o.ro_num=r.ro_num 
+		<if test="acc_grade_count>0">
+		JOIN (SELECT avg(ag_grade) ag_grade,ag_acc_num FROM accom_grade group by ag_acc_num) g on o.ro_acc_num=g.ag_acc_num 
+		</if>
+		WHERE a.acc_num=#{acc_num} AND o.ro_num=#{ro_num} AND r.member_email=#{user_email}
+	</select>
 </mapper>
 
 

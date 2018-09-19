@@ -30,9 +30,23 @@ public interface MyPageMapper {
 	
 	//Reservation --------------------
 	
-	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email}")
+	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email} AND SYSDATE < TO_DATE(rv_end_date)")
 	public int selectReservationRowCount(String user_email);
 	
-	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM reservation WHERE member_email=#{user_email})a) WHERE rnum >= #{start} AND rnum <= #{end} AND TO_DATE(rv_start_date, 'YYYY-MM-DD') BETWEEN SYSDATE AND ADD_MONTHS(SYSDATE, 3)")
+	@Select("SELECT a.acc_num, r.ro_num, acc_name, rv_start_date, rv_end_date, rv_people, rv_money FROM reservation r JOIN accom a ON r.acc_num=a.acc_num WHERE r.member_email=#{user_email} AND SYSDATE < TO_DATE(r.rv_end_date)")
 	public List<ReservationCommand> selectReservationList(Map<String, Object> map);
+	
+	@Select("SELECT COUNT(*) FROM reservation WHERE member_email=#{user_email} AND SYSDATE > TO_DATE(rv_end_date)")
+	public int selectReservationRowCountOld(String user_email);
+	
+	@Select("SELECT acc_name, rv_start_date, rv_end_date, rv_people, rv_money, ro_num FROM (SELECT rownum rnum, a.acc_name, r.rv_start_date, r.rv_end_date, r.rv_people, r.rv_money, r.ro_num FROM accom a, reservation r WHERE (a.acc_num=r.acc_num) AND (r.member_email=#{user_email}) AND SYSDATE > (TO_DATE(r.rv_end_date))) WHERE rnum >= #{start} AND rnum <= #{end}")
+	public List<ReservationCommand> selectReservationListOld(Map<String, Object> map);
+	
+	
+	//Grade counting(Reservation detail used SQL)
+	@Select("SELECT count(*) FROM  accom_grade WHERE ag_acc_num = #{acc_num}")
+	public int selectGradeCount(Integer acc_num);
+	
+	//XML mapping
+	public ReservationCommand selectReservationDetail(Map<String, Object> map);
 }

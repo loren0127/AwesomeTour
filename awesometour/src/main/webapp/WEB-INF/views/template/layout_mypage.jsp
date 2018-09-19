@@ -127,12 +127,11 @@
             
             $('#sidebarCollapse').on('click', function() {
             	if($('#sidebar').is('.active') === true) {
-            		$('#mypageBody').hide();
+            		/* $('#mypageBody').hide(); */
             	} else {
-            		$('#mypageBody').show();
+            		/* $('#mypageBody').show(); */
             	}
             });
-            
         });
     </script>
    </div>

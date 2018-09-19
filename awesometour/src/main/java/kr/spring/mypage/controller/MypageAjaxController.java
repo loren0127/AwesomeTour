@@ -28,8 +28,8 @@ public class MypageAjaxController {
 	@Resource
 	private MyPageService mypageService;
 	
-	int rowCount = 5;//媛쒖닔
-	int pageCount = 5;//�럹�씠吏�移댁슫�듃
+	int rowCount = 5;//揶쏆뮇�땾
+	int pageCount = 5;//占쎈읂占쎌뵠筌욑옙燁삳똻�뒲占쎈뱜
 	
 	@RequestMapping("/mypage/complainList_ajax.do")
 	@ResponseBody
@@ -39,10 +39,10 @@ public class MypageAjaxController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("user_email", user_email);
 		
-		//珥� 而댄뵆�젅�씤 媛쒖닔
+		//�룯占� �뚮똾逾놅옙�쟿占쎌뵥 揶쏆뮇�땾
 		int count = mypageService.selectRowCount(map);
 		
-		//start,end 援ы븯湲�
+		//start,end �뤃�뗫릭疫뀐옙
 		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, null);
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
@@ -51,7 +51,7 @@ public class MypageAjaxController {
 		if(count > 0) {
 			list = mypageService.selectMypageList(map);
 		}else {
-			//null�씠 �쟾�떖�릺吏� �븡寃� 鍮꾩썙�꽌 蹂대궡湲�
+			//null占쎌뵠 占쎌읈占쎈뼎占쎈┷筌욑옙 占쎈륫野껓옙 �뜮袁⑹뜖占쎄퐣 癰귣�沅→묾占�
 			list = Collections.emptyList();
 		}
 		
@@ -70,7 +70,7 @@ public class MypageAjaxController {
 		
 		int count = mypageService.selectReservationRowCount(user_email);
 		
-		PagingUtil pageUtil = new PagingUtil(currentPage, count, rowCount, pageCount, null);
+		PagingUtil pageUtil = new PagingUtil(currentPage, count, rowCount, pageCount, "mypageReservationList.do");
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		jsonMap.put("start", pageUtil.getStartCount());
 		jsonMap.put("end", pageUtil.getEndCount());
@@ -110,10 +110,10 @@ public class MypageAjaxController {
 		
 		
 		if(user_email == null) {
-			//로그인이 안되어 있는 경우
+			//濡쒓렇�씤�씠 �븞�릺�뼱 �엳�뒗 寃쎌슦
 			map.put("result", "logout");
 		}else{
-			//쪽지 전송
+			//履쎌� �쟾�넚
 			map.put("result", "success");
 			mypageService.insert_message1(mapper);
 		}

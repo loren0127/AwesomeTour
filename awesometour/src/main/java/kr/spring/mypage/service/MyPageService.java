@@ -17,4 +17,12 @@ public interface MyPageService {
 	public int selectReservationRowCount(String user_email);
 	
 	public List<ReservationCommand> selectReservationList(Map<String, Object> map);
+	
+	public List<ReservationCommand> selectReservationListOld(Map<String, Object> map);
+	
+	public int selectReservationRowCountOld(String user_email);
+	
+	public int selectGradeCount(Integer acc_num);
+	
+	public ReservationCommand selectReservationDetail(Map<String, Object> map);
 }

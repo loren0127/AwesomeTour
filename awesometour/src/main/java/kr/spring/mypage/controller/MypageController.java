@@ -1,5 +1,6 @@
 package kr.spring.mypage.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +20,23 @@ import kr.spring.member.domain.MemberCommand;
 import kr.spring.member.service.MemberService;
 import kr.spring.mypage.domain.MyPageCommand;
 import kr.spring.mypage.service.MyPageService;
+import kr.spring.reservation.domain.ReservationCommand;
+import kr.spring.reservation.service.ReservationService;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class MypageController {
+	private int rowCount = 5;
+	private int pageCount = 10;
 	
 	@Resource
 	private MemberService memberService;
 	
 	@Resource
 	private MyPageService mypageService;
+	
+	@Resource
+	private ReservationService reservationService;
 	
 	@RequestMapping(value="/mypage/mypageComplainList.do")
 	public String mypageComplainList(HttpSession session,Model model) {
@@ -78,10 +87,52 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage/mypageReservationList.do", method=RequestMethod.GET)
-	public ModelAndView mypageReservationList() {
+	public ModelAndView mypageReservationList(HttpSession session, @RequestParam(value="pageNum",defaultValue="1")int currentPage) {
+		String user_email = (String)session.getAttribute("user_email");
+		int count = mypageService.selectReservationRowCount(user_email);
+		int countOld = mypageService.selectReservationRowCountOld(user_email);
+		System.out.println("count :: " + count + " / countOld :: " + countOld);
+		PagingUtil pageUtil = new PagingUtil(currentPage, countOld, rowCount, pageCount, "mypageReservationList.do");
+		
+		Map<String, Object> reservationMap = new HashMap<String, Object>();
+		reservationMap.put("user_email", user_email);
+		reservationMap.put("start", pageUtil.getStartCount());
+		reservationMap.put("end", pageUtil.getEndCount());
+		List<ReservationCommand> reservationList = null;
+		ModelAndView mav = new ModelAndView();
+		if(count > 0) {
+			reservationList = mypageService.selectReservationList(reservationMap);
+			mav.addObject("reservationList", reservationList);
+			reservationList = mypageService.selectReservationListOld(reservationMap);
+			mav.addObject("reservationListOld", reservationList);
+		} else {
+			reservationList = Collections.emptyList();
+		}
+		
+		System.out.println(reservationList.isEmpty());
+		mav.setViewName("mypageReservationList");
+		mav.addObject("countOld", countOld);
+		mav.addObject("count", count);
+		mav.addObject("pagingHtml", pageUtil.getPagingHtml());
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage/mypageReservationDetail.do")
+	public ModelAndView mypageReservationDetail(HttpSession session, @RequestParam("acc_num")int acc_num, @RequestParam("ro_num")int ro_num) {
+		int acc_grade_count = mypageService.selectGradeCount(acc_num);
+		
+		String user_email = (String)session.getAttribute("user_email");
+		Map<String, Object> reservationAccMap = new HashMap<String, Object>();
+		reservationAccMap.put("acc_grade_count", acc_grade_count);
+		reservationAccMap.put("user_email", user_email);
+		reservationAccMap.put("acc_num", acc_num);
+		reservationAccMap.put("ro_num", ro_num);
+		ReservationCommand reservationDetail = mypageService.selectReservationDetail(reservationAccMap);
+		System.out.println("rv :: " + reservationDetail);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("mypageReservationList");
+		mav.setViewName("mypageReservationDetail");
+		mav.addObject("rv", reservationDetail);
 		return mav;
 	}
 }
