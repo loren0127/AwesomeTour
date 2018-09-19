@@ -255,7 +255,7 @@
 
 	</select>
 	<select id="selectPrivateDetail" parameterType="Integer" resultType="privateDetailCommand">
-		SELECT * FROM (SELECT c.*,s.se_name 
+		SELECT r.*,ro.ro_price FROM(SELECT * FROM (SELECT c.*,s.se_name 
 		   FROM 
 		     (SELECT a.acc_num,a.acc_name,a.acc_address1,a.acc_theme,a.acc_in,a.acc_out,NVL(b.ag_grade,0) ag_grade,a.acc_host
 		         FROM accom a LEFT OUTER JOIN (
@@ -263,7 +263,8 @@
 		                  FROM accom_grade 
 		                  GROUP BY ag_acc_num)b 
 		             ON a.acc_num=b.ag_acc_num 
-		             WHERE acc_num=#{im_ac_num})c JOIN accom_service s ON c.acc_num=s.se_acc_num)g JOIN (SELECT member_content,member_email,member_nickname,member_reg_date FROM member_detail)f ON g.acc_host=f.member_email
+		             WHERE acc_num=#{im_ac_num})c JOIN accom_service s ON c.acc_num=s.se_acc_num)g JOIN (SELECT member_content,member_email,member_nickname,member_reg_date FROM member_detail)f ON g.acc_host=f.member_email)r
+                     JOIN accom_room ro ON r.acc_num=ro.ro_acc_num WHERE ro.ro_sub='p'
 	</select>
 	<select id="selectHotelRecommendationList" parameterType="map" resultType="hotelDetailCommand">
 	
@@ -299,11 +300,10 @@
 		    <![CDATA[
 			WHERE ro_room_count >= rv_room_count
 			 ]]>
-			)cr ON br.acc_num=cr.rv_acc_num WHERE br.ag_grade >= 4.0 ORDER BY br.ag_grade DESC)rw) 
+			)cr ON br.acc_num=cr.rv_acc_num WHERE br.ag_grade >= 4.0 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) ORDER BY br.ag_grade DESC)rw) 
 			 <![CDATA[
 		  	WHERE rnum >= 1 AND rnum <=4
 		  	 ]]>
-		  	 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) 
 	</select>
 	<select id="selectPrivateRecommendationList" parameterType="map" resultType="privateDetailCommand">
 	SELECT * FROM (SELECT rw.*,rownum rnum FROM (SELECT * FROM 
@@ -331,11 +331,11 @@
 		  ]]>
 			)a JOIN (SELECT ro_acc_num FROM accom_room WHERE ro_sub='p')b ON
 			a.rv_acc_num=b.ro_acc_num)cr 
-			ON br.acc_num=cr.rv_acc_num WHERE cr.rv_start_date is null AND br.ag_grade >= 4.0 ORDER BY br.ag_grade DESC)rw)
+			ON br.acc_num=cr.rv_acc_num WHERE cr.rv_start_date is null AND br.ag_grade >= 4.0 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) ORDER BY br.ag_grade DESC)rw)
 		  <![CDATA[
 		  	WHERE rnum >= 1 AND rnum <=4
 		  ]]>
-		  AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num})
+		  
 	</select>
 	<select id="selectHotelRvChecked" parameterType="map" resultType="hotelDetailCommand">
 		SELECT * FROM(SELECT rv_start_date,rv_end_date,rv_acc_num,ro_num as rv_ro_num
