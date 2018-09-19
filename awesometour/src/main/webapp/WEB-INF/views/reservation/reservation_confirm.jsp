@@ -12,9 +12,9 @@
 }
 
   input[type="submit"]:hover{
-		color: #212529;
+		color: #FEC019;
 		background-color: #fff;
-	    border: 1px solid #007bff; 
+	    border: 1px solid #FEC019; 
 	  }
  @media ( max-width:766px ) {
  
@@ -169,7 +169,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 </div>
 
 <div class="state" style="margin-bottom:30px">
-<input type="submit"  class="btn btn-primary" value="예약 요청">
+<input type="submit"  class="btn btn-warning" value="예약 요청">
 </div>
 </div>
 </form>

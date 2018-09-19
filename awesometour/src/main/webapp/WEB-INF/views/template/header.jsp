@@ -56,7 +56,7 @@ $(function(){
 </nav>
 
 <!-- 성원이가 만든 예약 바 시작 -->
-<nav class="sticky-top navbar-dark navbar-expand-sm justify-content-center">
+<%-- <nav class="sticky-top navbar-dark navbar-expand-sm justify-content-center">
 	<ul class="nav navbar-nav navbar-dark bg-dark justify-content-center"
 		id="list_nav">
 		<li class="nav-item"><input type="text"
@@ -89,7 +89,7 @@ $(function(){
 				style="background-color: white; border: 1px; height: 40px; width: 100px; margin-top: 15px;">검색</button>
 		</li>
 	</ul>
-</nav>
+</nav> --%>
 <!-- 성원이가 만든 예약 바 끝 -->
 
 <!-- Map -->

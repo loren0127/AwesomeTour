@@ -164,8 +164,7 @@
 								<span style="font-size: 18px; font-weight: bold;">${recommend.acc_name}</span><br>
 							</div>
 							<div>
-								<span style="font-size: 14px;"><fmt:formatNumber
-										value="${recommend.ro_price}" type="currency"></fmt:formatNumber>/박</span><br>
+								<span style="font-size: 14px;">₩${recommend.ro_price}/박</span><br>
 								<span style="font-size: 14px;">이용후기 <b>${recommend.review_count}</b>건
 								</span>
 							</div>

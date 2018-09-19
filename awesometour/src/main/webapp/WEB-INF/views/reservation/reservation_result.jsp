@@ -5,6 +5,13 @@
     
     
 <!DOCTYPE html>
+<style>
+.zzangna:hover{
+		color: #FEC019;
+		background-color: #fff;
+	    border: 1px solid #FEC019; 
+	  }
+</style>
 <script>
 history.pushState(null, null, location.href);
 window.onpopstate = function(event) {
@@ -159,8 +166,8 @@ $("#recGr").hide();
 	</div>
 
 <div id="recGr" style="margin:30px auto">
- <a class="btn btn-primary" href="../main/main.do">홈으로</a>
-<a class="btn btn-primary" href="../mypage/mypageMemberDetail.do">마이페이지</a> 
+	<a class="btn btn-warning zzangna" href="../main/main.do">홈으로</a>
+	<a class="btn btn-warning zzangna" href="../mypage/mypageMemberDetail.do">마이페이지</a> 
 </div>
 </div>
 </div>

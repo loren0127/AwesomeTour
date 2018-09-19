@@ -9,9 +9,9 @@
 <style>
 
 input[type="submit"]:hover{
-		color: #212529;
+		color: #FEC019;
 		background-color: #fff;
-	    border: 1px solid #007bff; 
+	    border: 1px solid #FEC019; 
 	  }
 #noSeePrice{
  	display:none;
@@ -420,7 +420,7 @@ $(function(){
 </div>
 <div class="state" style="    margin: 30px 0;">
 
-<input type="submit" class="btn btn-primary" value="결제 요청"  >
+<input type="submit" class="btn btn-warning" value="결제 요청"  >
 </div>
 </form:form>
 </div>
