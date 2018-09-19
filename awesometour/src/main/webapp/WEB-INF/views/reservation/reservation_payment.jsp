@@ -160,8 +160,8 @@ $(function(){
    
 
        setTimeout(function() {
-    	   $('html, body').animate(function(){tips.removeClass( "ui-state-highlight" )}, 400);
-      }, 3000 ); 
+	        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 ); 
     }
  
     function checkLength( o, n, min, max ) {
@@ -205,13 +205,12 @@ $(function(){
 
 	$('#payForm').submit(function(){
 		
-
+	
 
 	      if(!$('#agree').prop("checked")){
 				alert("환불 정책에 동의 해 주십시오.");
 				return false;
 				}
-				
       
       var valid = true;
       allFields.removeClass( "ui-state-error" );
@@ -256,13 +255,19 @@ $(function(){
       
       if ( valid ) {
     	
+  	  	$("#myModal").modal();
     	  return true;
+
       }
       
 		return false;
 
    	
 	});
+	
+	$( "#progressbar" ).progressbar({
+	      value: false
+	    });
 })
 
 </script>    
@@ -283,7 +288,7 @@ $(function(){
 </div>
 <hr  style="width:90%" noshade>
 인원수 : ${rv.rv_people }명<br>
-날짜 : <span id="check_in">${rv.rv_startdate }</span> ~<span id="check_out">${rv.rv_enddate}</span> <br>
+날짜 : <span id="check_in">${rv.rv_start_date }</span> ~<span id="check_out">${rv.rv_end_date}</span> <br>
 <hr  style="width:90%" noshade>
 <span id="money_sp"></span>원 x <span id="during_date"></span>박 = <span id="money_sum_sp"></span>원<br>
 수수료 (10%) = <span id="fee_sp"></span>원<br>
@@ -408,9 +413,26 @@ $(function(){
 </div>
 <div class="state" style="    margin: 30px 0;">
 
-<input type="submit" class="btn btn-primary" value="결제 요청">
+<input type="submit" class="btn btn-primary" value="결제 요청"  >
 </div>
 </form:form>
 </div>
 
 </div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          <p>처리 중 입니다 잠시만 기다려 주세요.</p>
+          <div id="progressbar"></div>
+        </div>
+       
+      </div>
+      
+    </div>
+  </div>

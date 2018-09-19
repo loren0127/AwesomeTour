@@ -301,7 +301,7 @@ $('.hobby').each(function(element, index){
 			<button class="btn" id="chat_in" style="  margin :15px 30px ; margin-right:12%; float:right;  width: 100px;    height: 40px;" onclick='window.open("${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=groupChatList", "Chat_page_popup", "width=1100, height=620");'>채팅 참가</button>
 	<div id="big_title" >
 			<B style="font-size:24pt">${group.g_name}</B><br>
-			<font color="gray">${group.g_reg_date}~${group.g_close_date}</font> 
+			<font color="gray" style="    padding-left: 3px;">${group.g_reg_date}~${group.g_close_date}</font> 
 	</div>
 		</div>	
 	</div>

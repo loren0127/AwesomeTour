@@ -186,6 +186,8 @@
 						alert('등록 완료 하였습니다!');
 						dialog.dialog( "close" );
 
+						$('#address').trigger('change');
+
 					}else{
 						alert('실패??');
 
@@ -226,6 +228,9 @@
 	     
 	     $("#move-3").click(function(){
 			$( "#tabs" ).tabs({ active: 2 });
+	     })
+	     $("#move-4").click(function(){
+			$( "#tabs" ).tabs({ active: 3 });
 	     })
 
 	     

@@ -159,6 +159,7 @@ $( "#groupAdd" ).button().on( "click", function() {
 							<option value="웰빙">웰빙</option>
 							<option value="글쓰기">글쓰기</option>
 							<option value="게임">게임</option>
+							<option value="예약전용">예약</option>
 					
 						</select>
 					</li>
@@ -228,17 +229,17 @@ $( "#groupAdd" ).button().on( "click", function() {
 <div   id="addDialog"  class="container" title="그룹 생성">
   <p class="validateTips"></p>
 
-<div id="tabs">
+<div id="tabs" style="height:500px">
   <ul>
     <li><a href="#tabs-1">1.이름 및 소개</a></li>
     <li><a href="#tabs-2">2. 위치</a></li>
-    <li><a href="#tabs-3">3.관심사 및 프로필 지정</a></li>
-    <li><a href="#tabs-4">4.초대</a></li>
+    <li><a href="#tabs-3">3.종료일 및 프로필 지정</a></li>
+    <li><a href="#tabs-4">4.관심사 및 초대장</a></li>
   </ul> 
   <form:form commandName="command"  id="groupInsert" >
     <!-------------------------- 탭 1 ---------------------->
   <div id="tabs-1">
-     <label for="g_name">그룹명</label>
+     <label for="g_name"><b>그룹명</b></label>
       <form:input path="g_name"  class="text ui-widget-content ui-corner-all"/>
 
       <input type=checkbox name="g_isPrivate"  value="1" class="" style="display:inline"/>
@@ -247,39 +248,47 @@ $( "#groupAdd" ).button().on( "click", function() {
       <label for="g_isPrivate" style="display:inline">검색에 안뜨게 하기</label>
     
       
-       <label for="g_explain">소개</label>
-      <form:textarea path="g_explain" class="text ui-widget-content ui-corner-all"  rows="10" cols="50"  /><br>
-<a href="#" class="btn" id="move-2">다음</a>
+       <label for="g_explain"><b>소개</b></label>
+      <form:textarea path="g_explain" class="text ui-widget-content ui-corner-all"  rows="8" cols="50"  /><br>
+<a href="#" class="btn btn-info" id="move-2" role="button" id="move-2">다음</a>
   </div>
   
       <!-------------------------- 탭 2 ---------------------->
   
   <div id="tabs-2">
-      <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-      <label for="g_address1">모임 위치</label>
-      <form:input  readonly="true"  path ="g_address1" id="g_address1" class="text ui-widget-content ui-corner-all" style="width:80%; display:inline" />
-	  <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="display:inline"><br>
+      <label for="g_address1"><b>모임 위치</b></label>
+      <div id="map" style="width:100%;height:200px;margin-top:10px;display:none"></div>
+      <form:input  readonly="true"  path ="g_address1" id="g_address1" class="text ui-widget-content ui-corner-all" style="width:75%; display:inline" />
+	  <input type="button" class="btn button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="display:inline"><br>
       <form:input  path ="g_address2" id="g_address2" class="text ui-widget-content ui-corner-all" placeholder="나머지 주소 입력"/><br>
      	
-     <a href="#" class="btn" id="move-3">다음</a>
+     <a href="#" class="btn btn-info" id="move-3" role="button">다음</a>
    
   </div> 
   
       <!-------------------------- 탭 3 -------------------- -->
   <div id="tabs-3">
-  	  <label for="g_close_date">마감일시</label>
+  	  <label for="g_close_date"><b>마감일시</b></label>
        <form:input type="date"  path="g_close_date" id="g_close_date" class="text ui-widget-content ui-corner-all"/>
       <br>
       
-       <label for="upload">사진 등록</label>
+       <label for="upload"><b>사진 등록</b></label>
        <img id="LoadImg" src="https://cdn.icon-icons.com/icons2/37/PNG/512/add_archive_application_4473.png" style="margin: 10px 0; height: 120px;" alt="이미지를 등록해주세요" onerror="this.style.display='none'">
        
         <form:input type="file" name="upload" path="upload"/><br>
-       <label for="g_close_date">취미(최대 3개까지 가능)
-       </label>
+      
 	
-		<div class="row">
- 
+		
+		<a href="#" class="btn btn-info" role="button" id="move-4">다음</a>
+		
+  </div>
+  <!-------------------------- 탭 3-------------------- -->
+  <div id="tabs-4">
+  
+  
+  <label for="g_close_date"><b>취미(최대 3개까지 가능)</b>
+       </label>
+  <div class="row">
       <div class="col-4">
      	 	<form:checkbox path="g_hobby"   onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="야외활등"/>야외활동<br>
 			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="기술"/>기술<br>
@@ -294,19 +303,17 @@ $( "#groupAdd" ).button().on( "click", function() {
 	 </div>
 	 
 	<div class="col-4">
-			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="건강과 웰빙"/>건강과 웰빙<br>
+			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="웰빙"/>웰빙<br>
 			<form:checkbox  path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="글쓰기"/>글쓰기<br>
 			<form:checkbox path="g_hobby" onSubmit="count_ck(this);" onClick="count_ck(this);" style="display:inline"  value="게임"/>게임<br>
      </div>
      
 		</div>
-  </div>
-  <!-------------------------- 탭 3-------------------- -->
-  <div id="tabs-4">
-  	 <label for="g_close_date">초대 하기</label>
+		<br><Br>
+  	 <label for="g_close_date"><b>초대 하기</b></label>
   	  <div id="inviteID" class="row"  >
   	  <div class="col-5" >
-  	 	 <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; ">
+  	 	 <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; cursor:pointer">
   	  		<div style="margin: 0 auto;color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/group/invite.do", "Chat_page_popup", "width=600, height=320");'><b>+</b></div>
   	 	 </div>
   	 </div>	   	  

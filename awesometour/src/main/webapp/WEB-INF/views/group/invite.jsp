@@ -32,8 +32,8 @@ $(function(){
 			success:function(data){ 
 				if(data.result=='EmailDuplicated'){
 					var append = '';
-					append += '<div class="row"><div class="col-9 memberId" data-email="'+email+'">'+email+'</div>';
-					append += '<div class="col-3"><button id="delete">삭제</button></div> <hr style="width:100%"></div>';
+					append += '<div class="row" style="width:95%"><div class="col-9 memberId" data-email="'+email+'"style="margin-left:20px;margin-top:10px;">'+email+'</div>';
+					append += '<div class="col-2" style="padding:0px;width:90%"><button id="delete" class="btn button">삭제</button></div></div> <hr style="width:100%">';
 					
 					
 					if($('div[data-email="'+email+'"]', opener.document).length>0){
@@ -95,12 +95,18 @@ $("#send").on('click',function(event){
 });
 </script>
 <body>
-<h2 style="text-align:center">멤버 닉네임 조회</h2>
-<input type="email" id="member"><button id="searchMember">찾기</button>
-<hr style="width:100%"> 
-<div id="memberList">
-
+<div class="rounded" style="border:1px solid silver; margin:5px"> 
+	<h2 style="text-align:center">멤버 닉네임 조회</h2>
+		<div style="text-align:center">
+		<input type="email" id="member" class="form-control" style="width:40%;display:inline;padding-top:3px;margin-right:5px"><button id="searchMember" class="btn button">찾기</button>
+		</div>
+	<hr style="width:100%"> 
+		<div id="memberList"style=" height:145px">
+		
+		</div>
+	<div  style="text-align:center; margin-bottom:20px" >
+	<button id="send" class="btn button">추가</button>
+	</div>
 </div>
-<button id="send">추가</button>
 </body>
 </html>

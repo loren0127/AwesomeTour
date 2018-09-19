@@ -14,10 +14,10 @@
 		FROM group_table
 		<where>
 		<if test='myGroup == "" || myGroup==0 '>
-		g_isSearch = 0
+		g_isSearch = 0  AND g_num != -1
 		</if>
 		<if test="myGroup == 1  ">
-		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})
+		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})  AND g_num != -1
 		</if>
 		<if test="hobby != '' ">
 		and g_hobby like '%' || #{hobby} || '%'
@@ -27,7 +27,7 @@
 		</if>
 		<if test="date != '' ">
 		and to_date(g_close_date,'yy/mm/dd') >=  to_date(#{date},'yy/mm/dd')
-		</if>)a)
+		</if>ORDER BY g_reg_date DESC)a)
 				<![CDATA[	 WHERE rnum >= #{start} AND rnum <= #{end} ]]>
 		
 		</where>
@@ -39,10 +39,10 @@
 		FROM group_table
 		<where>
 		<if test='myGroup == "" || myGroup==0 '>
-		g_isSearch = 0
+		g_isSearch = 0  AND g_num != -1
 		</if>
 		<if test="myGroup == 1  ">
-		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})
+		g_num in (SELECT group_num FROM chat_member m, chat_all a WHERE m.chat_all_num = a.chat_all_num AND m.member_email = #{user_email})  AND g_num != -1
 		</if>
 		<if test="hobby != '' ">
 		and g_hobby like '%' || #{hobby} || '%'

@@ -57,6 +57,13 @@ public class ReservationController {
 	private AdminService adminService;
 	@Resource
 	private AccomDetailService accomDetailService;
+	 
+	
+	//자바용 , 찍기
+	public static String toNumFormat(int num) {
+		  DecimalFormat df = new DecimalFormat("#,###");
+		  return df.format(num);
+		 }
 	
 	//예약 정보 확인
 	@RequestMapping("/reservation/confirm.do")
@@ -319,31 +326,38 @@ public class ReservationController {
 	      MimeMessageHelper messageHelper;
 		try {
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-	      String setfrom = "ghcks3916@gmail.com";         
+	      String setfrom = "AwesomeTour@noreply.com";         
 	      
 	      messageHelper.setFrom(setfrom); 
 	      messageHelper.setTo(paymentCommand.getPm_email());
 	      
 	      messageHelper.setSubject("Awesome Tour 예약완료 되었습니다."); 
-	      String appandEmail ="<h1>AWESOME TOUR</h1>"; 
+	      String appandEmail ="<table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='672' border='0'> <!-- 헤더 --> <tbody><tr><td style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px'><a href='http://smtp2.gravity.co.kr/5I-111099I-452727I-4goaSoZE-8zPqrCF-14582I-4ehhgE-8D-7D-7DDDD-6EHpCAD-6oCbD-7I-3' name='ANCHOR14311' target='_blank' rel='noreferrer noopener'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='GNJOY 게임을 즐기는 방법!' src='http://i1.ruliweb.com/img/18/09/18/165ec1d1cbcf9e2b.png'></a> </td></tr><!-- //헤더 --> <!-- 컨텐츠 --><tr><td style='BORDER-RIGHT: #e4e4e4 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: #e4e4e4 1px solid; MARGIN: 0px; PADDING-RIGHT: 0px'> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='670' border='0'> <tbody><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='49' colspan='3'>&nbsp;</td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' width='53'>&nbsp;</td><td width='564'> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'> <tbody><tr><td> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'> <tbody><tr><td style='HEIGHT: 20px'> <span style='color:gray'> Awesome Tour에서 알려드립니다. </span> </td></tr><tr><td>"; 
+	      
+	      appandEmail +="<h1>고객님의 예약이 완료 되었습니다</h1></td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='27'>&nbsp;</td></tr><tr><td>";
+	      appandEmail +="<table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'>";
+	      appandEmail +="<tbody><tr><td style='COLOR: #666; FONT: 12px/20px dotum'><strong style='FONT-WEIGHT: bold; COLOR: #333'>안녕하세요, 고객님</strong><br>저희 어썸투어에서 고객님의 예약정보를 알려드리겠습니다.<br>";
+
 	      
 	      appandEmail +="<h2>예약 정보</h2>";
-	      appandEmail +="-------------------------------------------------<br>";
+	      appandEmail +="<hr>";
 
 	      appandEmail +="예약 숙소 : "+reservationCommand.getAcc_name()+"<br>";
 	      appandEmail +="예약 일시 : "+reservationCommand.getRv_start_date()+"~"+reservationCommand.getRv_end_date()+"<br>";
 	      appandEmail +="예약 이메일 : "+email+"<br>";
 	      appandEmail +="<h2>결제 정보</h2>";
 	      appandEmail +="결제 수단 : ";
+	      appandEmail +="<hr>";
 	      if(paymentCommand.getPm_type()==0){
 	    	  appandEmail +="신용카드<br>";
 	      }else {
 	    	  appandEmail +="무통장 입금<br>";
 
 	      }
-	      appandEmail +="결제 금액 : "+reservationCommand.getRv_money()+"<br>";
-	      appandEmail +="-------------------------------------------------<br>";
+	      appandEmail +="결제 금액 : "+toNumFormat(reservationCommand.getRv_money())+"원<br>";
+	      appandEmail +="<hr>";
 	      appandEmail +="이상 예약이 완료되었음을 알려드립니다.";
+	      appandEmail +="</td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='30'>&nbsp;</td></tr> <tr> <td style='TEXT-ALIGN: center'> <a href='http://smtp2.gravity.co.kr/6I-111099I-452727I-4goaSoZE-8zPqrCF-14583I-4ehhgE-8D-7D-7bPbvPuD-6EHpCAD-6oCbD-7UzPuD-7guCmSaPD-7SHmCD-6BzgI-3' name='ANCHOR14312' rel='noreferrer noopener' target='_blank'> <button style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='홈페이지 바로가기' src='http://imgc.gnjoy.com/event/dm/images/btn_advertisement.gif'></button></a></td> </tr></tbody> </table> </td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='60'>&nbsp;</td></tr></tbody> </table> </td></tr></tbody> </table> </td><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' width='53'>&nbsp;</td></tr></tbody> </table> </td></tr><tr><td> <table cellspacing='0' cellpadding='0' width='672' border='0'> <tbody><tr><td style='WIDTH: 155px'><a href='http://smtp2.gravity.co.kr/5I-111099I-452727I-4goaSoZE-8zPqrCF-14585I-4ehhgE-8D-7D-7DDDD-6EuBcShAD-6oCD-6ZuD-7SHJPKD-6BzgI-3' name='ANCHOR14314' target='_blank' rel='noreferrer noopener'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='GRAVITY' src='http://i3.ruliweb.com/img/18/09/18/165ec1d0ee9f9e2b.png'></a></td><td style='WIDTH: 517px'> <table cellspacing='0' cellpadding='0' width='517' border='0'> <tbody><tr><td style='FONT-SIZE: 12px; LINE-HEIGHT: 12px'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='㈜그라비티 대표이사 : 박현철 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 연구개발타워)' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer02_150207.gif'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='전화문의 :1588-9897 팩스 : 02-2132-7077 사업자등록번호 : 201 -81-56197' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer03.gif'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='통신판매업 신고번호 : 제 2008-서울마포-0207호 고객지원센터 : 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 연구개발타워)' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer04_150207.gif'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='Copyright (c) GRAVITY Co., Ltd. All Rights Reserved.' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer05.gif'><br> </td></tr></tbody> </table> </td></tr></tbody> </table> </td></tr></tbody> </table> </td></tr><!-- //풋터 --></tbody> </table>"; 
 	      messageHelper.setText(appandEmail,true);  
 	     
 	      
@@ -360,7 +374,7 @@ public class ReservationController {
 			
 			HoldingCommand hold = new HoldingCommand();
 			hold.setAcc_num(reservationCommand.getAcc_num());
-			hold.setAt_money(reservationCommand.getRv_money());
+			hold.setHd_money(reservationCommand.getRv_money());
 			hold.setHd_account(paymentCommand.getPm_deposit_ac());
 			hold.setHd_deposit(0);
 			adminService.insertHolding(hold);
@@ -378,7 +392,7 @@ public class ReservationController {
 			//카드 대금 홀딩
 			HoldingCommand hold = new HoldingCommand();
 			hold.setAcc_num(reservationCommand.getAcc_num());
-			hold.setAt_money(reservationCommand.getRv_money());
+			hold.setHd_money(reservationCommand.getRv_money());
 			hold.setHd_account("card");
 			hold.setHd_deposit(1);
 			adminService.insertHolding(hold);

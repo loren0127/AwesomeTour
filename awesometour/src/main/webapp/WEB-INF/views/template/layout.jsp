@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
 <!-- CSS -->
+<link rel="shortcut icon" href="../resources/images/favicon.ico">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
