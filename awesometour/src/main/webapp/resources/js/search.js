@@ -1,31 +1,12 @@
-$(document).ready(function() {	
-/*	$('#pe_pop').show();
-
-	//인원수 클릭시 div 활성화
-	$('.people_pop').click(function(event){
-		event.stopPropagation();
-		$('#pe_pop').show();
-
-		event.preventDefault();
-	});*/
-	
-	//인원수 체크부분 외 다른 영역을 클릭시 인원수,객실수 버튼이 닫힘.
-	//$('body').click(function(e){
-		//if(!$(e.target).hasClass('check')){
-			//$('#pe_pop').hide();
-		//}
-	//});
-	
-	
-	
-
-
-	
+$(document).ready(function() {
+	if($('#peo_sum_btn').text() ==1){
+		$('#people_minus').attr('disabled',true); 		
+	}
 //	--------------------------인원수 클릭시 숫자변경----------------------------------------------
-	var peo_num = $('#people_sum').text();
+	var peo_num = $('#peo_sum_btn').text();
 	var room_num = $('#room_sum').text();
 	
-	$('#people_plus').on("click",function(){ 
+	$('#people_plus').on("click",function(event){ 
 		var new_peo_num = ++ peo_num;
 		$('#people_sum').text(new_peo_num);
 		$('#peo_sum_btn').text(new_peo_num);
@@ -39,18 +20,18 @@ $(document).ready(function() {
 				$('#people_minus').removeAttr('disabled');
 			}, 1000);
 		}
+		event.preventDefault();
 	});
 
-	$('#people_minus').on("click",function(){ //인원수 설정시 
+	$('#people_minus').on("click",function(event){ //인원수 설정시 
 		var new_peo_minus = -- peo_num;
 		$('#people_sum').text(new_peo_minus);
 		$('#peo_sum_btn').text(new_peo_minus);
 		$('#people_count').val(new_peo_minus);
-		
 		if(new_peo_minus<=1){
 			$('#people_minus').attr('disabled',true); 
 		}
-		if(new_peo_minus>2){
+		if(new_peo_minus>=2){
 			$('#people_minus').attr('disabled',false); 
 		}
 		if(new_peo_minus>1){ //2초후 다시 버튼활성화
@@ -58,7 +39,7 @@ $(document).ready(function() {
 				$('#people_plus').removeAttr('disabled');
 			}, 1000);
 		}
-		
+		event.preventDefault();
 	});
 	// ------------------------------------------------------------------------	
 	
@@ -81,7 +62,6 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 	});
-	
 });
 
 //----------------------------날짜 설정시 선택한 날짜로부터 한달동안만 보여지게 활성화 -----------------------//
@@ -106,6 +86,7 @@ $(function(selectedDate) {
 			$('.date_out').datepicker('option','maxDate',maxDate); //객체로 전달하여 toString에 인해 문자열로 반환
 			$('.date_in').val(selected);
 		}
+	
 	});
 /*	$('#date_in1').datepicker({
 		showMonthAfterYear:true, //default 월 년
