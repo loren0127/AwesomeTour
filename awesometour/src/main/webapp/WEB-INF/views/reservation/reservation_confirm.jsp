@@ -88,7 +88,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 </div>
 <hr  style="width:90%" noshade>
 인원수 : ${rv.rv_people }명<br>
-날짜 <span id="check_in">${rv.rv_startdate }</span> ~<span id="check_out">${rv.rv_enddate}</span> <br>
+날짜 <span id="check_in">${rv.rv_start_date }</span> ~<span id="check_out">${rv.rv_end_date}</span> <br>
 <hr  style="width:90%" noshade>
 <span id="money_sp"></span>원 x <span id="during_date"></span>박 = <span id="money_sum_sp"></span>원<br>
 수수료 (10%) = <span id="fee_sp"></span>원<br>
@@ -142,7 +142,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 </div>
 
 <div class="state">  
-	<h3>특별 요정하기</h3>
+	<h3>특별 요청하기</h3>
 	<span style="font-size:12px">고객님의 특별 요청 사항을 호스트에게 예약 완료 즉시 전달하겠습니다.</span><br>
 <div class="rounded" style="background-color:#aaaaaa; padding:15px; width:60%;" id="yogu">
 	<p>
