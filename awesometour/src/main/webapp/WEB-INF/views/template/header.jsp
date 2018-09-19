@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white" id="mainNav">
 	<div class="container">
 		<a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/main/main.do"><i class="fa fa-font"></i><span style="font-weight:bold;">wesome Tour</span></a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
