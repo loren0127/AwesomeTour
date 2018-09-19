@@ -95,6 +95,9 @@
 			<if test="orderby == 'minimum'">
 				ORDER BY price.ro_price ASC
 			</if>
+			<if test="orderby == 'init'">
+				
+			</if>
 	</select>
 	
 	<select id="selectImage" parameterType="Integer" resultType="ImageCommand">

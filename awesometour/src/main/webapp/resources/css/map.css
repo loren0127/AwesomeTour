@@ -114,13 +114,24 @@ input:focus { outline: none; }
 }
 
 /*priceFilter*/
-.priceFilter input[type="text"]{
+.priceFilter input[type="text"] {
 	display: inline-block;
 	width: 90px;
 	font-weight: bold;
 	margin-top: 5px;
     padding: 2px 10px;
     border: 1px solid lightgray;
+    border-radius: 2px !important;
+}
+
+.dateFilter input[type="text"] {
+	display: inline-block;
+	width: 150px;
+	font-weight: bold;
+	margin-top: 5px;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    border-radius: 2px !important;
 }
 
 /*dateFilter*/
@@ -132,12 +143,11 @@ input:focus { outline: none; }
 .headcountFilter{
 	width: fit-content;
 	padding: 5px 10px;
-	box-shadow: 0 3px 5px 0 rgba(136, 136, 136, .15);
-	color: rgb(0, 132, 137);
+	color: #0F1721;
 }
 
 .headcountFilter input{
-	color: rgb(0, 132, 137);
+	color: #0F1721;
 }
 
 .plus_minus {
@@ -152,9 +162,9 @@ input:focus { outline: none; }
     box-shadow: none !important;
     border-radius: 50% !important;
     border-style: solid !important;
-    border-color: rgb(0, 132, 137) !important;
+    border-color: #0F1721 !important;
     background: transparent !important;
-    border-width: 1px !important;
+    border-width: 2px !important;
 }
 
 /*map-sidePanel*/

@@ -259,17 +259,13 @@ $(function() {
 	<c:if test=""></c:if>
 	<div class="container" style="min-height: 3500px;">
 		<h2>숙소 목록</h2>
-		<!-- Map Dialog Button Start -->
-
-		<!-- Map Dialog Button End -->
-
 		<div class="row" style="margin-top: 30px;">
 			<div id="map" class="col-3">
-								<div>
-				<button id="opener2">숙소 위치 확인</button>
-				<img src="../resources/images/mappin.jpg" style="margin-bottom:40px;" width="255px">
+				<div id="opener2">
+				<span style="position:absolute;margin-top:75px;margin-left:85px;">숙소 위치 확인</span>
+				<img src="../resources/images/mapimg.jpg" style="margin-bottom:40px;" width="255px" title="숙소 위치 확인">
 				</div>
-					<select name="price" style="width: 100%;height: 40px; color: #fff;background-color: #5392f9;margin-bottom: 20px;">
+			<select name="price" style="width: 100%;height: 40px; color: #fff;background-color: #5392f9;margin-bottom: 20px;">
 			<option value="">선택하세요</option>
 			<option value="ASC">가격 낮은순</option>
 			<option value="DESC">가격 높은순</option>
@@ -316,11 +312,7 @@ $(function() {
 				</ul>
 				</div>
 			</div>
-
-
-
 			<div id="col-6" class="col-9">
-
 				<c:if test="${count == 0}">
 					<div class="align-center">등록된 게시물이 없습니다.</div>
 				</c:if>
@@ -434,62 +426,52 @@ $(function() {
 			</div>
 			<div class="map-header">
 				<div class="mapFilter" style="padding-bottom: 10px">
-					<form class="form-inline" action="" method="get">
-						<div class="col-3 col-xs-3 priceFilter"
-							style="padding-right: 10px;">
-							<span style="font-size: 13px;">1박당 요금</span>
+					<form class="form-inline" action="#" method="get">
+						<div class="col-3 col-xs-3 priceFilter"	style="padding-right: 10px;">
+							<span style="font-size: 13px;" class="text-muted">1박당 요금</span>
 							<div id="slider-range" style="width: 260px; font-size: .7em;"></div>
-							<input type="text" id="perNightPriceAbove" readonly> <label
-								for="perNightPriceAbove"
-								style="display: inline-block; font-size: 13px;">이상&nbsp;&nbsp;&nbsp;</label>
-							<input type="text" id="perNightPriceBelow" readonly> <label
-								for="perNightPriceBelow"
-								style="display: inline-block; font-size: 13px;">이하</label>
+							<input type="text" id="perNightPriceAbove" readonly>
+							<label for="perNightPriceAbove" style="display: inline-block; font-size: 13px;" class="text-muted">이상&nbsp;&nbsp;&nbsp;</label>
+							<input type="text" id="perNightPriceBelow" readonly>
+							<label for="perNightPriceBelow" style="display: inline-block; font-size: 13px;" class="text-muted">이하</label>
 						</div>
 						<div class="col-auto dateFilter" style="padding-right: 10px;">
-							<label for="datepicker1" style="display: inline-block;"><i
-								class="fa fa-calendar"></i></label> <input type="text"
-								name="datepicker1" id="datepicker1" value="${map.check_in}" style="width: 100px;">
-							&nbsp;&nbsp;&nbsp; <label for="datepicker2"
-								style="display: inline-block;"><i class="fa fa-calendar"></i></label>
-							<input type="text" name="datepicker2" value="${map.check_out}" id="datepicker2"
-								style="width: 100px;">
+							<label for="datepicker1" style="display: inline-block;"><i class="fa fa-calendar"></i></label>
+							<input type="text" name="datepicker1" id="datepicker1" value="${map.check_in}">
+							&nbsp;&nbsp;&nbsp;
+							<label for="datepicker2" style="display: inline-block;"><i class="fa fa-calendar"></i></label>
+							<input type="text" name="datepicker2" id="datepicker2" value="${map.check_out}">
 						</div>
 						<div class="col-auto headcountFilter">
 							<label for="headcount" style="display: inline-block;font-weight:bold;">인원수&nbsp;</label>
-							<input type="button" value="-" id="count_m" class="plus_minus"> <input
-								type="text" value="${map.people_count}" id="headcount"
-								style="text-align: center; width: 50px;border: none;font-weight:bold;"> <input
-								type="button" value="+" id="count_p" class="plus_minus">
+							<input type="button" value="-" id="count_m" class="plus_minus" style="font-weight: bold;">
+							<input type="text" value="${map.people_count}" id="headcount" style="text-align: center; width: 50px;border: none;font-weight:bold;">
+							<input type="button" value="+" id="count_p" class="plus_minus" style="font-weight: bold;">
 						</div>
 						<div class="col-auto">
-							<input type="submit" value="재검색" id="research"
-								class="btn btn-warning"
-								style="font-size: .8em; font-weight: bold;">
+							<input type="submit" value="재검색" id="research" class="btn btn-warning" style="font-size: .8em; font-weight: bold;">
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="map-body" style="height: 765px;">
-				<div class="map-mapArea" id="mapList"
-					style="width: calc(100% - 450px); height: 765px; float: right;"></div>
+				<div class="map-mapArea" id="mapList" style="width: calc(100% - 450px); height: 765px; float: right;"></div>
 				<div class="map-sidePanel" style="width: 450px;">
 					<div>
-						<span style="font-weight:bold;color: rgb(0, 132, 137);">선택한 날짜</span>
+						<span style="font-weight:bold;color: #0F1721;">선택한 날짜</span>
 					</div>
 					<div>
 						<i class="fa fa-calendar-check-o"></i>&nbsp;<span id="perNight3"></span>박
-						(<input type="text" id="perNight1"
-							style="width: 100px; border: none;">-<input type="text"
-							id="perNight2" style="width: 100px; border: none;">)
+						(<input type="text" id="perNight1" style="width: 100px; border: none;"><i class="fa fa-minus" style="font-size:14px;"></i>
+						<input type="text" id="perNight2" style="width: 100px; border: none;">)
 					</div>
 					<!-- <div id="selectedInMap">선택 조건 표시박스</div> -->
 					<div id="checkedInMap" style="margin-top: 5px;">
 						<form action="#">
 							<fieldset style="border: none;">
-								<label for="detailInMap" style="display: inline-block;">정렬
-									기준&nbsp;</label> <select name="detailInMap" id="detailInMap">
-									<option disabled selected>상세 조건을 직접 선택하세요.</option>
+								<label for="detailInMap" style="display: inline-block;" class="text-muted">정렬 기준&nbsp;</label>
+								<select name="detailInMap" id="detailInMap">
+									<option value="init" disabled selected>상세 조건을 직접 선택하세요.</option>
 									<option value="recommend">오썸투어 추천으로 볼래요!</option>
 									<option value="rating">투숙객 평점이 좋은 곳은?</option>
 									<option value="minimum">최저가부터 확인하실래요?</option>
@@ -504,8 +486,7 @@ $(function() {
 							</fieldset>
 						</form>
 					</div>
-					<div id="output"
-						style="padding-bottom: 15px; height: 700px; overflow-y: scroll;"></div>
+					<div id="output" style="padding-bottom: 15px; height: 700px; overflow-y: scroll;"></div>
 				</div>
 			</div>
 		</div>

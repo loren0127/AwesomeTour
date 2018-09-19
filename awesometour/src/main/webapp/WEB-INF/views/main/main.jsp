@@ -16,32 +16,26 @@
 </script>
 
 <!-- Masthead -->
-<header class="masthead text-white text-center">
+<header class="masthead text-center">
 	<div class="container">
 		<div class="row">
 			<!-- 폼 영역 -->
 			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
 				<form id="search_form" action="../accomList/accomList.do">
 					<div class="form-row" id="form_row">
+						<!-- 제목 영역 -->
+						<div class="col-lg-12 col-md-12 col-xs-12 mx-auto">
+							<h2 class="mb-5">오썸투어에서<br>숙소와 모임을 예약하세요.</h2>
+						</div>
 						<div class="col-lg-12 col-md-12 col-xs-12">
 							<input type="radio" id="h" name="searchtype" value="h" checked/>
     						<label for="h" class="radio_label">호텔</label>
     						<input type="radio" id="p" name="searchtype" value="p"/>
     						<label for="p" class="radio_label">프라이빗 하우스</label>
 						</div>
-						<div class="col-lg-6 col-md-6 col-xs-6">
-							<label for="checkin_input">체크인</label>
-							<input type="text" class="date_in" id="checkin_input" name="check_in"
-								value="" style="width: 100%;" autocomplete="off">
-						</div>
-						<div class="col-lg-6 col-md-6 col-xs-6">
-							<label for="checkin_output">체크아웃</label>
-							<input type="text" class="date_out" id="checkin_output" name="check_out"
-								value="" style="width: 100%;" autocomplete="off">
-						</div>
-						<div class="col-lg-12 col-md-12 col-xs-12 people_pop" style="margin-top:10px;">
+						<div class="col-lg-12 col-md-12 col-xs-12 people_pop">
 								<input type="hidden" name="people_count" id="people_count" value="1">
-							<label for="checkin_input">인원</label>
+							<label for="checkin_input" class="other_lable">인원</label>
 							<button id="people_minus" name="minus" style="outline:none;">-</button>
 							<!-- <input type="button" name="minus" id="people_minus" value="-" style="border:none;outline:none;"> -->
 							<button id="people" name="people" style="outline:none;">
@@ -50,8 +44,18 @@
 							<button id="people_plus" name="people_plus" style="outline:none;">+</button>
 							<!-- <input type="button" name="people_plus" id="people_plus" value="+" style="border:none;outline:none;"> -->
 						</div>
+						<div class="col-lg-6 col-md-6 col-xs-6" style="margin-top:10px;">
+							<label for="checkin_input" class="other_lable">체크인</label>
+							<input type="text" class="date_in" id="checkin_input" name="check_in"
+								value="" style="width: 100%;" autocomplete="off">
+						</div>
+						<div class="col-lg-6 col-md-6 col-xs-6" style="margin-top:10px;">
+							<label for="checkin_output" class="other_lable">체크아웃</label>
+							<input type="text" class="date_out" id="checkin_output" name="check_out"
+								value="" style="width: 100%;" autocomplete="off">
+						</div>
 						<div class="col-lg-12 col-md-12 col-xs-12" style="margin-top:10px;">
-							<label for="address">위치</label>
+							<label for="address" class="other_lable">위치</label>
 							<input type="text"	name="search" id="address" placeholder="서울" value="" style="width: 100%;">
 						</div>
 						<div class="col-lg-12 col-md-12 col-xs-12" style="margin-top:10px;">
@@ -61,10 +65,7 @@
 					</div>
 				</form>
 			</div>
-			<!-- 제목 영역 -->
-			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
-				<h2 class="mb-5">숙소와 트립을 예약하세요.</h2>
-			</div>
+			<div class="col-lg-6 col-md-6 col-xs-12 mx-auto"></div>
 		</div>
 	</div>
 </header>
@@ -145,10 +146,10 @@
 					<c:set var="tomorrow" value="<%=new java.util.Date(new java.util.Date().getTime() + 60*60*24*1000*1)%>" />
 					<div class="col-xs-12 col-md-6 col-lg-3">
 						<div class="card-recom align-left">
-							<div style="margin-bottom: 10px;">
+							<div style="margin-bottom: 10px;height:200px;object-fit:contain !important;">
 								<img
 									src="${pageContext.request.contextPath}/accomList/imageView.do?im_ac_num=${recommend.acc_num}&kind=im_image2"
-									style="width: 100%;">
+									style="width: 100%;height:100%;overflow:hidden;">
 							</div>
 							<div>
 								<c:if
@@ -251,8 +252,8 @@
 			<c:forEach var="group" items="${groupList}" varStatus="status">
 			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="card align-left">
-					<div style="margin-bottom: 10px;">
-						<img src="${pageContext.request.contextPath}/group/imageView.do?g_num=${group.g_num}" style="width:100%;">
+					<div style="margin-bottom: 10px;height:200px;object-fit:contain !important;">
+						<img src="${pageContext.request.contextPath}/group/imageView.do?g_num=${group.g_num}" style="width:100%;height:100%;overflow:hidden;">
 					</div>
 					<div>
 						<span style="font-size: 18px; font-weight: bold;margin-top:5px;">${group.g_name}</span><br>

@@ -29,7 +29,7 @@
 
 /*메인 페이지 검색폼*/
 #form_row{
-	background-color: rgb(255,255,255,.3) !important;
+	background-color: rgb(255,255,255) !important;
     padding: 20px !important;
     border-radius: 2px !important;
 }
@@ -37,6 +37,11 @@
 #search_form label{
 	display: block !important;
 	text-align:left;
+}
+
+.other_lable{
+	color: #0F1721;
+	font-weight: bold;
 }
 
 #search_form input[type=text]{
@@ -47,21 +52,28 @@
     border-style: solid !important;
     border-radius: 2px !important;
     background-color: #ffffff !important;
-    border-color: #ffffff !important;
+    border-color: #ccc !important;
 }
 
 /*라디오 체크 박스 CSS*/
 /**
  * Hide those ugly radio boxes
  */
-input[type=radio]{
+#form_row input[type=radio]{
   display: none;
 }
 
 /**
  * How it should look when hovered
  */
-.active-.radio_label, .radio_label:focus, .radio_label:hover, .radio_label:active, input:checked + .radio_label {
+.active-.radio_label, input:checked + .radio_label {
+  color: #FFC107;
+}
+.active-.radio_label:before, input:checked + .radio_label:before {
+  background: white;
+  border-color: #FFC107;
+}
+.active-.radio_label, .radio_label:focus, .radio_label:hover, .radio_label:active + .radio_label {
   color: #0F1721;
 }
 .active-.radio_label:before, .radio_label:focus:before, .radio_label:hover:before, .radio_label:active:before, input:checked + .radio_label:before {
@@ -75,9 +87,9 @@ input[type=radio]{
 .radio_label {
   font-size: 1rem;
   font-weight: bold;
+  color: #ccc;
   line-height: 1;
   cursor: pointer;
-  display: inline-block;
   padding: 1rem 1rem 1rem 3rem;
   position: relative;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -109,23 +121,7 @@ input[type=radio]{
 input:checked + .radio_label:before {
   border-color: white;
   border: none;
-  background: #0F1721;
-}
-
-/**
- * How it should look when disabled
- */
-input:disabled + .radio_label {
-  background: #efefef;
-  color: rgba(0, 0, 0, 0.5);
-  cursor: not-allowed;
-}
-input:disabled + .radio_label:hover {
-  border-color: rgba(0, 0, 0, 0.1);
-}
-input:disabled + .radio_label:before {
-  border-color: white;
-  background: white;
+  background: #FFC107;
 }
 
 /*인원수 체크 버튼*/
@@ -144,9 +140,31 @@ input:disabled + .radio_label:before {
     border: 1px solid transparent;
     padding: .375rem .75rem;
     font-size: 1rem;
+    font-weight: bold;
     color: #0F1721;
     line-height: 1.5;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#people_minus{
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-left-radius: 2px !important;
+    border-top-left-radius: 2px !important;
+}
+
+#people{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#people_plus{
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-right-radius: 2px !important;
+    border-top-right-radius: 2px !important;
 }
 
 /*위치 검색 버튼*/

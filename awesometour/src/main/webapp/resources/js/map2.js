@@ -23,10 +23,7 @@ $(document).ready(function(){
 		prices=[];
 		styles=[];
 		grades=[];
-		
-		//숙소 리스트 내에서 재검색할 때 다시 값 받아와야 함
-		search = $('#je_search').val();
-		
+		console.log(check_in+','+check_out+','+people_count+','+search+','+orderby);
 		/*
 		 * $.ajax({옵션}) 메소드는 HTTP 요청을 만드는 강력하고도 직관적인 방법을 제공
 		 * 옵션은 HTTP 요청을 구성하는 키와 값의 쌍으로 구성되는 헤더의 집합
@@ -178,6 +175,15 @@ $(document).ready(function(){
 		calDate();
 	});
 	$('.closer').on('click', function() {
+		$('#output').empty();
+		$('#mapList').empty();
+		$('#perNightPriceAbove').empty();
+		$('#perNightPriceBelow').empty();
+		//정은이 값 다시 넘기기
+		check_in = $('.date_in').val();
+		check_out = $('.date_out').val();
+		people_count = $('#people').val();
+		search = $('#je_search').val();
 		$('#mapList_dialog').dialog('close');
 	});
 	
@@ -299,12 +305,16 @@ $(document).ready(function(){
 	$('#detailInMap').selectmenu({
 		change:function(event,ui){//이벤트 객체, jQuery UI에 대한 정보를 받는 객체
 			orderby = $(this).val();
-			alert(orderby);
+			//alert(orderby);
 			//기존에 존재하던 데이터 초기화
 			$('#output').empty();
 			$('#mapList').empty();
 			$('#perNightPriceAbove').empty();
 			$('#perNightPriceBelow').empty();
+			check_in = $('#datepicker1').val();
+			check_out = $('#datepicker2').val();
+			people_count = $('#headcount').val();
+			search = '서울';
 			callMap2(orderby,check_in,check_out,people_count,search);
 		}
 	}).selectmenu('menuWidget').addClass('overflow');
@@ -387,10 +397,14 @@ $(document).ready(function(){
 		$('#mapList').empty();
 		$('#perNightPriceAbove').empty();
 		$('#perNightPriceBelow').empty();
+		//정렬 조건 초기화
+		orderby = $('#detailInMap option:eq(0)').val();
+		$('#detailInMap option:eq(0)').prop('selected', true);
 		check_in = $('#datepicker1').val();
 		check_out = $('#datepicker2').val();
 		people_count = $('#headcount').val();
-		//alert(check_in+','+check_out+','+people_count);
+		search = '서울';
+		//alert(check_in+','+check_out+','+people_count+','+search+','+orderby);
 		callMap2(orderby,check_in,check_out,people_count,search);
 	});
 });
