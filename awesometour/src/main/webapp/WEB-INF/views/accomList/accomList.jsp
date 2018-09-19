@@ -4,6 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+.crying:hover{
+	color: #d90feb;
+}
+</style>
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/search.js"></script>
 <script type="text/javascript"
@@ -209,7 +215,7 @@ $(function() {
 						<div style="margin-left: 100px;">
 				<input type="text" style="    margin-top: 15px;margin-right: 30px;width: 75%;height: 40px;margin-left: 140px;"
 					id="je_search" name="search"
-					placeholder="구 또는 이름을 검색하세요" value="${map.search}">
+					placeholder="숙소명/지역" value="${map.search}">
 			</div>
 			<div style="margin-left: 50px;">
 				<input type="hidden" name="searchtype" value="${map.searchtype}">
@@ -257,22 +263,22 @@ $(function() {
 	<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test=""></c:if>
-	<div class="container" style="min-height: 3500px;">
-		<h2>숙소 목록</h2>
-		<div class="row" style="margin-top: 30px;">
-			<div id="map" class="col-3">
+	<div class="container" style="max-height: 3000px;">
+		<div class="row" style="margin-top: 50px;">
+			<div id="map" class="col-lg-3 col-md-3 col-xs-3">
 				<div id="opener2">
 				<span style="position:absolute;margin-top:75px;margin-left:85px;">숙소 위치 확인</span>
 				<img src="../resources/images/mapimg.jpg" style="margin-bottom:40px;" width="255px" title="숙소 위치 확인">
 				</div>
-			<select name="price" style="width: 100%;height: 40px; color: #fff;background-color: #5392f9;margin-bottom: 20px;">
-			<option value="">선택하세요</option>
-			<option value="ASC">가격 낮은순</option>
-			<option value="DESC">가격 높은순</option>
-			<option value="avg_DESC">평점</option>
-			<option value="test_DESC">추천숙소</option>
-			</select>
-				<div class="sticky-top" style="border: 1px solid #e5e5e5;box-shadow: 0 2px 2px rgba(0,0,0,.12);">
+				
+				<select name="price" style="width: 100%;height: 40px; border-color:lightgray;border-radius: 2px;color: #0F1620;margin-bottom: 20px;">
+					<option value="">선택하세요</option>
+					<option value="ASC">가격 낮은순</option>
+					<option value="DESC">가격 높은순</option>
+					<option value="avg_DESC">평점</option>
+					<option value="test_DESC">추천숙소</option>
+				</select>
+				<div class="sticky-top" style="border: 1px solid #ededed;box-shadow: 0 2px 2px rgba(0,0,0,.2);padding-top: 15px;">
 				<span style="padding-left: 10px;"><b>편의시설</b></span>
 				<ul style="list-style: none;padding-left: 10px;border-bottom: 1px solid rgba(0,0,0,.12);padding-bottom: 15px;">
 					<li><input type="checkbox" value="WIFI" name="se_name">WIFI</li>
@@ -312,32 +318,38 @@ $(function() {
 				</ul>
 				</div>
 			</div>
-			<div id="col-6" class="col-9">
+			
+			<div class="col-lg-9 col-md-9 col-xs-9" id="col-6">
 				<c:if test="${count == 0}">
 					<div class="align-center">등록된 게시물이 없습니다.</div>
 				</c:if>
 				<c:forEach var="accom" items="${list}">
 					<div class="row" style="margin-bottom: 20px;">
-						<div class="col-10" 
+						<div class="col-lg-10 col-md-10 col-xs-10" 
 							style="height: 200px; border: 1px solid #e5e5e5; border-right: none;padding-left: inherit;box-shadow: 0 2px 2px rgba(0,0,0,.12);">
-							<span> 
+							<div> 
 							<c:if test="${accom.ro_sub=='h'}">
+							<div>
 							<a style="text-decoration: none;" 
 								href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">
 							<img class="rounded"
 								src="${pageContext.request.contextPath}/accomList/ListimageView.do?im_ac_num=${accom.acc_num}&kind=im_cover"
 								style="width: 200px; height: 170px; float: left; margin: 13px 15px 10px 10px;"></a>
+							</div>
 							</c:if>
 							
 							<c:if test="${accom.ro_sub=='p'}">
+							<div>
 							<a style="text-decoration: none;" 
 								href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">
 							<img class="rounded"
 								src="${pageContext.request.contextPath}/accomList/ListimageView.do?im_ac_num=${accom.acc_num}&kind=im_cover"
 								style="width: 200px; height: 170px; float: left; margin: 13px 15px 10px 10px;"></a>
+							</div>
 							</c:if>							
-								<div style="margin-top: 12px;"><b><span>${accom.acc_name}</span></b></div>
+								<div style="padding-top:10px;"><span><b>${accom.acc_name}</b></span></div>
 								<c:if test="${accom.ro_sub=='h'}">
+								<div>
 									<fmt:formatNumber value="${accom.acc_grade}" var="accom_grade"></fmt:formatNumber>
 									<c:set var="grade1"
 										value="${fn:replace(accom.acc_grade,'1','★')}" />
@@ -349,23 +361,14 @@ $(function() {
 										value="${fn:replace(accom.acc_grade,'4','★★★★')}" />
 									<c:set var="grade5"
 										value="${fn:replace(accom.acc_grade,'5','★★★★★')}" />
-									<c:if test="${accom_grade == '1'}">
-									호텔성급 : ${grade1}
+										<c:if test="${accom_grade == '1'}">호텔성급 ${grade1}</c:if>
+										<c:if test="${accom_grade == '2'}">호텔성급 ${grade2}</c:if>
+										<c:if test="${accom_grade == '3'}">호텔성급 ${grade3}</c:if>
+										<c:if test="${accom_grade == '4'}">호텔성급 ${grade4}</c:if>
+										<c:if test="${accom_grade == '5'}">호텔성급 ${grade5}</c:if>
+								</div>
 								</c:if>
-									<c:if test="${accom_grade == '2'}">
-									호텔성급 : ${grade2}
-								</c:if>
-									<c:if test="${accom_grade == '3'}">
-									호텔성급 : ${grade3}
-								</c:if>
-									<c:if test="${accom_grade == '4'}">
-									호텔성급 : ${grade4}
-								</c:if>
-									<c:if test="${accom_grade == '5'}">
-									호텔성급 : ${grade5}
-								</c:if>
-								</c:if>
-							</span>
+							</div>
 							<c:if test="${accom.ro_sub=='h'}">						
 							<br>
 							</c:if>
@@ -380,7 +383,7 @@ $(function() {
 									<c:set var="array" value="${fn:split(accom.se_name,',')}" />
 									<!-- 서비스를 배열형태로 반환하여 실행함 -->
 									<c:forEach var="hobby" items="${array}" begin="0" end="2">
-										<div class="col-3" style="margin: auto;display: contents;">
+										<div>
 											<div class="hobby_small rounded"
 												style="height: 30px; width: max-content; text-align: center;color: #D900ED;margin-right: 10px;">
 												<h6>${hobby}</h6>
@@ -391,12 +394,16 @@ $(function() {
 							</div>
 							<input type="hidden" value="${accom.acc_num}" name="im_ac_num">
 							<c:if test="${accom.ro_sub=='h'}">
-								<a style="text-decoration: none;" 
-								href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
+								<div>
+								<i class="fa fa-arrow-right"></i><a class="crying" style="text-decoration: none;color:black;" 
+								href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
+								</div>
 							</c:if>
 							<c:if test="${accom.ro_sub=='p'}">
-								<a style="text-decoration: none;"  
-								href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>
+								<div>
+								<i class="fa fa-arrow-right"></i><a class="crying" style="text-decoration: none;color:black;"  
+								href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
+								</div>
 							</c:if>
 						</div>
 						<div class="col-2"
