@@ -4,11 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-.crying:hover{
-	color: #d90feb;
-}
-</style>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/search.js"></script>
@@ -118,7 +113,7 @@ $(function() {
 								grade_str = grade_str.replace('5','★★★★★');
 						
 							pagingAppend += '<div class="row" style="margin-bottom: 20px;">';
-							pagingAppend += '<div class="col-10" style="height: 200px; border: 1px solid #e5e5e5; border-right: none;padding-left: inherit;box-shadow: 0 2px 2px rgba(0,0,0,.12);">';
+							pagingAppend += '<div class="col-lg-10 col-md-10 col-xs-10" style="height: 200px; border: 1px solid #e5e5e5; border-right: none;padding-left: inherit;box-shadow: 0 2px 2px rgba(0,0,0,.12);">';
 							pagingAppend += '<span>';
 							
 							if (item.ro_sub == 'h') {
@@ -131,19 +126,19 @@ $(function() {
 							pagingAppend += '<img class="rounded" src="${pageContext.request.contextPath}/accomList/ListimageView.do?im_ac_num='+ item.acc_num+ '&kind=im_cover" style="width: 200px; height: 170px; float: left; margin: 13px 15px 10px 10px;"></a>';
 							}
 							
-							pagingAppend += '<div style="margin-top: 12px;">';
-							pagingAppend += '<b><span>'+ item.acc_name+ '</span></b>';
+							pagingAppend += '<div style="padding-top:10px;">';
+							pagingAppend += '<span><b>'+ item.acc_name+ '</b></span>';
 							pagingAppend += '</div>';
 
 							if (item.ro_sub == 'h') {
-								pagingAppend += '<span>호텔성급:'+ grade_str+ '</span><br>';
+								pagingAppend += '<div>호텔성급 '+ grade_str+ '</div><br>';
 								pagingAppend += '<input type="hidden" value="'+item.acc_num+'" name="im_ac_num">';
 							}
-								pagingAppend += '</span>';
-								pagingAppend += '<span>'+ item.acc_address1+ '</span><br>';
+								pagingAppend += '<div style="padding-top:10px;">';
+								pagingAppend += '<span>'+ item.acc_address1+ '</span></div>';
 								pagingAppend += '<input type="hidden" value="'+item.se_name+' id="service_name"">';
 								pagingAppend += '<div>';
-								pagingAppend += '<span class="hobby_small rounded" style="height:30px; text-align:center;color: green;font-weight: 700;">'+ item.acc_theme+ '</span><br>';
+								pagingAppend += '<span class="hobby_small rounded" style="text-align:center;font-size:0.9em;font-weight:700;font-style:italic;">'+ item.acc_theme+ ' 타입</span><br>';
 								pagingAppend += '</div>';
 								pagingAppend += '<div class="service">';
 								pagingAppend += '<div class="row">';
@@ -151,24 +146,22 @@ $(function() {
 							var array = item.se_name.split(',');
 
 							for (var i = 0; i < 3; i++) {
-								pagingAppend += '<div class="col-3" style="margin: auto;display:contents;"><div class="hobby_small rounded" style="height: 30px; width: max-content; text-align: center;color: #D900ED;margin-right: 10px;"><h6>'+array[i]+ '</h6></div></div>';
+								pagingAppend += '<div><div class="hobby_small rounded" style="width:max-content;text-align:center;font-size:0.9em;font-weight:700;color:#63C355;margin-right:10px;"><span>'+array[i]+ '</span></div></div>';
 							}
 
 								pagingAppend += '</div>';
 								pagingAppend += '</div>';
 
 							if (item.ro_sub == 'h') {
-								pagingAppend += '<a style="text-decoration: none;"  href="../accomDetail/accomDetail_hotel.do?im_ac_num='+ item.acc_num+ '&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>';
-								pagingAppend += '<br>';
+								pagingAppend += '<div class="crying"><i class="fa fa-arrow-right"></i><a style="text-decoration: none;"  href="../accomDetail/accomDetail_hotel.do?im_ac_num='+ item.acc_num+ '&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a></div>';
 							}
 
 							if (item.ro_sub == 'p') {
-								pagingAppend += '<a style="text-decoration: none;"  href="../accomDetail/accomDetail_private.do?im_ac_num='+ item.acc_num+ '&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a>';
-								pagingAppend += '<br>';
+								pagingAppend += '<div class="crying"><i class="fa fa-arrow-right"></i><a style="text-decoration: none;"  href="../accomDetail/accomDetail_private.do?im_ac_num='+ item.acc_num+ '&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히보기</a></div>';
 							}
 												
 								pagingAppend += '</div>';
-								pagingAppend += '<div class="col-2" style="height: 200px; border: 1px solid #e5e5e5;padding-top: 65px;text-align:center;box-shadow: 0 2px 2px rgba(0,0,0,.12);"id="col-3">';
+								pagingAppend += '<div class="col-lg-2 col-md-2 col-xs-2" id="col-3" style="height:200px; border:1px solid #e5e5e5;padding: 70px 0px;text-align:center;box-shadow: 0 2px 2px rgba(0,0,0,.12);">';
 								pagingAppend += '<span style="font-size:12px;">1박 요금</span><br>';
 								pagingAppend += '￦<span>'+ numberWithCommas(item.ro_price)+ '</span><br>';
 								pagingAppend += '</div>';
@@ -204,58 +197,41 @@ $(function() {
 <!-- ====================정은이 폼 시작==================== -->
 <form id="se_form">
 <div>
-	<nav class="navbar sticky-top navbar-light bg-light"></nav>
+	<nav class="navbar sticky-top navbar-light bg-white"></nav>
+	
 	<!-- 검색창 끝-->
-
 	<div class="sticky-top" id="search_top"
-		style="z-index: 9998; background-color: white;margin-top: 65px;">
+		style="z-index: 9998; background-color: transparent;margin-top: 65px;">
 		<!-- 검색 시작 -->
 		
-		<div class="form-row" style="width: 100%; background-color: #0F1721;height: 70px;">
-						<div style="margin-left: 100px;">
-				<input type="text" style="    margin-top: 15px;margin-right: 30px;width: 75%;height: 40px;margin-left: 140px;"
+		<div id="je_form_row" class="form-row align-center" style="width: 100%; background-color: #0F1721;height: 70px;">
+			<div style="margin-left:20%;margin-right:-24px">
+				<input type="text" style="margin-top: 15px;width: 75%;height: 38px;"
 					id="je_search" name="search"
 					placeholder="숙소명/지역" value="${map.search}">
 			</div>
-			<div style="margin-left: 50px;">
+			<div>
 				<input type="hidden" name="searchtype" value="${map.searchtype}">
-			 <input
-					type="text" name="check_in"
-					class="date_in" value="${map.check_in}"
-					style="height: 40px;width: 150px;margin-top: 15px;padding-left: 5px;" autocomplete="off">
-
+			 <input type="text" name="check_in"	class="date_in" value="${map.check_in}"
+					style="height: 38px;width: 150px;margin-top: 15px;" autocomplete="off">
 			</div>
-			<div style="margin-right: 8px;">
-
-				<input type="text" name="check_out"
-					class="date_out" value="${map.check_out}"
-					style="height: 40px;width: 150px;margin-top:15px;" autocomplete="off">
+			<div>
+				<input type="text" name="check_out"	class="date_out" value="${map.check_out}"
+					style="height: 38px;width: 150px;margin-top:15px;" autocomplete="off">
 			</div>
-			<div class="people_pop" style=" margin-right: 8px;     margin-top: 15px;">
-				<input type="hidden" name="people_count" id="people_count"
-					value="1">
-
-				<button id="people" name="people"
-					style="height: 40px;width: 150px;position: absolute;background-color: white;border: 1px solid #A9A9A9;">
-					<span id="peo_sum_btn">${map.people_count}</span>명
-				</button>
-
-				<div class="check" id="pe_pop" 
-					style="position: absolute; margin-left: 50px; display: inline-flex;    margin-top: 1px;margin-left: 3px;">
-					<input type="button" name="minus" id="people_minus" value="-"
-						class="form-control" style="border:0;padding-top: 3px;font-size:20px;margin-right: 75px;">
-					<input type="button" name="people_plus" class="form-control"
-						id="people_plus" value="+" style="border:0;font-size:20px;">
-
-				</div>
+			<div style="margin:0 5px;margin-top:15px;height:100%;">
+				<input type="hidden" name="people_count" id="people_count" value="1">
+					<button id="people_minus" name="minus" style="outline:none;">-</button>
+					<button id="people" name="people" style="outline:none;">
+						<span id="peo_sum_btn">${map.people_count}</span>명
+					</button>
+					<button id="people_plus" name="people_plus" style="outline:none;">+</button>
 			</div>
 
-			<div style="margin-left: 150px;    margin-top: 15px;">
-				<button type="submit" class="hotelLink_main" style="background-color: white;border: 1px;height: 40px;width:100px;">검색</button>
+			<div style="margin-top:15px;margin-right:10%;">
+				<button type="submit" class="btn hotelLink_main" style="height:38px;background-color:#fff;">검색</button>
 			</div>
 		</div>
-		<div></div>
-
 	</div>
 
 	<!-- ====================숙소 리스트 시작==================== -->
@@ -268,10 +244,10 @@ $(function() {
 			<div id="map" class="col-lg-3 col-md-3 col-xs-3">
 				<div id="opener2">
 				<span style="position:absolute;margin-top:75px;margin-left:85px;">숙소 위치 확인</span>
-				<img src="../resources/images/mapimg.jpg" style="margin-bottom:40px;" width="255px" title="숙소 위치 확인">
+				<img src="../resources/images/mapimg.jpg" style="margin-bottom:10px;" width="255px" title="숙소 위치 확인">
 				</div>
 				
-				<select name="price" style="width: 100%;height: 40px; border-color:lightgray;border-radius: 2px;color: #0F1620;margin-bottom: 20px;">
+				<select name="price" style="width: 100%;height: 40px; border-color:lightgray;border-radius: 2px;color: #0F1620;margin-bottom: 10px;">
 					<option value="">선택하세요</option>
 					<option value="ASC">가격 낮은순</option>
 					<option value="DESC">가격 높은순</option>
@@ -369,24 +345,23 @@ $(function() {
 								</div>
 								</c:if>
 							</div>
-							<c:if test="${accom.ro_sub=='h'}">						
-							<br>
-							</c:if>
-							<span>${accom.acc_address1}</span><br>
+							<div style="padding-top:10px;">
+							<span>${accom.acc_address1}</span>
+							</div>
 							<div>
 							<span class="hobby_small rounded"
-												style="height: 30px;  text-align: center;color: green;font-weight: 700;">${accom.acc_theme}</span>							
+												style="text-align:center;font-size:0.9em;font-weight:700;font-style:italic;">${accom.acc_theme} 타입</span>							
 							</div>
 							<div class="service">
-								<div class="row">
+								<div class="row"><!-- 숙소 서비스 및 편의 시설 -->
 									<input type="hidden" value="${accom.se_name}">
 									<c:set var="array" value="${fn:split(accom.se_name,',')}" />
 									<!-- 서비스를 배열형태로 반환하여 실행함 -->
 									<c:forEach var="hobby" items="${array}" begin="0" end="2">
 										<div>
 											<div class="hobby_small rounded"
-												style="height: 30px; width: max-content; text-align: center;color: #D900ED;margin-right: 10px;">
-												<h6>${hobby}</h6>
+												style="width:max-content;text-align:center;font-size:0.9em;font-weight:700;color:#63C355;margin-right:10px;">
+												<span>${hobby}</span>
 											</div>
 										</div>
 									</c:forEach>
@@ -394,24 +369,21 @@ $(function() {
 							</div>
 							<input type="hidden" value="${accom.acc_num}" name="im_ac_num">
 							<c:if test="${accom.ro_sub=='h'}">
-								<div>
-								<i class="fa fa-arrow-right"></i><a class="crying" style="text-decoration: none;color:black;" 
-								href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
+								<div class="crying">
+								<i class="fa fa-arrow-right"></i>
+								<a href="../accomDetail/accomDetail_hotel.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
 								</div>
 							</c:if>
 							<c:if test="${accom.ro_sub=='p'}">
-								<div>
-								<i class="fa fa-arrow-right"></i><a class="crying" style="text-decoration: none;color:black;"  
-								href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
+								<div class="crying">
+								<i class="fa fa-arrow-right"></i>
+								<a href="../accomDetail/accomDetail_private.do?im_ac_num=${accom.acc_num}&check_in=${map.check_in}&check_out=${map.check_out}&people_count=${map.people_count}&search=${map.search}">자세히 보기</a>
 								</div>
 							</c:if>
 						</div>
-						<div class="col-2"
-							style="height: 200px; border: 1px solid #e5e5e5;padding-top: 65px;text-align:center;box-shadow: 0 2px 2px rgba(0,0,0,.12);" 
-							id="col-3">
+						<div class="col-lg-2 col-md-2 col-xs-2" id="col-3" style="height:200px; border:1px solid #e5e5e5;padding: 70px 0px;text-align:center;box-shadow: 0 2px 2px rgba(0,0,0,.12);">
 							<span style="font-size:12px;">1박요금</span><br>
 							￦<fmt:formatNumber>${accom.ro_price}</fmt:formatNumber>
-							<br>
 						</div>
 					</div>
 				</c:forEach>

@@ -54,3 +54,39 @@
 	background-color:inherit;
 	cursor:pointer;
 }
+
+#je_form_row input[type=text]{
+	color: darkgray;
+	padding-left: 10px;
+	border-width: 1px;
+    border-style: solid !important;
+    border-radius: 2px;
+    background-color: #ffffff !important;
+    border-color: #ccc;
+}
+
+.date_in {
+	border-right: 0px solid transparent !important;
+	border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.date_out{
+	border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+@media screen and (max-width: 800px) {
+	#search_top {
+		display:none;
+	}
+}
+
+.crying, .crying a {
+	text-decoration:none !important;
+	color:black;
+}
+
+.crying:hover, .crying a:hover {
+	color: #d90feb;
+}
