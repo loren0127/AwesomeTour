@@ -50,7 +50,6 @@ $(document).ready(function(){
 					prices.push(item.ro_price);
 					styles.push(item.acc_theme);
 					grades.push(item.ag_grade);
-					
 					var serviceSplit = item.se_name.split(',', 2);
 					var service = serviceSplit[0]+' '+serviceSplit[1];
 					
@@ -112,7 +111,6 @@ $(document).ready(function(){
 		
 		//지도를 생성합니다
 		var map = new daum.maps.Map(mapContainer, mapOption);
-		
 		for (var i = 0; i < locations.length; i++) {
 			//지오코드의 함수가 내부적으로 반복문의 변수를 받지 못하므로 주의!!!
 			
@@ -122,7 +120,7 @@ $(document).ready(function(){
 				var address = result[0].address_name;
 				//console.log(locations.indexOf(address));//브라우저 콘솔에 인덱스 출력해서 확인
 				
-				var content = '<div class="arrow_box">대한민국 호텔미텔미</div>';
+				var content = '190000';//대한민국 호텔미텔미 대신에 짜가 데이터
 				if(locations.indexOf(address)>=0){
 					//content = contents[locations.indexOf(address)];
 					content = prices[locations.indexOf(address)];
