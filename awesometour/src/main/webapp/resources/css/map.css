@@ -194,7 +194,8 @@ input:focus { outline: none; }
 
 .mapsCard-photo {
     width: 150px;
-    height: 100%;
+    height: 150px;
+    object-fit:contain !important;
     top: 0;
     left: 0;
     overflow: hidden;

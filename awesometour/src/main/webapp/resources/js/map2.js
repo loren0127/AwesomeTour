@@ -58,7 +58,7 @@ $(document).ready(function(){
 															
 					//검색 리스트 사이드에 표시하기
 					var output = '<div class="mapsCard-container" style="margin-top: 10px;" data-address1="'+item.acc_address1+'" data-accnum="'+item.acc_num+'">';
-					output += '<div class="mapsCard-photo"><img src="../accomList/imageView.do?im_ac_num='+item.acc_num+'&kind=im_cover" data-imgnum="'+item.acc_num+'" style="height:150px;"></div>';
+					output += '<div class="mapsCard-photo"><img src="../accomList/imageView.do?im_ac_num='+item.acc_num+'&kind=im_cover" data-imgnum="'+item.acc_num+'" style="width:100%;height:100%;"></div>';
 					output += '<div class="mapsCard-content">';
 					output += '	<div class="mapsCard-name">';
 					output += '		<h6>'+item.acc_name+'</h6>';
@@ -379,7 +379,7 @@ $(document).ready(function(){
 			
 			if(target == check){
 				$(this).addClass('on');
-				$('#output').animate({scrollTop:offsetTop}, 800);//두번째 속성은 duration(number), easing(String) 등
+				$('#output').animate({scrollTop:offsetTop}, 1000);//두번째 속성은 duration(number), easing(String) 등
 			}
 		});
 	});
