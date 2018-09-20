@@ -58,7 +58,7 @@ $(document).ready(function(){
 															
 					//검색 리스트 사이드에 표시하기
 					var output = '<div class="mapsCard-container" style="margin-top: 10px;" data-address1="'+item.acc_address1+'" data-accnum="'+item.acc_num+'">';
-					output += '<div class="mapsCard-photo"><img src="../accomList/imageView.do?im_ac_num='+item.acc_num+'&kind=im_cover" data-imgnum="'+item.acc_num+'" style="height:150px;"></div>';
+					output += '<div class="mapsCard-photo"><img src="../accomList/imageView.do?im_ac_num='+item.acc_num+'&kind=im_cover" data-imgnum="'+item.acc_num+'" style="width:100%;height:100%;"></div>';
 					output += '<div class="mapsCard-content">';
 					output += '	<div class="mapsCard-name">';
 					output += '		<h6>'+item.acc_name+'</h6>';
@@ -71,7 +71,7 @@ $(document).ready(function(){
 						output += '			<div class="starRates" style="font-style:italic;font-size:15px;">아직 평점이 없네요.</div>';					
 					}
 					output += '			<div class="reviews" style="font-size:12px;">이용후기 <b>'+item.review_count+'</b>건</div>';
-					output += '			<div class="benefits" style="font-size:15px;font-weight:bold;color:#63C355;">'+service+'</div>';
+					output += '			<div class="benefits" style="font-size:15px;font-weight:bold;color:#63C355;width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+service+'</div>';
 					output += '		</div>';
 					output += '		<div class="2ndRowRightCol" style="float: right;">';
 					output += '			<div class="accomPrice" data-price="'+item.ro_price+'" style="font-weight:bold;">'+numberWithCommas(item.ro_price)+'원</div>';
@@ -379,7 +379,7 @@ $(document).ready(function(){
 			
 			if(target == check){
 				$(this).addClass('on');
-				$('#output').animate({scrollTop:offsetTop}, 800);//두번째 속성은 duration(number), easing(String) 등
+				$('#output').animate({scrollTop:offsetTop}, 1000);//두번째 속성은 duration(number), easing(String) 등
 			}
 		});
 	});
