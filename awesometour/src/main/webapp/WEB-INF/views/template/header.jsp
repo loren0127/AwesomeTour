@@ -58,7 +58,7 @@
 					<button id="people_plus_h" name="people_plus" style="outline:none;">+</button></li>
 		<li class="nav-item"><input type="text" style="margin-top: 15px;width: 75%;height: 38px;"
 					id="je_search_h" name="search"
-					placeholder="숙소명/지역" value="${map.search}">
+					placeholder="서울" value="${map.search}">
 		</li>
 		<li class="nav-item" id="search_btn_h" style="margin-top:15px;margin-left:-50px;">
 			<button type="submit" class="btn hotelLink_main" style="height:38px;background-color:#fff;">검색</button>
