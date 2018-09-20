@@ -36,7 +36,7 @@ public class MailController {
     return "mailForm";
   }  
  
-  // mailSending 코드
+  // mailSending 肄붾뱶
   @RequestMapping(value="/mail/mailSending.do")
   public String mailSending(HttpServletRequest request,String email,HttpSession session) {
    
@@ -67,17 +67,22 @@ public class MailController {
 	
 	String code_code = code_code1+code_code2+code_code3+code_code4+code_code5;
 	
-    String setfrom = "ghcks3916@gmail.com";         
-    String code_email = request.getParameter("email");  // 받는 사람 이메일
-    String title   = "AwesomeTour 회원가입 코드 번호";  //request.getParameter("title");      // 제목
+    String setfrom = "AwesomeTour@noreply.com";         
+    String code_email = request.getParameter("email");  // 諛쏅뒗 �궗�엺 �씠硫붿씪
+    String title   = "AwesomeTour 회원가입 인증코드입니다.";  //request.getParameter("title");      // �젣紐�
     try {
       MimeMessage message = mailSender.createMimeMessage();
       MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
  
-      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
-      messageHelper.setTo(code_email);     // 받는사람 이메일
-      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-      messageHelper.setText("코드번호 : "+code_code);  // 메일 내용
+      messageHelper.setFrom(setfrom);  // 蹂대궡�뒗�궗�엺 �깮�왂�븯嫄곕굹 �븯硫� �젙�긽�옉�룞�쓣 �븞�븿
+      messageHelper.setTo(code_email);     // 諛쏅뒗�궗�엺 �씠硫붿씪
+      messageHelper.setSubject(title); // 硫붿씪�젣紐⑹� �깮�왂�씠 媛��뒫�븯�떎
+     
+      String append = "<table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='672' border='0'> <!-- 헤더 --> <tbody><tr><td style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px'><a href='http://192.168.10.41:8080/awesometour/index.jsp' name='ANCHOR14311' target='_blank' rel='noreferrer noopener'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='AwesomeTour!' src='http://i1.ruliweb.com/img/18/09/18/165ec1d1cbcf9e2b.png'></a> </td></tr><!-- //헤더 --> <!-- 컨텐츠 --><tr><td style='BORDER-RIGHT: #e4e4e4 1px solid; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; BORDER-LEFT: #e4e4e4 1px solid; MARGIN: 0px; PADDING-RIGHT: 0px'> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='670' border='0'> <tbody><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='49' colspan='3'>&nbsp;</td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' width='53'>&nbsp;</td><td width='564'> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'> <tbody><tr><td> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'> <tbody><tr><td style='HEIGHT: 20px'> <span style='color:gray'> Awesome Tour에서 알려드립니다. </span> </td></tr><tr><td> <h1>회원가입 코드가 발송되었습니다.</h1></td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='27'>&nbsp;</td></tr><tr><td> <table style='PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px; PADDING-RIGHT: 0px' cellspacing='0' cellpadding='0' width='564' border='0'> <tbody><tr><td style='COLOR: #666; FONT: 12px/20px dotum'> <strong style='FONT-WEIGHT: bold; COLOR: #333'>안녕하세요, 고객님</strong> <br>저희 어썸투어에 가입절차 진행을 위한 코드번호를 알려드리겠습니다<br>";
+      append +="<h2 style=\"margin: 10 0 5;\">가입 코드 : "+code_code+"</h2>";
+      append +="<br> 위의 코드를 홈페이지에 입력후 가입을 절차를 이어서 진행해주시기 바랍니다.<br> 감사합니다. <br> <!-- 받는 부분 --> </td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='30'>&nbsp;</td></tr> <tr> <td style='TEXT-ALIGN: center'> <div style='margin: 0 auto;padding: 0;max-width: 760px;clear: both;line-height: 1.8;'> <br> <a href='http://192.168.10.41:8080/awesometour/index.jsp' style='background: #ce3176;border: 1px solid #ce3176;color: #fff;cursor: pointer;text-decoration: none;border-radius: 100px; font-size: 16px;padding: 8px 16px;font-weight: 600;' target='_blank'> 홈페이지 바로가기 </a></div> </tr></tbody> </table> </td></tr><tr><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' height='60'>&nbsp;</td></tr></tbody> </table> </td></tr></tbody> </table> </td><td style='FONT-SIZE: 0px; LINE-HEIGHT: 0' width='53'>&nbsp;</td></tr></tbody> </table> </td></tr><tr><td> <table cellspacing='0' cellpadding='0' width='672' border='0'> <tbody><tr><td style='WIDTH: 155px'><a href='http://192.168.10.41:8080/awesometour/index.jsp' name='ANCHOR14314' target='_blank' rel='noreferrer noopener'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='GRAVITY' src='http://i3.ruliweb.com/img/18/09/20/165f2923892f9e2b.jpg'></a></td><td style='WIDTH: 517px'> <table cellspacing='0' cellpadding='0' width='517' border='0'> <tbody><tr><td style='FONT-SIZE: 12px; LINE-HEIGHT: 12px'> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='㈜그라비티 대표이사 : 박현철 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 연구개발타워)' src='http://i1.ruliweb.com/img/18/09/20/165f273122ef9e2b.png'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='전화문의 :1588-9897 팩스 : 02-2132-7077 사업자등록번호 : 201 -81-56197' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer03.gif'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='통신판매업 신고번호 : 제 2008-서울마포-0207호 고객지원센터 : 서울특별시 마포구 월드컵북로 396, 15층(상암동, 누리꿈스퀘어 연구개발타워)' src='http://imgc.gnjoy.com/gnjoy/2012_gnjoy/dm/images/img_dm_footer04_150207.gif'><br> <img style='BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: top; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px' alt='Copyright (c) GRAVITY Co., Ltd. All Rights Reserved.' src='http://i1.ruliweb.com/img/18/09/20/165f2731386f9e2b.png'><br> </td></tr></tbody> </table> </td></tr></tbody> </table> </td></tr></tbody> </table> </td></tr><!-- //풋터 --></tbody> </table>";
+      
+      messageHelper.setText(append,true);  // 硫붿씪 �궡�슜
       
       
       codeCommand.setCode_code(code_code);
@@ -90,19 +95,19 @@ public class MailController {
     
     return "mailCheck";
   }
-  //이메일 보낸 후 페이지
+  //�씠硫붿씪 蹂대궦 �썑 �럹�씠吏�
   @RequestMapping(value="/mail/mailComp.do")
   public String mailComp() {
 	  
 	return "/mail/mailComp";
   }
-  // 이메일 체크 페이지
+  // �씠硫붿씪 泥댄겕 �럹�씠吏�
   @RequestMapping(value="/mail/mailCheck.do")
   public String mailCheck() {
 	  
 	return "mailCheck";
   }
-  //이메일 코드인증
+  //�씠硫붿씪 肄붾뱶�씤利�
   @RequestMapping(value="/mail/mailChecking.do",method = RequestMethod.POST)
   public String mailChecking(String code_email, String code_code, HttpSession session) {
 	 
@@ -112,7 +117,7 @@ public class MailController {
 	  codeCommand.setCode_email(code_email);
 	  session.setAttribute("code_email", code_email);
 	  
-	  //이메일 코드 찾기
+	  //�씠硫붿씪 肄붾뱶 李얘린
 	  int count = memberService.selectCode(codeCommand);
 	  if(count == 0) {
 		  return mailCheck();

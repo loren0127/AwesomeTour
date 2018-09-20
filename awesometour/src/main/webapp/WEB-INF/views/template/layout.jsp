@@ -29,16 +29,40 @@
 <!-- services 라이브러리 불러오기 -->
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=463df352b2234b5bac553021b6d8bd14&libraries=services"></script>
+<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0
+            }, 400);
+            return false;
+        });
+    });
+</script>
+
+
 </head>
+
 <body>
 <div id="main">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
+	<div style="position:fixed;z-index:20000;bottom: 80px;right: 45px;">
+	<a href="#"><i class="fa fa-angle-up" style="font-size:32pt; color:#C80DD8 ; z-index: 999;" id="MOVE_TOP_BTN"></i></a>
 	
+	</div>
 	<c:if test="${not empty user_email}">
 		<div style="position:fixed;z-index:20000;bottom: 10px;right: 5px;">
-			<a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1100, height=620'); return false;"><img alt="icon" src="${pageContext.request.contextPath}/resources/img/chat_icon.png" style="width:70px;"></a>
+			<a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chat/chatFunctionResult.do?selected=mainChat" onclick="window.open(this.href, 'Chat_page_popup', 'width=1100, height=620'); return false;"><img alt="icon" src="${pageContext.request.contextPath}/resources/img/chat_icon.png" style="width:70px; z-index: 999;"></a>
 		</div>
 	</c:if>
 	<div id="main_body">

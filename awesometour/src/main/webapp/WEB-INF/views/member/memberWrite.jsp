@@ -126,17 +126,17 @@
 					<div class="col-md-4">
 						<div class="single-defination">
 							<h4 class="mb-20">순서 2</h4>
-							<div class="mt-10">
-								<form:input path="member_nickname" class="form-control" placeholder="닉네임" style="width:200px;" />
-								<form:errors path="member_nickname" cssClass="error-color"/><br>
-								<span id="message_nickname"></span><br>
+							<div >
+								<form:input path="member_nickname" class="form-control" placeholder="닉네임" style="width:250px;margin:10px 0" />
+								<form:errors path="member_nickname" cssClass="error-color"/>
 								<input type="button" id="confirm_nickname" value="닉네임 중복체크"  class="btn btn-warning mb-2">
+								<span id="message_nickname" style="margin-left:5px"></span><br>
 							</div>
 							<br>
 							<div class="filebox">
-								<label for="upload" class="btn btn-warning mb-2" id="profile">프로필</label>
-								<input type="file" name="upload" id="upload" accept=".bmp, .gif, .jpg, .png" onchange="getThumbnailPrivew(this, 'data-type');">	
-								<img id="data-type" class="img-circle" width="40%" height="40%">
+								<img id="data-type"  src="../resources/images/noImg.jpg" class="img-circle" width="40%" height="40%" style="border:1px solid silver">
+								<input type="file" name="upload" id="upload" accept=".bmp, .gif, .jpg, .png" onchange="getThumbnailPrivew(this, 'data-type');">	<br>
+								<label for="upload" class="btn btn-warning mb-2" id="profile" style=";margin-top: 10px;">프로필</label>
 							</div>
 						</div>
 					</div>
@@ -144,7 +144,7 @@
 						<div class="single-defination">
 							<h4 class="mb-20">순서 3</h4>
 							<div>
-								<form:input path="member_content" class="form-control" placeholder="자기소개" style="width:200px;" />
+								<textarea name="member_content" id="member_content" class="form-control" placeholder="자기소개" style="width:200px; height:200px" ></textarea>
 								<form:errors path="member_content" cssClass="error-color" />
 							</div>
 							<br><br>

@@ -78,7 +78,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 
 
 <!-- ------------ 사이드 메뉴 ---------------- -->
-<div class="rounded sticky-top" style="float:right; border:1px solid silver ; top: 100px; padding-left:10px; font-size:10pt" >
+<div class="rounded sticky-top" style="float:right; border:1px solid silver ; top: 100px; padding-left:10px; font-size:10pt;overflow:hidden" >
 <div class="row">
 <div class="col-6" style="    padding: 10px;    text-align: center;">
 <h6>${rv.acc_name }</h6> 

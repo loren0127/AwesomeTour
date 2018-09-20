@@ -11,6 +11,12 @@
 		background-color: #fff;
 	    border: 1px solid #FEC019; 
 	  }
+	   @media ( max-width:766px ) {
+.row div{
+padding:0 10px!important;
+font-size:8pt;
+}
+}
 </style>
 <script>
 history.pushState(null, null, location.href);
@@ -67,7 +73,7 @@ $("#recGr").hide();
 <input type="hidden" id="rv_money" name="rv_money">
 
 
-<div class="rounded "  style="border:1px solid gray">
+<div class="rounded "  style="border:1px solid gray;overflow:hidden">
 <div class="container">
 <div class="row ">
 	<div class="col-8" style="text-align:center;padding: 5% 0;" >
@@ -114,7 +120,7 @@ $("#recGr").hide();
 		:
 	</div>
 	
-	<div class="col-7">
+	<div class="col-6">
 		${rv.rv_people }명<br>
 		<span id="check_in">${rv.rv_start_date }</span> ~ <span id="check_out">${rv.rv_end_date}</span> <br>
 	</div>
@@ -133,7 +139,7 @@ $("#recGr").hide();
 	
 	
 	
-	<div class="col-7">
+	<div class="col-6">
 		<span id="money_sum_sp"></span>원<br>
 		<span id="fee_sp"></span>원
 	</div>
@@ -148,7 +154,7 @@ $("#recGr").hide();
 	</div>
 	
 
-	<div class="col-7" >
+	<div class="col-6" >
 		<span id="rv_money_sp"></span>원<br>
 	</div>
 
