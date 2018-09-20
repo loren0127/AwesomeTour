@@ -69,7 +69,7 @@
 						<div style="padding: 2% 0;">
 							<img style="max-height: 200px; max-width: 300px" src="../accomDetail/imageView.do?im_ac_num=${rv.acc_num}&ro_room_num=${rv.ro_room_num}&kind=im_cover">
 						</div>
-						<h3>${rv.acc_name }</h3>
+						<h3>${rv.acc_name}</h3>
 						${rv.acc_address1} ${rv.acc_address2}<br>
 						<c:if test=" ${!empty rv.ag_grade }">
 							<i class="fa fa-heart" style="color: #ffc107"></i> ${rv.ag_grade}점<br>
@@ -108,7 +108,7 @@
 					</div>
 
 					<div class="col-7">
-						${rv.rv_people }명<br> <span id="check_in">${rv.rv_start_date }</span>
+						${rv.rv_people }명<br> <span id="check_in">${rv.rv_start_date}</span>
 						~ <span id="check_out">${rv.rv_end_date}</span> <br>
 					</div>
 
@@ -149,9 +149,12 @@
 
 		<div id="recGr" style="margin: 30px auto">
 			<a class="btn btn-primary" href="#" onclick="history.go(-1)">이전</a> 
-			<a class="btn btn-primary" href="#" onclick="checkedConfirm();">예약 취소</a> 
-			<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">컴플레인 보내기</a>
-			
+			<a class="btn btn-primary" href="mypageReservationCancel.do?rv_start_date=${rv.rv_start_date}&acc_name=${rv.acc_name}&rv_num=${rv.rv_num}" onclick="checkedConfirm();">예약 취소</a> 
+			<p>현재 컴플레인이 진행중입니다...</p>
+			<c:if test="${checkedComplain > 0}">
+				<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">컴플레인 보내기</a>
+			</c:if>
+			<!--  -->
 			<!--  -->
 			<!-- The Modal -->
 			<div class="modal fade" id="myModal">
@@ -173,7 +176,6 @@
 							<label for="member_complain_content">컴플레인 사유</label>
 							<form:textarea class="form-control form-control-sm" rows="5" path="member_complain_content"/>
 							
-							:: Test 구간(${rv.rv_end_date} --- ${rv.rv_num} --- ${rv.acc_num})
 							<form:hidden path="member_rv_end_date" value="${rv.rv_end_date}"/>
 							<form:hidden path="member_rv_num" value="${rv.rv_num}"/>
 							<form:hidden path="member_complain_accom_num" value="${rv.acc_num}"/>
@@ -187,7 +189,6 @@
 					</div>
 				</div>
 			</div>
-			<!--  -->
 		</div>
 	</div>
 </div>

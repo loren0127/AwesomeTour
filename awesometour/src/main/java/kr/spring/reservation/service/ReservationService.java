@@ -13,6 +13,4 @@ public interface ReservationService {
 	public int selectGroupMemberCount(Map<String, Object> m_map);
 	public int selectRoNum(Map<String,Integer> map);
 	public int selectGradeCount(Integer acc_num);
-
-
 }

@@ -134,7 +134,7 @@ $(document).ready(function() {
 															<h4 class="modal-title">채팅 신청 쪽지</h4>
 															<button type="button" class="close" data-dismiss="modal">&times;</button>
 														</div>
-
+														
 														<!-- Modal body -->
 														<form:form id="friendChatInvite" commandName="messageCommand" action="insertFriendChatSendMessage.do">
 														<div class="modal-body" >
@@ -151,12 +151,12 @@ $(document).ready(function() {
 																<span id="receiverCheckedMessageChat"></span>
 																<hr>
 																내용 : <form:textarea path="message_content" class="form-control form-control-sm"/><br>
-														</div>
+															</div>
 														
 														<!-- Modal footer -->
 														<div class="modal-footer">
 															<button type="submit">전송</button>
-														</div>
+														</div>``
 														
 														</form:form>
 													</div>
@@ -170,8 +170,7 @@ $(document).ready(function() {
 									<div class="chat_list">
 										<div class="chat_people">
 											<div class="chat_img">
-												<img src="https://ptetutorials.com/images/user-profile.png"
-													alt="sunil">
+												<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${user_email}">
 											</div>
 											<div class="chat_ib">
 												<h5>

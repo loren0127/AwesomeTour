@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="shortcut icon" href="../resources/images/favicon.ico">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" 
 	rel="stylesheet">
@@ -32,7 +33,21 @@
 <script src="${pageContext.request.contextPath}/resources/js/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/map.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/map2.js"></script>
+<style>
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 
+sidebarCollapse:hover {
+	color: #212529;
+	background-color: #fff;
+    border-color: #ffc107;
+}
+
+.bg-light {
+	background-color:#5a5a5a!important;
+}
+</style>
 <!-- Mypage layout css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
 
@@ -60,10 +75,10 @@
 					<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${user_email}" style="width: 60%;">
 				</p>
 					
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="nav-item" style="width:50%"><a class="nav-link active" data-toggle="tab" href="#member" style="text-align:">&nbsp;&nbsp;&nbsp;회원</a></li>
+				<ul class="nav nav-tabs" role="tablist" style="border-bottom: 1px solid #464646;">
+					<li class="nav-item" style="width:50%; align-text:center;"><a class="nav-link active" data-toggle="tab" href="#member" style="background-color:#fec826; border-color:#fec826">&nbsp;&nbsp;&nbsp;회원</a></li>
 					<c:if test="${user_auth == 3}">
-						<li class="nav-item" style="width:50%"><a class="nav-link" data-toggle="tab" href="#host" style="test-align: center">&nbsp;&nbsp;&nbsp;호스트</a></li>
+						<li class="nav-item" style="width:50%"><a class="nav-link" data-toggle="tab" href="#host" style="background-color:#fec826;	 border-color:#fec826">&nbsp;&nbsp;&nbsp;호스트</a></li>
 					</c:if>
 				</ul>
 				<div class="tab-content">
@@ -88,7 +103,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 
-					<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary" style="background-color:#393939; border-color:#393939;">
 						<svg class="svg-inline--fa fa-align-left fa-w-14"
 							aria-hidden="true" data-prefix="fas" data-icon="align-left"
 							role="img" xmlns="http://www.w3.org/2000/svg"
