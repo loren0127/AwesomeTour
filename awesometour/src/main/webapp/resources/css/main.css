@@ -167,6 +167,14 @@ input:checked + .radio_label:before {
     border-top-right-radius: 2px !important;
 }
 
+#people_minus:disabled{
+	color: lightgray;
+}
+
+#people_plus:disabled{
+	color: lightgray;
+}
+
 /*위치 검색 버튼*/
 #search{
 	color: #0F1721;

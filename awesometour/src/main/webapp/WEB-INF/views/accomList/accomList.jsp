@@ -103,7 +103,7 @@ $(function() {
 							var pagingAppend = '';
 							var searchList = [];
 							$(list).each(function(index, item) {;
-								//호텔성급 숫자->문자 -> 특수문자 로 
+								//호텔성급 숫자->문자->특수문자로 
 								var grade = item.acc_grade;
 								grade_str = grade.toString();
 								grade_str = grade_str.replace('1', '★');
@@ -131,7 +131,7 @@ $(function() {
 							pagingAppend += '</div>';
 
 							if (item.ro_sub == 'h') {
-								pagingAppend += '<div>호텔성급 '+ grade_str+ '</div><br>';
+								pagingAppend += '<div>호텔성급 '+ grade_str+ '</div>';
 								pagingAppend += '<input type="hidden" value="'+item.acc_num+'" name="im_ac_num">';
 							}
 								pagingAppend += '<div style="padding-top:10px;">';
@@ -187,86 +187,43 @@ $(function() {
 						}
 					},
 					error : function() {
-						alert('해당조건에 부합하는 숙소가 없습니다');
+						alert('해당하는 숙소가 없네요ㅠㅠ');
 					}
 				});
 		}
-	
-	if (matchMedia("screen and (max-width:766px)").matches) {
-		$("#rvSearch").removeClass("sticky-top");
-		
-		} 
-	
 });
 </script>
-<style>
-@media ( max-width:766px ) {
-
-#rvSearch input[type="text"]{
-	width:100%!important;
-	text-align:center;
-}
-
- 
-#plus_minus{
-
- 		padding-left: 33%!important;
-
- 	}
- 	
- #search_btn{
-
- 		text-align:center;
-
- 	}
- }
-</style>
 
 <!-- ====================정은이 폼 시작==================== -->
 <form id="se_form">
 <div>
-	
 	<nav class="navbar-dark navbar-expand-sm sticky-top" id="rvSearch" style="margin-top:82px; z-index:10000">
  
-	<ul class="nav navbar-nav navbar-dark bg-dark justify-content-center"
-		id="list_nav_h">
-		<li class="nav-item">
-		<input type="text" name="searchtp" disabled value=
+	<ul class="je_form_row nav navbar-nav navbar-dark justify-content-center" id="list_nav_h" style="background-color: #0F1721;">
+		<li class="nav-item" style="margin:0 5px;">
+		<input type="text" name="searchtp" value=
 		<c:if test="${map.searchtype eq 'p'}">"프라이빗하우스"</c:if>
 		<c:if test="${map.searchtype eq 'h'}">"호텔"</c:if>
-		  style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;">
+		  style="height: 38px; width: 150px; margin-top: 15px;">
 		<input type="hidden" name="searchtype" value="${map.searchtype}">
+		</li><!-- =======================================================절대로 li태그 내부 태그 정렬 바꾸지 마시오!!! -->
+		<li class="nav-item"><input type="text" name="check_in"	class="date_in" value="${map.check_in}"
+					style="height: 38px;width: 150px;margin-top: 15px;" autocomplete="off"><input type="text" name="check_out"	class="date_out" value="${map.check_out}"
+					style="height: 38px;width: 150px;margin-top:15px;" autocomplete="off"></li>
+		<li class="nav-item" id="plus_minus" style="margin:0 5px;margin-top:15px;height:100%;"><input type="hidden" name="people_count" id="people_count" value="1">
+					<button id="people_minus" name="minus" style="outline:none;">-</button>
+					<button id="people" name="people" style="outline:none;">
+						<span id="peo_sum_btn">${map.people_count}</span>명
+					</button>
+					<button id="people_plus" name="people_plus" style="outline:none;">+</button></li>
+		<li class="nav-item"><input type="text" style="margin-top: 15px;width: 75%;height: 38px;"
+					id="je_search" name="search"
+					placeholder="숙소명/지역" value="${map.search}">
 		</li>
-		<li class="nav-item"> <input type="text" name="check_in"
-			class="date_in" value="${map.check_in}"
-			style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;"
-			autocomplete="off"></li>
-		<li class="nav-item"><input type="text" name="check_out"
-			class="date_out" value="${map.check_out}"
-			style="height: 40px; width: 150px; margin-top: 15px;"
-			autocomplete="off"></li>
-		<li class="nav-item" id="plus_minus"><input type="hidden"
-			name="people_count" id="people_count" value="1">
-			<button id="people" name="people"
-				style="height: 40px; width: 150px; position: absolute; background-color: white; border: 1px solid #A9A9A9; z-index: 0; margin-top: 15px;display: inline;">
-				<span id="peo_sum_btn">1</span>명
-			</button> <input type="button" name="minus" id="people_minus" value="-"
-			class="form-control"
-			style="border: 0;; font-size: 20px; width: 40px; position: relative; margin-top: 16px; margin-left: 1px;display: inline;">
-			<input type="button" name="people_plus" class="form-control"
-			id="people_plus" value="+"
-			style="border: 0; font-size: 20px; position: relative; z-index: 1; width: 40px; margin-left: 65px; margin-top: 16px;display: inline;">
-		</li>
-		<li class="nav-item"><input type="text"
-			style="margin-top: 15px; width: 100%; height: 40px;" id="je_search_h"
-			name="search" placeholder="구 또는 이름을 검색하세요" value="${map.search}" autocomplete="off">
-		</li>
-		<li class="nav-item" id="search_btn">
-			<button type="submit" class="btn btn-warning" 
-				style=" height: 40px; width: 100px; margin-top: 15px;">검색</button>
+		<li class="nav-item" id="search_btn" style="margin-top:15px;margin-left:-50px;">
+			<button type="submit" class="btn hotelLink_main" style="height:38px;background-color:#fff;">검색</button>
 		</li>
 	</ul>
-	
 </nav>
 
 	<!-- ====================숙소 리스트 시작==================== -->
@@ -307,7 +264,7 @@ $(function() {
 				<span style="padding-left: 10px;"><b>서비스 및 이용규칙</b></span>
 				<ul style="list-style: none;padding-left: 10px;border-bottom: 1px solid rgba(0,0,0,.12);padding-bottom: 15px;">
 					<li><input type="checkbox" value="픽업" name="se_name">픽업</li>
-					<li><input type="checkbox" value="24시간 프론트(호텔전용)"
+					<li><input type="checkbox" value="24시간 프론트"
 						name="se_name">24시간 프론트(호텔전용)</li>
 					<li><input type="checkbox" value="룸 서비스" name="se_name">룸
 						서비스</li>
@@ -316,7 +273,7 @@ $(function() {
 					<li><input type="checkbox" value="조식" name="se_name">조식</li>
 					<li><input type="checkbox" value="반려동물 허용" name="se_name">반려동물
 						허용</li>
-					<li><input type="checkbox" value="파티 행사 허용" name="se_name">파티
+					<li><input type="checkbox" value="파티행사 허용" name="se_name">파티
 						행사 허용</li>
 				</ul>
 				<span style="padding-left: 10px;"><b>호텔성급</b></span>

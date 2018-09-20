@@ -55,7 +55,7 @@
 	cursor:pointer;
 }
 
-#je_form_row input[type=text]{
+.je_form_row input[type=text]{
 	color: darkgray;
 	padding-left: 10px;
 	border-width: 1px;
@@ -76,9 +76,16 @@
     border-top-left-radius: 0px !important;
 }
 
-@media screen and (max-width: 800px) {
-	#search_top {
-		display:none;
+@media ( max-width :766px ) {
+	#rvSearch input[type="text"] {
+		width: 100% !important;
+		text-align: center;
+	}
+	#plus_minus {
+		padding-left: 33.333333% !important;
+	}
+	#search_btn {
+		text-align: center;
 	}
 }
 

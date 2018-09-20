@@ -111,3 +111,35 @@
 .arrow_box a:hover{
 	color:#d900ed;
 }
+
+/*성원이 예약 설정 부분*/
+#list_nav_h li{
+	padding:0 3px 15px;; 
+}
+
+#people_plus_h{
+	display: inline!important;
+}
+
+#search_h:hover {
+	color: #212529;
+	background-color: #fff;
+	border-color: #ffc107;
+}
+
+@media ( max-width :766px ) {
+	#rv_h input[type="text"] {
+		width: 100% !important;
+		margin: 0 5px !important;
+	}
+	#rv_h select {
+		width: 100% !important;
+		margin: 0 5px !important;
+	}
+	#plus_minus_h {
+		padding-left: 33% !important;
+	}
+	#search_btn_h {
+		text-align: center;
+	}
+}
