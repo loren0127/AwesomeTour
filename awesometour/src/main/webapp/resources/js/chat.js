@@ -7,7 +7,8 @@ function connect() {
 	var request = new Request();
 	var chat_all_num = request.getParameter("chat_all_num");
 	
-	webSocket = new WebSocket("ws://192.168.10.41:8080/awesometour/chat-ws.do");
+	
+	webSocket = new WebSocket("ws://192.168.10.33:8080/awesometour/chat-ws.do");
 	//주석
 	webSocket.onopen = function(event) {
 		var message = chat_all_num + '|connect';
@@ -27,7 +28,7 @@ function connect() {
 		
 		if(arrayData[1] == chat_all_num) {
 			if(arrayData[2] == 'normal') {
-				appendMessage(arrayData[0] + ': ' +arrayData[3]);
+				appendMessage(arrayData[0] + ': ' +arrayData[3] + ':' + arrayData[5]);
 				//appendMessage(arrayData[0] + '|' + arrayData[1] + '|' + arrayData[2] + '|' + removeArrayByIndex(removeArrayByIndex(removeArrayByIndex(arrayData, 0), 0), 0));
 			} else if(arrayData[2] == 'connect') {
 				appendMessage('알람 - ' + arrayData[0] + '님 입장!');
@@ -75,9 +76,11 @@ function send() {
 function appendMessage(message) {
 	var request = new Request();
 	var user_email = request.getParameter("user_email");
+	var user_nickname = $('#user_nickname').val();
+	
 	var splitMessage = message.split(':');
 	
-	if(splitMessage[0] == user_email) {
+	if(splitMessage[0] == user_nickname) {
 		//Right user(Me)
 		var sendMessage = '<div class="outgoing_msg"><div class="sent_msg"><p>' + splitMessage[1] + '</p><span class="time_date">' + getTimeStamp() + '</span> </div></div><hr>'
 		$('#chatMessageArea').append(sendMessage);
@@ -92,7 +95,8 @@ function appendMessage(message) {
 		$("#chatMessageArea").scrollTop($("#chatMessageArea")[0].scrollHeight);
 	} else {
 		//Left chat(Other user)
-		var sendMessage = '<div class="outgoing_msg"><div class="incoming_msg_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>' + splitMessage[0] + '<div class="received_msg"><div class="received_withd_msg"><p>' + splitMessage[1] + '</p><span class="time_date">' + getTimeStamp() + '</span></div></div></div><hr>'
+		alert(message);
+		var sendMessage = '<div class="outgoing_msg"><div class="incoming_msg_img"><img class="rounded-circle" src=\"/awesometour/member/imageView.do?member_email=' + splitMessage[2] +'\"></div>' + splitMessage[0] + '<div class="received_msg"><div class="received_withd_msg"><p>' + splitMessage[1] + '</p><span class="time_date">' + getTimeStamp() + '</span></div></div></div><hr>'
 		$('#chatMessageArea').append(sendMessage);
 		
 		$("#mesgs").scrollTop($("#mesgs")[0].scrollHeight);

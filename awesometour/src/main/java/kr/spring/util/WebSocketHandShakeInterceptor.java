@@ -21,8 +21,9 @@ public class WebSocketHandShakeInterceptor extends HttpSessionHandshakeIntercept
 		HttpServletRequest req =  ssreq.getServletRequest();
 
 		String user_email = (String)req.getSession().getAttribute("user_email");
+		String user_nickname = (String)req.getSession().getAttribute("user_nickname");
 		attributes.put("user_email", user_email);
-
+		attributes.put("user_nickname", user_nickname);
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}
 

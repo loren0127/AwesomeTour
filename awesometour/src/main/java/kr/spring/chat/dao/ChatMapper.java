@@ -52,7 +52,7 @@ public interface ChatMapper {
 	public void updateChatMemberStatousCross(Map<String, Object> map);
 	
 	//Chat insert message(chat_talk_reg_date is default SYSDATE)
-	@Insert("INSERT INTO chat_all_talk(chat_all_talk_num, chat_all_num, member_email, chat_all_talk_content, chat_all_talk_reg_date) VALUES(chat_all_talk_seq.NEXTVAL, #{chat_all_num}, #{member_email}, #{chat_all_talk_content}, TO_DATE(#{chat_all_talk_reg_date}, 'YYYY-MM-DD HH24:MI:SS'))")
+	@Insert("INSERT INTO chat_all_talk(chat_all_talk_num, chat_all_num, member_email, chat_all_talk_content, chat_all_talk_reg_date, chat_all_talk_nickname) VALUES(chat_all_talk_seq.NEXTVAL, #{chat_all_num}, #{member_email}, #{chat_all_talk_content}, TO_DATE(#{chat_all_talk_reg_date}, 'YYYY-MM-DD HH24:MI:SS'), #{chat_all_talk_nickname})")
 	public void insertChatAllTalkMessageLog(ChatAllTalkCommand command);
 	
 	@Select("SELECT * FROM chat_all_talk WHERE chat_all_num=#{chat_all_num} ORDER BY chat_all_talk_reg_date ASC")

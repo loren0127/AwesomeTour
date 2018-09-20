@@ -44,18 +44,19 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		Map<String, Object> webSocketSessionMap = webSocketSession.getAttributes();
 		
 		String user_email = (String)webSocketSessionMap.get("user_email");
+		String user_nickname = (String)webSocketSessionMap.get("user_nickname");
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
 		String setChat_all_talk_reg_date = dateFormat.format(new java.util.Date());
-		System.out.println("³¯Â¥°¡ ¹¹´Ï?" + setChat_all_talk_reg_date);
 		
-		log.info(user_email + "(handleTextMessage): " + message);
+		log.info(user_nickname + "(handleTextMessage): " + message);
 		
 		//Insert chat message log
 		ChatAllTalkCommand chatAllTalkCommand = new ChatAllTalkCommand();
 		chatAllTalkCommand.setMember_email(user_email);
 		chatAllTalkCommand.setChat_all_talk_content(StringUtil.useNoHtml(message.getPayload()));
 		chatAllTalkCommand.setChat_all_talk_reg_date(setChat_all_talk_reg_date);
+		chatAllTalkCommand.setChat_all_talk_nickname(user_nickname);
 		
 		String talk_split[] = message.getPayload().split("\\|");
 		String chat_all_talk_content = "";
@@ -73,8 +74,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		}
 		
 		for(WebSocketSession loopWebSocketSession : user.values()) {
-			log.info(user_email + "(handleTextMessage): " + message.getPayload() + "|" + setChat_all_talk_reg_date);
-			loopWebSocketSession.sendMessage(new TextMessage(user_email + "|" + message.getPayload() + "|" + setChat_all_talk_reg_date));
+			log.info(user_email + "(handleTextMessage): " + message.getPayload() + "|" + setChat_all_talk_reg_date + "|" + user_email);
+			loopWebSocketSession.sendMessage(new TextMessage(user_nickname + "|" + message.getPayload() + "|" + setChat_all_talk_reg_date + "|" + user_email));
 		}
 	}
 	

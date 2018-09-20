@@ -11,6 +11,10 @@
 <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/chat.css" style="text/css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/chatEmailCheck.js"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
 <style>
 body {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -174,7 +178,7 @@ $(document).ready(function() {
 											</div>
 											<div class="chat_ib">
 												<h5>
-													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=friend">${chatMemberCommand.chat_all_title}</a>
+													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=friend&user_nickname=${user_nickname}">${chatMemberCommand.chat_all_title}</a>
 													<br><br>
 													<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
 												</h5>
@@ -207,7 +211,7 @@ $(document).ready(function() {
 											</div>
 											<div class="chat_ib">
 												<h5>
-													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=group">${chatMemberCommand.chat_all_title}</a>
+													<a class="hide_a" href="selectChatAllJoin.do?chat_all_num=${chatMemberCommand.chat_all_num}&chat_all_num_overlap=${chatMemberCommand.chat_all_num}&user_email=${chatMemberCommand.member_email}&checked=group&user_nickname=${user_nickname}">${chatMemberCommand.chat_all_title}</a>
 													<br><br>
 													<a href="#" data-toggle="modal" data-target="#groupChatMemberList">사용자 보기</a>
 													<span class="chat_date">${chatMemberCommand.chat_member_mod_date}</span>
@@ -334,6 +338,7 @@ $(document).ready(function() {
 		<!-- Message div start -->
 		<tiles:insertAttribute name="body" />
 		<!-- Message div end -->
+		<input type="hidden" id="user_nickname" value="${user_nickname}">
 	</div>
 </div>
 </div>

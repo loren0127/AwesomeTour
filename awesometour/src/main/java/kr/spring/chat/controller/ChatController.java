@@ -7,8 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
-import javax.validation.Valid;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.chat.dao.MessageMapper;
 import kr.spring.chat.domain.ChatAllAndMemberCommand;
 import kr.spring.chat.domain.ChatAllCommand;
 import kr.spring.chat.domain.ChatAllTalkCommand;
@@ -161,12 +159,7 @@ public class ChatController {
 			@RequestParam(value = "pageNum", defaultValue = "1") int receiveCurrentPage,
 			@RequestParam("checked") String checked, HttpSession session) {
 		String user_email = (String) session.getAttribute("user_email");
-		Map<String, Object> selectChatAllJoinMap = new HashMap<String, Object>();
-
-		// Chat join log start
-		selectChatAllJoinMap.put("user_email", user_email);
-		selectChatAllJoinMap.put("chat_all_num", chat_all_num);
-		// Chat join log end
+		String user_nickname = (String) session.getAttribute("user_nickname");
 
 		// Chat join date update start
 		Map<String, Object> changeMap = new HashMap<String, Object>();
@@ -229,7 +222,7 @@ public class ChatController {
 		String user_email = (String) session.getAttribute("user_email");
 
 		ChatAllCommand chatAllCommand = new ChatAllCommand();
-		chatAllCommand.setChat_all_title(message_sender + "(¹æÀå) / " + user_email);
+		chatAllCommand.setChat_all_title(message_sender + "(Â¹Ã¦Ã€Ã¥) / " + user_email);
 
 		// Create chat room and return chat_all_num
 		chatService.insertFriendChatCreate(chatAllCommand);

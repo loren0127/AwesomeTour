@@ -7,6 +7,7 @@ public class ChatAllTalkCommand {
 	private int chat_all_num;
 	private String member_email;
 	private String chat_all_talk_content;
+	private String chat_all_talk_nickname;
 	
 	//String type date
 	private String chat_all_talk_reg_date;
@@ -60,6 +61,22 @@ public class ChatAllTalkCommand {
 
 	public void setChat_all_talk_reg_date_type(Date chat_all_talk_reg_date_type) {
 		this.chat_all_talk_reg_date_type = chat_all_talk_reg_date_type;
+	}
+
+	public int getChat_all_talk_num() {
+		return chat_all_talk_num;
+	}
+
+	public void setChat_all_talk_num(int chat_all_talk_num) {
+		this.chat_all_talk_num = chat_all_talk_num;
+	}
+
+	public String getChat_all_talk_nickname() {
+		return chat_all_talk_nickname;
+	}
+
+	public void setChat_all_talk_nickname(String chat_all_talk_nickname) {
+		this.chat_all_talk_nickname = chat_all_talk_nickname;
 	}
 
 	@Override
