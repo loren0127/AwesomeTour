@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+	if (matchMedia("screen and (max-width:766px)").matches) {
+		$("#se_form nav").removeClass("sticky-top");
+		
+		} 
+	
 	var directorList=[];
 	if($('#peo_sum_btn').text() ==1){
 		$('#people_minus').attr('disabled',true); 		
@@ -64,19 +70,19 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 	
-/*	var directorList = new Array();
+	var directorList = new Array();
 	$('#address').keyup(function (event) {
 		search_auto = $(this).val();
 		director_List(search_auto);
-	});*/
+	});
 
-/*	var director_value = '';
+	var director_value = '';
 	var director_count = 0;
 	$('#address').keydown(function (event) {
 		search_auto = $(this).val();
 		console.log('search_auto : ' + search_auto);
 		director_List(search_auto);
-	});*/
+	});
 
 	$('#address').keypress(function (event) {
 		var search = $(this).val();
@@ -111,7 +117,9 @@ $(document).ready(function() {
 		$('#address').autocomplete({
 			source: directorList,
 			minLength: 2,
-			max:5
+			max:5,
+			matchContains: false,
+			selectFirst:false
 		}); //자동완성 처리	
 	}
 });

@@ -134,6 +134,7 @@ public class MemberController {
 					log.debug("<<dd>>");
 					log.debug("<<user_email>> : " + member.getMember_email());
 					log.debug("<<user_auth>> : " + member.getMember_auth());
+					
 				}
 				return "redirect:/main/main.do";
 			}else {

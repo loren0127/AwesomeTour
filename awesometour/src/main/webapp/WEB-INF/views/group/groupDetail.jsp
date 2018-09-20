@@ -103,14 +103,14 @@ geocoder.addressSearch($('#add1').text(), function(result, status) {
 				timeout:30000,
 				success:function(data){  
 					if(data.result == 'success'){
-						alert("모임에 가입되었습니다!")
+						alert("모임에 가입되었습니다!");
+						location.reload();
 					}else{
-						alert(data.result);
+						
 					}
 				},
 				error:function(request,status,error){
-					alert('등록시 네트워크 오류 발생!');
-			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					
 				}
 	 	  
 	   })
@@ -177,17 +177,14 @@ $.ajax({
 	 				$('#recAcc').append(appendText);
 
 			}else{
-				
-				alert(data.result)
+		
 
 			}
 		},
 		error:function(request,status,error){
-			alert('등록시 네트워크 오류 발생!');
-	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
+			
   
-})
+}})
 	
 	
 	////////////////////
@@ -201,7 +198,7 @@ $('.hobby').each(function(element, index){
 	  }		  
 	  $(this).append(appendText);
 	 
-});
+})
 
  
 })

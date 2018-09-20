@@ -116,12 +116,19 @@ $( "#groupAdd" ).button().on( "click", function() {
 	position: new daum.maps.LatLng(37.537187, 127.005476),
 	map: map
 	});
+	
+	
 
   });
   
   
   ////////////////////////////////////////////
-    
+
+$(document).on('click', '#uploadBtn', function(event){
+	event.preventDefault();
+    $('#upload').trigger('click');
+});
+
 
 })
 </script>
@@ -276,12 +283,11 @@ $( "#groupAdd" ).button().on( "click", function() {
       <br>
       
        <label for="upload"><b>사진 등록</b></label>
-       <img id="LoadImg" src="https://cdn.icon-icons.com/icons2/37/PNG/512/add_archive_application_4473.png" style="margin: 10px 0; height: 120px;" alt="이미지를 등록해주세요" onerror="this.style.display='none'">
+       <img id="LoadImg" src="../resources/images/noImg.jpg" style="margin: 10px 0; height: 120px; max-width:300px; border:1px solid silver " alt="이미지를 등록해주세요" onerror="this.style.display='none'">
        
-        <form:input type="file" name="upload" path="upload"/><br>
-      
-	
-		
+        <form:input type="file" name="upload" path="upload" style="display:none" /><br>
+      <button  class="btn btn-default hotelLink_main" id="uploadBtn" style="margin-bottom:50px;border:1px solid silver">파일 업로드</button><br>
+
 		<a href="#" class="btn btn-light hotelLink_main" role="button" id="move-4">다음</a>
 		
   </div>
@@ -317,7 +323,7 @@ $( "#groupAdd" ).button().on( "click", function() {
   	  <div id="inviteID" class="row"  >
   	  <div class="col-5" >
   	 	 <div class="rounded-circle"  style="height:50px;width:50px;background-color:gray; padding: 5px 5px; cursor:pointer">
-  	  		<div style="margin: 0 auto;color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/group/invite.do", "Chat_page_popup", "width=600, height=320");'><b>+</b></div>
+  	  		<div style="margin: 0 auto;color:white;margin: 0 11px;font-size: 20pt;" onclick='window.open("${pageContext.request.contextPath}/group/invite.do", "Chat_page_popup", "width=500, height=330");'><b>+</b></div>
   	 	 </div>
   	 </div>	   	  
   	         <form:input type="hidden"  path="inviteMember" />

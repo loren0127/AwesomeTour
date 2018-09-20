@@ -15,7 +15,7 @@
 				<div class="serial">고객이메일</div>
 				<div class="serial"></div>
 				<div class="serial">보낸날짜</div>
-				<div class="serial">숙박 종료날짜</div>
+				<div class="serial">숙박 종료일</div>
 			</div>
 			
 			<input type="hidden" value="${user_email }" id="user_email" name="user_email">

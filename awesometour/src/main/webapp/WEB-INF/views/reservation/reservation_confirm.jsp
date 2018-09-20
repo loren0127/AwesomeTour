@@ -17,12 +17,19 @@
 	    border: 1px solid #FEC019; 
 	  }
  @media ( max-width:766px ) {
- 
+  #state1 ul{
+	    padding: 10px!important;
+}
  	.sticky-top{
  	display:none;
  	}
  	#yogu{
  	width:100%!important ;
+ 	}
+ 	
+	#cntRv{
+ 	 	width:100%!important ;
+ 	
  	}
  }
  
@@ -70,7 +77,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 <h1>예약 정보 확인</h1>
 <div>
  <c:if test="${count>0}" > 
-<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "   >
+<div class="rounded" style="border:1px solid green ; width:60%; padding:15px 0; text-align:center "  id="cntRv" >
   <i class="fa fa-info-circle" style="margin-top: 2px;color:green;font-size:15pt;margin-left:30px;float:left"></i> 서두르세요! 오늘 이 호텔 예약한 사람이 ${count}명 있습니다!
 </div>
 </c:if>
@@ -111,7 +118,7 @@ $("#rv_money").val(Number($("#money_sum").val())+Number($("#fee").val()));
 </div>
 <!-- ------------ 사이드 메뉴 ---------------- -->
 
-<div class="state">
+<div class="state" id="state1">
 	<input type="hidden" name="acc_num" value="${rv.acc_num}">
 	<h3>숙박 정보</h3><br>
 	<ul style="list-style: none;"> 

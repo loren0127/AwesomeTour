@@ -96,7 +96,7 @@ $("#send").on('click',function(event){
 </script>
 <body>
 <div class="rounded" style="border:1px solid silver; margin:5px"> 
-	<h2 style="text-align:center">멤버 닉네임 조회</h2>
+	<h3 style="text-align:center">멤버 아이디 조회</h3>
 		<div style="text-align:center">
 		<input type="email" id="member" class="form-control" style="width:40%;display:inline;padding-top:3px;margin-right:5px"><button id="searchMember" class="btn button">찾기</button>
 		</div>

@@ -199,14 +199,11 @@
 						$('#address').trigger('change');
 
 					}else{
-						alert('실패??');
-
+				
 					}
 				},
 				error:function(request,status,error){
-					alert('등록시 네트워크 오류 발생!');
-			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-
+					
 
 				}
 	    	  
@@ -301,7 +298,8 @@
 								appendText+='<img class="rounded groupListImg" src="../resources/img/mbr-1.jpg" style="  max-width:100%; " >';
 										}
 								appendText+='</div>';
-								appendText+='<h5 style="margin: 10px;">'+item.g_name+'</h5>';
+								appendText+='<p style="text-overflow: ellipsis;margin: 10px; font-size:15pt; white-space: nowrap; overflow: hidden;"><b>'+item.g_name+'</b></p>';
+							
 								appendText+='<div class="row hobby justify-content-start" style="margin: 0 10px;">';
 								appendText+='<input type="hidden" value="'+item.g_hobby+'">';
 								appendText+='</div>';
@@ -328,8 +326,7 @@
 						}
 					},
 					error:function(request,status,error){
-						alert('등록시 네트워크 오류 발생!');
-				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						
 					}
 		    	  
 		      })

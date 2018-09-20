@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	var prev = 0;
+	
+	
 	$(window).scroll(function() {
 		
 		/*if($(this).scrollTop() < 50)
@@ -80,7 +82,7 @@ $(document).ready(function(){
 	//============================================================
 	$('#search_btn_h').on("click change submit",function(event){
 		var date = $('.date_out_h').val();
-		var search = $('#address_h').val();
+		var search = $('#je_search_h').val();
 		if(date == '' || date == null){
 			alert('체크인 날짜와 체크아웃 날짜를 선택하세요.');
 			return false;
@@ -89,7 +91,7 @@ $(document).ready(function(){
 			//검색 시작일 비우기
 			return true;
 		}else{
-			$('#address_h').val('서울');
+			$('#je_search_h').val('서울');
 			return true;
 		}
 		event.preventDefault();

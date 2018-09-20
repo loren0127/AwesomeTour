@@ -29,7 +29,7 @@
         margin : 10px 10px;
         width:250px;
     }
-    label, input { 
+    #group_nav label, #group_nav input { 
     	display:block; 
     }
     input.text ,textarea { 
