@@ -159,8 +159,8 @@ $(document).ready(function() {
 														
 														<!-- Modal footer -->
 														<div class="modal-footer">
-															<button type="submit">전송</button>
-														</div>``
+															<button type="submit" class="btn btn-primary btn-sm">전송</button>
+														</div>
 														
 														</form:form>
 													</div>

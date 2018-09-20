@@ -10,7 +10,7 @@
 				<c:if test="${!empty chatAllTalkCommandList}">
 					<c:forEach var="chatAllTalkCommand" items="${chatAllTalkCommandList}">
 						<!-- My chat message(left) -->
-						<c:if test="${chatAllTalkCommand.member_email eq user_email}">
+						<c:if test="${chatAllTalkCommand.chat_all_talk_nickname eq user_nickname}">
 							<div class="outgoing_msg">
 								<div class="sent_msg">
 									<p>${chatAllTalkCommand.chat_all_talk_content}</p>
@@ -26,7 +26,7 @@
 								<div class="incoming_msg_img">
 									<img class="rounded-circle" src="${pageContext.request.contextPath}/member/imageView.do?member_email=${chatAllTalkCommand.member_email}">
 								</div>
-								 ${chatAllTalkCommand.member_email}
+								 ${chatAllTalkCommand.chat_all_talk_nickname}
 								<div class="received_msg">
 									<div class="received_withd_msg">
 										<p>${chatAllTalkCommand.chat_all_talk_content}</p>
