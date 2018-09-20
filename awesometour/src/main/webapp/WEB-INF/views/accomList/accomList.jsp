@@ -231,11 +231,11 @@ $(function() {
 	<ul class="nav navbar-nav navbar-dark bg-dark justify-content-center"
 		id="list_nav_h">
 		<li class="nav-item">
-		<input type="text" name="searchtype" disabled value=
+		<input type="text" name="searchtp" disabled value=
 		<c:if test="${map.searchtype eq 'p'}">"프라이빗하우스"</c:if>
 		<c:if test="${map.searchtype eq 'h'}">"호텔"</c:if>
 		  style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;">
-		
+		<input type="hidden" name="searchtype" value="${map.searchtype}">
 		</li>
 		<li class="nav-item"> <input type="text" name="check_in"
 			class="date_in" value="${map.check_in}"
