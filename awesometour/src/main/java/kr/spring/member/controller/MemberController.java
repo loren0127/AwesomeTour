@@ -40,12 +40,12 @@ public class MemberController {
 	//@Resource
 	//private CipherTemplate cipherAES;
 	
-	//�ڹٺ� �ʱ�ȭ
+	//占쌘바븝옙 占십깍옙화
 	@ModelAttribute("command")
 	public MemberCommand initCommand() {
 		return new MemberCommand();
 	}
-	//====================회원가입 폼=================//
+	//====================�쉶�썝媛��엯 �뤌=================//
 	@RequestMapping(value="/member/write.do", method=RequestMethod.GET)
 	public String form(HttpServletRequest request) {
 		return "memberWrite";
@@ -62,7 +62,7 @@ public class MemberController {
 		/*if(result.hasErrors()) {
 			return form();
 		}*/
-		//CipherTemplate�� �̿��� ��ȣȭ
+		//CipherTemplate占쏙옙 占싱울옙占쏙옙 占쏙옙호화
 		/*memberCommand.setPasswd(cipherAES.encrypt(memberCommand.getPasswd()));*/
 		
 		//
@@ -89,18 +89,18 @@ public class MemberController {
 			ho +=ra[i];
 		}
 		
-		//전에있던 데이터
+		//�쟾�뿉�엳�뜕 �뜲�씠�꽣
 		MemberCommand memberCommand = (MemberCommand) session.getAttribute("command");
-		//텐에서 선택한
+		//�뀗�뿉�꽌 �꽑�깮�븳
 		memberCommand.setMember_tendency(ten);
 		memberCommand.setMember_hobby(ho);
-		//합쳐서 인서트
+		//�빀爾먯꽌 �씤�꽌�듃
 		memberService.insert(memberCommand);
 		memberService.deleteCode(member_email);
 		
 		return "redirect:/main/main.do";
 	}
-	//====================로그인 폼=================//
+	//====================濡쒓렇�씤 �뤌=================//
 	@RequestMapping(value="/member/login.do", method=RequestMethod.GET)
 	public String formLogin() {
 		return "memberLogin";
@@ -109,7 +109,7 @@ public class MemberController {
 	public String submitLogin(@ModelAttribute("command") @Valid MemberCommand memberCommand, BindingResult result, HttpSession session) {
 		
 		
-		/*//id�� passwd �ʵ常 üũ
+		/*//id占쏙옙 passwd 占십드만 체크
 		if(result.hasFieldErrors("id") || 
 				result.hasFieldErrors("passwd")) {
 			return formLogin();
@@ -128,7 +128,8 @@ public class MemberController {
 			}
 			if(check) {
 				session.setAttribute("user_email", member.getMember_email());
-				session.setAttribute("user_auth", member.getMember_auth());
+	            session.setAttribute("user_auth", member.getMember_auth());
+	            session.setAttribute("user_nickname", member.getMember_nickname());
 				if(log.isDebugEnabled()) {
 					log.debug("<<dd>>");
 					log.debug("<<user_email>> : " + member.getMember_email());
@@ -141,32 +142,32 @@ public class MemberController {
 		}catch(Exception e) {
 			result.reject("invalidIdOrPassword");
 			if(log.isDebugEnabled()) {
-				log.debug("<<���� ����>>");
+				log.debug("<<占쏙옙占쏙옙 占쏙옙占쏙옙>>");
 			}
 			return formLogin();
 		}
 	}
 	
-	//====================로그아웃=================//
+	//====================濡쒓렇�븘�썐=================//
 	@RequestMapping("/member/logout.do")
 	public String processLogin(HttpSession session) {
-		//�α׾ƿ�
+		//占싸그아울옙
 		session.invalidate();
 		
 		return "redirect:/main/main.do";
 	}
-	//====================정보 체크=================//
+	//====================�젙蹂� 泥댄겕=================//
 	@RequestMapping("/member/detailCheck.do")
 	public String processCheck(HttpSession session,Model model) {
-		//로그인하라고 뜨는거였음
-		//인터셉터에서
+		//濡쒓렇�씤�븯�씪怨� �쑉�뒗嫄곗��쓬
+		//�씤�꽣�뀎�꽣�뿉�꽌
 		String user_email = (String)session.getAttribute("user_email");
 		
 		model.addAttribute("email",user_email);
 		
 		return "memberViewCheck";
 	}
-	//====================정보 첵킹=================//
+	//====================�젙蹂� 泥듯궧=================//
 		@RequestMapping(value="/member/detailChecking.do",method = RequestMethod.POST)
 		public String processChecking(String member_email, String member_passwd,HttpSession session) {
 			
@@ -183,11 +184,11 @@ public class MemberController {
 			}
 			return "redirect:/member/detail.do";
 		}
-	//====================조회=================//
+	//====================議고쉶=================//
 		@RequestMapping("/member/detail.do")
 		public String process(HttpSession session,Model model) {
-			//로그인하라고 뜨는거였음
-			//인터셉터에서
+			//濡쒓렇�씤�븯�씪怨� �쑉�뒗嫄곗��쓬
+			//�씤�꽣�뀎�꽣�뿉�꽌
 			String user_email = (String)session.getAttribute("user_email");
 			
 			MemberCommand member = memberService.selectMember(user_email);
@@ -201,7 +202,7 @@ public class MemberController {
 			
 			return "memberView";
 		}
-		//==========이미지 뷰==================
+		//==========�씠誘몄� 酉�==================
 		@RequestMapping("/member/imageView.do")
 		public ModelAndView viewImage(@RequestParam("member_email")String member_email) {
 
@@ -210,14 +211,14 @@ public class MemberController {
 
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("imageView");
-			//�Ӽ���       �Ӽ���(byte[]�� ������)
+			//占쌈쇽옙占쏙옙       占쌈쇽옙占쏙옙(byte[]占쏙옙 占쏙옙占쏙옙占쏙옙)
 			mav.addObject("imageFile", board.getMember_uploadfile());
 			mav.addObject("filename", board.getMember_filename());
 
 			return mav;
 		}
 	
-	//====================수정=================//
+	//====================�닔�젙=================//
 		@RequestMapping(value="/member/update.do",method=RequestMethod.GET)
 		public String formUpdate(HttpSession session, Model model) {
 			String user_email = (String)session.getAttribute("user_email");
@@ -239,10 +240,10 @@ public class MemberController {
 				return "memberModify";
 			}*/
 			
-			//CipherTemplate�� �̿��� ��ȣȭ
+			//CipherTemplate占쏙옙 占싱울옙占쏙옙 占쏙옙호화
 			//memberCommand.setPasswd(cipherAES.encrypt(memberCommand.getPasswd()));
 			//memberCommand.setMember_passwd(memberCommand.getMember_passwd());
-			//ȸ����������
+			//회占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙
 			
 			
 			session.setAttribute("command", memberCommand);
@@ -250,7 +251,7 @@ public class MemberController {
 			return "memberModify2";
 			//return "redirect:/member/detail.do";
 		}
-		//==========회원수정 2=======
+		//==========�쉶�썝�닔�젙 2=======
 		@RequestMapping(value="/member/update2.do", method=RequestMethod.POST)
 		public String submitUpdate2(String ch[],String ra[],HttpSession session,String member_email) {
 			String ten = "";
@@ -265,9 +266,9 @@ public class MemberController {
 			for (int i=0 ; i<ra.length ; i++) {
 				ho +=ra[i];
 			}
-			//전에있던 데이터
+			//�쟾�뿉�엳�뜕 �뜲�씠�꽣
 			MemberCommand memberCommand = (MemberCommand) session.getAttribute("command");
-			//텐에서 선택한
+			//�뀗�뿉�꽌 �꽑�깮�븳
 			memberCommand.setMember_tendency(ten);
 			memberCommand.setMember_hobby(ho);
 			System.out.println("!$%@%#$%#$%#$#%"+memberCommand);
@@ -275,13 +276,13 @@ public class MemberController {
 			
 			return "redirect:/member/detail.do";
 		}
-		//=========================탈퇴 확인
+		//=========================�깉�눜 �솗�씤
 		@RequestMapping("member/memberdeleteCheck.do")
 		public String deleteCheck() {
 			
 			return "memberdeleteCheck";
 		}
-		//================탈퇴 인증 페이지=======
+		//================�깉�눜 �씤利� �럹�씠吏�=======
 		@RequestMapping("member/delete.do")
 		public String formDelete(HttpSession session,Model model,HttpServletRequest request) {
 			
@@ -309,16 +310,16 @@ public class MemberController {
 			String code = code_code1+code_code2+code_code3+code_code4+code_code5;
 			
 		    String setfrom = "ghcks3916@gmail.com";         
-		    String a_code_email = user_email;  // 받는 사람 이메일
-		    String title   = "AwesomeTour 회원탈퇴  코드번호";  //request.getParameter("title");      // 제목
+		    String a_code_email = user_email;  // 諛쏅뒗 �궗�엺 �씠硫붿씪
+		    String title   = "AwesomeTour �쉶�썝�깉�눜  肄붾뱶踰덊샇";  //request.getParameter("title");      // �젣紐�
 		    try {
 		      MimeMessage message = mailSender.createMimeMessage();
 		      MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 		 
-		      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
-		      messageHelper.setTo(a_code_email);     // 받는사람 이메일
-		      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-		      messageHelper.setText("코드번호 : "+code);  // 메일 내용
+		      messageHelper.setFrom(setfrom);  // 蹂대궡�뒗�궗�엺 �깮�왂�븯嫄곕굹 �븯硫� �젙�긽�옉�룞�쓣 �븞�븿
+		      messageHelper.setTo(a_code_email);     // 諛쏅뒗�궗�엺 �씠硫붿씪
+		      messageHelper.setSubject(title); // 硫붿씪�젣紐⑹� �깮�왂�씠 媛��뒫�븯�떎
+		      messageHelper.setText("삭제 코드 : "+code);  // 硫붿씪 �궡�슜
 		      
 		      
 		      codeCommand.setCode_code(code);
@@ -334,7 +335,7 @@ public class MemberController {
 			
 			return "memberDelete";
 		}
-		//=============탈퇴 ing ==============
+		//=============�깉�눜 ing ==============
 		@RequestMapping("/member/deleteCheck.do")
 		public String delete(String code_email, String code_code, HttpSession session) {
 			
@@ -344,7 +345,7 @@ public class MemberController {
 			  codeCommand.setCode_email(code_email);
 			  session.setAttribute("code_email", code_email);
 			  
-			  //이메일 코드 찾기
+			  //�씠硫붿씪 肄붾뱶 李얘린
 			  int count = memberService.selectCode(codeCommand);
 			  if(count == 0) {
 				  return "member/delete.do";
