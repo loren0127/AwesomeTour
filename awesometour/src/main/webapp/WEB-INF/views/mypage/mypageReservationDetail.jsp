@@ -151,9 +151,7 @@
 			<a class="btn btn-primary" href="#" onclick="history.go(-1)">이전</a> 
 			<a class="btn btn-primary" href="mypageReservationCancel.do?rv_start_date=${rv.rv_start_date}&acc_name=${rv.acc_name}&rv_num=${rv.rv_num}" onclick="checkedConfirm();">예약 취소</a> 
 			<p>현재 컴플레인이 진행중입니다...</p>
-			<c:if test="${checkedComplain > 0}">
-				<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">컴플레인 보내기</a>
-			</c:if>
+			<a class="btn btn-primary" data-toggle="modal" data-target="#myModal">컴플레인 보내기</a>
 			<!--  -->
 			<!--  -->
 			<!-- The Modal -->
