@@ -3639,6 +3639,18 @@ h1, h2, h3, h4, h5, h6 {
     left: 50%;
   }
   
+  #re_submit{
+  	float: right;
+    position: relative;
+    left: -50%;
+  }
+  
+  #re_second{
+  	float: left;
+    position: relative;
+    left: 50%;
+  }
+  
    @media screen and (max-width: 999px){
      .about_content{
      	 width:80%;
@@ -3654,17 +3666,6 @@ h1, h2, h3, h4, h5, h6 {
    @media screen and (max-width: 999px){
      #theme_id{
      	 display:none;
-     }
-  }
-  
-  @media screen and (max-width: 999px){
-     #re_second{
-     	 padding-left:39%
-     }
-  }
-  @media screen and (min-width: 1000px){
-     #re_second{
-	     padding-left:47%
      }
   }
 

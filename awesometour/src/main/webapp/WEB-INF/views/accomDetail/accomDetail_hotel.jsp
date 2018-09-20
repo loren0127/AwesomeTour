@@ -274,9 +274,8 @@
 								<span class="letter-count">300/300</span>
 							</div>
 							<br>
-							<div id="re_second" style="float: left;">
-								<input type="submit" class="btn-reply text-uppercase"
-									value="click">
+							<div id="re_second">
+								<input type="submit" class="btn-reply text-uppercase" value="click" id="re_submit">
 							</div>
 						</c:if>
 					</form>
