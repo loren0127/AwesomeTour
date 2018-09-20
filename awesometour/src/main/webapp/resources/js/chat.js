@@ -95,7 +95,6 @@ function appendMessage(message) {
 		$("#chatMessageArea").scrollTop($("#chatMessageArea")[0].scrollHeight);
 	} else {
 		//Left chat(Other user)
-		alert(message);
 		var sendMessage = '<div class="outgoing_msg"><div class="incoming_msg_img"><img class="rounded-circle" src=\"/awesometour/member/imageView.do?member_email=' + splitMessage[2] +'\"></div>' + splitMessage[0] + '<div class="received_msg"><div class="received_withd_msg"><p>' + splitMessage[1] + '</p><span class="time_date">' + getTimeStamp() + '</span></div></div></div><hr>'
 		$('#chatMessageArea').append(sendMessage);
 		
