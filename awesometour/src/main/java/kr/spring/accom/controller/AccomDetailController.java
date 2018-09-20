@@ -33,7 +33,7 @@ public class AccomDetailController {
 	@Resource
 	private AccomDetailService accomDetailService;
 	
-	//지우기
+	//吏��슦湲�
 	@RequestMapping(value="/accomDetail/insertImage.do",method=RequestMethod.GET)
 	public String formImage() {
 		return "accomDetail/insertImage";
@@ -51,7 +51,7 @@ public class AccomDetailController {
 		return "redirect:/main/main.do";
 	}
 	
-	//호텔 전용
+	//�샇�뀛 �쟾�슜
 	@RequestMapping("/accomDetail/imageView.do")
 	public ModelAndView viewImage(@RequestParam("im_ac_num") int im_ac_num, @RequestParam("ro_room_num") int ro_room_num,@RequestParam("kind")String kind) {
 		
@@ -71,7 +71,7 @@ public class AccomDetailController {
 		mav.setViewName("imageView");
 		
 		if(kind.equals("im_cover")) {
-			mav.addObject("imageFile", image.getIm_cover());//byte[] 타입 데이터를 넣어야함
+			mav.addObject("imageFile", image.getIm_cover());//byte[] ���엯 �뜲�씠�꽣瑜� �꽔�뼱�빞�븿
 			mav.addObject("filename", image.getIm_cover_name());
 		}else if(kind.equals("im_image2")) {
 			mav.addObject("imageFile", image.getIm_image2());
@@ -84,7 +84,7 @@ public class AccomDetailController {
 		return mav;
 	}
 	
-	//프라이빗 하우스 전용
+	//�봽�씪�씠鍮� �븯�슦�뒪 �쟾�슜
 	@RequestMapping("/accomDetail/imageViewPrivate.do")
 	public ModelAndView viewPrivateImage(@RequestParam("im_ac_num") int im_ac_num,@RequestParam("kind")String kind) {
 		
@@ -99,7 +99,7 @@ public class AccomDetailController {
 		mav.setViewName("imageView");
 		
 		if(kind.equals("im_cover")) {
-			mav.addObject("imageFile", image.getIm_cover());//byte[] 타입 데이터를 넣어야함
+			mav.addObject("imageFile", image.getIm_cover());//byte[] ���엯 �뜲�씠�꽣瑜� �꽔�뼱�빞�븿
 			mav.addObject("filename", image.getIm_cover_name());
 		}else if(kind.equals("im_image2")) {
 			mav.addObject("imageFile", image.getIm_image2());
@@ -125,15 +125,15 @@ public class AccomDetailController {
 			log.debug("<<search>> : "+ search);
 		}
 		
-		//전체 이미지 리스트
+		//�쟾泥� �씠誘몄� 由ъ뒪�듃
 		List<HotelDetailCommand> totalHotelImage = accomDetailService.selectHotelTotalImage(im_ac_num);
 		model.addAttribute("totalHotelImage",totalHotelImage);
 		
-		//호텔 상세 정보 처리
+		//�샇�뀛 �긽�꽭 �젙蹂� 泥섎━
 		HotelDetailCommand detailCommand = accomDetailService.selectHotelDetail(im_ac_num);
 		model.addAttribute("hotelDetail",detailCommand);
 		
-		//서비스 배열
+		//�꽌鍮꾩뒪 諛곗뿴
 		String serviceName = accomDetailService.selectService(im_ac_num);
 		String[] serviceNameArray = serviceName.split(",");
 		
@@ -163,7 +163,7 @@ public class AccomDetailController {
 			model.addAttribute("WIFI",WIFI);
 		}
 		
-		//스탠다드룸
+		//�뒪�깲�떎�뱶猷�
 		Map<String,Object> mapStandard = new HashMap<String,Object>();
 		mapStandard.put("im_ac_num", im_ac_num);
 		mapStandard.put("check_in", check_in);
@@ -176,14 +176,14 @@ public class AccomDetailController {
 		
 		int countStandard = accomDetailService.selectStandardRoomCount(mapStandard);
 		
-		int more = 1;//다음페이지있음
-		if(1>=Math.ceil((double)countStandard/2)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-			more = 0;//다음페이지없음
+		int more = 1;//�떎�쓬�럹�씠吏��엳�쓬
+		if(1>=Math.ceil((double)countStandard/2)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+			more = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 		}
 		
 		model.addAttribute("more",more);
 		
-		//디럭스룸
+		//�뵒�윮�뒪猷�
 		Map<String,Object> mapDelux = new HashMap<String,Object>();
 		mapDelux.put("im_ac_num", im_ac_num);
 		mapDelux.put("check_in", check_in);
@@ -191,14 +191,14 @@ public class AccomDetailController {
 		mapDelux.put("people_count", people_count);
 		int countDelux = accomDetailService.selectDeluxRoomCount(mapDelux);
 		
-		int more2 = 1;//다음페이지있음
-		if(1>=Math.ceil((double)countDelux/2)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-			more2 = 0;//다음페이지없음
+		int more2 = 1;//�떎�쓬�럹�씠吏��엳�쓬
+		if(1>=Math.ceil((double)countDelux/2)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+			more2 = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 		}
 		
 		model.addAttribute("more2",more2);
 		
-		//스위트룸
+		//�뒪�쐞�듃猷�
 		Map<String,Object> mapSuite = new HashMap<String,Object>();
 		mapSuite.put("im_ac_num", im_ac_num);
 		mapSuite.put("check_in", check_in);
@@ -206,26 +206,26 @@ public class AccomDetailController {
 		mapSuite.put("people_count", people_count);
 		int countSuite = accomDetailService.selectSuiteRoomCount(mapSuite);
 		
-		int more3 = 1;//다음페이지있음
-		if(1>=Math.ceil((double)countSuite/2)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-			more3 = 0;//다음페이지없음
+		int more3 = 1;//�떎�쓬�럹�씠吏��엳�쓬
+		if(1>=Math.ceil((double)countSuite/2)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+			more3 = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 		}
 		
 		model.addAttribute("more3",more3);
 		
-		//리뷰 
+		//由щ럭 
 		Map<String,Object> mapReview = new HashMap<String,Object>();
 		mapReview.put("im_ac_num", im_ac_num);
 		int countReview = accomDetailService.selectReviewCount(mapReview);
 		
-		int more4 = 1;//다음페이지있음
-		if(1>=Math.ceil((double)countReview/4)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-			more4 = 0;//다음페이지없음
+		int more4 = 1;//�떎�쓬�럹�씠吏��엳�쓬
+		if(1>=Math.ceil((double)countReview/4)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+			more4 = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 		}
 		
 		model.addAttribute("more4",more4);
 		
-		//평점이 높은 다른 숙소
+		//�룊�젏�씠 �넂�� �떎瑜� �닕�냼
 		Map<String,Object> mapHotelGrade = new HashMap<String,Object>();
 		mapHotelGrade.put("im_ac_num", im_ac_num);
 		mapHotelGrade.put("check_in", check_in);
@@ -244,10 +244,10 @@ public class AccomDetailController {
 		
 		model.addAttribute("hotelGrade",hotelGrade);
 		
-		return "accomDetailHotel";//식별자
+		return "accomDetailHotel";//�떇蹂꾩옄
 		}
 	
-		//=======프라이빗 하우스========
+		//=======�봽�씪�씠鍮� �븯�슦�뒪========
 		@RequestMapping("/accomDetail/accomDetail_private.do")
 		public String accomDetailPrivate(@RequestParam("im_ac_num") int im_ac_num,@RequestParam("check_in") String check_in,
 				                         @RequestParam("check_out") String check_out,@RequestParam("people_count") int people_count,
@@ -261,14 +261,14 @@ public class AccomDetailController {
 				log.debug("<<search>> : "+ search);
 			}
 			
-			//프라이빗 하우스 이미지
+			//�봽�씪�씠鍮� �븯�슦�뒪 �씠誘몄�
 			PrivateDetailCommand privateDetail = accomDetailService.selectPrivateImage(im_ac_num);
 			
-			//프라이빗 하우스 상세
+			//�봽�씪�씠鍮� �븯�슦�뒪 �긽�꽭
 			privateDetail = accomDetailService.selectPrivateDetail(im_ac_num);
 			model.addAttribute("privateDetail",privateDetail);
 			
-			//서비스 배열
+			//�꽌鍮꾩뒪 諛곗뿴
 			String serviceName2 = accomDetailService.selectService(im_ac_num);
 			String[] serviceNameArray2 = serviceName2.split(",");
 			
@@ -287,19 +287,19 @@ public class AccomDetailController {
 			
 			model.addAttribute("serviceSet2",serviceSet2);
 			
-			//리뷰 
+			//由щ럭 
 			Map<String,Object> mapReview = new HashMap<String,Object>();
 			mapReview.put("im_ac_num", im_ac_num);
 			int countReview = accomDetailService.selectReviewCount(mapReview);
 			
-			int more5 = 1;//다음페이지있음
-			if(1>=Math.ceil((double)countReview/4)) {//자바 스크립트와 다르게 자바는 무조건 int 연산은 int이므로 ceil이 동작하지 않으므로 하나의 값을 double로 만들어서 사용
-				more5 = 0;//다음페이지없음
+			int more5 = 1;//�떎�쓬�럹�씠吏��엳�쓬
+			if(1>=Math.ceil((double)countReview/4)) {//�옄諛� �뒪�겕由쏀듃�� �떎瑜닿쾶 �옄諛붾뒗 臾댁“嫄� int �뿰�궛�� int�씠誘�濡� ceil�씠 �룞�옉�븯吏� �븡�쑝誘�濡� �븯�굹�쓽 媛믪쓣 double濡� 留뚮뱾�뼱�꽌 �궗�슜
+				more5 = 0;//�떎�쓬�럹�씠吏��뾾�쓬
 			}
 			
 			model.addAttribute("more5",more5);
 			
-			//평점이 높은 다른 숙소
+			//�룊�젏�씠 �넂�� �떎瑜� �닕�냼
 			Map<String,Object> mapPrivateGrade = new HashMap<String,Object>();
 			mapPrivateGrade.put("im_ac_num", im_ac_num);
 			mapPrivateGrade.put("check_in", check_in);
@@ -320,11 +320,11 @@ public class AccomDetailController {
 			model.addAttribute("privateGrade",privateGrade);
 			
 			//datepicker
-			//시작일과 종료일
+			//�떆�옉�씪怨� 醫낅즺�씪
 			PrivateDetailCommand privateDetail2 = accomDetailService.selectStartEndDate();
 			model.addAttribute("privateDetail2", privateDetail2);
 			
-			//검색한 날짜에 예약되어 있으면 예약버튼 disable
+			//寃��깋�븳 �궇吏쒖뿉 �삁�빟�릺�뼱 �엳�쑝硫� �삁�빟踰꾪듉 disable
 			Map<String,Object> disableMap = new HashMap<String,Object>();
 			disableMap.put("im_ac_num", im_ac_num);
 			disableMap.put("check_in", check_in);
