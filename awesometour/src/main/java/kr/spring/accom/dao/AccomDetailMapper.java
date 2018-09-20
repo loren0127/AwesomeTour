@@ -94,9 +94,9 @@ public interface AccomDetailMapper {
 	@Select("SELECT TO_CHAR(SYSDATE,'YYYY/MM/DD') start_date, TO_CHAR((ADD_MONTHS(SYSDATE,3)),'YYYY/MM/DD') end_date FROM dual")
 	public PrivateDetailCommand selectStartEndDate();
 	//제거일1
-	@Select("SELECT rv_start_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,3) AND acc_num=#{im_ac_num}")
+	@Select("SELECT rv_start_date FROM reservation WHERE TO_DATE((rv_end_date),'YYYY/MM/DD') >= SYSDATE AND acc_num=#{im_ac_num}")
 	public List<String> selectRvDateStart(Integer im_ac_num);
-	@Select("SELECT rv_end_date FROM reservation WHERE TO_DATE((rv_start_date),'YYYY/MM/DD') > SYSDATE AND TO_DATE((rv_end_date),'YYYY/MM/DD') < ADD_MONTHS(SYSDATE,3) AND acc_num=#{im_ac_num}")
+	@Select("SELECT rv_end_date FROM reservation WHERE TO_DATE((rv_end_date),'YYYY/MM/DD') >= SYSDATE AND acc_num=#{im_ac_num}")
 	public List<String> selectRvDateEnd(Integer im_ac_num);
 	
 	//리뷰 작성 후 리뷰 5개, 예약 내역 5개 이상이면 슈퍼호스트 업데이트

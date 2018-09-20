@@ -609,7 +609,7 @@ $('document').ready(function(){
 		success:function(data){
 			disabledate = '\'' + data.startList.join(','); 
 			disabledate += ',' + data.endList.join(',') + '\'';
-			//console.log(disabledate);
+			console.log(disabledate);
 			
 			$('#datepicker_accomDetail').datepicker({
 				showMonthAfterYear:true,

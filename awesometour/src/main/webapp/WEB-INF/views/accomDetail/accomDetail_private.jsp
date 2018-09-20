@@ -76,7 +76,7 @@
 		<div style="float: right; width: 10%;" id="theme_id">
 			<b style="color: #d900ed;">${privateDetail.acc_theme}</b>테마
 		</div>
-		<div style="float:left;width:100%;"><b style="font-size:20px;color: #d900ed;">₩${privateDetail.ro_price}</b></div>
+		<div style="float:left;width:100%;"><b style="font-size:20px;color: #d900ed;">₩<fmt:formatNumber>${privateDetail.ro_price}</fmt:formatNumber></b></div>
 		<br> <br><br><br>
 		<hr size="1" noshade>
 	 	<div style="padding-left: 30%;">
