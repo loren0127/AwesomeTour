@@ -44,4 +44,9 @@ public class AccomServiceImpl implements AccomService{//트랜잭션 처리
 	public List<GroupCommand> selectGroupList() {
 		return accomMapper.selectGroupList();
 	}
+
+	@Override
+	public List<AccomCommand> selectSearchList(Map<String, Object> map) {
+		return accomMapper.selectSearchList(map);
+	}
 }

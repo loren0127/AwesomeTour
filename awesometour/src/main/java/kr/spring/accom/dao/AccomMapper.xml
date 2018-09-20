@@ -9,6 +9,32 @@
 	parameterType : 인자로 전달되는 데이터의 타입
 	resultType : 한 건의 데이터를 자바빈에 담는다. (List라고 명시하면 SQL문에 의해 데이터가 처리되기 전 상태라 객체가 비어있어서 예외 발생)
 	-->
+	<select id="selectSearchList" parameterType="java.util.Map" resultType="AccomCommand">
+	SELECT price.*, auth.member_auth, service.se_name, grade.ag_grade,
+	review.review_count, book.rv_start_date, book.rv_end_date FROM (SELECT
+	* FROM ((SELECT * FROM accom)a) JOIN
+	(SELECT * FROM (SELECT ROW_NUMBER() OVER(PARTITION BY ro_acc_num ORDER BY
+	MIN(ro_price)) row_num, ro_acc_num, MIN(ro_price) ro_price, ro_num,
+	ro_sub, ro_pe_count FROM accom_room
+	GROUP BY ro_acc_num, ro_num, ro_sub, ro_pe_count) WHERE row_num = 1)b ON
+	a.acc_num = b.ro_acc_num ORDER BY b.ro_price)price RIGHT OUTER JOIN
+	(SELECT member_auth, member_email FROM member_auth WHERE member_auth >=
+	2)auth ON price.acc_host = auth.member_email RIGHT OUTER JOIN
+	(SELECT se_acc_num, se_name FROM accom_service)service ON price.acc_num =
+	service.se_acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.ag_grade FROM ((SELECT * FROM accom)a) JOIN (SELECT ag_acc_num,
+	ROUND(AVG(ag_grade), 1)ag_grade FROM accom_grade
+	GROUP BY ag_acc_num)b ON a.acc_num = b.ag_acc_num)grade ON price.acc_num =
+	grade.acc_num LEFT OUTER JOIN
+	(SELECT a.*, b.review_count FROM ((SELECT * FROM accom)a) JOIN (SELECT
+	re_acc_num, COUNT(*)review_count FROM accom_review GROUP BY
+	re_acc_num)b ON a.acc_num = b.re_acc_num)review
+	ON grade.acc_num = review.acc_num LEFT OUTER JOIN (SELECT member_email,
+	rv_start_date, rv_end_date FROM reservation WHERE rv_start_date IS
+	NULL)book
+	ON price.acc_host = book.member_email WHERE price.acc_name || price.acc_address1 LIKE '%' || #{search} || '%'
+	</select>
+	
 	<select id="selectList" parameterType="java.util.Map" resultType="AccomCommand">
 	SELECT price.*, auth.member_auth, service.se_name, grade.ag_grade,
 	review.review_count, book.rv_start_date, book.rv_end_date FROM (SELECT

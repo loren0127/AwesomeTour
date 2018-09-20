@@ -51,7 +51,7 @@ public class MapAjaxController {
 		map.put("search", search);
 		
 		List<AccomCommand> list = null;
-		list = accomService.selectList(map);
+		list = accomService.selectSearchList(map);
 		
 		if(log.isDebugEnabled()) {
 			log.debug("<<°Ë»ö>> : "+list);

@@ -11,6 +11,9 @@ import kr.spring.accom.domain.ReviewCommand;
 import kr.spring.group.domain.GroupCommand;
 
 public interface AccomMapper {
+	//헤더 지도
+	public List<AccomCommand> selectSearchList(Map<String,Object> map);
+	
 	public List<AccomCommand> selectList(Map<String,Object> map);
 	
 	//숙소 이미지 불러오기
