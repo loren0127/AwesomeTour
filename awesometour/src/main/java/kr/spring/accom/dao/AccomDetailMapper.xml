@@ -300,7 +300,7 @@
 		    <![CDATA[
 			WHERE ro_room_count >= rv_room_count
 			 ]]>
-			)cr ON br.acc_num=cr.rv_acc_num WHERE br.ag_grade >= 4.0 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) ORDER BY br.ag_grade DESC)rw) 
+			)cr ON br.acc_num=cr.rv_acc_num WHERE cr.rv_start_date is null AND br.ag_grade >= 4.0 AND acc_num NOT IN (SELECT acc_num FROM accom WHERE acc_num=#{im_ac_num}) ORDER BY br.ag_grade DESC)rw) 
 			 <![CDATA[
 		  	WHERE rnum >= 1 AND rnum <=4
 		  	 ]]>
