@@ -239,7 +239,7 @@ $(function() {
 	<div class="align-center">등록된 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test=""></c:if>
-	<div class="container" style="max-height: 3000px;">
+	<div class="container" style="max-height: 5000px;">
 		<div class="row" style="margin-top: 50px;">
 			<div id="map" class="col-lg-3 col-md-3 col-xs-3">
 				<div id="opener2">

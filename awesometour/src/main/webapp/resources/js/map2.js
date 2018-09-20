@@ -71,7 +71,7 @@ $(document).ready(function(){
 						output += '			<div class="starRates" style="font-style:italic;font-size:15px;">아직 평점이 없네요.</div>';					
 					}
 					output += '			<div class="reviews" style="font-size:12px;">이용후기 <b>'+item.review_count+'</b>건</div>';
-					output += '			<div class="benefits" style="font-size:15px;font-weight:bold;color:#63C355;">'+service+'</div>';
+					output += '			<div class="benefits" style="font-size:15px;font-weight:bold;color:#63C355;width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+service+'</div>';
 					output += '		</div>';
 					output += '		<div class="2ndRowRightCol" style="float: right;">';
 					output += '			<div class="accomPrice" data-price="'+item.ro_price+'" style="font-weight:bold;">'+numberWithCommas(item.ro_price)+'원</div>';
