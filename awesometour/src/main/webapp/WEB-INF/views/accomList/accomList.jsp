@@ -200,11 +200,11 @@ $(function() {
 	<nav class="navbar-dark navbar-expand-sm sticky-top" id="rvSearch" style="margin-top:82px; z-index:10000">
  
 	<ul class="je_form_row nav navbar-nav navbar-dark justify-content-center" id="list_nav_h" style="background-color: #0F1721;">
-		<li class="nav-item" style="margin:0 5px;">
+		<li class="nav-item" style="margin:15px 5px;">
 		<input type="text" name="searchtp" disabled value=
 		<c:if test="${map.searchtype eq 'p'}">"프라이빗하우스"</c:if>
 		<c:if test="${map.searchtype eq 'h'}">"호텔"</c:if>
-		  style="height: 38px; width: 150px; margin-top: 15px;">
+		  style="height: 38px; width: 150px;">
 		<input type="hidden" name="searchtype" value="${map.searchtype}">
 		</li><!-- =======================================================절대로 li태그 내부 태그 정렬 바꾸지 마시오!!! -->
 		<li class="nav-item"><input type="text" name="check_in"	class="date_in" value="${map.check_in}"

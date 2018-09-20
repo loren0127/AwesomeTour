@@ -64,7 +64,7 @@
 	min-width: 120px;
 	max-width: 300px;
 	word-wrap: break-word;
-	z-index: 10000;
+	z-index: 20000;
 	opacity: 0;
 	left: -9999px;
   	top: 90%;
@@ -113,18 +113,75 @@
 }
 
 /*성원이 예약 설정 부분*/
-#list_nav_h li{
-	padding:0 3px 15px;; 
+#search_form_h select {
+	padding-left: 10px;
+	border-width: 1px;
+    border-style: solid !important;
+    border-radius: 2px;
+    background-color: #ffffff !important;
+    border-color: #ccc;
+}
+
+.date_in_h {
+	border-right: 0px solid transparent !important;
+	border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.date_out_h {
+	border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+}
+
+/*인원수 체크 버튼*/
+#people_minus_h, #people_h, #people_plus_h {
+	background-color: white;
+	float:left;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #0F1721;
+    line-height: 1.5;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#people_minus_h{
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-left-radius: 2px !important;
+    border-top-left-radius: 2px !important;
+}
+
+#people_h{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
 #people_plus_h{
-	display: inline!important;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-right-radius: 2px !important;
+    border-top-right-radius: 2px !important;
 }
 
-#search_h:hover {
-	color: #212529;
-	background-color: #fff;
-	border-color: #ffc107;
+#people_minus_h:disabled{
+	color: lightgray;
+}
+
+#people_plus_h:disabled{
+	color: lightgray;
 }
 
 @media ( max-width :766px ) {
@@ -137,7 +194,7 @@
 		margin: 0 5px !important;
 	}
 	#plus_minus_h {
-		padding-left: 33% !important;
+		padding-left: 33.333333% !important;
 	}
 	#search_btn_h {
 		text-align: center;

@@ -35,50 +35,33 @@
 			</ul>
 		</div>
 	</div>
-
-	
 </nav>
 
 <!-- 성원이가 만든 예약 바 시작 -->
- <nav class="navbar-dark navbar-expand-sm  fixed-top" id="rv_h" style="margin-top:82px;position:absolute">
- 				<form id="search_form" action="../accomList/accomList.do">
- 
-	<ul class="nav navbar-nav navbar-dark bg-dark justify-content-center"
-		id="list_nav_h">
-		<li class="nav-item">
-		<select name="searchtype" style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;">
-		<option value="p">프라이빗 하우스</option>
-		<option value="h">호텔</option>
-		
-		</select>
+ <nav class="navbar-dark navbar-expand-sm fixed-top" id="rv_h" style="margin-top:82px;position:absolute">
+ 	<form id="search_form_h" action="../accomList/accomList.do">
+ 		<ul class="je_form_row nav navbar-nav navbar-dark justify-content-center" id="list_nav_h" style="background-color: #0F1721;">
+		<li class="nav-item" style="margin:15px 5px;">
+			<select name="searchtype" style="height: 38px; width: 150px;">
+				<option value="h">호텔</option>
+				<option value="p">프라이빗 하우스</option>
+			</select>
+		</li><!-- =======================================================절대로 li태그 내부 태그 정렬 바꾸지 마시오!!! -->
+		<li class="nav-item"><input type="text" name="check_in"	class="date_in_h" value="${map.check_in}"
+					style="height: 38px;width: 150px;margin-top: 15px;" autocomplete="off"><input type="text" name="check_out"	class="date_out_h" value="${map.check_out}"
+					style="height: 38px;width: 150px;margin-top:15px;" autocomplete="off"></li>
+		<li class="nav-item" id="plus_minus_h" style="margin:0 5px;margin-top:15px;height:100%;"><input type="hidden" name="people_count" id="people_count_h" value="1">
+					<button id="people_minus_h" name="minus" style="outline:none;">-</button>
+					<button id="people_h" name="people" style="outline:none;">
+						<span id="peo_sum_btn_h">1</span>명
+					</button>
+					<button id="people_plus_h" name="people_plus" style="outline:none;">+</button></li>
+		<li class="nav-item"><input type="text" style="margin-top: 15px;width: 75%;height: 38px;"
+					id="je_search_h" name="search"
+					placeholder="숙소명/지역" value="${map.search}">
 		</li>
-		<li class="nav-item"> <input type="text" name="check_in"
-			class="date_in_h" value="${map.check_in}"
-			style="height: 40px; width: 150px; margin-top: 15px; padding-left: 5px;"
-			autocomplete="off"></li>
-		<li class="nav-item"><input type="text" name="check_out"
-			class="date_out_h" value="${map.check_out}"
-			style="height: 40px; width: 150px; margin-top: 15px;"
-			autocomplete="off"></li>
-		<li class="nav-item" id="plus_minus_h"><input type="hidden"
-			name="people_count" id="people_count" value="1">
-			<button id="people_h" name="people"
-				style="height: 40px; width: 150px; position: absolute; background-color: white; border: 1px solid #A9A9A9; z-index: 0; margin-top: 15px;display: inline;">
-				<span id="peo_sum_btn_h">1</span>명
-			</button> <input type="button" name="minus" id="people_minus_h" value="-"
-			class="form-control"
-			style="border: 0;; font-size: 20px; width: 40px; position: relative; margin-top: 16px; margin-left: 1px;display: inline;">
-			<input type="button" name="people_plus" class="form-control"
-			id="people_plus_h" value="+"
-			style="border: 0; font-size: 20px; position: relative; z-index: 1; width: 40px; margin-left: 65px; margin-top: 16px;display: inline;">
-		</li>
-		<li class="nav-item"><input type="text"
-			style="margin-top: 15px; width: 100%; height: 40px;" id="je_search_h"
-			name="search" placeholder="구 또는 이름을 검색하세요" value="${map.search}" autocomplete="off">
-		</li>
-		<li class="nav-item" id="search_btn_h">
-			<button type="submit" class="btn btn-warning" id="search_h"
-				style=" height: 40px; width: 100px; margin-top: 15px;">검색</button>
+		<li class="nav-item" id="search_btn_h" style="margin-top:15px;margin-left:-50px;">
+			<button type="submit" class="btn hotelLink_main" style="height:38px;background-color:#fff;">검색</button>
 		</li>
 	</ul>
 	</form>

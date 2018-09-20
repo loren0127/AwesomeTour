@@ -71,7 +71,7 @@
 				]]>
 			</if>
 			<if test="search != ''">
-				AND price.acc_address1 || price.acc_name LIKE '%' || #{search} || '%' 
+				AND price.acc_name || price.acc_address1 LIKE '%' || #{search} || '%' 
 			</if>
 			<if test="search == '호텔'">
 				OR price.ro_sub = 'h'
